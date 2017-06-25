@@ -1,0 +1,566 @@
+<HTML>
+<HEAD>
+<TITLE>
+W. Richard Stevens' FAQ
+</TITLE>
+</HEAD>
+
+<BODY>
+<!-- ******************************************************************** -->
+<H3>Q: Why did you write <I>UNIX Network Programming</I>?</H3>
+During the 1980s, while I was at Health Systems International,
+we were doing Unix software development for a variety of platforms.
+We went through the normal sequences of hardware that most startups went
+through at that time: one VAX-11/750 running 4.2BSD, then a bigger VAX (785),
+then multiple VAXes (added an 8650), throw in some PCs
+running a flavor of operating systems (Venix, Xenix, DOS),
+and for good measure one IBM mainframe running VM.
+Naturally with multiple VAXes running 4.xBSD you connect them together
+with an Ethernet and run TCP/IP, and TCP/IP was also available for
+the PC-based Unices and the mainframe.
+In addition to the standard utilities (ftp, rlogin) we started writing
+our own applications using sockets.
+Documentation was almost nonexistent (I had very worn copies of the two
+[Leffler et al.] documents from the 4.3BSD manual set)
+so when you needed an answer, you looked it up in the source code.
+After doing this for a while I realized that everything I was digging up
+should really be documented.
+I started writing UNP in 1988, while working full time,
+and finished 2 years later.
+
+<P>
+I really believe that my background is fundamental to the success
+of UNP and my other books.
+That is, I was not one of the developers at Berkeley or AT&T,
+so the writing of UNP was not a "memory dump".
+Everything that is in the book I had to dig out of somewhere and
+understand myself.
+This process of digging up the details and learning how things work
+leads down many side streets and to many dead ends,
+but is fundamental (I think) to understanding something new.
+Many times in my books I have set out to write how something works,
+thinking I know how it works,
+only to write some test programs that lead me to things that I never knew.
+I try to convey some of these missteps in my books,
+as I think seeing the wrong solution to a problem
+(and understanding why it is wrong)
+is often as informative as seeing the correct solution.
+
+<!-- ******************************************************************** -->
+<H3>Q: Why did you write
+<I>Advanced Programming in the UNIX Environment</I>?</H3>
+During the 1980s I used Marc Rochkind's <I>Advanced UNIX Programming</I> a lot.
+But it only covered through System III and I knew he wasn't going to
+update the book, so I decided to write my own version of an
+advanced Unix book.
+
+<!-- ******************************************************************** -->
+<H3>Q: Why did you write
+<I>TCP/IP Illustrated, Volume 1: The Protocols</I>?</H3>
+I first became interested in TCP/IP at the Summer 1987 Summer Usenix
+conference in Phoenix when I bought a copy of Doug Comer's
+<I>Internetworking With Xinu</I> book.
+(I bought it at Jim Joyce's bookshop that was set up in one of the
+hotel suites, possibly one of the first attempts to sell books at a
+Usenix conference.  Selling on the conference floor was forbidden.)
+I read the entire book on the flight back to Connecticut.
+While writing UNP and in the early 1990s I used Doug Comer's Volume I
+so much that I broke the spines on both the first and second editions.
+But I am a practitioner interested in more of the practical details
+than the theory and I kept coming up with practical questions that were not
+answered in Doug's texts.
+At the same time a friend who was teaching TCP/IP at IBM kept asking me
+questions that I couldn't find answers for in the RFCs or any text.
+I started writing little test programs to see what happens
+(the beginnings of the Sock program from Appendix C of the book),
+and at some point realized that this would be a neat approach for a book.
+I also realized that were numerous publicly-available tools out there
+that aid in understanding the protocols (most written by Van Jacobson!)
+and anyone could use them, when shown how.
+Tcpdump, for example, is not just a tool for diagnosing network problems,
+but is invaluable for understanding how the protocols work.
+Finally, after years of working with network programming I came to
+realize that 80% of all network programming problems were not
+programming problems at all,
+but were from a lack of understanding of how the protocols operate.
+
+<!-- ******************************************************************** -->
+<H3>Q: Why did you write <I>TCP/IP Illustrated, Volume 2:
+The Implementation</I>?</H3>
+Once again, I was a fan of Doug Comer's Volume II (the Xinu implementation
+of TCP/IP) but was frustrated when I encountered features that were not
+implemented, and Xinu was just not the standard.
+The Berkeley implementation <B>is</B> the de facto standard
+and the code base was "small enough" (15,000 lines of C)
+to cover in a book, albeit a "big" book.
+
+<!-- ******************************************************************** -->
+<H3>Q: Why did you write <I>TCP/IP Illustrated, Volume 3:
+TCP for Transactions, HTTP, NNTP, and the Unix Domain Protocols</I>?</H3>
+This book is really three smaller books in one.
+Part 1 is TCP for Transactions and is a major expansion of Section 24.7
+of Volume 1.
+This presentation of T/TCP is in two pieces: the TCP protocol extensions
+with examples (Chapters 1-4, which follow the style of Volume 1),
+and the implementation of T/TCP within the 4.4BSD-Lite networking code
+(Chapters 5-13, which follow the style of Volume 2).
+Part 2, HTTP (Hypertext Transfer Protocol) and
+NNTP (Network News Transfer Protocol) is an addition to Volume 1,
+as it describes two application protocols built on top of TCP.
+One chapter in this part is a detailed examination of the actual packets
+found on a busy World Wide Web server, showing how varied, and sometimes
+downright weird, TCP behavior and implementations can be.
+This is a wonderful example which brings together numerous topics
+from both Volumes 1 and 2, in the context of an important and popular
+real-world application.
+Part 3, the Unix Domain Protocols, is an addition to Volume 2,
+as it concentrates on the implementation of these protocols within
+the 4.4BSD-Lite networking code.
+So this latest volume is really a continuation of both previous volumes.
+
+<!-- ******************************************************************** -->
+<H3>Q: Which of these books do I need?</H3>
+It depends where your interests lie.
+UNP is a network programming text: lots of details on network programming
+with about 15,000 lines of C code presented in the book.
+But UNP has minimal coverage of Unix and TCP/IP.
+APUE, on the other hand, is entirely Unix programming
+with no coverage of network programming.
+In fact APUE started as a major expansion of Chapter 2 of UNP.
+TCP/IPIv1 is purely the protocols--how and why they operate as they do
+(a major expansion of Section 5.2 of UNP).
+There is not one line of C code in this book.
+TCP/IPIv2 is the actual implementation of TCP/IP--about 15,000 lines
+of C code from the kernel.
+TCP/IPIv3 is a combination of the protocols (T/TCP, HTTP, NNTP) along with
+some implementation (about 2,200 lines of kernel C code).
+<P>
+My interest is network programming but I've found that to do this
+one needs to understand the underlying operating system (APUE)
+and the underlying protocols (TCP/IPIv[123]).
+
+<!-- ******************************************************************** -->
+<H3>Q: Didn't you write some books with Doug Comer?</H3>
+No, that's David L. Stevens at Purdue.
+We're different people.
+
+<!-- ******************************************************************** -->
+<H3>Q: How long does it take to write a book?</H3>
+It takes me about 2 hours per page.
+That time includes everything required to produce camera-ready
+PostScript files for the publisher.
+So for a 600-page book, it's about 1,200 hours.
+You could cut this down a little if you didn't produce camera-ready files
+(i.e., let the publisher do the page layout and indexing)
+but I like complete control over the final result.
+
+<!-- ******************************************************************** -->
+<H3>Q: How did you learn everything to write these books?</H3>
+I read lots of source code.
+In fact, the art of reading source code is something that most
+universities do not teach, but something that is easy to do on your own.
+(Remember Lions' fantastic
+<A HREF="http://www.peer-to-peer.com/catalog/opsrc/lions.html">
+<I>A Commentary on the UNIX Operating System</I></A>
+from 1977, which was a complete presentation and analysis of the
+UNIX Version 6 source code?
+I was fortunate to sit in on a graduate class taught by
+Dave Hanson that used this as the text.)
+Although the source code for most commercial versions of Unix is
+unavailable today, fortunately there are still lots of systems for which
+the source code is available: 4.4BSD-Lite,
+ <A HREF="http://www.freebsd.org">FreeBSD</A>,
+ <A HREF="http://www.linux.org">Linux</A>,
+ <A HREF="http://www.cs.vu.nl/~ast/minix.html">Minix</A>,
+ <A HREF="http://www.gnu.org">GNU</A>,
+etc.
+<P>
+I also read select Usenet newsgroups.
+It is worthwhile because you see other approaches to problems,
+find out things you never knew, and can see the types of problems
+people are encountering.
+I average about 25 minutes per day reading and posting to Usenet.
+<P>
+Here are the newsgroups that I read:
+<TT>news.admin.announce</TT>,
+<TT>comp.security.announce</TT>,
+<TT>comp.protocols.tcp-ip</TT>,
+<TT>comp.dcom.sys.cisco</TT>,
+<TT>comp.unix.bsd.bsdi.announce</TT>,
+<TT>comp.unix.bsd.bsdi.misc</TT>,
+<TT>info.bsdi.users</TT>,
+<TT>comp.unix.solaris</TT>,
+<TT>comp.unix.internals</TT>,
+<TT>comp.unix.programmer</TT>,
+<TT>comp.protocols.dns.bind</TT>,
+<TT>comp.protocols.dns.std</TT>,
+<TT>comp.protocols.dns.ops</TT>,
+<TT>comp.programming.threads</TT>,
+<TT>gnu.groff.bug</TT>,
+<TT>gnu.announce</TT>,
+<TT>gnu.gcc.announce</TT>,
+<TT>gnu.g++.announce</TT>,
+<TT>misc.books.technical</TT>,
+<TT>comp.protocols.time.ntp</TT>,
+<TT>comp.protocols.tcp-ip.domains</TT>,
+<TT>comp.org.usenix</TT>,
+<TT>comp.mail.mush</TT>,
+<TT>comp.protocols.nfs</TT>,
+<TT>comp.std.unix</TT>,
+<TT>comp.text</TT>,
+<TT>alt.sys.sun</TT>,
+<TT>comp.sys.sun.announce</TT>,
+<TT>comp.sys.sun.hardware</TT>,
+<TT>comp.std.announce</TT>,
+<TT>comp.os.linux.announce</TT>,
+<TT>comp.lang.java.announce</TT>, and
+<TT>comp.lang.java.programmer</TT>.
+
+<!-- ******************************************************************** -->
+<H3>Q: Do you respond to email?</H3>
+Yes.  My email address is at the end of the Preface of each of my books
+and I read all the email that I receive.
+Unfortunately the quantity of email that I receive has forced me
+to develop a few form letters over the past years.
+The quickest way to receive a form letter from me is to send me
+source code that you want me to debug for you
+(don't laugh, you would be surprised how many of these I get).
+The next quickest way is to send me the <TT>make</TT> output
+from trying to build some of the source code from one of my books,
+asking me to tell you what to fix--my publishers graciously allow all the
+code to be made available, but the code is provided "as is" with no
+support implied.  Most of the these problems should be posted to the
+Unix-version-specific newsgroup.
+<P>
+I also get lots of detailed questions on things that I wrote years ago,
+and, believe it or not, I do not have immediate recall of all these details.
+My basic rule is that if I can answer a question on the top of my head,
+in a few lines, I always do.
+But it it requires that I pull out a book to understand more of the topic,
+or exchange numerous emails with the sender to figure out more details about
+the problem, I simply do not have the time.
+<P>
+Many of the programming questions that readers send me
+should be posted to some Usenet newsgroup
+(<TT>comp.unix.programmer</TT> is typical).
+
+<!-- ******************************************************************** -->
+<H3>Q: I am interested in writing a book.  What should I do?</H3>
+The technical book market is totally different from the fiction market.
+Technical publishers are always looking for good books,
+even from unknown authors.
+My suggestion is to first write something (a few chapters that are
+typical of the book) and then contact a publisher.
+The best way to contact publishers is to go to a technical conference
+(Usenix, Interop, etc.) and go to their booths and talk to them.
+They normally do not bite.
+<P>
+Some explicit suggestions:
+<UL>
+<LI>Don't spend too much time on an extremely detailed outline.
+	I guarantee 90% of it will change as you write.
+<LI>Don't spend lots of time on the introduction chapter (normally Chapter 1)
+	until you've finished writing the book.
+	This chapter is probably the most important of the entire book since
+	it introduces the rest of the book to the reader.
+	But until you've finished writing the entire book, things will change.
+<LI>Don't write a book if you cannot take criticism.
+	Here are some of the comments I received on various drafts of
+	the first edition of UNP:
+	"Argh!  Doesn't this guy know anything about grammar or style?",
+	"How come I never heard of this guy?",
+	"Take out parenthesized editorializing",
+	"The terminology is often muddled."
+	The second edition of UNP generated the comment:
+	"Sentence beginning ... is incomprehensible gobbledegook."
+
+</UL>
+
+<P>
+Also be prepared to rewrite, rewrite, and rewrite.
+<A HREF="gifs/unprewrite.gif">Here</A> is a page (280K GIF image) from
+<EM>UNIX Network Programming, Second Edition, Volume 1</EM>
+that shows the kind of rewriting that I do.
+The final version of this text is on pp. 92-93 of the book,
+if you want to compare.
+This was before any external reviewers saw it;
+these are just my changes as I proofed what I had written.
+
+<!-- ******************************************************************** -->
+<H3>Q: How did you get <I>UNIX Network Programming</I> published?</H3>
+As I said earlier, I started writing UNP in 1988,
+based on internal notes that I was putting together on how the
+Berkeley networking code worked.
+I am still not certain of why I decided to sit down and write a book
+on this, but I think there are a number of small reasons.
+First, I had been working at a startup (HSI) for 6 years,
+and we were doing well, had a bigger programming staff,
+so I had a little more time at work to do things other than
+write code and put out fires.
+It had also been 6 years since finishing my Ph.D. and I had done
+no technical writing.
+Finally, we had hired this new kid at HSI (Gary Wright),
+fresh out of college, and when I realized how sharp he was,
+I knew I had to keep growing technically just to keep up with him.
+(Gary, you may note from the Preface of UNP,
+was the first one to read everything that I wrote.)
+
+<P>
+Having decided to write a book, I had to decide what to write about.
+My interests were a book on computer graphics or a networking book.
+We went to Nantucket for Thanksgiving in 1987 and I remember taking along
+Tanenbaum's <I>Computer Networks</I> and
+Foley and Van Dam's <I>Fundamentals of Interactive Computer Graphics</I>.
+When we got home I decided on a network programming book.
+I started writing and the initial title was <I>Network Programming</I>.
+As with most new authors,
+I kept my day job while writing my first book during my "spare time".
+
+<P>
+I still have a Usenet posting from January 1989 that went:
+"I am looking for a good Unix book (aren't we all?).
+I've got a good feel for Unix and both C and Shell programming.
+I'm now interested in learning about the communication aspect of Unix -
+i.e., sockets, protocols, etc."
+One week later there was another posting titled "IPC questions"
+asking lots of details about the various methods for IPC,
+above and beyond the coverage in Marc Rochkind's book.
+These made me feel that I was on the right track.
+I also have a Usenet posting by Rick Adams,
+dated November 23, 1988, stating that
+"At long last, the 4.3BSD files that do not contain ATT code
+are available to anyone who wants them."
+This meant I could include the Berkeley code in the book.
+
+<P>
+After writing for a few months I figured I should see if what I
+had written was worth finishing.
+I asked a friend at Bell Labs who had published a book with
+Prentice Hall for a contact there,
+and got the name and phone number of John Wait, an editor.
+I called in June 1988, left a message with his secretary,
+and he actually called back!
+He was interested, asked to see what I had written,
+and said he would be at the USENIX conference in July in San Francisco.
+I was registered for the conference, but sent Gary Wright instead,
+and he used my name badge.
+Gary delivered the manuscript (278 pages) to John.
+(Gary also ran into John months later at a Unix Expo conference,
+again wearing a name tag with my name on it,
+and John was wondering if Gary was doing all the writing under
+a pseudonym.
+If you encounter someone at a Unix conference with a badge that says
+"Rich Stevens" you should say "Oh, you must be Gary Wright.")
+John said he would send out the chapters for review,
+and then he would either
+(1) drive to New Haven immediately with a contract for me to sign,
+(2) send a contract in the mail, or
+(3) tell me I should be doing something other than writing.
+I then headed off to Hawaii for a month's vacation
+and when I returned there was a phone message to call John.
+I didn't know ahead of time, but one of the reviewers was
+Brian Kernighan and Brian's comments included
+"It's quite a reasonable piece of work,
+and certainly worth publishing. ...
+Overall, I think there's the nucleus of quite a useful book here.  ...
+In any case, it's well worth pursuing."
+John sent a contract in the mail, and I kept writing.
+
+<!-- ******************************************************************** -->
+<H3>Q: You don't really write your books using troff, do you?</H3>
+Of course.  What else is there?
+Troff is an industrial strength package that I have spent
+years of my life learning.
+I use a modified version of the -ms macros for everything that I write.
+There are numerous "tweaks" that I apply to my troff input before troff
+formats the pages, and I just can't imagine trying to implement some of
+these details with something like Frame.
+I also use pic for all the figures.
+I can type faster than I can move a mouse,
+so I find menu-driven drawing packages time consuming and frustrating.
+I don't use TeX because for years TeX and PostScript really didn't
+go together.
+If my writing contained more math, I might consider switching to TeX.
+
+<P>
+As a side note about camera ready copy ...
+In 1989 when I finished UNP,
+publishers were not fully prepared to handle camera ready copy,
+except from places like Bell Labs, which had their own typesetters.
+So when UNP was all done, I wrote the PostScript files in 15-page pieces
+to six 1.2 Mbyte MS-DOS diskettes and drove the diskettes myself
+from New Haven to Typesetting Service Corp. in Providence, Rhode Island.
+They sent the typeset pages via FedEx to Prentice Hall two days later,
+and I paid for the typesetting on my Visa
+(781 pages at $4 per page, for a total of $3,124),
+which Prentice Hall reimbursed me for later.
+Today one just sends the final PostScript to the publisher using ftp,
+and they take care of the actual typesetting.
+
+<!-- ******************************************************************** -->
+<H3>Q: What kind of Unix systems do you run?</H3>
+My main, everyday system is a Sparc Ultra 5 running Solaris.
+The reason is simple: in 1990 when I bought my first workstation,
+the SparcStation SLC was the only workstation under $5,000.
+Most workstation vendors ignored the low end market for years
+(and some still do).
+I later upgraded the SLC to an ELC,
+and then replaced it with a SparcStation4,
+and then replaced that with the Ultra 5.
+(I upgrade or replace about every 3 years.)
+I also run lots of publicly available software
+(GNU C, GNU troff, etc.)
+and I find most software of this form is ported to the Sun platform first,
+making my life simpler.
+
+<P>
+For my <TT>kohala.com</TT> domain I run
+<A HREF="http://www.bsdi.com/">BSD/OS</A>
+on its server (HTTP, anonymous FTP, email, DNS, etc.).
+BSD/OS is a very reliable, industrial-strength, system,
+that just runs and runs without any problems.
+I also like having the source code available,
+mainly just to look at,
+but also just in case I need to fix anything myself.
+But I also buy their service contract,
+letting them find and fix any bugs.
+(I pay list price for everything from Sun and BSDI,
+so the above comments are completely unbiased.)
+
+<P>
+I have a number of other computers in my office,
+running various flavors of Unix
+(nine when writing the second edition of UNP; see p. 21).
+I use these mainly for compiling and testing the code that I write
+on other systems,
+and to allow me to run clients and servers on the various hosts.
+
+<P>
+I do all my own system administration on these systems and my Cisco router,
+because if you cannot do this,
+you shouldn't be writing about Unix networking and programming.
+
+<!-- ******************************************************************** -->
+<H3>Q: What are your favorite technical books?</H3>
+Here is my list, in no particular order.
+<UL>
+<LI>
+ <A HREF="http://www.amazon.com/exec/obidos/ISBN=0131103628/wrichardstevensA/">
+        <I>The C Programming Language</I></A>
+	by Kernighan and Ritchie.
+	I've always been amazed by people who say this book is too
+	complicated or inadequate.  It is so concise, precise, and even
+	contains examples.
+<P>
+<LI>
+ <A HREF="http://www.amazon.com/exec/obidos/ISBN=020103669X/wrichardstevensA/">
+	<I>Software Tools</I></A>
+	by Kernighan and Plauger.
+	This book shows how to design and then implement simple versions
+	of many Unix tools: <TT>grep</TT>, <TT>sort</TT>, <TT>ed</TT>,
+	and the like.  (Yes, even <TT>ed</TT>, an editor that
+	<I>every</I> system administrator should know how to use.
+	I find myself still using it a few times a year,
+	often in single-user mode,
+	editing some basic configuration file.)
+	A favorite quote of mine is from p. 250:
+	"As always, if you propose to build something,
+	make sure it has some conceptual integrity--it should not be
+	merely a collection of unrelated "features".
+	And build it in increments, not all at once."
+<P>
+<LI>
+ <A HREF="http://www.amazon.com/exec/obidos/ISBN=013937681X/wrichardstevensA/">
+	<I>The UNIX Programming Environment</I></A>
+	by Kernighan and Pike.
+	A classic that is still "current" IMHO.
+	This book describes the use of the standard Unix tools from a
+	command line (with a little C programming),
+	whereas <I>Software Tools</I> is a programming book.
+<P>
+<LI>
+ <A HREF="http://www.amazon.com/exec/obidos/ISBN=0201134470/wrichardstevensA/">
+	<I>The TeXbook</I></A> by Knuth.
+	I don't use TeX but I continually use this book as a
+	typesetting reference.
+<P>
+<LI>
+ <A HREF="http://www.amazon.com/exec/obidos/ISBN=020107981X/wrichardstevensA/">
+	<I>The AWK Programming Language</I></A>
+	by Aho, Kernighan, and Weinberger.
+	I use AWK a lot for most small programs that I write.
+	No, I don't use perl--I consider it an unreadable write-only language.
+<P>
+<LI>
+ <A HREF="http://www.amazon.com/exec/obidos/ISBN=0070342075/wrichardstevensA/">
+	<I>The Elements of Programming Style</I></A>
+	by Kernighan and Plauger.
+	This book should still be required reading for all programmers.
+<P>
+<LI>
+ <A HREF="http://www.amazon.com/exec/obidos/ISBN=0062735233/wrichardstevensA/">
+	<I>On Writing Well</I></A>
+	by Zinsser.
+	A great book on how to write.
+<P>
+<LI>
+ <A HREF="http://www.amazon.com/exec/obidos/ISBN=0139478213/wrichardstevensA/">
+	<I>Webster's New World Guide to Current American Usage</I></A>
+	by Randall.
+	How to break all those stupid habits that you were taught in
+	high school English.
+</UL>
+<P>The only two books that I keep on my desk at all times are
+<A HREF="http://www.amazon.com/exec/obidos/ISBN=0877797099/wrichardstevensA/">
+<I>Merriam Webster's Collegiate Dictionary</I></A> and
+<A HREF="http://www.amazon.com/exec/obidos/ISBN=0226103897/wrichardstevensA/">
+<I>The Chicago Manual of Style</I></A>.
+
+<P>Just so you don't think I only read technical books,
+my favorite fiction authors (i.e., those authors whose hardcover books
+I will buy as soon as they are published) are:
+David Baldacci, Patricia Cornwell, Michael Crichton,
+Patrick Davis, Nelson DeMille, Joseph Finder, Frederick Forsyth,
+Stephen Frey, John Grisham, Payne Harrison,
+Greg Isles, Douglas Kennedy, Phillip Margolin, Steve Martini,
+Douglas Preston and Lincoln Child, and Stuart Woods.
+But the only time I seem to have for fun reading is on airplanes.
+
+<!-- ******************************************************************** -->
+<H3>Q: What does the W. in your name stand for?</H3>
+William.  My parents wanted to name me after my Uncle Bill but also
+wanted to call me Richard.  They figured "William Richard" sounded
+better than "Richard William".
+
+<!-- ******************************************************************** -->
+<H3>Q: Why did you dedicate APUE to MTS (the Michigan Terminal System)?</H3>
+I was an undergraduate at Michigan from 1968-1973 and the first computer
+I used was an IBM 360/67 running MTS for the Fortran programming course
+required of all Freshman engineers.
+The textbook was a homegrown text by Brice Carnahan and James Wilkes
+with Elliot Organick's Fortran IV book as a supplementary text.
+MTS was a fantastic system with lots of neat ideas and was developed
+around the same time as Unix.
+Like Unix, MTS had ideas that were ahead of its time,
+especially when compared to the other alternative OSes that were
+available for an IBM mainframe.
+Unfortunately for MTS, it ran on expensive IBM mainframes and Unix ran on
+cheap PDP-11s.
+As they say, the rest is history.
+
+<!-- ******************************************************************** -->
+<H3>Q: Why do your programs contain gotos?</H3>
+Read <I>Structured Programming with go to Statements</I>
+by Knuth in the ACM Computing Surveys, Vol. 6, No. 4, Dec. 1974 issue.
+(In fact, this entire issue of Computing Surveys is a classic.)
+My challenge to the goto-less programmer is to recode tcp_input()
+(Chapters 27 and 28 of TCP/IPIv2) without any gotos ...
+without any loss of efficiency (there has to be a catch).
+
+<P>
+<A HREF="index.html">
+<IMG SRC="gifs/left-arrow.gif" ALT="left arrow" WIDTH=36 HEIGHT=23></A>
+Back to W. Richard Stevens' Home Page
+
+</BODY>
+</HTML>

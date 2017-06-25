@@ -1,0 +1,258 @@
+<HTML>
+<HEAD>
+<TITLE>
+UNIX Network Programming, Volume 2
+</TITLE>
+</HEAD>
+<BODY>
+<H2>Preface</H2>
+</DL>
+<P>
+<H1>Part 1.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Introduction<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif">   1</H1>
+<HR>
+</DL>
+<DL>
+<H2>Chapter 1.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Introduction<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif">   3</H2>
+<DD>1.1<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">3
+<DD>1.2<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Processes, Threads, and the Sharing of Information<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">5
+<DD>1.3<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Persistence of IPC Objects<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">6
+<DD>1.4<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Name Spaces<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">7
+<DD>1.5<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Effect of <TT>fork</TT>, <TT>exec</TT>, and <TT>exit</TT> on IPC Objects<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">9
+<DD>1.6<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Error Handling: Wrapper Functions<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">11
+<DD>1.7<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Unix Standards<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">13
+<DD>1.8<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Road Map to IPC Examples in the Text<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">15
+<DD>1.9<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">16
+</DL>
+<DL>
+<H2>Chapter 2.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Posix IPC<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif">  19</H2>
+<DD>2.1<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">19
+<DD>2.2<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">IPC Names<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">19
+<DD>2.3<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Creating and Opening IPC Channels<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">22
+<DD>2.4<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">IPC Permissions<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">25
+<DD>2.5<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">26
+</DL>
+<DL>
+<H2>Chapter 3.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">System V IPC<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif">  27</H2>
+<DD>3.1<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">27
+<DD>3.2<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>key_t</TT> Keys and <TT>ftok</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">28
+<DD>3.3<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>ipc_perm</TT> Structure<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">30
+<DD>3.4<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Creating and Opening IPC Channels<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">30
+<DD>3.5<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">IPC Permissions<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">32
+<DD>3.6<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Identifier Reuse<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">34
+<DD>3.7<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>ipcs</TT> and <TT>ipcrm</TT> Programs<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">36
+<DD>3.8<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Kernel Limits<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">36
+<DD>3.9<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">38
+</DL>
+<P>
+<H1>Part 2.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Message Passing<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif">  41</H1>
+<HR>
+</DL>
+<DL>
+<H2>Chapter 4.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Pipes and FIFOs<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif">  43</H2>
+<DD>4.1<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">43
+<DD>4.2<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">A Simple Client-Server Example<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">43
+<DD>4.3<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Pipes<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">44
+<DD>4.4<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Full-Duplex Pipes<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">50
+<DD>4.5<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>popen</TT> and <TT>pclose</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">52
+<DD>4.6<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">FIFOs<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">54
+<DD>4.7<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Additional Properties of Pipes and FIFOs<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">58
+<DD>4.8<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">One Server, Multiple Clients<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">60
+<DD>4.9<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Iterative versus Concurrent Servers<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">66
+<DD>4.10<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Streams and Messages<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">67
+<DD>4.11<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Pipe and FIFO Limits<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">72
+<DD>4.12<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">73
+</DL>
+<DL>
+<H2>Chapter 5.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Posix Message Queues<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif">  75</H2>
+<DD>5.1<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">75
+<DD>5.2<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>mq_open</TT>, <TT>mq_close</TT>, and <TT>mq_unlink</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">76
+<DD>5.3<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>mq_getattr</TT> and <TT>mq_setattr</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">79
+<DD>5.4<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>mq_send</TT> and <TT>mq_receive</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">82
+<DD>5.5<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Message Queue Limits<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">86
+<DD>5.6<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>mq_notify</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">87
+<DD>5.7<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Posix Realtime Signals<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">98
+<DD>5.8<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Implementation Using Memory-Mapped I/O<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">106
+<DD>5.9<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">126
+</DL>
+<DL>
+<H2>Chapter 6.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">System V Message Queues<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif"> 129</H2>
+<DD>6.1<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">129
+<DD>6.2<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>msgget</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">130
+<DD>6.3<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>msgsnd</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">131
+<DD>6.4<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>msgrcv</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">132
+<DD>6.5<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>msgctl</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">134
+<DD>6.6<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Simple Programs<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">135
+<DD>6.7<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Client-Server Example<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">140
+<DD>6.8<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Multiplexing Messages<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">142
+<DD>6.9<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Message Queues with <TT>select</TT> and <TT>poll</TT><IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">151
+<DD>6.10<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Message Queue Limits<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">152
+<DD>6.11<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">155
+</DL>
+<P>
+<H1>Part 3.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Synchronization<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif"> 157</H1>
+<HR>
+</DL>
+<DL>
+<H2>Chapter 7.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Mutexes and Condition Variables<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif"> 159</H2>
+<DD>7.1<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">159
+<DD>7.2<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Mutexes: Locking and Unlocking<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">159
+<DD>7.3<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Producer-Consumer Problem<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">161
+<DD>7.4<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Locking versus Waiting<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">165
+<DD>7.5<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Condition Variables: Waiting and Signaling<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">167
+<DD>7.6<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Condition Variables: Timed Waits and Broadcasts<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">171
+<DD>7.7<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Mutexes and Condition Variable Attributes<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">172
+<DD>7.8<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">174
+</DL>
+<DL>
+<H2>Chapter 8.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Read-Write Locks<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif"> 177</H2>
+<DD>8.1<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">177
+<DD>8.2<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Obtaining and Releasing Read-Write Locks<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">178
+<DD>8.3<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Read-Write Lock Attributes<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">179
+<DD>8.4<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Implementation Using Mutexes and Condition Variables<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">179
+<DD>8.5<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Thread Cancellation<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">187
+<DD>8.6<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">192
+</DL>
+<DL>
+<H2>Chapter 9.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Record Locking<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif"> 193</H2>
+<DD>9.1<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">193
+<DD>9.2<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Record Locking versus File Locking<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">197
+<DD>9.3<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Posix <TT>fcntl</TT> Record Locking<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">199
+<DD>9.4<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Advisory Locking<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">203
+<DD>9.5<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Mandatory Locking<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">204
+<DD>9.6<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Priorities of Readers and Writers<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">207
+<DD>9.7<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Starting Only One Copy of a Daemon<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">213
+<DD>9.8<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Lock Files<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">214
+<DD>9.9<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">NFS Locking<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">216
+<DD>9.10<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">216
+</DL>
+<DL>
+<H2>Chapter 10.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Posix Semaphores<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif"> 219</H2>
+<DD>10.1<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">219
+<DD>10.2<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>sem_open</TT>, <TT>sem_close</TT>, and <TT>sem_unlink</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">225
+<DD>10.3<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>sem_wait</TT> and <TT>sem_trywait</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">226
+<DD>10.4<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>sem_post</TT> and <TT>sem_getvalue</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">227
+<DD>10.5<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Simple Programs<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">228
+<DD>10.6<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Producer-Consumer Problem<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">233
+<DD>10.7<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">File Locking<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">238
+<DD>10.8<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>sem_init</TT> and <TT>sem_destroy</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">238
+<DD>10.9<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Multiple Producers, One Consumer<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">242
+<DD>10.10<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Multiple Producers, Multiple Consumers<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">245
+<DD>10.11<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Multiple Buffers<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">249
+<DD>10.12<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Sharing Semaphores between Processes<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">256
+<DD>10.13<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Semaphore Limits<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">257
+<DD>10.14<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Implementation Using FIFOs<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">257
+<DD>10.15<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Implementation Using Memory-Mapped I/O<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">262
+<DD>10.16<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Implementation Using System V Semaphores<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">271
+<DD>10.17<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">278
+</DL>
+<DL>
+<H2>Chapter 11.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">System V Semaphores<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif"> 281</H2>
+<DD>11.1<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">281
+<DD>11.2<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>semget</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">282
+<DD>11.3<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>semop</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">285
+<DD>11.4<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>semctl</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">287
+<DD>11.5<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Simple Programs<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">289
+<DD>11.6<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">File Locking<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">294
+<DD>11.7<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Semaphore Limits<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">296
+<DD>11.8<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">300
+</DL>
+<P>
+<H1>Part 4.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Shared Memory<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif"> 301</H1>
+<HR>
+</DL>
+<DL>
+<H2>Chapter 12.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Shared Memory Introduction<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif"> 303</H2>
+<DD>12.1<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">303
+<DD>12.2<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>mmap</TT>, <TT>munmap</TT>, and <TT>msync</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">307
+<DD>12.3<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Increment Counter in a Memory-Mapped File<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">311
+<DD>12.4<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">4.4BSD Anonymous Memory Mapping<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">315
+<DD>12.5<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">SVR4 <TT>/dev/zero</TT> Memory Mapping<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">316
+<DD>12.6<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Referencing Memory-Mapped Objects<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">317
+<DD>12.7<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">322
+</DL>
+<DL>
+<H2>Chapter 13.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Posix Shared Memory<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif"> 325</H2>
+<DD>13.1<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">325
+<DD>13.2<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>shm_open</TT> and <TT>shm_unlink</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">326
+<DD>13.3<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>ftruncate</TT> and <TT>fstat</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">327
+<DD>13.4<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Simple Programs<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">328
+<DD>13.5<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Incrementing a Shared Counter<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">333
+<DD>13.6<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Sending Messages to a Server<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">336
+<DD>13.7<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">342
+</DL>
+<DL>
+<H2>Chapter 14.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">System V Shared Memory<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif"> 343</H2>
+<DD>14.1<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">343
+<DD>14.2<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>shmget</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">343
+<DD>14.3<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>shmat</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">344
+<DD>14.4<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>shmdt</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">345
+<DD>14.5<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>shmctl</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">345
+<DD>14.6<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Simple Programs<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">346
+<DD>14.7<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Shared Memory Limits<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">349
+<DD>14.8<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">351
+</DL>
+<P>
+<H1>Part 5.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Remote Procedure Calls<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif"> 353</H1>
+<HR>
+</DL>
+<DL>
+<H2>Chapter 15.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Doors<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif"> 355</H2>
+<DD>15.1<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">355
+<DD>15.2<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>door_call</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">361
+<DD>15.3<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>door_create</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">363
+<DD>15.4<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>door_return</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">364
+<DD>15.5<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>door_cred</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">365
+<DD>15.6<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>door_info</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">365
+<DD>15.7<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Examples<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">366
+<DD>15.8<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Descriptor Passing<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">379
+<DD>15.9<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>door_server_create</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">384
+<DD>15.10<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>door_bind</TT>, <TT>door_unbind</TT>, and <TT>door_revoke</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">390
+<DD>15.11<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Premature Termination of Client or Server<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">390
+<DD>15.12<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">397
+</DL>
+<DL>
+<H2>Chapter 16.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Sun RPC<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif"> 399</H2>
+<DD>16.1<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">399
+<DD>16.2<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Multithreading<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">407
+<DD>16.3<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Server Binding<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">411
+<DD>16.4<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Authentication<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">414
+<DD>16.5<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Timeout and Retransmission<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">417
+<DD>16.6<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Call Semantics<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">422
+<DD>16.7<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Premature Termination of Client or Server<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">424
+<DD>16.8<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">XDR: External Data Representation<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">426
+<DD>16.9<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">RPC Packet Formats<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">444
+<DD>16.10<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">449
+</DL>
+<DL>
+<H2>Epilogue<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif"> 453</H2>
+</DL>
+<DL>
+<H2>Appendix A.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Performance Measurements<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif"> 457</H2>
+<DD>A.1<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">457
+<DD>A.2<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Results<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">458
+<DD>A.3<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Message Passing Bandwidth Programs<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">467
+<DD>A.4<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Message Passing Latency Programs<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">480
+<DD>A.5<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Thread Synchronization Programs<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">486
+<DD>A.6<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Process Synchronization Programs<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">497
+</DL>
+<DL>
+<H2>Appendix B.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">A Threads Primer<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif"> 501</H2>
+<DD>B.1<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">501
+<DD>B.2<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Basic Thread Functions: Creation and Termination<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">502
+</DL>
+<DL>
+<H2>Appendix C.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Miscellaneous Source Code<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif"> 505</H2>
+<DD>C.1<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>unpipc.h</TT> Header<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">505
+<DD>C.2<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif"><TT>config.h</TT> Header<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">509
+<DD>C.3<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Standard Error Functions<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">510
+</DL>
+<DL>
+<H2>Appendix D.<IMG HEIGHT=1 WIDTH=18 SRC="blank.gif">Solutions to Selected Exercises<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif"> 515</H2>
+</DL>
+<DL>
+<H2>Bibliography<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif"> 535</H2>
+</DL>
+<DL>
+<H2>Index<IMG HEIGHT=1 WIDTH=40 SRC="blank.gif"> 539</H2>
+</BODY>
+</HTML>

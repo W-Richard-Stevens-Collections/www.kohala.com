@@ -1,0 +1,258 @@
+
+
+		T/TCP -- Transaction TCP
+	   	Source Changes for Sun OS 4.1.3
+
+		Release 1.0
+		September 14, 1994
+
+		Prepared by Bob Braden
+		USC Information Sciences Institute
+
+
+INTRODUCTION
+
+The README file describes a package of extensions to Sun OS 4.1.3 (basically,
+BSD Reno TCP) for the transaction extensions to TCP described in RFC1644.
+"T/TCP -- TCP Extensions for Transactions; Functional Specifications".
+
+To use this package, you will need kernel sources for 4.1.3.  These sources
+have been used also with 4.1.3U1 without difficulty.
+
+This package includes the following files:
+
+	README		-- This file
+
+	netinet.diffs	-- Context diffs for files in netinet/ directory
+				 in kernel source tree.
+
+	os.diffs	-- Ditto for os/ directory
+
+	sys.diffs	-- Ditto for sys/ directory
+
+	test/*		-- A set of test and diagnostic programs.  See the
+				README file there.
+
+BUILDING A KERNEL
+
+Each of these *.diffs files can be applied to the corresponding source
+directory using the 'patch' program, and a new kernel generated.
+For example, starting in the base system build tree directory:
+
+		cd netinet
+		patch < ../4.1.3TTCP/netinet.diffs
+		cd ../os
+		patch < ../4.1.3TTCP/os.diffs
+		cd ../sys
+		patch < ../4.1.3TTCP/sys.diffs
+
+To include the T/TCP changes, you will also need to add the following
+line to your kernel config file:
+
+		options XACT     # T/TCP transaction TCP extensions
+
+If you omit this line, you will build a standard 4.1.3x kernel.
+
+
+TESTING THE KERNEL
+
+First of all, the new kernel should be fully compatible with normal TCP
+unless you exercise its new features.  The only anomaly you should
+observe will be seen with tcpdump: your SYN segments will be sent with
+a new TCP option (CC.NEW, kind = 12; see RFC1644).  The listening TCP
+that does not implement T/TCP should just ignore this option.
+
+(If you think you observe any problems with standard-TCP compatibility,
+try to capture a tcpdump trace of it and send it to me).
+
+USING T/TCP
+
+    1. New setsockopts:
+
+	Two new set/getsockopts are defined for TCP (level = IPPROTO_TCP):
+
+	    TCP_NOTPUSH
+
+		This option turns the NotPush flag on or off for the
+		specified socket (nonzero value turns the flag on,
+		which suppresses PUSH).
+
+		Basically, this supplies a capability implied by the
+		TCP specification but not implemented in standard BSD
+		TCP, which always has an implied PUSH for any data
+		write, i.e., BSD TCP always forwards any data passed to
+		it for output.  Turning on NOTPUSH removes this implied
+		Push, so that data may be buffered within TCP and
+		combined with a data from later writes to form
+		full-sized segments for transmission.  This buffering
+		may continue until the connection is closed or NOTPUSH
+		is turned off.
+
+		This facility was added for T/TCP, to be executed on
+		the server socket.  This will ensure that the SYN,
+		response data, and FIN from the server are piggy-backed
+		on the same segment whenever possible.
+
+		[Note: I am not sure this bit is really required for
+		T/TCP; this needs further experimentation.]
+
+		Note: NOTPUSH should not be confused with the existing
+		setsockopt TCP_NODELAY, which suppresses the Nagel
+		algorithm.  The two are related, but different.
+
+	    TCP_NOOPTS
+
+		This option suppresses sending any options on the
+		initial SYN segment.  It is intended for use for
+		communicating with a (broken!) host that cannot
+		accept and ignore TCP options on SYN segments.
+
+
+	Both the TCP_NOTPUSH and TCP_NOOPTS flags are inherited from
+	the LISTEN socket when a new socket is created as the result of
+	an accept() call.
+
+    2. New send flag MSG_EOF
+
+	A new send flag is defined in socket.h, MSG_EOF.  This flag
+	causes an "end of file" after the data in a send, sendto, or
+	sendmsg operation.  That is, it closes the send side of the
+	connection after sending the data, all in one system call.
+	This forces the FIN bit to be piggy-backed on the last
+	data segment.
+
+	Note that this flag does NOT give the effect of a send (or
+	write) followed by a close() call.  The BSD socket abstraction
+	is full-duplex, while the underlying TCP protocol has a more
+	complex dual-simplex logic: a TCP connection is allowed
+	to be half-open, i.e., open in only one direction.  This is
+	essential for T/TCP.  Setting the MSG_EOF in the send call
+	sends the data and closes the send side of the connection;
+	it does not affect the other side or delete the socket.
+	A subsequent close call must still be made to delete the
+	socket.
+
+   3. Sendto Call for TCP
+
+	A very small change in the socket layer allows the sendto call
+	to be used for a SOCK_STREAM socket, i.e., for TCP.
+
+	This is the basic call used by a client application to issue a
+	normal transaction request:
+
+		sendto(so, msg, len, MSG_EOF, to, tolen)
+
+	This call does an implied connect() to the socket address *to,
+	sends the data in msg with specified length, and closes the
+	send side.  If the length len is short enough to fit into a
+	single packet, it will send one packet containing a SYN and FIN
+	bit as well as the data.  Unlike a sendto call on a UDP socket,
+	there is no limit on the size of a message with TCP.
+
+	If the flag parameter is zero rather than MSG_EOF, the call
+	will do an implied connect and send the data but not close the
+	connection; then further send[to] or write calls can be
+	issued.
+
+	Note: We did not implement a TCP version of recvfrom(); receipt
+	of T/TCP transactions uses the standard TCP listen/accept
+	mechanism.
+ 
+   4. Client, Server Application Code
+
+	Here is a cryptic outline of basic client and server code using
+	T/TCP.  All code to handle errors or other exceptions is omitted.
+
+	CLIENT:
+		so = socket(AF_INET, SOCK_STREAM, 0);
+
+		/* Send request message
+		 */
+		sendto(so, reqbuf, reqlen, MSG_EOF, &peeraddr_in, peeraddr_len);
+
+		/* Read reply message into buffer (assumed here to be
+		 * large enough).  Reply msg is delimited by EOF (FIN).
+		 */
+		read(so, rcv_buf, sizeof(rcvbuf));
+
+		/* Delete socket.
+		 */
+		close(so);
+
+	SERVER:
+		so = socket(AF_INET, SOCK_STREAM, 0);
+
+		bind(so, local_addr, addr_len);
+
+		setsockopt(so, IPPROTO_TCP, TCP_NOTPUSH, &One, sizeof(int));
+
+		listen(so, n);
+
+		while (1) {
+			new_so = accept(so, foreign_addr, &addr_len);
+	
+			/* Read request message into buffer (assumed here to be
+			 * large enough).  Request msg is delimited by EOF (FIN).
+			 */
+			read(new_so, reqbuf, sizeof(reqbuf));
+
+			/*  <Process request buffer 'reqbuf' and
+			 *    compute reply buffer 'replybuf'>
+			 */
+
+			sendto(new_so, replybuf, replylen, MSG_EOF, 0, 0);
+
+			close(new_so);
+		}
+
+
+IMPLEMENTATION
+
+Here are some brief notes on the T/TCP kernel changes.
+
+     1. Support TCP options
+
+	The original BSD code was not structured properly to allow
+	TCP options.  Correcting this required significant changes
+	in a number of the TCP routines.  These changes are delimited
+	by #ifdef USE_OPTIONS, while the rest of the T/TCP changes
+	are delmited by #ifdef XACT.  (Defining XACT defines USE_OPTIONS
+	for you).
+
+	(Explanatory note: the original source from which this release
+	is derived has *both* T/TCP and RFC-1323 changes, controlled by
+	separate #ifdefs.  We bound and removed the RFC-1323 #ifdefs
+	for this T/TCP release, because the combination with RFC1323
+	changes gets quite confusing.  As a result of the way this was
+	done, USE_OPTIONS sometimes delimits code that is not strictly
+	for supporting options, but rather for any extension that uses
+	options.)
+
+    2. Large TCPCB
+
+	The standard BSD TCP places a connection control block tcpcb in
+	a 128-byte mbuf, and it JUST fits.  To extend TCP, the tcpcb
+	must be expanded, and this requires a new way to allocate a
+	tcpcb.  This version uses the dumbest and most inefficient
+	way... it uses an entire 1K cluster mbuf for each tcpcb.  The
+	mbuf.h and uipc_mbuf.c files include a new mechanism (XCLGET
+	and free_xclfun) that will suballocate a cluster mbuf to hold 5
+	tcpcb's.  This code has worked, but to be conservative we do
+	not use it in this version.
+
+    3. RTT Calculations
+
+	It is important to maintain RTT estimates across multiple
+	transactions (see RFC1644).  The cache maintained by T/TCP
+	therefore records the SRTT and RTT_VAR values for a particular
+	remote host, and uses them to initialize the values for the
+	next transaction to/from that host.
+
+	However, this code forces a slowstart (initializes cwnd to
+	1*maxseg) if the destination is not on the local network.
+
+    4. Header Prediction
+
+	This code adds the CC count to header prediction, assuming
+	the same format in which it sends CC counts.
+

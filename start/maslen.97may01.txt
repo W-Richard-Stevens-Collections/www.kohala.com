@@ -1,0 +1,163 @@
+Article: 4779 of comp.programming.threads
+From: maslen@best.com (Thomas M. Maslen)
+Newsgroups: comp.programming.threads
+Subject: Re: gethostbyXXXX() and threads
+Date: 1 May 1997 01:37:13 -0700
+Organization: BEST Internet Communications
+Message-ID: <maslen.862463530@shellx>
+
+My officemate (who may wish to remain anonymous) and I specified and 
+implemented the getXXXX_r() routines that went into SunOS 5.3 (Solaris 2.3), 
+so I have a fading recollection (from 1991 or 1992) of how and why things
+were done then.  Some of this may have changed since, and I haven't kept
+close tabs on it.
+
+First, we checked with the Sun folks who went to UI (Unix International) and 
+POSIX meetings, and discovered that all we had to go on were:
+
+      -	the SVID (System V Interface Definition), which defined pre-MT
+	interfaces in painful detail but had nothing to say about MT,
+
+      -	a UI (Unix International) document about MT-safe APIs for libc, 
+	which defined libc routines like getpwnam_r() and its friends but 
+	didn't  say anything about libsocket or libnsl,
+
+      -	if there was a similar POSIX document then we had it, but offhand 
+	I don't remember whether POSIX had got as far as libc, much less
+	libsocket or libnsl.
+
+I took some time out to curse
+
+      -	whoever it was that originally defined getpwnam() et al to return 
+	a pointer-to-static, 
+
+      -	the same person, presumably, who defined the setpwent/getpwent/endpwent
+	enumeration routines,
+
+      -	whoever gave us the global variable 'errno',
+
+      -	whoever it was at Berkeley who slavishly followed suit when they 
+	created gethostbyname() et al and h_errno (can we blame this one
+	on Bill Joy?).
+
+We also noted that whoever defined the transport-independent naming API, 
+netdir_getbyname() and netdir_getbyaddr(), had at least got the no-pointers-
+to-static part right, even if the interface wasn't exactly beautiful.  It was 
+probably at about this time that I began to yearn very strongly for a useful 
+programming language with garbage collection built in.
+
+Then we sat down to define MT-safe interfaces to gethostbyname() et al that
+would, as much as possible, follow the intent of the getpwnam_r() definitions
+in the documents we had, i.e.
+
+    (1)	Don't attempt to make the existing interface MT-safe by playing
+	games with TSD (Thread-Specific Data):  instead, leave that interface
+	alone and introduce a new _r interface
+
+	[I happen to agree with this...  I think that returning pointer-to-TSD
+	is only marginally better than returning pointer-to-static -- it still
+	means that, in a given thread, all bets are off if I call a second
+	routine without doing a deep copy of the results from the first]
+
+    (2)	The _r routine should take three extra arguments:  
+
+	      -	a pointer to space for a (struct XXX), 
+
+	      -	a pointer to a buffer for all the stuff that the struct XXX
+		might point to,
+
+	      -	the size of the buffer
+
+	[There are obviously alternatives, but at least this approach keeps
+	the performance folks from freaking out]
+
+    (3)	The routine would set a TSD errno, and the return value of the
+	function would be either NULL or a pointer to struct XXX
+
+	[This is pretty silly.  The caller knows what the pointer-to-struct 
+	is because it was one of the arguments in (2), and the return value 
+	should have been an integer 0 or errno.  However, that's what 
+	getpwnam_r() and friends did, and we slavishly followed suit]
+	
+    (4)	Nobody had said anything about h_errno, so we mumbled something about
+	the hobgoblin of small minds and, instead of creating a TSD h_errno
+	[bleah], we made it an 'out' parameter of gethostbyname_r() and
+	gethostbyaddr_r()
+
+	[h_errno is pretty cheesy anyway, maybe we should have been more bold
+	and just nuked it]
+
+    (5)	The enumeration routines get a getXXXent_r(), but the enumeration
+	state is still process-global rather than, say, thread-specific or
+	held in a client-controlled state object
+
+	[This makes the enumeration routines pretty useless, but they were
+	pretty useless already -- they stopped making sense the minute that
+	name-service information was put in, say, DNS rather than /etc/hosts.
+	Under the covers, our implementation uses a state object, so it could
+	easily adapt to a thread-specific or client-controlled state API]
+
+... which meant that, for better or worse, we ended up with interfaces like
+
+	struct hostent *gethostbyname_r(const char *name, 
+	     struct hostent *result, char *buffer, int buflen, int *h_errnop);
+
+and
+
+	struct netent *getnetbyname_r(const char *name, 
+	     struct netent *result, char *buffer, int buflen);
+
+
+Other people clearly made different, maybe more sensible, decisions, and the
+POSIX committee changed its mind a few times (which led to a brief panic late
+in the development cycle of 5.3 or 5.4, I forget which).
+
+Ben Self <bself@opentext.com> writes:
+[...]
+>I think to some extent that the interfaces in nsl/socket are second
+>class citizens.  
+
+Amen to that.
+
+>In practice, every platform that I have worked on has solved this
+>problem differently.  Most just specify a XXX_r() function which takes
+>its buffers in a format that requires them to rewrite the least amount
+>of code.  
+
+Actually, it would have been easier for us to implement pointer-to-TSD;
+instead, the client-supplied buffers meant that we pretty much rewrote the
+code from scratch (partly because it meant that, for the first time in the 
+history of this code, the code actually did some bounds-checking).
+
+>A few have really fixed the interface by using thread specific
+>data or another thread safe mechanism.  
+
+I guess we disagree on whether pointer-to-TSD is a feature or a bug.
+
+>In all cases, the documentation of what was done and why is in short supply.
+
+Yup.
+
+>Good luck, I for one would love to see this standardized.
+
+Likewise.  
+
+However, before sinking too much time into trying to standardize MT-safe 
+versions of the old get{host,net,service...} routines, it might be a good 
+idea to make sure that future API work is headed in the right direction.  
+I'm thinking of RFC 2133 Section 6, particularly the use of the global 
+variable _res.options, which (apart from being pretty BIND-specific) does 
+seem to tie all threads in the process to a single policy.  
+
+Section 6.3 of that RFC also mentions POSIX 1003.1g and the getaddrinfo() 
+function, which seems to be a rather more MT-friendly API.  (Mr Stevens
+presumably knows all this, since he's one of the authors of the RFC, but
+I certainly didn't).
+
+In the short term, does anyone know whether there's likely to be an MT-hot
+version of the BIND libresolv code?  Last time I looked, both the code and 
+the APIs were pretty MT-hostile.
+
+Thomas Maslen
+maslen@pobox.com
+(Maybe I'll just refuse to write MT networking code in anything except Java...)

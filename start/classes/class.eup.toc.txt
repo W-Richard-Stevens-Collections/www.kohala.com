@@ -1,0 +1,110 @@
+
+STANDARDS   6 
+
+     ANSI C   6 
+     IEEE POSIX   7 
+     X/Open   9 
+     FIPS   10 
+     Limits   12 
+     sysconf, pathconf, and fpathconf Functions   14 
+     getrlimit and setrlimit Functions   16 
+     64-bit Architectures   18 
+
+FILE I/O   19 
+
+     I/O Efficiency   19 
+     I/O Sharing   20 
+     Synchronizing Output to Disk   22 
+     Standard I/O Buffering   24 
+     Standard I/O Performance   25 
+     Large Files   26 
+     File Truncation   30 
+     File Times   30 
+     Filesystems   31 
+
+ENVIRONMENT OF A UNIX PROCESS   32 
+
+     exit and _exit Functions   32 
+     atexit Function   33 
+     setjmp and longjmp Functions   34 
+     Timer Functions   36 
+
+PROCESS CONTROL   37 
+
+     fork Function   37 
+     wait and waitpid Functions   38 
+     Interpreter Files   40 
+
+PROCESS RELATIONSHIPS   42 
+
+     Sessions   42 
+     Daemon Processes   43 
+     Daemon Error Logging   46 
+
+SIGNALS   47 
+
+     Introduction   47 
+     signal Function   48 
+     Terminology   49 
+     Interrupted System Calls   51 
+     Async-Signal-Safe Functions   53 
+     Signal Sets   55 
+     sigprocmask and pthread_sigmask Functions   57 
+     sigaction Function   58 
+     signal Function   59 
+     Posix.1 Realtime Signals   61 
+     sigqueue Function   62 
+     pthread_kill Function   63 
+     pthread_cancel Function   63 
+     sigwait, sigwaitinfo, and sigtimedwait Functions   64 
+     sigevent Structure   66 
+     SIGCHLD and wait   67 
+     sigsetjmp and siglongjmp Functions   68 
+     sigsuspend Function   70 
+
+ADVANCED I/O   74 
+
+     I/O Models   74 
+     Parallel I/O   77 
+        pread and pwrite Functions   77 
+     Asynchronous I/O   78 
+        aio_read and aio_write Functions   79 
+        aio_error and aio_return Functions   80 
+        aio_suspend Function   81 
+     Record Locking   82 
+     Nonblocking I/O   85 
+     Memory Mapped I/O   88 
+        4.4BSD Anonymous Memory Mapping   92 
+        SVR4 Memory Mapping of /dev/zero   93 
+
+INTERPROCESS COMMUNICATION   94 
+
+     Introduction   94 
+     Coprocesses   95 
+     System V IPC   97 
+     POSIX IPC   99 
+        Message Queues   100 
+        Semaphores   102 
+        Shared Memory   104 
+
+PSEUDO TERMINALS   108 
+
+     Introduction   108 
+     Network Login Servers   110 
+     script Program   111 
+
+THREADS   113 
+
+     Introduction   113 
+     pthread_create Function   115 
+     pthread_exit Function   115 
+     pthread_join Function   116 
+     pthread_detach Function   116 
+     Attributes   118 
+     Mutexes   119 
+     Condition Variables   120 
+     Read-Write Locks   121 
+     Other Functions   123 
+     C Libraries   124 
+     Thread-Specific Data   126 
+     System Call Tracing   129 

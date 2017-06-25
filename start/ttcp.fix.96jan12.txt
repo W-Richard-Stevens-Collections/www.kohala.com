@@ -1,0 +1,155 @@
+To: Richard Stevens <rstevens@noao.edu>
+Subject: Fwd: The anatomy of a FreeBSD bug
+Date: Fri, 12 Jan 1996 18:07:47 +0100
+From: Andras Olah <olah@cs.utwente.nl>
+
+Rich,
+
+Here's a description of a bug which is the result of the interference
+between T/TCP and a change you mentioned (p. 95 of Volume 3) that setting
+TF_ACKNOW when the rexmit timer goes off is redundant.  I made the change
+in FreeBSD and it caused sporadic panics.  Here's my analysis sent to the
+FreeBSD people and I thought you may also find it interesting.
+
+Andras
+
+------- Forwarded Message
+
+From:    Andras Olah <olah@cs.utwente.nl>
+To:      davidg@root.com, "Garrett A. Wollman" <wollman@lcs.mit.edu>
+Cc:      current@freebsd.org
+Subject: Re: m_copydata panic & tcp_extensions: the full analysis
+Date:    Thu, 11 Jan 1996 17:13:37 +0100
+
+On Thu, 04 Jan 1996 18:44:37 +0100, Andras Olah wrote:
+> and some segments are lost.  For the people interested in the
+> anatomy of this bug, I'll describe the problem in full details.
+
+As I promised earlier, here's a detailed analysis of the (already
+exterminated) m_copydata panics.  Since I've never had these panics
+myself, there's a slight chance that I'm wrong but it's not likely. 
+I'm sending it to current as well because so many people were bitten
+by this bug.  Please accept my apologies for the inconvenience.
+
+Andras
+
+Assume that host A sends data to host B, they both use T/TCP and
+they've communicated successfully before, i.e. both of them have the
+cached information about the other used by T/TCP to speed up opens.
+
+
+host A							host B
+1.		<SYN,CC=n> ->-->
+
+2.		<--<- <SYN,ACK(SYN),CC=m,CCecho=n>
+
+3.		<ACK(SYN),CC=n> ->--X (lost)
+
+4.		<ACK(SYN),data1,CC=n> ->--X (lost)
+
+5.					rexmit timer goes off
+
+6.		<ACK(SYN),FIN,CC=n> ->-->
+
+					panic in tcp_output()
+					while sending the ACK
+
+When B receives seg 1., it immediately enters the ESTABLISHED state
+because of the accelerated open (TAO) succeeds.  The TF_SENDSYN flag
+is set in the tcpcb.
+
+Seg. 2 acknowledges A's SYN, so A also enters the ESTABLISHED state.
+It sends back an ACK (seg. 3) of the SYN, the connect() returns to
+the appl.  which then sends some data (seg. 4) on the socket.  So
+the application doesn't have to use implicit connect to exercise
+this bug.  Seg. 3 and 4 are both lost.
+
+At 5. the retransmission timer of B goes off because it hasn't seen
+an ACK of its SYN yet.  The effect of the timeout is that snd_nxt is
+set to snd_una which is equal to the initial sequence number iss. 
+Then tcp_output() is called to retransmit the SYN.
+
+But in practice nothing is sent at this stage.  The change I made
+back in November was based on the observation that setting TF_ACKNOW
+at a rexmit timeout is redundant because tcp_output() tests for
+snd_nxt being less than snd_max to see if a retransmission is taking
+place.  The problem is that this test is only taking place if the
+segment to be sent has data (len > 0):
+
+        /*
+         * Sender silly window avoidance.  If connection is idle
+         * and can send all data, a maximum segment,
+         * at least a maximum default-size segment do it,
+         * or are forced, do it; otherwise don't bother.
+         * If peer's buffer is tiny, then send
+         * when window is at least half open.
+         * If retransmitting (possibly after persist timer forced us
+         * to send into a small window), then must resend.
+         */
+        if (len) {
+                if (len == tp->t_maxseg)
+                        goto send;
+                if ((idle || tp->t_flags & TF_NODELAY) &&
+                    (tp->t_flags & TF_NOPUSH) == 0 &&
+                    len + off >= so->so_snd.sb_cc)
+                        goto send;
+                if (tp->t_force)
+                        goto send;
+                if (len >= tp->max_sndwnd / 2 && tp->max_sndwnd > 0)
+                        goto send;
+                if (SEQ_LT(tp->snd_nxt, tp->snd_max))
+                        goto send;
+        }
+
+Furthermore if TF_SENDSYN is set, then the presence of the SYN flag
+is not sufficient reson for sending a segment, anticipating some data
+from the application soon or the expiration of the delack timer.
+
+        /*
+         * Send if we owe peer an ACK.
+         */
+        if (tp->t_flags & TF_ACKNOW)
+                goto send;
+        if ((flags & TH_RST) ||
+            ((flags & TH_SYN) && (tp->t_flags & TF_SENDSYN) == 0))
+                goto send;
+
+Therefore, snd_nxt is equal to snd_una == iss when seg. 6 is
+received.  Seg. 6 acks the SYN of B, but the FIN is out of order
+because the data in between was lost.  The ack in seg. 6 is
+processed by the lines below:
+
+                /*       
+                 *  If we reach this point, ACK is not a duplicate,
+                 *     i.e., it ACKs something we sent.
+                 */
+                if (tp->t_flags & TF_SENDSYN) { 
+                        /*
+                         *   T/TCP: Connection was half-synchronized, and our
+                         *   SYN has been ACK'd (so connection is now fully
+                         *   synchronized).  Go to non-starred state and
+                         *   increment snd_una for ACK of SYN.
+                         */
+                        tp->t_flags &= ~TF_SENDSYN; 
+                        tp->snd_una++; 
+                }
+
+Then, some lines later, the rest of the ACK processing is skipped. 
+ 
+                /*                      
+                 * If no data (only SYN) was ACK'd,
+                 *    skip rest of ACK processing.
+                 */
+                if (acked == 0)                 
+                        goto step6;     
+
+The net effect of these is that snd_una == iss+1, but snd_nxt is
+still equal to iss.  When tcp_output() is called at the end of
+tcp_input(), it calculates an offset of -1 to the socket buffer
+which is the direct reason of the panic.
+
+Adding back the ACKNOW flag solved the issue, because then
+tcp_output() in step 5. resends the SYN and sets snd_nxt to iss+1
+(the seq.  number after the SYN).
+
+------- End of Forwarded Message

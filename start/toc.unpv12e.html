@@ -1,0 +1,507 @@
+<HTML>
+<HEAD>
+<TITLE>
+UNIX Network Programming, Volume 1
+</TITLE>
+</HEAD>
+<BODY>
+<H2>Preface</H2>
+</DL>
+<P>
+<H1>Part 1.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction and TCP/IP<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif">   1</H1>
+<HR>
+</DL>
+<DL>
+<H2>Chapter 1.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif">   3</H2>
+<DD>1.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">3
+<DD>1.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">A Simple Daytime Client<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">6
+<DD>1.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Protocol Independence<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">9
+<DD>1.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Error Handling: Wrapper Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">11
+<DD>1.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">A Simple Daytime Server<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">13
+<DD>1.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Road Map to Client-Server Examples in the Text<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">16
+<DD>1.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">OSI Model<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">18
+<DD>1.8<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">BSD Networking History<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">19
+<DD>1.9<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Test Networks and Hosts<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">20
+<DD>1.10<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Unix Standards<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">24
+<DD>1.11<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">64-bit Architectures<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">27
+<DD>1.12<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">28
+</DL>
+<DL>
+<H2>Chapter 2.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">The Transport Layer: TCP and UDP<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif">  29</H2>
+<DD>2.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">29
+<DD>2.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">The Big Picture<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">30
+<DD>2.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">UDP: User Datagram Protocol<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">32
+<DD>2.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP: Transmission Control Protocol<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">32
+<DD>2.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Connection Establishment and Termination<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">34
+<DD>2.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TIME_WAIT State<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">40
+<DD>2.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Port Numbers<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">41
+<DD>2.8<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Port Numbers and Concurrent Servers<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">44
+<DD>2.9<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Buffer Sizes and Limitations<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">46
+<DD>2.10<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Standard Internet Services<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">50
+<DD>2.11<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Protocol Usage by Common Internet Applications<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">52
+<DD>2.12<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">52
+</DL>
+<P>
+<H1>Part 2.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Elementary Sockets<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif">  55</H1>
+<HR>
+</DL>
+<DL>
+<H2>Chapter 3.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Sockets Introduction<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif">  57</H2>
+<DD>3.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">57
+<DD>3.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Socket Address Structures<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">57
+<DD>3.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Value-Result Arguments<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">63
+<DD>3.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Byte Ordering Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">66
+<DD>3.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Byte Manipulation Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">69
+<DD>3.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>inet_aton</TT>, <TT>inet_addr</TT>, and <TT>inet_ntoa</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">70
+<DD>3.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>inet_pton</TT> and <TT>inet_ntop</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">72
+<DD>3.8<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>sock_ntop</TT> and Related Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">75
+<DD>3.9<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>readn</TT>, <TT>writen</TT>, and <TT>readline</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">77
+<DD>3.10<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>isfdtype</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">81
+<DD>3.11<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">82
+</DL>
+<DL>
+<H2>Chapter 4.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Elementary TCP Sockets<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif">  85</H2>
+<DD>4.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">85
+<DD>4.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>socket</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">85
+<DD>4.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>connect</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">89
+<DD>4.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>bind</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">91
+<DD>4.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>listen</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">93
+<DD>4.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>accept</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">99
+<DD>4.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>fork</TT> and <TT>exec</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">102
+<DD>4.8<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Concurrent Servers<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">104
+<DD>4.9<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>close</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">107
+<DD>4.10<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>getsockname</TT> and <TT>getpeername</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">107
+<DD>4.11<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">110
+</DL>
+<DL>
+<H2>Chapter 5.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Client-Server Example<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 111</H2>
+<DD>5.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">111
+<DD>5.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Echo Server: <TT>main</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">112
+<DD>5.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Echo Server: <TT>str_echo</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">113
+<DD>5.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Echo Client: <TT>main</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">113
+<DD>5.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Echo Client: <TT>str_cli</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">115
+<DD>5.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Normal Startup<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">115
+<DD>5.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Normal Termination<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">117
+<DD>5.8<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Posix Signal Handling<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">119
+<DD>5.9<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Handling <TT>SIGCHLD</TT> Signals<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">122
+<DD>5.10<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>wait</TT> and <TT>waitpid</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">124
+<DD>5.11<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Connection Abort before <TT>accept</TT> Returns<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">129
+<DD>5.12<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Termination of Server Process<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">130
+<DD>5.13<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>SIGPIPE</TT> Signal<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">132
+<DD>5.14<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Crashing of Server Host<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">133
+<DD>5.15<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Crashing and Rebooting of Server Host<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">134
+<DD>5.16<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Shutdown of Server Host<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">135
+<DD>5.17<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary of TCP Example<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">135
+<DD>5.18<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Data Format<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">137
+<DD>5.19<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">140
+</DL>
+<DL>
+<H2>Chapter 6.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">I/O Multiplexing: The <TT>select</TT> and <TT>poll</TT> Functions<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 143</H2>
+<DD>6.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">143
+<DD>6.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">I/O Models<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">144
+<DD>6.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>select</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">150
+<DD>6.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>str_cli</TT> Function (Revisited)<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">155
+<DD>6.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Batch Input<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">157
+<DD>6.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>shutdown</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">160
+<DD>6.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>str_cli</TT> Function (Revisited Again)<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">161
+<DD>6.8<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Echo Server (Revisited)<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">162
+<DD>6.9<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>pselect</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">168
+<DD>6.10<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>poll</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">169
+<DD>6.11<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Echo Server (Revisited Again)<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">172
+<DD>6.12<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">175
+</DL>
+<DL>
+<H2>Chapter 7.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Socket Options<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 177</H2>
+<DD>7.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">177
+<DD>7.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>getsockopt</TT> and <TT>setsockopt</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">178
+<DD>7.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Checking If an Option Is Supported and Obtaining the Default<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">178
+<DD>7.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Socket States<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">183
+<DD>7.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Generic Socket Options<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">183
+<DD>7.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">IPv4 Socket Options<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">197
+<DD>7.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">ICMPv6 Socket Option<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">199
+<DD>7.8<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">IPv6 Socket Options<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">199
+<DD>7.9<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Socket Options<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">201
+<DD>7.10<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>fcntl</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">205
+<DD>7.11<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">207
+</DL>
+<DL>
+<H2>Chapter 8.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Elementary UDP Sockets<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 211</H2>
+<DD>8.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">211
+<DD>8.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>recvfrom</TT> and <TT>sendto</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">212
+<DD>8.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">UDP Echo Server: <TT>main</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">213
+<DD>8.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">UDP Echo Server: <TT>dg_echo</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">214
+<DD>8.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">UDP Echo Client: <TT>main</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">216
+<DD>8.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">UDP Echo Client: <TT>dg_cli</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">217
+<DD>8.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Lost Datagrams<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">217
+<DD>8.8<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Verifying Received Response<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">218
+<DD>8.9<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Server Not Running<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">220
+<DD>8.10<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary of UDP example<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">221
+<DD>8.11<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>connect</TT> Function with UDP<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">224
+<DD>8.12<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>dg_cli</TT> Function (Revisited)<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">227
+<DD>8.13<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Lack of Flow Control with UDP<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">228
+<DD>8.14<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Determining Outgoing Interface with UDP<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">231
+<DD>8.15<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP and UDP Echo Server Using <TT>select</TT><IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">233
+<DD>8.16<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">235
+</DL>
+<DL>
+<H2>Chapter 9.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Elementary Name  and Address  Conversions<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 237</H2>
+<DD>9.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">237
+<DD>9.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Domain Name System<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">237
+<DD>9.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>gethostbyname</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">240
+<DD>9.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>RES_USE_INET6</TT> Resolver Option<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">245
+<DD>9.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>gethostbyname2</TT> Function and IPv6 Support<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">246
+<DD>9.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>gethostbyaddr</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">248
+<DD>9.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>uname</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">249
+<DD>9.8<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>gethostname</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">250
+<DD>9.9<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>getservbyname</TT> and <TT>getservbyport</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">251
+<DD>9.10<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Other Networking Information<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">255
+<DD>9.11<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">256
+</DL>
+<P>
+<H1>Part 3.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Advanced Sockets<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 259</H1>
+<HR>
+</DL>
+<DL>
+<H2>Chapter 10.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">IPv4 and IPv6 Interoperability<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 261</H2>
+<DD>10.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">261
+<DD>10.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">IPv4 Client, IPv6 Server<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">262
+<DD>10.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">IPv6 Client, IPv4 Server<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">265
+<DD>10.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">IPv6 Address Testing Macros<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">267
+<DD>10.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>IPV6_ADDRFORM</TT> Socket Option<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">268
+<DD>10.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Source Code Portability<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">270
+<DD>10.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">271
+</DL>
+<DL>
+<H2>Chapter 11.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Advanced Name  and Address  Conversions<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 273</H2>
+<DD>11.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">273
+<DD>11.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>getaddrinfo</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">273
+<DD>11.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>gai_strerror</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">278
+<DD>11.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>freeaddrinfo</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">279
+<DD>11.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>getaddrinfo</TT> Function: IPv6 and Unix Domain<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">279
+<DD>11.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>getaddrinfo</TT> Function: Examples<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">282
+<DD>11.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>host_serv</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">284
+<DD>11.8<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>tcp_connect</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">285
+<DD>11.9<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>tcp_listen</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">288
+<DD>11.10<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>udp_client</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">293
+<DD>11.11<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>udp_connect</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">295
+<DD>11.12<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>udp_server</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">296
+<DD>11.13<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>getnameinfo</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">298
+<DD>11.14<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Reentrant Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">300
+<DD>11.15<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>gethostbyname_r</TT> and <TT>gethostbyaddr_r</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">303
+<DD>11.16<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Implementation of <TT>getaddrinfo</TT> and <TT>getnameinfo</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">305
+<DD>11.17<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">328
+</DL>
+<DL>
+<H2>Chapter 12.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Daemon Processes and <TT>inetd</TT> Superserver<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 331</H2>
+<DD>12.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">331
+<DD>12.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>syslogd</TT> Daemon<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">332
+<DD>12.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>syslog</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">333
+<DD>12.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>daemon_init</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">335
+<DD>12.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>inetd</TT> Daemon<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">339
+<DD>12.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>daemon_inetd</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">344
+<DD>12.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">346
+</DL>
+<DL>
+<H2>Chapter 13.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Advanced I/O Functions<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 349</H2>
+<DD>13.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">349
+<DD>13.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Socket Timeouts<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">349
+<DD>13.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>recv</TT> and <TT>send</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">354
+<DD>13.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>readv</TT> and <TT>writev</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">357
+<DD>13.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>recvmsg</TT> and <TT>sendmsg</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">358
+<DD>13.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Ancillary Data<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">362
+<DD>13.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">How Much Data Is Queued?<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">365
+<DD>13.8<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Sockets and Standard I/O<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">366
+<DD>13.9<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">T/TCP: TCP for Transactions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">369
+<DD>13.10<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">371
+</DL>
+<DL>
+<H2>Chapter 14.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Unix Domain Protocols<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 373</H2>
+<DD>14.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">373
+<DD>14.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Unix Domain Socket Address Structure<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">374
+<DD>14.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>socketpair</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">376
+<DD>14.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Socket Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">377
+<DD>14.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Unix Domain Stream Client-Server<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">378
+<DD>14.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Unix Domain Datagram Client-Server<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">379
+<DD>14.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Passing Descriptors<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">381
+<DD>14.8<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Receiving Sender Credentials<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">390
+<DD>14.9<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">394
+</DL>
+<DL>
+<H2>Chapter 15.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Nonblocking I/O<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 397</H2>
+<DD>15.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">397
+<DD>15.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Nonblocking Reads and Writes: <TT>str_cli</TT> Function (Revisited)<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">399
+<DD>15.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Nonblocking <TT>connect</TT><IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">409
+<DD>15.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Nonblocking <TT>connect</TT>: Daytime Client<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">410
+<DD>15.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Nonblocking <TT>connect</TT>: Web Client<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">413
+<DD>15.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Nonblocking <TT>accept</TT><IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">422
+<DD>15.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">424
+</DL>
+<DL>
+<H2>Chapter 16.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>ioctl</TT> Operations<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 425</H2>
+<DD>16.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">425
+<DD>16.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>ioctl</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">426
+<DD>16.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Socket Operations<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">426
+<DD>16.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">File Operations<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">427
+<DD>16.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Interface Configuration<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">428
+<DD>16.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>get_ifi_info</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">429
+<DD>16.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Interface Operations<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">439
+<DD>16.8<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">ARP Cache Operations<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">440
+<DD>16.9<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Routing Table Operations<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">442
+<DD>16.10<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">443
+</DL>
+<DL>
+<H2>Chapter 17.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Routing Sockets<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 445</H2>
+<DD>17.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">445
+<DD>17.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Datalink Socket Address Structure<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">446
+<DD>17.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Reading and Writing<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">447
+<DD>17.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>sysctl</TT> Operations<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">454
+<DD>17.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>get_ifi_info</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">459
+<DD>17.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Interface Name and Index Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">463
+<DD>17.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">467
+</DL>
+<DL>
+<H2>Chapter 18.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Broadcasting<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 469</H2>
+<DD>18.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">469
+<DD>18.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Broadcast Addresses<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">470
+<DD>18.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Unicast versus Broadcast<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">472
+<DD>18.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>dg_cli</TT> Function Using Broadcasting<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">475
+<DD>18.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Race Conditions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">478
+<DD>18.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">486
+</DL>
+<DL>
+<H2>Chapter 19.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Multicasting<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 487</H2>
+<DD>19.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">487
+<DD>19.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Multicast Addresses<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">487
+<DD>19.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Multicasting versus Broadcasting on A LAN<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">490
+<DD>19.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Multicasting on a WAN<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">493
+<DD>19.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Multicast Socket Options<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">495
+<DD>19.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>mcast_join</TT> and Related Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">499
+<DD>19.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>dg_cli</TT> Function Using Multicasting<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">502
+<DD>19.8<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Receiving MBone Session Announcements<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">504
+<DD>19.9<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Sending and Receiving<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">507
+<DD>19.10<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">SNTP: Simple Network Time Protocol<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">510
+<DD>19.11<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">SNTP (Continued)<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">515
+<DD>19.12<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">528
+</DL>
+<DL>
+<H2>Chapter 20.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Advanced UDP Sockets<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 531</H2>
+<DD>20.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">531
+<DD>20.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Receiving Flags, Destination IP Address, and Interface Index<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">532
+<DD>20.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Datagram Truncation<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">539
+<DD>20.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">When to Use UDP Instead Of TCP<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">539
+<DD>20.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Adding Reliability to a UDP Application<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">542
+<DD>20.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Binding Interface Addresses<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">553
+<DD>20.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Concurrent UDP Servers<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">557
+<DD>20.8<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">IPv6 Packet Information<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">560
+<DD>20.9<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">562
+</DL>
+<DL>
+<H2>Chapter 21.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Out-of-Band Data<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 565</H2>
+<DD>21.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">565
+<DD>21.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Out-of-Band Data<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">565
+<DD>21.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>sockatmark</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">572
+<DD>21.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Out-of-Band Data Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">580
+<DD>21.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Client-Server Heartbeat Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">581
+<DD>21.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">586
+</DL>
+<DL>
+<H2>Chapter 22.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Signal-Driven I/O<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 589</H2>
+<DD>22.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">589
+<DD>22.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Signal-Driven I/O for Sockets<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">590
+<DD>22.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">UDP Echo Server Using <TT>SIGIO</TT><IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">592
+<DD>22.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">598
+</DL>
+<DL>
+<H2>Chapter 23.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Threads<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 601</H2>
+<DD>23.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">601
+<DD>23.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Basic Thread Functions: Creation and Termination<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">602
+<DD>23.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>str_cli</TT> Function Using Threads<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">605
+<DD>23.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Echo Server Using Threads<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">607
+<DD>23.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Thread-Specific Data<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">611
+<DD>23.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Web Client and Simultaneous Connections (Continued)<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">620
+<DD>23.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Mutexes: Mutual Exclusion<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">622
+<DD>23.8<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Condition Variables<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">627
+<DD>23.9<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Web Client and Simultaneous Connections (Continued)<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">631
+<DD>23.10<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">633
+</DL>
+<DL>
+<H2>Chapter 24.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">IP Options<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 635</H2>
+<DD>24.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">635
+<DD>24.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">IPv4 Options<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">635
+<DD>24.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">IPv4 Source Route Options<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">637
+<DD>24.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">IPv6 Extension Headers<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">645
+<DD>24.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">IPv6 Hop-by-Hop Options and Destination Options<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">645
+<DD>24.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">IPv6 Routing Header<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">649
+<DD>24.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">IPv6 Sticky Options<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">653
+<DD>24.8<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">654
+</DL>
+<DL>
+<H2>Chapter 25.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Raw Sockets<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 655</H2>
+<DD>25.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">655
+<DD>25.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Raw Socket Creation<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">656
+<DD>25.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Raw Socket Output<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">657
+<DD>25.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Raw Socket Input<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">659
+<DD>25.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Ping Program<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">661
+<DD>25.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Traceroute Program<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">672
+<DD>25.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">An ICMP Message Daemon<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">685
+<DD>25.8<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">702
+</DL>
+<DL>
+<H2>Chapter 26.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Datalink Access<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 703</H2>
+<DD>26.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">703
+<DD>26.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">BPF: BSD Packet Filter<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">704
+<DD>26.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">DLPI: Data Link Provider Interface<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">706
+<DD>26.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Linux: <TT>SOCK_PACKET</TT><IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">707
+<DD>26.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>libpcap</TT>: Packet Capture Library<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">707
+<DD>26.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Examining the UDP Checksum Field<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">708
+<DD>26.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">725
+</DL>
+<DL>
+<H2>Chapter 27.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Client-Server Design Alternatives<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 727</H2>
+<DD>27.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">727
+<DD>27.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Client Alternatives<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">730
+<DD>27.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Test Client<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">730
+<DD>27.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Iterative Server<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">732
+<DD>27.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Concurrent Server, One Child per Client<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">732
+<DD>27.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Preforked Server, No Locking around <TT>accept</TT><IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">736
+<DD>27.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Preforked Server, File Locking around <TT>accept</TT><IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">742
+<DD>27.8<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Preforked Server, Thread Locking around <TT>accept</TT><IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">745
+<DD>27.9<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Preforked Server, Descriptor Passing<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">746
+<DD>27.10<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Concurrent Server, One Thread per Client<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">752
+<DD>27.11<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Prethreaded Server, per-Thread <TT>accept</TT><IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">754
+<DD>27.12<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TCP Prethreaded Server, Main Thread <TT>accept</TT><IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">756
+<DD>27.13<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">759
+</DL>
+<P>
+<H1>Part 4.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">XTI: X/Open Transport Interface<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 761</H1>
+<HR>
+</DL>
+<DL>
+<H2>Chapter 28.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">XTI: TCP Clients<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 763</H2>
+<DD>28.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">763
+<DD>28.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_open</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">764
+<DD>28.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_error</TT> and <TT>t_strerror</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">767
+<DD>28.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>netbuf</TT> Structures and XTI Structures<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">769
+<DD>28.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_bind</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">770
+<DD>28.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_connect</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">772
+<DD>28.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_rcv</TT> and <TT>t_snd</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">773
+<DD>28.8<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_look</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">774
+<DD>28.9<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_sndrel</TT> and <TT>t_rcvrel</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">775
+<DD>28.10<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_snddis</TT> and <TT>t_rcvdis</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">777
+<DD>28.11<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">XTI TCP Daytime Client<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">778
+<DD>28.12<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>xti_rdwr</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">781
+<DD>28.13<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">782
+</DL>
+<DL>
+<H2>Chapter 29.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">XTI: Name and Address Functions<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 783</H2>
+<DD>29.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">783
+<DD>29.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>/etc/netconfig</TT> File and <TT>netconfig</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">784
+<DD>29.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>NETPATH</TT> Variable and <TT>netpath</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">785
+<DD>29.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>netdir</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">786
+<DD>29.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_alloc</TT> and <TT>t_free</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">788
+<DD>29.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_getprotaddr</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">790
+<DD>29.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>xti_ntop</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">791
+<DD>29.8<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>tcp_connect</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">792
+<DD>29.9<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">796
+</DL>
+<DL>
+<H2>Chapter 30.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">XTI: TCP Servers<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 797</H2>
+<DD>30.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">797
+<DD>30.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_listen</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">799
+<DD>30.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>tcp_listen</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">800
+<DD>30.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_accept</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">802
+<DD>30.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>xti_accept</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">803
+<DD>30.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Simple Daytime Server<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">804
+<DD>30.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Multiple Pending Connections<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">806
+<DD>30.8<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>xti_accept</TT> Function (Revisited)<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">808
+<DD>30.9<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">816
+</DL>
+<DL>
+<H2>Chapter 31.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">XTI: UDP Clients and Servers<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 819</H2>
+<DD>31.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">819
+<DD>31.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_rcvudata</TT> and <TT>t_sndudata</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">819
+<DD>31.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>udp_client</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">820
+<DD>31.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_rcvuderr</TT> Function: Asynchronous Errors<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">824
+<DD>31.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>udp_server</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">826
+<DD>31.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Reading a Datagram in Pieces<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">829
+<DD>31.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">831
+</DL>
+<DL>
+<H2>Chapter 32.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">XTI Options<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 833</H2>
+<DD>32.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">833
+<DD>32.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_opthdr</TT> Structure<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">835
+<DD>32.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">XTI Options<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">837
+<DD>32.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_optmgmt</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">840
+<DD>32.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Checking If an Option Is Supported and Obtaining the Default<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">841
+<DD>32.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Getting and Setting XTI Options<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">844
+<DD>32.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">848
+</DL>
+<DL>
+<H2>Chapter 33.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Streams<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 849</H2>
+<DD>33.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">849
+<DD>33.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Overview<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">850
+<DD>33.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>getmsg</TT> and <TT>putmsg</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">854
+<DD>33.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>getpmsg</TT> and <TT>putpmsg</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">855
+<DD>33.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>ioctl</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">855
+<DD>33.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">TPI: Transport Provider Interface<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">856
+<DD>33.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">866
+</DL>
+<DL>
+<H2>Chapter 34.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">XTI: Additional Functions<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 867</H2>
+<DD>34.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">867
+<DD>34.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Nonblocking I/O<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">867
+<DD>34.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_rcvconnect</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">868
+<DD>34.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_getinfo</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">869
+<DD>34.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_getstate</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">869
+<DD>34.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_sync</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">870
+<DD>34.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_unbind</TT> Function<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">872
+<DD>34.8<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_rcvv</TT> and <TT>t_rcvvudata</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">872
+<DD>34.9<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_sndv</TT> and <TT>t_sndvudata</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">873
+<DD>34.10<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>t_rcvreldata</TT> and <TT>t_sndreldata</TT> Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">874
+<DD>34.11<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Signal-Driven I/O<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">874
+<DD>34.12<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Out-of-Band Data<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">875
+<DD>34.13<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Loopback Transport Providers<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">880
+<DD>34.14<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Summary<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">881
+</DL>
+<DL>
+<H2>Appendix A.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">IPv4, IPv6, ICMPv4, and ICMPv6<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 883</H2>
+<DD>A.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">883
+<DD>A.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">IPv4 Header<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">883
+<DD>A.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">IPv6 Header<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">885
+<DD>A.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">IPv4 Addresses<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">887
+<DD>A.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">IPv6 Addresses<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">892
+<DD>A.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">ICMPv4 and ICMPv6: Internet Control Message Protocol<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">896
+</DL>
+<DL>
+<H2>Appendix B.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Virtual Networks<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 899</H2>
+<DD>B.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Introduction<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">899
+<DD>B.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">The MBone<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">899
+<DD>B.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">The 6bone<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">901
+</DL>
+<DL>
+<H2>Appendix C.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Debugging Techniques<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 903</H2>
+<DD>C.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">System Call Tracing<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">903
+<DD>C.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Standard Internet Services<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">908
+<DD>C.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>sock</TT> Program<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">908
+<DD>C.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Small Test Programs<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">911
+<DD>C.5<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>tcpdump</TT> Program<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">913
+<DD>C.6<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>netstat</TT> Program<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">914
+<DD>C.7<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>lsof</TT> Program<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">914
+</DL>
+<DL>
+<H2>Appendix D.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Miscellaneous Source Code<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 915</H2>
+<DD>D.1<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>unp.h</TT> Header<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">915
+<DD>D.2<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>config.h</TT> Header<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">919
+<DD>D.3<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif"><TT>unpxti.h</TT> Header<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">920
+<DD>D.4<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Standard Error Functions<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">922
+</DL>
+<DL>
+<H2>Appendix E.<IMG HEIGHT=1 WIDTH=18 SRC="gifs/blank.gif">Solutions to Selected Exercises<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 925</H2>
+</DL>
+<DL>
+<H2>Bibliography<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 963</H2>
+</DL>
+<DL>
+<H2>Index<IMG HEIGHT=1 WIDTH=40 SRC="gifs/blank.gif"> 971</H2>
+</BODY>
+</HTML>

@@ -1,0 +1,355 @@
+-------------------------------------------------------------------------------
+From: braden@isi.edu
+To: end2end-interest@isi.edu
+Subject: RPC is a poor solution anyway, so why bother?
+Date: Fri, 24 Feb 1995 16:21:53 -0800
+Message-Id: <199502250021.AA21740@can.isi.edu>
+
+----- Begin Included Message -----
+
+Sender: ietf-request@IETF.CNRI.Reston.VA.US
+From: Stefan Sharkansky <shark@prospero.com>
+To: ietf@CNRI.Reston.VA.US
+Subject: RPC is a poor solution anyway, so why bother?
+Date: Fri, 24 Feb 1995 09:55:58 -0800 (PST)
+
+> The RPC issue within the IETF is evidence of the the IETF's consideration
+> of entering another 'market' for standards.  "Is this a good thing?"  I ask
+> innocently.
+
+I think that it is not a "good thing".  RPC is an inherently flawed
+technology.  Instead of institutionalizing it any further, the IETF should
+act by inaction and help RPC die its long overdue death.
+
+In discussing RPC, its useful to look at 4 things independently:
+
+1) The Remote Procedure Call paradigm, independent of any implementation
+such as ONC or DCE.
+
+2) RFC 1057 which specifies the formats of the messages that Sun RPC puts
+over the network.
+
+3) Sun's RPC API and implementation
+
+4) XDR
+
+Re #1) the RPC paradigm is a really inappropriate method for building
+distributed applications.  It's based on the idea that you can "simplify
+the programmer's task" by making calls to remote entities look almost like
+calls to local procedures.  Nonsense.  There might be some academic
+conceptual elegance here, but in the real world where we deal with network
+delays and partial failures, blocking communications is impractical.  This
+is especially true in modern GUI-based user environments, where it's
+intolerable to hang waiting for something to happen.  Clinging to an
+outmoded programming style does NOT help programmers create better
+applications.
+
+Re #3) Sun's implementation of RPC is particularly clumsy. Network
+applications need asynchronous messaging.  SunRPC can't do this in any
+reasonable fashion.  I've worked on many different network software
+projects in a number of different environments.  I've yet to see a
+non-trivial application where RPC was a natural solution.  Indeed, the most
+chronic (and expensive) problems I've had to troubleshoot have involved
+creative uses of RPC.  The only place where I've seen RPC working well is in
+applications with trivial networking requirements such as perfmeter.  (And
+yes, RPC works "really well" in NFS and NIS, if you don't mind bringing an
+entire LAN to its knees because of a single point of failure).
+
+Re #2) If #1 and #3 don't work.  Why bother with #2?  It is true that the
+protocol can be implemented more effectively than Sun has done.  But is a
+simple reimplementation all that is needed, or do we want a more
+fundamental examination of application-enabling protocols above the
+transport layer?  I think the latter.   Indeed this effort should be
+combined with some of the HTTP work to create an effective protocol for
+enabling transactions.
+
+Re #4) Although I think that RPC is a really inadequate solution for
+application development, I do like XDR.  It's simple, elegant and effective
+for a very large class of data structures.  When people say that "RPC makes
+it easy to develop network applications" they usually mean that rpcgen and
+XDR make it easy to convert data structures into network-ready format.  XDR
+when used without the rest of RPC has more value than when used with RPC.
+
+I recommend standardizing XDR (RFC 1014) alone, and not wasting anymore
+time on RPC.
+
+-- 
+
+Stefan Sharkansky
+Prospero Systems Research, Inc.
+USMAIL	520 Frederick St. Box 19, San Francisco, CA 94117
+VOICE	(415) 731-8114		FAX  (415) 731-3395
+E-MAIL	shark@prospero.com
+
+----- End Included Message -----
+
+-------------------------------------------------------------------------------
+From: Christian Huitema <Christian.Huitema@sophia.inria.fr>
+To: Jon Crowcroft <J.Crowcroft@cs.ucl.ac.uk>
+Cc: braden@isi.edu, end2end-interest@isi.edu
+Subject: Re: RPC is a poor solution anyway, so why bother? 
+Date: Sat, 25 Feb 1995 19:23:10 +0100
+Message-Id: <199502251823.TAA20322@mitsou.inria.fr>
+
+> hmmmmm.......well, actually, i think some form of efficient XDR is
+> moderately useful (as an alternative to ASN.1)....
+
+Some form, maybe. But in fact, there are real problems with RPC technologies,
+and more precisely with the idea of having your spec specified in a format
+which is very different from your programming language. 
+
+Basically, one problem is that the API is "invented" by the stub compiler. If
+you do not use the exact same compiler, the same spec will translate in a
+different API. E.g. some will use linked lists, other will use static arrays.
+
+There is also the "megatool" problem. Suppose you develop an application with a
+stub compiler, and you want to pass it to a friend. passing the binary is OK.
+But your friend will not be able to recompile your sources without buying the
+same compiler, or at the very least the "run time" environment of that
+compiler.
+
+On the contrary, protocols developed without extra tools, such as SMTP or
+HTTP, tend to be very easy to port. They also tend to be follow much simpler
+designs.
+
+Christian Huitema
+
+-------------------------------------------------------------------------------
+From: Larry Peterson <llp@cs.arizona.edu>
+To: braden@isi.edu
+Cc: end2end-interest@isi.edu
+Subject: RPC is a poor solution anyway, so why bother?
+Date: Sat, 25 Feb 1995 12:21:15 -0700
+Message-Id: <9502251921.AA12231@cicada.CS.Arizona.EDU>
+
+> I think that it is not a "good thing".  RPC is an inherently flawed
+> technology.  Instead of institutionalizing it any further, the IETF should
+> act by inaction and help RPC die its long overdue death.
+
+I was literally seconds away from sending a response to this message
+when my modem lost carrier.  I should have taken that as a sign not to
+return flame, but I can't help myself....
+
+RPC is not a bogus paradigm for communication. In fact, I would claim
+that not having a standard RPC protocol is the single greatest failing
+of the Internet architecture.
+
+For starters, there has been a proliferation of protocols that were
+just begging to run on top of an RPC transport---DNS, SMNP, and HTTP
+are all protocols that would have been more easily defined as
+program/procedure specifications. What's next: anything having to do
+with authentication. That's not to mention distributed file systems
+(yes, the state of the art has advanced beyond FTP). It seems entirely
+possible that the existence of an Internet-sanctioned RPC would
+encourage the introduction of interesting and useful network services.
+
+Larry
+
+P.S. I'm not a big fan of SunRPC; it's flawed in many ways. XDR is
+much preferred over ASN.1---it's possible to build an efficient stub
+compiler for it.
+
+-------------------------------------------------------------------------------
+From: Jon Crowcroft <J.Crowcroft@cs.ucl.ac.uk>
+To: braden@isi.edu
+Cc: end2end-interest@isi.edu
+Subject: Re: RPC is a poor solution anyway, so why bother?
+Date: Mon, 27 Feb 95 08:49:23 +0000
+Message-Id: <582.793874963@cs.ucl.ac.uk>
+
+ >Re #1) the RPC paradigm is a really inappropriate method for building
+ >distributed applications.  
+
+actually, thinking about this, and having written several "diatribes"
+about RPC, i'd like to disagree 
+
+RPC is one reasonable component of the distributed systems programmers
+toolkit, just as is a TCP stream, a message, a multicast etc....
+
+its just that 
+i) RPC is rarely the right tool in small or large systems
+ii) Sun RPC may not be the 'right' RPC to standardise, given DCE etc
+
+in fact, the complaints leveled at RPC can be levelled easily at TCP
+(hard to make n-to-m programs work, doesn't use multicast, error
+handling hidden, latency variation hidden etc etc) and are addressed
+by the same solutions - multithreading and co-routines...
+
+but...
+
+how do people feel about XDR versus Idl? [i know how most here stand
+on XDR v. ASN1:-)
+
+jon
+
+-------------------------------------------------------------------------------
+From: Christian Huitema <Christian.Huitema@sophia.inria.fr>
+To: bachmann@austin.ibm.com (Dave Bachmann)
+Cc: end2end-interest@isi.edu
+Subject: Re: RPC is a poor solution anyway, so why bother? 
+Date: Mon, 27 Feb 1995 16:23:45 +0100
+Message-Id: <199502271523.QAA27086@mitsou.inria.fr>
+
+Dave,
+
+You have to be extremely cautious with statements such as "don't want to waste
+time flipping ints back and forth", specially when you consider RISC systems
+where the strongest penalty is moving in and out of cache. Unmarshalling is
+essentially a memory move operation; the byte flipping can be hidden in this
+move at about zero cost (by the way, this is why compression is almost always
+a win).
+
+On the other hand, algorithm complexity has non zero cost. "Receiver makes
+right" implies that the receiver has to keep several programs available. This
+translates in more code, less locality of instructions, maybe less optimized
+codes if you want to maintain the same density.
+
+In fact, the data at hand (mine, those of Philipp Hoschka, those of Sean
+O'Malley) show that the difference is not in the protocol but rather in the
+implementation. Mavros-generated ASN.1 stubs run much faster than
+RPCGEN-generated  XDR stubs, but they run a bit slower than USC-generated XDR
+stubs. This is in fact a strong argument for the "unique format" approach,
+since by picking a unique format you can concentrate your efforts in the
+optimizing of this format.
+
+Christian Huitema
+
+-------------------------------------------------------------------------------
+From: vjs@rhyolite.denver.sgi.com (Vernon Schryver)
+To: end2end-interest@isi.edu
+Subject: Re: RPC is a poor solution anyway, so why bother?
+Date: Mon, 27 Feb 95 09:49:01 -0700
+Message-Id: <9502271649.AA22659@rhyolite.denver.sgi.com>
+
+> From: bachmann@austin.ibm.com (Dave Bachmann)
+> 
+> >how do people feel about XDR versus Idl? [i know how most here stand
+> >on XDR v. ASN1:-)
+> 
+> I prefer the "receiver makes right" philosophy of DCE's NDR over the XDR's
+> approach of "always use Sun format".  If I'm going between two compatible
+> machines, I don't want to waste time flipping ints back and forth.
+
+Other people strongly disagree.  It was called "receiver makes it
+wrong" in early days by many people.
+
+The trouble with 2 or 3 types of int and 4 or 5 types of floating point
+is that you have not really solved the problem.  You have only
+converted an N or 2N problem into a 4N or 5N problem.  Every receiver
+must be prepared to decode not just 1 type, but several types.  There
+are just too many varients of data representation to support all of them
+in the standard.  That became painfully apparent in the old NCS
+committee meetings when Apollo was evidently flabbergasted to discover
+that 2 floating point types did not come remotely close to covering
+everything of interest.
+
+Remember that a big cost of marshalling and unmarshalling is in
+deciding what to do, not just or even primarily in the doing.
+Switching between big and little endian ints is a non-problem.
+
+The strengths of NCS RPC were elsewhere.  It's data representation
+scheme was its weakest feature.  (Well, the religious objections to
+using TCP/IP in addition to UDP/IP were also bad, but they've seen been
+fixed.)
+
+Vernon Schryver,  vjs@sgi.com
+
+-------------------------------------------------------------------------------
+From: Philipp Hoschka <Philipp.Hoschka@sophia.inria.fr>
+To: hoschka@droopy.inria.fr
+Cc: end2end-interest@isi.edu
+Subject: Re: RPC is a poor solution anyway, so why bother? 
+Date: Tue, 28 Feb 1995 17:21:01 +0100
+Message-Id: <199502281621.RAA10566@droopy.inria.fr>
+ 
+=> It would be surprising if any marshalling and unmarshalling scheme for
+=> any RPC protocol could approach modern bcopy speeds.  Even on PC's,
+=> bcopy benefits from burst mode access to DRAMs, which you don't get
+=> with random accesses for typical marshalling and unmarshalling.
+=> Fancier machines fiddle with knobs on the sides of their caches to
+=> never touch bcopy'ed data with their CPU's.  Other machines use tricks
+=> like using floating point registers in their inner, unrolled, heavily
+=> tuned assembly language bcopy loops.
+
+Well, you can *match* bcopy speed simply by using bcopy as much as
+possible. If your message happens to contain 10 32 bit 
+integers in a row that do not have to be byteswapped, the stub compiler
+should rather generate a bcopy for 40 byte when marshalling into XDR,
+instead of 10 calls to the integer marshalling routine.
+
+Things get complicated when sections you can bcopy and sections 
+you can't occur in the message. And if the sections you can bcopy
+become very short. The latter is because there are some extra tests
+in the bcopy routine - are src and dst aligned ? is the length bigger
+than a cache-block ? - that can cost more time than just copying bytes,
+saving these tests and a procedure call (I don't think inlining bcopy
+is a good idea - I once dissassembled the memcpy routine of SunOS 4.1.3
+and gcc - it's huge. For this specific routine, I also found that 
+up to a length of about 20 byte using a simple byte copy loop
+was faster than calling memcpy on a Sparc SS 10).
+
+=> Rpcgen's code was, to be generous, unimpressive.  The standard response
+=> has always been, "if it's not fast enough, then don't whine about it,
+=> but simply provide inline macros of your own."
+
+I experimented with a couple of ideas to do this automatically.
+The idea is to build an "optimising" stub compiler that among
+other things produces inlined macros only for the most frequently 
+used sections of an interface specification.
+
+First, why is it that the code produced by stub generators is 
+often "unimpressive" ? The main reason seems to be to avoid
+code size explosion: using inlined code for all marshalling
+code used by an application will often lead to a prohibitive
+code size. The reason is that with inlining codesize will grow 
+with the number of fields in an interface specification, 
+multiplied by the number of operations on these fields 
+(marshalling, unmarshalling, memory alloc, ...)
+
+To avoid code space problems, the stub compiler writer will thus 
+have to choose a conservative code generation strategy that produces 
+relatively slow, and relatively small code. ASN.1 compilers go 
+even so far to use interpreted code, which costs yet another 
+factor of 4 in performance ( I measured "down to" 3 Mbit/s for fairly
+primitive type structures). This is because the OSI interfaces
+specified in ASN.1 tend to be rather complicated, so that code
+sizes grow out of proportion.
+
+Now, most of the time only a small subset of the 
+types defined in an interface will be used frequently 
+on run-time, because there is some "workhorse" type or operation
+in the application. Typical examples are "central concepts" like
+e-mail addresses, directory entries or "central operations"
+like "read an entry". The idea is then to foresee different 
+code generation strategies in the compiler that have different
+time/space trade-offs. 
+
+A first way to automate this is to let the user tell the
+stub compiler which types to optimise. A more sophisticated 
+approach is to let the compiler find out which types are
+worthwhile optimising. I achieved very good results on ASN.1
+benchmarks by using a standard compiler technique (control flow 
+analysis) and a number of heuristics for branch prediction 
+("optional fields are infrequent"). In this case, the
+user can give a constraint on the maximal size of the marshalling
+code, or the compiler can use some default ("optimise so that
+20 % of the codesize of fully inlined code are used")
+
+Given a constraint on the size of the object code and estimates
+for the effects of optimisations on the code size and speed, 
+the problem of selecting the types can be mapped
+onto a standard optimisation problem (Knapsack problem).
+
+=> Vernon Schryver,  vjs@sgi.com
+
+-Philipp Hoschka
+
+----------------------------------------------------------------------
+   Philipp Hoschka
+   Mosaic homepage: 
+	http://zenon.inria.fr:8003/rodeo/personnel/hoschka/hoschka.html 
+				|   INRIA-Rodeo
+   hoschka@sophia.inria.fr      |   2004, Route des Lucioles, BP 93
+   Ph: (+33) 93 65 77 47        |   06902 Sophia Antipolis Cedex
+   Fax:(+33) 93 65 77 65        |   France
+----------------------------------------------------------------------

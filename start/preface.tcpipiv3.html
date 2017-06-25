@@ -1,0 +1,299 @@
+<HTML>
+<HEAD>
+<TITLE>
+TCP/IP Illustrated, Volume 3-Preface
+</TITLE>
+</HEAD>
+
+<BODY>
+<H1>Preface</H1>
+<P>
+<!-- ***************************************************************** -->
+<HR>
+<H2>Introduction and Organization of the Book</H2>
+<P>
+This book is a logical continuation of the <I>TCP/IP Illustrated</I>
+series: [Stevens 1994], which we refer to as <I>Volume 1</I>,
+and [Wright and Stevens 1995], which we refer to as <I>Volume 2</I>
+This book is divided into three parts,
+each covering a different topic:
+<OL>
+<LI>
+TCP for transactions, commonly called T/TCP.
+This is an extension to TCP designed to make client-server
+transactions faster, more efficient, and reliable.
+This is done by omitting TCP's three-way handshake
+at the beginning of a connection
+and shortening the TIME_WAIT state at the end of a connection.
+We'll see that T/TCP can match UDP's performance
+for a client-server transaction
+and that T/TCP provides reliability and adaptability,
+both major improvements over UDP.
+<P>
+A transaction is defined to be a client request to a server,
+followed by the server's reply.
+(The term <I>transaction</I>
+does not mean a database transaction,
+with locking, two-phase commit, and backout.)
+<P>
+<LI>
+TCP/IP applications,
+specifically HTTP (the Hypertext Transfer Protocol,
+the foundation of the World Wide Web)
+and NNTP (the Network News Transfer Protocol,
+the basis for the Usenet news system).
+<P>
+<LI>
+The Unix domain protocols.
+These protocols are provided by all Unix TCP/IP implementations
+and on many non-Unix implementations.
+They provide a form of interprocess communication (IPC)
+and use the same sockets interface used with TCP/IP.
+When the client and server are on the same host,
+the Unix domain protocols are often twice as fast as TCP/IP.
+</OL>
+<P>
+Part 1, the presentation of T/TCP, is in two pieces.
+Chapters 1-4 describe the protocol and provide numerous
+examples of how it works.
+This material is a major expansion of the brief presentation of T/TCP
+in Section 24.7 of Volume 1.
+The second piece, Chapters 5-12,
+describes the actual implementation of T/TCP within the 4.4BSD-Lite
+networking code (i.e., the code presented in Volume 2).
+Since the first T/TCP implementation was not released until September 1994,
+about one year after Volume 1 was published and right as Volume 2 was
+being completed, the detailed presentation of T/TCP,
+with examples and all the implementation details,
+had to wait for another volume in the series.
+<P>
+Part 2, the HTTP and NNTP applications,
+are a continuation of the TCP/IP applications presented
+in Chapters 25-30 of Volume 1.
+In the two years since Volume 1 was published,
+the popularity of HTTP has grown enormously,
+as the Internet has exploded,
+and the use of NNTP has been growing about 75% per year for more than 10 years.
+HTTP is also a wonderful candidate for T/TCP,
+given its typical use of TCP:
+short connections with small amounts of data transferred,
+where the total time is often dominated by the connection setup and teardown.
+The heavy use of HTTP (and therefore TCP) on a busy Web server
+by thousands of different and varied clients
+also provides a unique opportunity to examine the actual packets
+at the server (Chapter 14) and look at many features of TCP/IP
+that were presented in Volumes 1 and 2.
+<P>
+The Unix domain protocols in Part 3 were originally considered
+for Volume 2 but omitted when its size reached 1200 pages.
+While it may seem odd to cover protocols other than TCP/IP in a series titled
+<I>TCP/IP Illustrated</I>,
+the Unix domain protocols were implemented almost 15 years ago
+in 4.2BSD alongside the first implementation of BSD TCP/IP.
+They are used heavily today in any Berkeley-derived kernel,
+but their use is typically "under the covers,"
+and most users are unaware of their presence.
+Besides being the foundation for Unix pipes on a Berkeley-derived kernel,
+another heavy user is the X Window System,
+when the client and server are on the same host
+(i.e., on typical workstations).
+Unix domain sockets are also used to pass descriptors between processes,
+a powerful technique for interprocess communication.
+Since the sockets API (application program interface)
+used with the Unix domain protocols
+is nearly identical to the sockets API used with TCP/IP,
+the Unix domain protocols provide an easy way to enhance the performance
+of local applications with minimal code changes.
+<P>
+Each of the three parts can be read by itself.
+<P>
+<!-- ***************************************************************** -->
+<HR>
+<H2>Readers</H2>
+<P>
+As with the previous two volumes in the series,
+this volume is intended for anyone wishing to understand how the
+TCP/IP protocols operate:
+programmers writing network applications,
+system administrators responsible for maintaining computer systems
+and networks utilizing TCP/IP,
+and users who deal with TCP/IP applications on a daily basis.
+<P>
+Parts 1 and 2 assume a basic understanding of how the TCP/IP protocols work.
+Readers unfamiliar with TCP/IP should consult the first volume in
+this series, [Stevens 1994],
+for a thorough description of the TCP/IP protocol suite.
+The first half of Part 1
+(Chapters 1-4, the concepts behind T/TCP along with examples)
+can be read independent of Volume 2, but the remainder of Part 1
+(Chapters 5-12, the implementation of T/TCP)
+assumes familiarity with the 4.4BSD-Lite networking code,
+as provided with Volume 2.
+<P>
+Many forward and backward references are provided throughout the text,
+to both topics within this text,
+and to relevant sections of Volumes 1 and 2
+for readers interested in more details.
+A thorough index is provided,
+and a list of all the acronyms used throughout the text,
+along with the compound term for the acronym,
+appears on the inside front covers.
+The inside back covers contain an alphabetical cross-reference
+of all the structures, functions, and macros described in the book
+and the starting page number of the description.
+This cross-reference also refers to definitions in Volume 2,
+when that object is referenced from the code in this volume.
+<P>
+<!-- ***************************************************************** -->
+<HR>
+<H2>Source Code Copyright</H2>
+<P>
+All the source code in this book that is taken from the 4.4BSD-Lite
+release contains the following copyright notice:
+<LISTING>
+/*
+ * Copyright (c) 1982, 1986, 1988, 1990, 1993, 1994
+ *      The Regents of the University of California.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. All advertising materials mentioning features or use of this software
+ *    must display the following acknowledgement:
+ *      This product includes software developed by the University of
+ *      California, Berkeley and its contributors.
+ * 4. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ */
+</LISTING>
+<P>
+The routing table code in Chapter 6 contains the following
+copyright notice:
+<LISTING>
+/*
+ * Copyright 1994, 1995 Massachusetts Institute of Technology
+ *
+ * Permission to use, copy, modify, and distribute this software and
+ * its documentation for any purpose and without fee is hereby
+ * granted, provided that both the above copyright notice and this
+ * permission notice appear in all copies, that both the above
+ * copyright notice and this permission notice appear in all
+ * supporting documentation, and that the name of M.I.T. not be used
+ * in advertising or publicity pertaining to distribution of the
+ * software without specific, written prior permission.  M.I.T. makes
+ * no representations about the suitability of this software for any
+ * purpose.  It is provided "as is" without express or implied
+ * warranty.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY M.I.T. ``AS IS''.  M.I.T. DISCLAIMS
+ * ALL EXPRESS OR IMPLIED WARRANTIES WITH REGARD TO THIS SOFTWARE,
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT
+ * SHALL M.I.T. BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ */
+</LISTING>
+<!-- ***************************************************************** -->
+<HR>
+<H2>Typographical Conventions</H2>
+<P>
+When we display interactive input and output we'll show
+our typed input in a <KBD>bold font</KBD>, and the computer output
+<TT>like this</TT>.
+<I>Comments are added in italics</I>.
+<PRE>
+<TT>sun %</TT> <KBD>telnet www.aw.com 80</KBD>     <I>connect to the HTTP server</I>
+<TT>Trying 192.207.117.2...</TT>     <I>this line and next output by Telnet client</I>
+<TT>Connected to aw.com.</TT>
+</PRE>
+We always include the name of the system as part of the shell prompt
+(<TT>sun</TT> in this example) to show on which host the command was run.
+The names of programs referred to in the text are normally capitalized
+(e.g., Telnet and Tcpdump) to avoid excessive font changes.
+<BLOCKQUOTE>
+Throughout the text we'll use indented, parenthetical notes
+such as this to describe historical points or implementation details.
+</BLOCKQUOTE>
+<!-- ***************************************************************** -->
+<HR>
+<H2>Acknowledgments</H2>
+<P>
+First and foremost I thank my family, Sally, Bill, Ellen, and David,
+who have endured another book along with all my traveling during
+the past year.
+This time, however, it really is a "small" book.
+<P>
+I thank the technical reviewers who read the manuscript and
+provided important feedback on a tight timetable:
+Sami Boulos, Alan Cox, Tony DeSimone, Pete Haverlock,
+Chris Heigham, Mukesh Kacker, Brian Kernighan, Art Mellor,
+Jeff Mogul, Marianne Mueller, Andras Olah, Craig Partridge,
+Vern Paxson, Keith Sklower, Ian Lance Taylor, and Gary Wright.
+A special thanks to the consulting editor, Brian Kernighan,
+for his rapid, thorough, and helpful reviews throughout the
+course of the book, and for his continued encouragement and support.
+<P>
+Special thanks are also due Vern Paxson and Andras Olah
+for their incredibly detailed reviews of the entire manuscript,
+finding many errors and providing valuable technical suggestions.
+My thanks also to Vern Paxson for making available his software for
+analyzing Tcpdump traces,
+and to Andras Olah for his help with T/TCP over the past year.
+My thanks also to Bob Braden, the designer of T/TCP,
+who provided the reference source code implementation on which Part 1
+of this book is based.
+<P>
+Others helped in significant ways.
+Gary Wright and Jim Hogue provided the system
+on which the data for Chapter 14 was collected.
+Doug Schmidt provided a copy of the public domain TTCP program
+that uses Unix domain sockets,
+for the timing measurements in Chapter 16.
+Craig Partridge provided a copy of the RDP source code to examine.
+Mike Karels answered lots of questions.
+<P>
+My thanks once again to the National Optical Astronomy Observatories (NOAO),
+Sidney Wolff, Richard Wolff, and Steve Grandi,
+for providing access to their networks and hosts.
+<P>
+Finally, my thanks to all the staff at Addison-Wesley,
+who have helped over the past years,
+especially my editor John Wait.
+<P>
+As usual, camera-ready copy of the book was produced by the author,
+a Troff die-hard, using the Groff package written by James Clark.
+I welcome electronic mail from any readers with comments,
+suggestions, or bug fixes.
+<P>
+W. Richard Stevens
+<BR> <TT>http://www.kohala.com/</TT>
+<BR> <I>Tucson, Arizona</I>
+<BR> <I>November 1995</I>
+<BR>
+
+</BODY>
+</HTML>

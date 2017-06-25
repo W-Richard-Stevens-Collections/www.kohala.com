@@ -1,0 +1,24 @@
+<H2>Abstract</H2>
+<P>The throughput of a disk subsystem is critical to the
+performance of a computer system.
+The 4.3BSD Unix operating system provides a good example for looking at
+the heuristics that are used to optimize the positioning of the
+read-write heads of a disk drive.
+In this paper we investigate the heuristics used in the BSD hp disk driver.
+These heuristics are driven by three parameters that can be changed
+by the system manager.
+We investigate the interaction of these parameters with the
+BSD fast filesystem.
+This provides a way to see the effects of the BSD fast filesystem.
+Finally we present the results of monitoring three active filesystems
+during day-to-day use, to see what effect these heuristics can have.
+<H2>Summary</H2>
+1. A Scenario<BR>
+2. Introduction<BR>
+3. BSD Block Allocation<BR>
+4. The BSD hp Disk Driver<BR>
+5. Measuring the sdist Parameter<BR>
+6. Additional Driver Measurements<BR>
+7. Selection of mindist and maxdist<BR>
+8. Summary<BR>
+Appendix A: The Original Tuning Method<BR>

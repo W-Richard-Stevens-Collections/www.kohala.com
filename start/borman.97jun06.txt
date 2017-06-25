@@ -1,0 +1,119 @@
+Date: Fri, 6 Jun 1997 10:26:44 -0500 (CDT)
+From: David Borman <dab@BSDI.COM>
+Message-Id: <199706061526.KAA01535@frantic.BSDI.COM>
+To: tcp-impl@relay.engr.SGI.COM
+Subject: Re: SYN/RST cookies (was Re: a quick clarification...)
+
+Well, I've been tryng to not get embroiled in this SYN-attack
+discussion, and I'm going to try and limit it to just this
+one note.  However, since I did do a fair amount of work on
+this last fall, I might be able to clarify a few things.
+
+First, some generic observations.  When planning a defense against
+any kind of attack, you need to plan for the worst case scenario.
+
+Problem:
+    The listen queue is too small, and when full it just denies
+    new connections.  SYN flooding keeps the queue full with bogus
+    connections that don't go away until the connection times out.
+
+Assumptions:
+    o No one else is going to stop the SYN-attack for you
+    o You cannot identify the bad SYN packets from the good SYN packets
+
+The goal was:
+    Allow legitimate connections to succeed in spite of a SYN-attack.
+
+The only way to do this is to:
+    1) Make the listen queue much larger
+    2) When the listen queue is full, drop an existing
+       embryonic connection, not the new SYN, so that
+    3) You respond to every SYN
+
+Several approaches were discussed.  The main ones were:
+    1) Make the listen queues deeper, and implement random drop
+    2) Create a minimal state SYN cache
+    3) Send the state to the src, and create the connection when
+       the reply is received.
+
+The SYN-cookie falls under #3.  The main advantage of it is that
+(1) it places the queue with state information into the network,
+making it infinitely deep, and (2) we don't have to do anything to
+time-out those items.
+
+The disadvantage of #3 is that all TCP state that cannot be gotten
+from the returning ACK has to be encoded in the 32 bit sequence
+number, with enough cryptography to ensure that you don't make
+yourself vulnerable to ACK spoofing.  From looking at the SYN-cookie
+archives, the only additional state encoded is the MSS, in the top
+3 bit.  It does not save Window Scale information.  That requires 8
+more bits, four for each direction.  Knowing whether or not SACK-ALLOWED
+was received reqires 1 more bit.  Now you are down to 20 bits for
+the cookie.  Is that enough? I don't know.
+
+I chose to implement a minimal state SYN cache, with oldest
+drop on overflow.  In 32 bytes I can retain all the information
+needed (for an IPv4 connection, IPv6 is another issue...)  The
+cached syns are kept in a hash table for easy lookup.  On table
+overflow, the oldest entry in the hash bucket is dropped.  No
+application changes are needed, because the concept of listen()
+backlog was changed to be the maximum number of *established*
+connections that are allowed to be queued up.  The whole point
+of the listen backlog is to keep a listen socket from continuing
+to accept new connections when the application is not accepting
+them.  So, we only drop incoming SYNs if the backlog of established
+connections exceeds the amount specified by listen().
+
+Oldest drop vs. Random drop:
+
+This is the difference between a cliff and a slope.  With oldest
+drop, if the RTT for a legitimate connection is less than the
+queue depth/attack rate, you can guarantee that the connection
+will succeed.  If your RTT is larger, then you can guarantee
+that the connection will fail.  With random drop, every connection
+has some probability of loosing, and that probability goes up
+with your RTT.
+
+As to the pros and cons of syn-cookies vs. a SYN-cache, both
+have their flaws.
+
+  o Neither one solves the problem of the returning ACK from a
+    valid connection being lost.  The cookie approach can't
+    retransmit the SYN/ACK, since it doesn't have any state, and
+    the SYN-cache chooses not to retransmit the SYN/ACK, since
+    most of the retransmissions would be for bogus connections.
+
+  o SYN cookies don't retain state about SACK or window scale.
+
+  o SYN cache requires memory, about 1 MB to allow a queue of
+    30,000 deep.
+
+  o SYN cookies must be cryptographically secure to prevent
+    a forged ACK attack.  If you don't already have MD5 in
+    your kernel, you have to add it.
+
+I'll also point out that along with the code that I released for
+4.4BSD-Lite2 (ftp://ftp.bsdi.com/contrib/bsdi_contrib/44Lite-SYNcache.gz)
+I put in comments about how to rip out just the caching code and
+replace it with something like the SYN-cookie defense.
+
+If you want more informaton about the syn-caching code, pick up
+the distribution and read all about it.
+
+The bottom line for me is that the SYN-cache solves the problem
+that we set out to solve, and for our situation (BSD/OS), we felt
+that it was a better solution than the SYN-cookie approach.  If
+at some point that proves to be false, we'll rethink our solution.
+
+I won't tell anyone which approach is better, because they both
+have their flaws.  The best I can do is point out the pros and
+cons of each, and let the other person decide which trade-offs
+best fits their situation.
+
+I've got well over a megabyte of mail discussion about the
+SYN-flood-attack and defenses against it, let's not continue
+to rehash the whole thing here.
+
+		-David Borman, dab@bsdi.com
+
+

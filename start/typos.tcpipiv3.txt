@@ -1,0 +1,149 @@
+-----------------------------------------------------------------------------
+This file contains all typos found in the book "TCP/IP Illustrated, Volume 3"
+by W. Richard Stevens, Addison-Wesley, 1996, ISBN 0-201-63495-3.
+(Last updated January 2, 1999)
+
+Note: If you fetched this file using anonymous ftp from ftp.uu.net,
+      be aware that a more current copy can probably be found at
+      the home page http://www.kohala.com/~rstevens.
+
+      Also be aware of http://www.kohala.com/~rstevens/ttcp.html, which
+      is the T/TCP home page.
+
+See also the "Comments to Readers" at the end of this file.
+-----------------------------------------------------------------------------
+
+The following errors are corrected in the Fifth Printing and later (check the
+last line on the copyright page to determine the printing).
+-----------------------------------------------------------------------------
+
+p.  22:	2nd line of indented paragraph: the URL for Netperf is now
+	http://www.netperf.org/netperf/NetperfPage.html.
+
+The following errors are corrected in the Fourth Printing and later (check the
+last line on the copyright page to determine the printing).
+-----------------------------------------------------------------------------
+
+p. 210:	In the example output towards the bottom of the page, the line
+	"xpath xpath MessageID" should be "xpath MessageID".
+
+p. 213:	6th line from top: the final article number in the .newsrc file
+	should be 43814, not 43815 (because 43815 is the first unread
+	article in the example at the bottom of the page).
+
+The following errors are corrected in the Third Printing and later (check the
+last line on the copyright page to determine the printing).
+-----------------------------------------------------------------------------
+
+p.  26:	4th line of 2nd paragraph: "Some of the work related to the routing
+	table" should be "All of the work related to the routing table".
+
+p.  34:	4th last line of page: "Figure 2.5, instead noting" should be
+	"Figure 2.6, instead noting".
+
+p.  74:	3rd line from bottom: "Figure 6.1" should be "Figure 6.2".
+
+p. 188:	The indented paragraph at the top of the page: "As described in
+	Volume 2, ...".  Add the following sentence to the end of this
+	paragraph: "This fudge factor is applied only by Berkeley-derived
+	implementations (pp. 257-258 of Volume 1)."
+
+p. 200:	2nd paragraph from the bottom: "used for the TAO cache."  This should
+	be "used for the TAO cache, although 256 bytes are actually allocated,
+	given the BSD memory allocation policy."  The value "168,000" in the
+	next sentence should then be "256,000".
+
+p. 224:	1st line of 3rd paragraph of Section 16.4: "AF_UNIX" should be
+	"PF_UNIX".
+
+The following errors are corrected in the Second Printing and later (check the
+last line on the copyright page to determine the printing).
+-----------------------------------------------------------------------------
+
+p.   4:	Code line 12: the 2nd and 3rd arguments to memset() are swapped.
+
+p.   6:	Code line 10: the 2nd and 3rd arguments to memset() are swapped.
+
+p.  10:	Code line 12: the 2nd and 3rd arguments to memset() are swapped.
+
+p.  11:	Code line 10: the 2nd and 3rd arguments to memset() are swapped.
+
+p.  17:	Code line 12: the 2nd and 3rd arguments to memset() are swapped.
+
+p.  18:	Code line 10: the 2nd and 3rd arguments to memset() are swapped.
+
+p.  36:	Second bullet on the page, the string ".ix RFC~1122" should be deleted.
+
+p.  95: The indented paragraph at the top of this page ("The original T/TCP
+	source code ...") should be removed.  See the 12 Jan 96 bug fix on
+	the author's T/TCP home page for a detailed analysis of why the
+	TF_ACKNOW flag must be set when the retransmission timer expires.
+	The source code fix is to add the line
+                tp->t_flags |= TF_ACKNOW;
+	between source code lines 171 and 172 on page 842 of Volume 2.
+
+p. 223:	2nd line from the top: "hostname:display:screen" should have a period
+	between "display" and "screen", not a colon: "hostname:display.screen".
+
+p. 225:	Code line 13: the 2nd and 3rd arguments to memset() are swapped.
+
+p. 226:	Code line 12: the 2nd and 3rd arguments to memset() are swapped.
+
+p. 305:	Code line 10: the 2nd and 3rd arguments to memset() are swapped.
+
+p. 307:	Code line 12: the 2nd and 3rd arguments to memset() are swapped.
+
+p. 316:	Index entry for Braden, R. T.: delete "-95".
+
+p. 321:	Index entry for Net/3: delete entry for page 95.
+
+p. 322: Index entry for retransmission timer: delete entry for page 95.
+
+p. 323:	Index entry for RFC 1122: add page 36 to this entry.
+
+p. 326:	Index entry for tcp_output function: delete entry for page 95.
+
+p. 326:	Index entry for tcp_timers function: delete entire entry.
+
+p. 326: Index entry for TCPT_REXMT constant: delete entire entry.
+
+p. 326: Index entry for TF_ACKNOW constant: delete entry for page 95.
+
+-----------------------------------------------------------------------------
+The following are Comments to the Reader, they are not typos to be fixed.
+
+p.  99:	A source code fix is required between lines 133 and 134 of Figure
+	9.2.  See the 11 Jan 96 bug fix on the author's T/TCP home page for
+	the actual code fix.
+
+p. 132:	A source code fix is required to correct line 607.  See the 30 Jan 96
+	bug fix on the author's T/TCP home page for the fix and a detailed
+	analysis.
+
+p. 144:	Some new code is required between lines 1180-1181.  See the 30 Jan 96
+	bug fix on the author's T/TCP home page for the fix and a detailed
+	analysis.
+
+- The following comments from Garrett A. Wollman describe the movitation
+  behind the per-host cache maintained by T/TCP:
+
+    Chapter 6 is missing some of discussion on the motivating need behind
+    the development of this code.  It was not done originally to support
+    Transaction TCP; that only came later, after my supervisor and I hit
+    upon the idea that the work I had done in creating the per-host cache
+    for regular TCP was just what Transaction TCP needed.  The original
+    work was motivated by the desire to do Path MTU discovery (finally
+    implemented a year later), and to have the TCP statistics in the route
+    metrics perform some useful function.  (In their original Net/2 form,
+    you will recall, TCP statistics would never get saved on machines
+    using only a default route.)  My initial work in this area actually
+    began in 1993, before I came to work at MIT.  Some contact with Ran
+    Atkinson's group at NRL suggested that this work would be helpful for
+    their IPv6 implementation, as well.
+
+- Readers interested in implementing T/TCP should also be aware that some
+  bugs have been fixed to allow the code in Chapter 6 to manage cache
+  entries in the presence of dynamic routing.  The problems occur when
+  the route to a host changes or is deleted before its cache entry expires.
+  These fixes apply to the files in_rmx.c (shown in Volume 3) along with
+  route.c and radix.c.  Current FreeBSD releases contain the fixes.

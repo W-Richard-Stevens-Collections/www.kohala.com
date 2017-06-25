@@ -1,0 +1,5042 @@
+#!/bin/sh
+# This is a shell archive (shar 3.32)
+# made 11/15/1995 13:09 UTC by hme@marathon
+# Source directory /users/pra1/hme/src
+#
+# existing files WILL be overwritten
+#
+# This shar contains:
+# length  mode       name
+# ------ ---------- ------------------------------------------
+#    965 -rwxr-xr-x prag-1.0/Copyright
+#   6836 -rw-r----- prag-1.0/Mail
+#   1043 -rw-r--r-- prag-1.0/Makefile
+#   2928 -rw------- prag-1.0/Patch.01
+#   7391 -rw-r----- prag-1.0/Patch.01+02
+#    578 -rw-r--r-- prag-1.0/README
+#      0 -rw-r----- prag-1.0/TODO
+#    141 -rw-r--r-- prag-1.0/ex01.prag
+#    891 -rw-r--r-- prag-1.0/ex02.prag
+#    164 -rw-r--r-- prag-1.0/ex03.prag
+#    523 -rw-r--r-- prag-1.0/ex04.prag
+#    894 -rw-r--r-- prag-1.0/ex05.prag
+#    161 -rw-r--r-- prag-1.0/ex06.prag
+#     36 -rw-r--r-- prag-1.0/ex07.prag
+#  16751 -rwxr-xr-x prag-1.0/prag
+#   6073 -rw-r--r-- prag-1.0/prag.1
+#   5779 -rw-r----- prag-1.0/prag.1.orig
+#  15387 -rw-r----- prag-1.0/prag.cat
+#  15572 -rwxr-xr-x prag-1.0/prag.orig
+#  65864 -rw-r----- prag-1.0/prag.ps
+#
+if touch 2>&1 | fgrep 'amc' > /dev/null
+ then TOUCH=touch
+ else TOUCH=true
+fi
+# ============= prag-1.0/Copyright ==============
+if test ! -d 'prag-1.0'; then
+    echo "x - creating directory prag-1.0"
+    mkdir 'prag-1.0'
+fi
+echo "x - extracting prag-1.0/Copyright (Text)"
+sed 's/^X//' << 'SHAR_EOF' > prag-1.0/Copyright &&
+XThe package is copyright 1992,1993,1995 by Holger Meyer
+XUniversity of Rostock, Dept. of Computer Science, Rostock, Germany
+X
+XPermission is hereby granted to freely copy and distribute source
+Xcode to PRAG, subject to the following conditions:
+X
+X1)  Source code for the entire package must be distributed with
+X    any derived work incorporating ANY part of PRAG.
+X
+X2)  This copyright notice must appear in all PRAG-associated files.
+X
+X3)  Ownership of the software remains with the author.
+X    Any modifications/improvements to this package should be reported
+X    to us for incorporation into further releases:
+X
+X    internet:   hm@GUUG.de
+X
+X    surface:    University of Rostock
+X                Dept. of Computer Science
+X                c/o Holger Meyer
+X                18051 Rostock, Germany
+X
+XThe author makes no warranty of any kind with respect to this
+Xproduct and explicitly disclaims any implied warranties of mer-
+Xchantability or fitness for any particular purpose.
+SHAR_EOF
+$TOUCH -am 0714144995 prag-1.0/Copyright &&
+chmod 0755 prag-1.0/Copyright ||
+echo "restore of prag-1.0/Copyright failed"
+set `wc -c prag-1.0/Copyright`;Wc_c=$1
+if test "$Wc_c" != "965"; then
+	echo original size 965, current size $Wc_c
+fi
+# ============= prag-1.0/Mail ==============
+echo "x - extracting prag-1.0/Mail (Text)"
+sed 's/^X//' << 'SHAR_EOF' > prag-1.0/Mail &&
+XFrom daemon  Fri Sep 22 17:48:56 1995
+XReturn-Path: eduardo@nostromo.medusa.es
+XReceived: by ceylon.informatik.uni-rostock.de id RAA27473; Fri, 22 Sep 1995 17:47:09 +0200
+XReceived: (from eduardo@localhost) by nostromo.medusa.es (8.6.11/8.6.9) id RAA00311; Fri, 22 Sep 1995 17:27:47 +0200
+XDate: Fri, 22 Sep 1995 17:27:46 +0200 (MET DST)
+XFrom: Eduardo Casino-Almao <eduardo@mailhost.medusa.es>
+XX-Sender: eduardo@nostromo.medusa.es
+XTo: hme@informatik.uni-rostock.de
+XSubject: ticks syntax in prag
+XMessage-ID: <Pine.LNX.3.91.950922170229.192A-100000@nostromo.medusa.es>
+XMIME-Version: 1.0
+XContent-Type: TEXT/PLAIN; charset=ISO-8859-1
+XContent-Transfer-Encoding: QUOTED-PRINTABLE
+XStatus: RO
+X
+X
+X
+XThere are quite a few grap files that make use of the following form of=20
+Xticks:
+X
+X    ticks [left | right | top | bot] [where] from begin to end [by step]
+X
+Xas in
+X
+X    ticks bot out from 0 to 100 by 10
+X
+XPrag v1.0 lacks of this feature, so I've written a patch which adds=20
+Xsupport for it. I'm afraid it is little more than a hack, but I send it=20
+Xto you just in case you find it of any interest.
+X
+XRegards,
+X    Eduardo.
+X
+X
+X=3D=3D=3D=3D PATCH STARTS HERE
+X
+X*** prag.orig=09Fri Sep 22 10:33:07 1995
+X--- prag=09Fri Sep 22 13:20:26 1995
+X***************
+X*** 168,173 ****
+X--- 168,174 ----
+X  =09next;
+X  }
+X  ## ticks [left | right | top | bot] [where] position ...
+X+ ## ticks [left | right | top | bot] [where] from begin to end [by step]
+X  # ticks for x- & y-axis, left, top, right or bottom position
+X  $1 =3D=3D "ticks" {
+X  =09if (NF <=3D 3) {
+X***************
+X*** 186,195 ****
+X  =09=09t_where[$2] =3D $3;
+X  =09=09++i;
+X  =09}
+X! =09while (i <=3D NF) {
+X! =09=09t_pos[$2, t_num[$2]] =3D $i;
+X! =09=09++t_num[$2];
+X! =09=09++i;
+X  =09}
+X  =09next;
+X  }
+X--- 187,222 ----
+X  =09=09t_where[$2] =3D $3;
+X  =09=09++i;
+X  =09}
+X! =09if ($i !=3D "from") {
+X! =09=09while (i <=3D NF) {
+X! =09=09=09t_pos[$2, t_num[$2]] =3D $i;
+X! =09=09=09++t_num[$2];
+X! =09=09=09++i;
+X! =09=09}
+X! =09}
+X! =09else {
+X! =09=09if ($(i+2) !=3D "to" || NF < i+3) {
+X! =09=09=09printf( "\"%s\":%d: ticks [left|right|top|bot] [where] from begi=
+Xn to end [by step]\n",
+X! =09=09=09=09=09FILENAME, FNR) | "cat >&2";
+X! =09=09=09errexit(-1);
+X! =09=09}
+X! =09=09if ($(i+4) =3D=3D "by") {
+X! =09=09=09if (NF =3D=3D i+5)
+X! =09=09=09=09tickstep=3D$(i+5);
+X! =09=09=09else {
+X! =09=09=09=09printf( "\"%s\":%d: ticks [left|right|top|bot] [where] from b=
+Xegin to end [by step]\n",
+X! =09=09=09=09=09=09FILENAME, FNR) | "cat >&2";
+X! =09=09=09=09errexit(-1);
+X! =09=09=09}
+X! =09=09}
+X! =09=09else
+X! =09=09=09tickstep=3D1;
+X!=20
+X! =09=09for (tick=3D$(i+1); tick <=3D $(i+3); tick+=3Dtickstep) {
+X! =09=09=09t_pos[$2, t_num[$2]] =3D tick;
+X! =09=09=09++t_num[$2];
+X! =09=09}
+X!=20
+X  =09}
+X  =09next;
+X  }
+X
+X=3D=3D=3D=3D END OF PATCH
+X
+X---------------------------------------------------------------------------=
+X-
+X  Eduardo Casino Almao             eduardo@medusa.es                (home)
+X  C/ Agustin Duran, 5, 2=BAF         e.casino@spa1002.wins.icl.co.uk  (work=
+X)
+X  28028 MADRID
+X  (Spain)                          Phone:  +34 1 726 52 85
+X
+X---
+X  "English well speaking. Here speeching American."
+X  (From a Majorcan shop entrance)
+X---------------------------------------------------------------------------=
+X-
+X
+XFrom hme Mon Sep 25 13:26:23 1995
+XSubject: Re: ticks syntax in prag
+XTo: eduardo@mailhost.medusa.es (Eduardo Casino-Almao)
+XDate: Mon, 25 Sep 1995 13:26:23 +0100 (MET)
+XIn-Reply-To: <Pine.LNX.3.91.950922170229.192A-100000@nostromo.medusa.es> from "Eduardo Casino-Almao" at Sep 22, 95 05:27:46 pm
+XReply-to: Holger.Meyer@Informatik.Uni-Rostock.DE
+XOrganization: University of Rostock; Dpt. of CS; Database Research Group
+XLocation: A.-Einstein-Str. 21; 18059 Rostock, Germany
+XPhone: +49 381 498-3402, 3404 (fax)
+XX-Mailer: ELM [version 2.4 PL23]
+XContent-Type: text
+XContent-Length: 981       
+X
+XHello Eduardo,
+X
+Xthank You very much for supplying the patch.  One of the few feedbacks
+XI got.  Some other have also send in some patches.  It seems to be easy
+Xfor other to add new features to prag with some minor efforts.
+X
+XEduardo Casino-Almao writes:
+X> There are quite a few grap files that make use of the following form of=20
+X> ticks:
+X> 
+X>     ticks [left | right | top | bot] [where] from begin to end [by step]
+X> 
+X> as in
+X> 
+X>     ticks bot out from 0 to 100 by 10
+X> 
+X> Prag v1.0 lacks of this feature, so I've written a patch which adds=20
+X> support for it. I'm afraid it is little more than a hack, but I send it=20
+X> to you just in case you find it of any interest.
+X
+XMore grap conformence is doubtless of interest.  What hack?  I wouldn't
+Xhave done it in another way.  Your patch will be incorporated in the
+Xnext release.
+X
+XThanks a lot.
+X
+XPeace
+X
+XHolger
+X
+X-- 
+XHolger Meyer, Uni of Rostock, Dpt. of CS, DB Research Group
+Xhm@guug.de, http://www.informatik.uni-rostock.de/~hme/
+X
+XFrom daemon Tue Dec 6 19:37:28 1994 +0100
+XReturn-Path: kevins@ee.pdx.edu
+XReceived: by ceylon.informatik.uni-rostock.de id TAA27351; Tue, 6 Dec 1994 19:35:14 +0100
+XReceived: from geppetto.ee.pdx.edu by ursula.ee.pdx.edu (4.1/CATastrophe-9/19/94-P)
+X	id AA26557; Tue, 6 Dec 94 10:36:51 PST
+XReceived: by geppetto.ee.pdx.edu (4.1/CATastrophe-6/18/94.1)
+X	id AA13781; Tue, 6 Dec 94 10:36:46 PST
+XDate: Tue, 6 Dec 94 10:36:46 PST
+XMessage-Id: <9412061836.AA13781@geppetto.ee.pdx.edu>
+XFrom: kevins@ee.pdx.edu
+XTo: hme@informatik.uni-rostock.de
+XSubject: Re: groff compatible GRAP (pic pre-processor)
+XNewsgroups: comp.text
+XIn-Reply-To: <3bkvo3$iia@taiwan.informatik.uni-rostock.de>
+XReferences: <3b08jj$8uf@flotsam.ee.pdx.edu>
+XOrganization: Portland State University, Portland, OR
+XStatus: RO
+X
+XIn article <3bkvo3$iia@taiwan.informatik.uni-rostock.de> you write:
+X>Kevin Stanton (kevins@ee.pdx.edu) wrote:
+X>> I use this at school all the time, but can't find it anywhere for my
+X>> machine at home (Linux).  It makes nice graphs and plots in troff
+X>> documents with just data as input.
+X>
+X>> Oh, and why is it soo well hidden?  I've tried  various methods of
+X>> searching over the last few months (spasmatically) and have found no
+X>> ftpable version.
+X>
+X>ftp.informatik.uni-rostock.de:/pub/local/software/prag-1.0.shar.gz
+X>
+X>It's written in awk(1).  It processes a language which is grap(DWB)-alike.
+X>If You run into problems, don't hesitate to contact the author (me :-)!
+X>
+X>Peace
+X>
+X>Holger
+X>
+X>--
+X>Holger Meyer, Uni of Rostock, Dpt. of CS: hme@informatik.uni-rostock.de
+X>-- Where'd you learn about /  Satan - out of a book /  Love? - out of a box
+X>-- Jim Morrison
+X
+X
+XThanks for the pointer.  I in fact used it for a report that was due today
+X(now Friday due to snow!).  Worked great!
+X
+XOnly problem I had was when I set the range to 0 0 1 1.  It actually set
+Xthe range to 0 0 4 4!  If I changed it to something like 0 0 0.2 0.2 it
+Xdid that, but as I got really close to one it suddenly jumped to 4.  Any
+Xclues for me?
+X
+XThanks, and thanks for the neat utility.
+X
+XKevin (in (n)AWK even!)
+X
+SHAR_EOF
+$TOUCH -am 0925134495 prag-1.0/Mail &&
+chmod 0640 prag-1.0/Mail ||
+echo "restore of prag-1.0/Mail failed"
+set `wc -c prag-1.0/Mail`;Wc_c=$1
+if test "$Wc_c" != "6836"; then
+	echo original size 6836, current size $Wc_c
+fi
+# ============= prag-1.0/Makefile ==============
+echo "x - extracting prag-1.0/Makefile (Text)"
+sed 's/^X//' << 'SHAR_EOF' > prag-1.0/Makefile &&
+X#
+X#	Copyright (C) 1992, 1993 Holger J. Meyer, Rostock, Germany
+X#	hme@informatik.uni-rostock.de
+X#
+X#	See file ``Copyright'' for terms of copyright.
+X#
+X# Source:
+X#	make(1)
+X#
+X# History:
+X#	93/8/24	hme, initial version
+X#
+XGRAP = ./prag
+XPIC = gpic
+XTROFF = groff -mpic
+XNROFF = gnroff -mpic
+XSOELIM = gsoelim
+X#XTROFF = groff -X -Tps -mpic
+XXTROFF = groff -TX75 -mpic
+XPS = pageview
+X#PS = gs
+XMS = mgs
+X
+X.SUFFIXES:
+X.SUFFIXES:	.1 .ms .cat .ps .pv .x
+X
+X.ms.cat:
+X	$(SOELIM) $< | $(GRAP) | $(PIC) | $(NROFF) -$(MS) >$*.cat
+X
+X.ms.ps:
+X	$(SOELIM) $< | $(GRAP) | $(PIC) | $(TROFF) -$(MS) >$*.ps
+X
+X.ms.pv:
+X	$(SOELIM) $< | $(GRAP) | $(PIC) | $(TROFF) -$(MS) >$*.ps
+X	$(PS) $*.ps
+X	rm -f $*.ps
+X
+X.ms.x:
+X	$(SOELIM) $< | $(GRAP) | $(PIC) | $(XTROFF) -$(MS)
+X
+X.1.cat:
+X	$(SOELIM) $< | $(GRAP) | $(PIC) | $(NROFF) -man >$*.cat
+X
+X.1.ps:
+X	$(SOELIM) $< | $(GRAP) | $(PIC) | $(TROFF) -man >$*.ps
+X
+X.1.pv:
+X	$(SOELIM) $< | $(GRAP) | $(PIC) | $(TROFF) -man >$*.ps
+X	$(PS) $*.ps
+X	rm -f $*.ps
+X
+X.1.x:
+X	$(SOELIM) $< | $(GRAP) | $(PIC) | $(XTROFF) -man
+X
+X.ps.pv:
+X	$(PS) $*.ps
+X
+Xall:	prag.cat prag.ps
+SHAR_EOF
+$TOUCH -am 1115132295 prag-1.0/Makefile &&
+chmod 0644 prag-1.0/Makefile ||
+echo "restore of prag-1.0/Makefile failed"
+set `wc -c prag-1.0/Makefile`;Wc_c=$1
+if test "$Wc_c" != "1043"; then
+	echo original size 1043, current size $Wc_c
+fi
+# ============= prag-1.0/Patch.01 ==============
+echo "x - extracting prag-1.0/Patch.01 (Text)"
+sed 's/^X//' << 'SHAR_EOF' > prag-1.0/Patch.01 &&
+XFrom daemon  Fri Sep 22 17:48:56 1995
+XReturn-Path: eduardo@nostromo.medusa.es
+XReceived: by ceylon.informatik.uni-rostock.de id RAA27473; Fri, 22 Sep 1995 17:47:09 +0200
+XReceived: (from eduardo@localhost) by nostromo.medusa.es (8.6.11/8.6.9) id RAA00311; Fri, 22 Sep 1995 17:27:47 +0200
+XDate: Fri, 22 Sep 1995 17:27:46 +0200 (MET DST)
+XFrom: Eduardo Casino-Almao <eduardo@mailhost.medusa.es>
+XX-Sender: eduardo@nostromo.medusa.es
+XTo: hme@informatik.uni-rostock.de
+XSubject: ticks syntax in prag
+XMessage-ID: <Pine.LNX.3.91.950922170229.192A-100000@nostromo.medusa.es>
+XMIME-Version: 1.0
+XContent-Type: TEXT/PLAIN; charset=ISO-8859-1
+XContent-Transfer-Encoding: QUOTED-PRINTABLE
+XStatus: RO
+X
+X
+X
+XThere are quite a few grap files that make use of the following form of=20
+Xticks:
+X
+X    ticks [left | right | top | bot] [where] from begin to end [by step]
+X
+Xas in
+X
+X    ticks bot out from 0 to 100 by 10
+X
+XPrag v1.0 lacks of this feature, so I've written a patch which adds=20
+Xsupport for it. I'm afraid it is little more than a hack, but I send it=20
+Xto you just in case you find it of any interest.
+X
+XRegards,
+X    Eduardo.
+X
+X
+X==== PATCH STARTS HERE
+X
+X*** prag.orig	Fri Sep 22 10:33:07 1995
+X--- prag	Fri Sep 22 13:20:26 1995
+X***************
+X*** 168,173 ****
+X--- 168,174 ----
+X  	next;
+X  }
+X  ## ticks [left | right | top | bot] [where] position ...
+X+ ## ticks [left | right | top | bot] [where] from begin to end [by step]
+X  # ticks for x- & y-axis, left, top, right or bottom position
+X  $1 == "ticks" {
+X  	if (NF <= 3) {
+X***************
+X*** 186,195 ****
+X  		t_where[$2] = $3;
+X  		++i;
+X  	}
+X! 	while (i <= NF) {
+X! 		t_pos[$2, t_num[$2]] = $i;
+X! 		++t_num[$2];
+X! 		++i;
+X  	}
+X  	next;
+X  }
+X--- 187,222 ----
+X  		t_where[$2] = $3;
+X  		++i;
+X  	}
+X! 	if ($i != "from") {
+X! 		while (i <= NF) {
+X! 			t_pos[$2, t_num[$2]] = $i;
+X! 			++t_num[$2];
+X! 			++i;
+X! 		}
+X! 	}
+X! 	else {
+X! 		if ($(i+2) != "to" || NF < i+3) {
+X! 			printf( "\"%s\":%d: ticks [left|right|top|bot] [where] from begin to end [by step]\n",
+X! 					FILENAME, FNR) | "cat >&2";
+X! 			errexit(-1);
+X! 		}
+X! 		if ($(i+4) == "by") {
+X! 			if (NF == i+5)
+X! 				tickstep=$(i+5);
+X! 			else {
+X! 				printf( "\"%s\":%d: ticks [left|right|top|bot] [where] from begin to end [by step]\n",
+X! 						FILENAME, FNR) | "cat >&2";
+X! 				errexit(-1);
+X! 			}
+X! 		}
+X! 		else
+X! 			tickstep=1;
+X! 
+X! 		for (tick=$(i+1); tick <= $(i+3); tick+=tickstep) {
+X! 			t_pos[$2, t_num[$2]] = tick;
+X! 			++t_num[$2];
+X! 		}
+X! 
+X  	}
+X  	next;
+X  }
+X
+X==== END OF PATCH
+X
+X----------------------------------------------------------------------------
+X  Eduardo Casino Almao             eduardo@medusa.es                (home)
+X  C/ Agustin Duran, 5, 2=BAF         e.casino@spa1002.wins.icl.co.uk  (work)
+X  28028 MADRID
+X  (Spain)                          Phone:  +34 1 726 52 85
+X---
+X  "English well speaking. Here speeching American."
+X  (From a Majorcan shop entrance)
+X----------------------------------------------------------------------------
+SHAR_EOF
+$TOUCH -am 0925130695 prag-1.0/Patch.01 &&
+chmod 0600 prag-1.0/Patch.01 ||
+echo "restore of prag-1.0/Patch.01 failed"
+set `wc -c prag-1.0/Patch.01`;Wc_c=$1
+if test "$Wc_c" != "2928"; then
+	echo original size 2928, current size $Wc_c
+fi
+# ============= prag-1.0/Patch.01+02 ==============
+echo "x - extracting prag-1.0/Patch.01+02 (Text)"
+sed 's/^X//' << 'SHAR_EOF' > prag-1.0/Patch.01+02 &&
+XThis patch incorporates patch.01 and changes the handling of unused
+Xmargin boxes (those without labels)
+X
+XHolger
+X
+X*** prag.orig	Thu Oct 21 17:09:48 1993
+X--- prag	Wed Nov 15 13:55:40 1995
+X***************
+X*** 1,6 ****
+X  #!/bin/nawk -f
+X  #	Copyright (C) 1992, 1993 Holger J. Meyer, Rostock, Germany
+X! #	hme@informatik.uni-rostock.de
+X  #
+X  #	See file ``Copyright'' for terms of copyright.
+X  #
+X--- 1,6 ----
+X  #!/bin/nawk -f
+X  #	Copyright (C) 1992, 1993 Holger J. Meyer, Rostock, Germany
+X! #	hm@GUUG.de
+X  #
+X  #	See file ``Copyright'' for terms of copyright.
+X  #
+X***************
+X*** 18,23 ****
+X--- 18,25 ----
+X  #	92/4/20	hme, initial version written
+X  #	93/8/24	hme, multiple graphs, grids, etc. added
+X  #	93/10/20	hme, labeled margin boxes, generate `reset' before .PE
+X+ #	95/9/24	hme, more grap conformance, improved ticks (by eduardo@nostromo.medusa.es)
+X+ #	95/11/15	hme, put out only labeled margin boxes
+X  #
+X  # Layout:
+X  #
+X***************
+X*** 42,48 ****
+X  #
+X  #
+X  BEGIN {
+X! 	MYADDR = "hme@informatik.uni-rostock.de";
+X  	# number (RE)
+X  	NUMBER = "^[-+]?([0-9]+[.]?[0-9]*|[.][0-9]+)" "([eE][-+]?[0-9]+)?$";
+X  	GNAME = "GRAPH";			# label for whole picture
+X--- 44,50 ----
+X  #
+X  #
+X  BEGIN {
+X! 	MYADDR = "hm@GUUG.de";
+X  	# number (RE)
+X  	NUMBER = "^[-+]?([0-9]+[.]?[0-9]*|[.][0-9]+)" "([eE][-+]?[0-9]+)?$";
+X  	GNAME = "GRAPH";			# label for whole picture
+X***************
+X*** 168,173 ****
+X--- 170,176 ----
+X  	next;
+X  }
+X  ## ticks [left | right | top | bot] [where] position ...
+X+ ## ticks [left | right | top | bot] [where] from begin to end [by step]
+X  # ticks for x- & y-axis, left, top, right or bottom position
+X  $1 == "ticks" {
+X  	if (NF <= 3) {
+X***************
+X*** 186,196 ****
+X  		t_where[$2] = $3;
+X  		++i;
+X  	}
+X! 	while (i <= NF) {
+X! 		t_pos[$2, t_num[$2]] = $i;
+X! 		++t_num[$2];
+X! 		++i;
+X  	}
+X  	next;
+X  }
+X  ## frame frame-attributes ...
+X--- 189,225 ----
+X  		t_where[$2] = $3;
+X  		++i;
+X  	}
+X! 	if ($i != "from") {
+X! 		while (i <= NF) {
+X! 			t_pos[$2, t_num[$2]] = $i;
+X! 			++t_num[$2];
+X! 			++i;
+X! 		}
+X  	}
+X+ 	else {
+X+ 		if ($(i+2) != "to" || NF < i+3) {
+X+ 			printf( "\"%s\":%d: ticks [left|right|top|bot] [where] from begin to end [by step]\n",
+X+ 				FILENAME, FNR) | "cat >&2";
+X+ 			errexit(-1);
+X+ 		}
+X+ 		if ($(i+4) == "by") {
+X+ 			if (NF == i+5) {
+X+ 				tickstep = $(i+5);
+X+ 			}
+X+ 			else {
+X+ 				printf( "\"%s\":%d: ticks [left|right|top|bot] [where] from begin to end [by step]\n",
+X+ 						FILENAME, FNR) | "cat >&2";
+X+ 				errexit(-1);
+X+ 			}
+X+ 		}
+X+ 		else {
+X+ 			tickstep = 1;
+X+ 		}
+X+ 		for (tick = $(i+1); tick <= $(i+3); tick += tickstep) {
+X+ 			t_pos[$2, t_num[$2]] = tick;
+X+ 			++t_num[$2];
+X+ 		}
+X+ 	}
+X  	next;
+X  }
+X  ## frame frame-attributes ...
+X***************
+X*** 409,416 ****
+X  function resizegraph()
+X  {
+X  	# left, right, top, bot margin of frame
+X! 	lmarg = rmarg = wid/6;
+X! 	tmarg = bmarg = ht/6;
+X  	ticklen = ht/32;			# default len for tick marker
+X  }
+X  function newgraph(g) {
+X--- 438,445 ----
+X  function resizegraph()
+X  {
+X  	# left, right, top, bot margin of frame
+X! 	m_size["left"] = m_size["right"] = wid/6;
+X! 	m_size["top"] = m_size["bot"] = ht/6;
+X  	ticklen = ht/32;			# default len for tick marker
+X  }
+X  function newgraph(g) {
+X***************
+X*** 449,458 ****
+X  			}
+X  		}
+X  	}
+X! 	printf(".PS %g %g\n", wid + lmarg + rmarg, ht + tmarg + bmarg);
+X  	printf("# DO NOT EDIT!\n");
+X  	printf("# generated from \"%s\" by prag (C) %s\n", FILENAME, MYADDR);
+X  	if (data) {	# any data?
+X  		frame();
+X  		label();
+X  		ticks();
+X--- 478,488 ----
+X  			}
+X  		}
+X  	}
+X! 	printf(".PS %g %g\n", wid+m_size["left"]+m_size["right"], ht+m_size["top"]+m_size["bot"]);
+X  	printf("# DO NOT EDIT!\n");
+X  	printf("# generated from \"%s\" by prag (C) %s\n", FILENAME, MYADDR);
+X  	if (data) {	# any data?
+X+ 		cutmarg();
+X  		frame();
+X  		label();
+X  		ticks();
+X***************
+X*** 465,487 ****
+X  	}
+X  	printf("reset\n.PE\n");
+X  }
+X  # create frame from graph
+X  function frame() {
+X  	printf("%s:\tbox invis ht %g wid %g\n",
+X! 		GNAME, ht+tmarg+bmarg, wid+lmarg+rmarg);
+X  	printf("%s:\tbox %s ht %g wid %g with .sw at %s.sw + (%g, %g)\n",
+X! 		FNAME, fattr, ht, wid, GNAME, lmarg, bmarg);
+X  }
+X  # center label under x-axis and left from y-axis
+X  function label() {
+X! 	printf("%s%s:\tbox wid %g ht %g invis %s with .e at %s.w\n",
+X! 		"L", MNAME, lmarg, ht, t_label["left"], GNAME);
+X! 	printf("%s%s:\tbox wid %g ht %g invis %s with .w at %s.e\n",
+X! 		"R", MNAME, rmarg, ht, t_label["right"], GNAME);
+X! 	printf("%s%s:\tbox wid %g ht %g invis %s with .s at %s.n\n",
+X! 		"T", MNAME, wid, tmarg, t_label["top"], GNAME);
+X! 	printf("%s%s:\tbox wid %g ht %g invis %s with .n at %s.s\n",
+X! 		"B", MNAME, wid, bmarg, t_label["bot"], GNAME);
+X  }
+X  # create tick marks for all axes
+X  function ticks(	i, user_ticks, w) {
+X--- 495,533 ----
+X  	}
+X  	printf("reset\n.PE\n");
+X  }
+X+ # cut off margins without a label
+X+ function cutmarg(	w) {
+X+ 	for (w in m_size) {
+X+ 		if (t_label[w] == "") {
+X+ 			m_size[w] = 0;
+X+ 		}
+X+ 	}
+X+ }
+X  # create frame from graph
+X  function frame() {
+X  	printf("%s:\tbox invis ht %g wid %g\n",
+X! 		GNAME, ht+m_size["top"]+m_size["bot"], wid+m_size["left"]+m_size["right"]);
+X  	printf("%s:\tbox %s ht %g wid %g with .sw at %s.sw + (%g, %g)\n",
+X! 		FNAME, fattr, ht, wid, GNAME, m_size["left"], m_size["bot"]);
+X  }
+X  # center label under x-axis and left from y-axis
+X  function label() {
+X! 	if (t_label["left"]) {
+X! 		printf("%s%s:\tbox wid %g ht %g invis %s with .e at %s.w\n",
+X! 			MNAME, "left", m_size["left"], ht, t_label["left"], GNAME);
+X! 	}
+X! 	if (t_label["right"]) {
+X! 		printf("%s%s:\tbox wid %g ht %g invis %s with .w at %s.e\n",
+X! 			MNAME, "right", m_size["right"], ht, t_label["right"], GNAME);
+X! 	}
+X! 	if (t_label["top"]) {
+X! 		printf("%s%s:\tbox wid %g ht %g invis %s with .s at %s.n\n",
+X! 			MNAME, "top", wid, m_size["top"], t_label["top"], GNAME);
+X! 	}
+X! 	if (t_label["bot"]) {
+X! 		printf("%s%s:\tbox wid %g ht %g invis %s with .n at %s.s\n",
+X! 			MNAME, "bot", wid, m_size["bot"], t_label["bot"], GNAME);
+X! 	}
+X  }
+X  # create tick marks for all axes
+X  function ticks(	i, user_ticks, w) {
+X*** prag.1.orig	Wed Nov 15 14:00:08 1995
+X--- prag.1	Wed Nov 15 13:55:06 1995
+X***************
+X*** 1,6 ****
+X--- 1,8 ----
+X  .TH PRAG 1 "1 August 1993"
+X  .ds Gr prag
+X  .if .t
+X+ .	ps	+2
+X+ .	vs	+2
+X  .	de Cw
+X  \\$3\f(CW\\$1\fP\\$2
+X  ..
+X***************
+X*** 136,141 ****
+X--- 138,174 ----
+X  .Cw out ) (
+X  the diagram.
+X  .RE
+X+ .Cw ticks
+X+ [
+X+ .Cw left
+X+ | 
+X+ .Cw right
+X+ | 
+X+ .Cw top
+X+ | 
+X+ .Cw bot
+X+ ] [
+X+ .I where
+X+ ] 
+X+ .Cw from 
+X+ .I begin 
+X+ .Cw to 
+X+ .I end 
+X+ [
+X+ .Cw by
+X+ .I step
+X+ ]
+X+ .RS
+X+ This second variant of the
+X+ .Cw tick -statement
+X+ allows the automatic generation of ticks
+X+ in the range from
+X+ .I begin
+X+ to
+X+ .I end
+X+ with an optional distance
+X+ .IR step .
+X+ .RE
+X  .Cw frame
+X  .I frame-attributes
+X  \&.\|.\|.
+X***************
+X*** 396,402 ****
+X  This can be obtained by sending a mail message to netlib@research.att.com
+X  with a body of `send\ 116\ from\ research/cstr'.
+X  .SH BUGS
+X! Bug reports or suggested improvements should go to hme@informatik.uni-rostock.de.
+X  .SH AUTHOR
+X  This program was contributed by Holger Meyer at University of Rostock,
+X  Germany.
+X--- 429,435 ----
+X  This can be obtained by sending a mail message to netlib@research.att.com
+X  with a body of `send\ 116\ from\ research/cstr'.
+X  .SH BUGS
+X! Bug reports or suggested improvements should go to hm@GUUG.de.
+X  .SH AUTHOR
+X  This program was contributed by Holger Meyer at University of Rostock,
+X  Germany.
+SHAR_EOF
+$TOUCH -am 1115140095 prag-1.0/Patch.01+02 &&
+chmod 0640 prag-1.0/Patch.01+02 ||
+echo "restore of prag-1.0/Patch.01+02 failed"
+set `wc -c prag-1.0/Patch.01+02`;Wc_c=$1
+if test "$Wc_c" != "7391"; then
+	echo original size 7391, current size $Wc_c
+fi
+# ============= prag-1.0/README ==============
+echo "x - extracting prag-1.0/README (Text)"
+sed 's/^X//' << 'SHAR_EOF' > prag-1.0/README &&
+XPrag is a simple grap(DWB) replacement.  It implements an extended
+Xsubset of grap(DWB)'s input language (sorry:).  You can draw several
+Xgraphs within one diagram, label it, set tick marks, use a grid, etc.
+X
+XIt is written in nawk(1) and you get the whole source code.  It's
+Xavailable via anonymous ftp service from
+X
+X	ftp.informatik.uni-rostock.de:/pub/local/software
+X
+XBug reports or suggested improvements should go to
+X
+X	hme@informatik.uni-rostock.de
+X
+XAside some simple examples you got a rudimentary manual page.
+XNevertheless the source is the best documentation.
+X
+XHolger Meyer
+SHAR_EOF
+$TOUCH -am 1015095693 prag-1.0/README &&
+chmod 0644 prag-1.0/README ||
+echo "restore of prag-1.0/README failed"
+set `wc -c prag-1.0/README`;Wc_c=$1
+if test "$Wc_c" != "578"; then
+	echo original size 578, current size $Wc_c
+fi
+# ============= prag-1.0/TODO ==============
+echo "x - extracting prag-1.0/TODO (Text)"
+sed 's/^X//' << 'SHAR_EOF' > prag-1.0/TODO &&
+SHAR_EOF
+$TOUCH -am 0925131395 prag-1.0/TODO &&
+chmod 0640 prag-1.0/TODO ||
+echo "restore of prag-1.0/TODO failed"
+set `wc -c prag-1.0/TODO`;Wc_c=$1
+if test "$Wc_c" != "0"; then
+	echo original size 0, current size $Wc_c
+fi
+# ============= prag-1.0/ex01.prag ==============
+echo "x - extracting prag-1.0/ex01.prag (Text)"
+sed 's/^X//' << 'SHAR_EOF' > prag-1.0/ex01.prag &&
+Xframe invis
+Xpic { line from FRAME.sw to FRAME.se }
+Xpic { line from FRAME.sw to FRAME.nw }
+Xdraw invis
+X0 \&
+X2.9 NY
+X7.8 NJ
+X3.4 CA
+X1.8 MI
+X3.7 FL
+SHAR_EOF
+$TOUCH -am 1006162593 prag-1.0/ex01.prag &&
+chmod 0644 prag-1.0/ex01.prag ||
+echo "restore of prag-1.0/ex01.prag failed"
+set `wc -c prag-1.0/ex01.prag`;Wc_c=$1
+if test "$Wc_c" != "141"; then
+	echo original size 141, current size $Wc_c
+fi
+# ============= prag-1.0/ex02.prag ==============
+echo "x - extracting prag-1.0/ex02.prag (Text)"
+sed 's/^X//' << 'SHAR_EOF' > prag-1.0/ex02.prag &&
+Xwid 4
+Xht 3
+Xgrid dotted
+Xlabel left "execution" "time / sec"
+Xlabel bot "# of msgs"
+Xrange 0 0 5000 25
+Xticks left 0 5 10 15 20 25
+Xticks right 0 5 10 15 20 25
+Xticks top 0 1000 2000 3000 4000 5000
+Xticks bot 0 1000 2000 3000 4000 5000
+Xnew marked MSG "\s-2MSG\s+2" above
+X100 0.19 \(*D
+X500 0.46 \(*D
+X1000 0.81 \(*D
+X2000 1.49 \(*D
+X3000 2.28 \(*D
+Xnew marked SOCKUDP "\s-2SOCKUDP\s+2" above
+X100 0.68 \(bu
+X500 2.53 \(bu
+X1000 4.88 \(bu
+X2000 9.50 \(bu
+Xnext MSG at 4000 2.88 \(*D
+Xnext MSG at 5000 3.69 \(*D
+X3000 14.12 \(bu
+X4000 18.78 \(bu
+X5000 23.26 \(bu
+Xnew marked TLIUDP "\s-2TLIUDP\s+2" below
+X100 0.64 \(sq
+X500 2.38 \(sq
+X1000 4.50 \(sq
+X2000 8.74 \(sq
+X3000 13.07 \(sq
+Xnext at 4000 17.28 \(sq
+X5000 21.68 \(sq
+Xnew marked TLITCP "\s-2TLITCP\s+2" above
+X100 15.33 \(mu
+X500 15.71 \(mu
+Xnext TLIUDP at 3000 13.07 \(sq
+X1000 16.18 \(mu
+X2000 17.13 \(mu
+Xnext TLITCP at 5000 20.09 \(mu
+X3000 18.08 \(mu
+X4000 19.12 \(mu
+SHAR_EOF
+$TOUCH -am 1005171193 prag-1.0/ex02.prag &&
+chmod 0644 prag-1.0/ex02.prag ||
+echo "restore of prag-1.0/ex02.prag failed"
+set `wc -c prag-1.0/ex02.prag`;Wc_c=$1
+if test "$Wc_c" != "891"; then
+	echo original size 891, current size $Wc_c
+fi
+# ============= prag-1.0/ex03.prag ==============
+echo "x - extracting prag-1.0/ex03.prag (Text)"
+sed 's/^X//' << 'SHAR_EOF' > prag-1.0/ex03.prag &&
+Xgrid dotted
+Xdraw marked
+X100 0.19
+X500 0.46
+X1000 0.81
+X2000 1.49
+X3000 2.28
+X4000 2.88
+X5000 3.69
+Xnew marked
+X0 0
+X400 0.45
+X1000 0.60
+X2000 0.12
+X3000 0.19
+X4000 2.5
+X5000 3.5
+SHAR_EOF
+$TOUCH -am 1006165593 prag-1.0/ex03.prag &&
+chmod 0644 prag-1.0/ex03.prag ||
+echo "restore of prag-1.0/ex03.prag failed"
+set `wc -c prag-1.0/ex03.prag`;Wc_c=$1
+if test "$Wc_c" != "164"; then
+	echo original size 164, current size $Wc_c
+fi
+# ============= prag-1.0/ex04.prag ==============
+echo "x - extracting prag-1.0/ex04.prag (Text)"
+sed 's/^X//' << 'SHAR_EOF' > prag-1.0/ex04.prag &&
+Xlabel left "execution time" "seconds"
+Xlabel right "\(ua message size"
+Xlabel bot "messages sent"
+Xrange 0 0 10000 25
+Xticks left 0 5 10 15 20 25
+Xticks bot 0 1000 5000 10000
+X100	1.3
+X500	1.8
+X1000	2.7
+X5000	7.5
+X6000	9.0
+X7000	10.3
+X8000	11.5
+X9000	12.6
+X10000	13.6
+Xnew
+X100	1.3
+X500	2.0
+X1000	2.7
+X5000	8.9
+X6000	10.4
+X7000	12.2
+X8000	13.8
+X9000	17.5
+X10000	16.9
+Xnew
+X100	1.3
+X500	2.1
+X1000	3.1
+X5000	10.4
+X6000	12.1
+X7000	14.4
+X8000	16.6
+X9000	17.9
+X10000	19.7
+Xnew
+X100	1.4
+X500	2.3
+X1000	3.5
+X5000	12.8
+X6000	14.7
+X7000	17.4
+X8000	19.4
+X9000	21.6
+X10000	24.6
+SHAR_EOF
+$TOUCH -am 1005135793 prag-1.0/ex04.prag &&
+chmod 0644 prag-1.0/ex04.prag ||
+echo "restore of prag-1.0/ex04.prag failed"
+set `wc -c prag-1.0/ex04.prag`;Wc_c=$1
+if test "$Wc_c" != "523"; then
+	echo original size 523, current size $Wc_c
+fi
+# ============= prag-1.0/ex05.prag ==============
+echo "x - extracting prag-1.0/ex05.prag (Text)"
+sed 's/^X//' << 'SHAR_EOF' > prag-1.0/ex05.prag &&
+Xlabel bot "time (in seconds)"
+Xlabel left "memory" "available"
+Xrange 0 0 365 1800
+Xticks left 200 400 600 800 1000 1200 1400 1600 
+Xticks bot 40 80 120 160 200 240 280 320 360
+Xnew
+X0 141
+X5 77
+X10 107
+X15 67
+X20 65
+X25 61
+X30 109
+X35 91
+X40 86
+X45 77
+X50 56
+X55 61
+X60 126
+X65 105
+X70 92
+X75 96
+X80 87
+X85 85
+X90 66
+X95 93
+X100 102
+X105 82
+X110 99
+X115 64
+X120 68
+X125 353
+X130 378
+X135 336
+X140 326
+X145 330
+X150 262
+X155 280
+X160 242
+X165 260
+X170 238
+X175 208
+X180 223
+X185 74
+X190 122
+X195 64
+X200 131
+X205 146
+X210 339
+X215 337
+X220 319
+X225 317
+X230 283
+X235 1314
+X240 1313
+X245 1313
+X250 1313
+X255 1312
+X260 1312
+X265 1312
+X270 1312
+X275 1310
+X280 1310
+X285 1310
+X290 1310
+X295 1310
+X300 1310
+X305 1310
+X310 1310
+X315 1310
+X320 1310
+X325 1310
+X330 1310
+X335 1310
+X340 1310
+X345 1309
+X350 1309
+X355 1309
+X360 1309
+X365 1309
+Xnew dashed
+Xnospline
+X0 12
+X150 247
+Xnew dashed
+Xnospline
+X90 29
+X240 535
+Xnew dashed
+Xnospline
+X180 171
+X330 1669
+Xnew dashed
+Xnospline
+X210 824
+X360 1508
+SHAR_EOF
+$TOUCH -am 1006171093 prag-1.0/ex05.prag &&
+chmod 0644 prag-1.0/ex05.prag ||
+echo "restore of prag-1.0/ex05.prag failed"
+set `wc -c prag-1.0/ex05.prag`;Wc_c=$1
+if test "$Wc_c" != "894"; then
+	echo original size 894, current size $Wc_c
+fi
+# ============= prag-1.0/ex06.prag ==============
+echo "x - extracting prag-1.0/ex06.prag (Text)"
+sed 's/^X//' << 'SHAR_EOF' > prag-1.0/ex06.prag &&
+Xdraw invis
+X1896 54.2
+X1900 49.4
+X1904 49.2
+X1908 50.0
+X1912 48.2
+X1916 47.3
+X1920 48.2
+X1924 46.7
+X1928 43.5
+X1932 45.7
+X1936 46.2
+X1948 42.7
+X1960 44.8
+X1972 42.5
+X1988 43.8
+SHAR_EOF
+$TOUCH -am 1006172993 prag-1.0/ex06.prag &&
+chmod 0644 prag-1.0/ex06.prag ||
+echo "restore of prag-1.0/ex06.prag failed"
+set `wc -c prag-1.0/ex06.prag`;Wc_c=$1
+if test "$Wc_c" != "161"; then
+	echo original size 161, current size $Wc_c
+fi
+# ============= prag-1.0/ex07.prag ==============
+echo "x - extracting prag-1.0/ex07.prag (Text)"
+sed 's/^X//' << 'SHAR_EOF' > prag-1.0/ex07.prag &&
+X40 72
+X45 76
+X50 74
+X55 89
+X60 85
+X65 79
+SHAR_EOF
+$TOUCH -am 1006180093 prag-1.0/ex07.prag &&
+chmod 0644 prag-1.0/ex07.prag ||
+echo "restore of prag-1.0/ex07.prag failed"
+set `wc -c prag-1.0/ex07.prag`;Wc_c=$1
+if test "$Wc_c" != "36"; then
+	echo original size 36, current size $Wc_c
+fi
+# ============= prag-1.0/prag ==============
+echo "x - extracting prag-1.0/prag (Text)"
+sed 's/^X//' << 'SHAR_EOF' > prag-1.0/prag &&
+X#!/bin/nawk -f
+X#	Copyright (C) 1992, 1993 Holger J. Meyer, Rostock, Germany
+X#	hm@GUUG.de
+X#
+X#	See file ``Copyright'' for terms of copyright.
+X#
+X# Module:
+X#	Process a grap(1) like language, to produce graphs.  The input language
+X#	syntax is documented in lines marked with double hash marks ('##').
+X#	The first implementation was much inspired by the graph program from
+X#	``Aho, A.V., Kernighan, B. W., Weinberger, P. J. "The AWK Programming
+X#	Language", Addison-Wesley, Reading, 1988''.
+X#
+X# Source:
+X#	NAWK
+X#
+X# History:
+X#	92/4/20	hme, initial version written
+X#	93/8/24	hme, multiple graphs, grids, etc. added
+X#	93/10/20	hme, labeled margin boxes, generate `reset' before .PE
+X#	95/9/24	hme, more grap conformance, improved ticks (by eduardo@nostromo.medusa.es)
+X#	95/11/15	hme, put out only labeled margin boxes
+X#
+X# Layout:
+X#
+X#	GRAPH
+X#	+----------+------------------------+----------+
+X#	|          |                     ^  |          |
+X#	|          | TMARG              ht/6|          |
+X#	|          |                     v  |          |
+X#	+----------+------------------------+----------+
+X#	| LMARG    | FRAME               ^  | RMARG    |
+X#	|          |                     |  |          |
+X#	|          |                     |  |          |
+X#	|          |                     ht |          |
+X#	|          |                     |  |          |
+X#	|          |                     |  |          |
+X#	|<-wid/6-->|<---------wid--------v->|<--wid/6->|
+X#	+----------+------------------------+----------+
+X#	|          |                     ^  |          |
+X#	|          | BMARG              ht/6|          |
+X#	|          |                     v  |          |
+X#	+----------+------------------------+----------+
+X#
+X#
+XBEGIN {
+X	MYADDR = "hm@GUUG.de";
+X	# number (RE)
+X	NUMBER = "^[-+]?([0-9]+[.]?[0-9]*|[.][0-9]+)" "([eE][-+]?[0-9]+)?$";
+X	GNAME = "GRAPH";			# label for whole picture
+X	FNAME = "FRAME";			# label for frame
+X	MNAME = "MARG";			# label for [top|....] margin boxes
+X	DEFLSTYLE = "solid";
+X	DEFCH = "\\s+2\\(bu\\s-2";
+X	MARKED = 1;
+X	MINXTICKS = 5;
+X	MINYTICKS = 5;
+X	nG1 = 0;
+X	grapinput = 0;
+X	err = 0;
+X	dot_lf = 1;
+X	warn = 1;
+X	debug = 0;
+X}
+X## .G1 [width [height]]
+X# start of graph input
+X/^.G1/ {
+X	++nG1;
+X	grapinput = 1;
+X	data = 0;
+X	initgraph();
+X	if (NF >= 2) {
+X		wid = $2;
+X	}
+X	if (NF >= 3) {
+X		ht = $3;
+X	}
+X	resizegraph();
+X	if (dot_lf) {
+X		printf(".lf %d %s\n", FNR, FILENAME);
+X	}
+X	next;
+X}
+X## .G2
+X# end of graph input -- draw graph
+X/^.G2/ {
+X	if (!grapinput) {
+X		printf("\"%s\":%d: missing previous .G1\n", FILENAME, FNR) |"cat >&2";
+X		errexit(-1);
+X	}
+X	else {
+X		endgraph();
+X		grapinput = 0;
+X	}
+X	if (dot_lf) {
+X		printf(".lf %d %s\n", FNR, FILENAME);
+X	}
+X	next;
+X}
+X# copy all outside from .G1 and .G2
+X!grapinput {
+X	print $0;
+X	next;
+X}
+X## # comment
+X# delete comments
+X/^#/ {
+X	next;
+X}
+X## draw line-style
+X$1 == "draw" {
+X	if (NF != 2) {
+X		printf("\"%s\":%d: draw line-style\n", FILENAME, FNR) | "cat >&2";
+X		errexit(-1);
+X	}
+X	if ($2 == "marked") {
+X		g_flags[ngs] = MARKED;
+X	}
+X	else {
+X		g_lstyle[ngs] = $2;
+X	}
+X	next;
+X}
+X## new [line-style [name [label]]]
+X# begin new graph, put old data points out
+X$1 == "new" {
+X	cg = ++ngs;
+X	newgraph(ngs);
+X	if (NF >= 2) {
+X		if ($2 == "marked") {
+X			g_flags[ngs] = MARKED;
+X		}
+X		else {
+X			g_lstyle[ngs] = $2;
+X		}
+X	}
+X	if (NF >= 3) {
+X		g_name[ngs] = $3;
+X	}
+X	if (NF >= 4) {
+X		$1 = $2 = $3 = "";
+X		sub(/^[ \t]*/, "");
+X		g_label[ngs] = $0;
+X	}
+X	g_ndata[ngs] = 0;
+X	next;
+X}
+X## label [left | right | top | bot] label-string
+X# left, right, top, bottom label
+X$1 == "label" {
+X	pos = $2;
+X	if (pos == "left") {
+X		sub(/^[ \t]*label[ \t]+left[ \t]*/, "");
+X	}
+X	else if (pos == "right") {
+X		sub(/^[ \t]*label[ \t]+right[ \t]*/, "");
+X	}
+X	else if (pos == "top") {
+X		sub(/^[ \t]*label[ \t]+top[ \t]*/, "");
+X	}
+X	else if (pos == "bot") {
+X		sub(/^[ \t]*label[ \t]+bot[ \t]*/, "");
+X	}
+X	else {
+X		printf("\"%s\":%d: label [left|right|top|bot] string ...\n",
+X			FILENAME, FNR) | "cat >&2";
+X		errexit(-1);
+X	}
+X	t_label[pos] = $0;
+X	next;
+X}
+X## ticks [left | right | top | bot] [where] position ...
+X## ticks [left | right | top | bot] [where] from begin to end [by step]
+X# ticks for x- & y-axis, left, top, right or bottom position
+X$1 == "ticks" {
+X	if (NF <= 3) {
+X		printf("\"%s\":%d: ticks [left|right|top|bot] [where] position ...\n",
+X			FILENAME, FNR) | "cat >&2";
+X		errexit(-1);
+X	}
+X	if ($2 != "left" && $2 != "right" && $2 != "top" && $2 != "bot") {
+X		printf("\"%s\":%d: ticks [left|right|top|bot] [where] position ...\n",
+X			FILENAME, FNR) | "cat >&2";
+X		errexit(-1);
+X	}
+X	i = 3;
+X	t_num[$2] = 0;
+X	if ($3 == "in" || $3 == "out") {
+X		t_where[$2] = $3;
+X		++i;
+X	}
+X	if ($i != "from") {
+X		while (i <= NF) {
+X			t_pos[$2, t_num[$2]] = $i;
+X			++t_num[$2];
+X			++i;
+X		}
+X	}
+X	else {
+X		if ($(i+2) != "to" || NF < i+3) {
+X			printf( "\"%s\":%d: ticks [left|right|top|bot] [where] from begin to end [by step]\n",
+X				FILENAME, FNR) | "cat >&2";
+X			errexit(-1);
+X		}
+X		if ($(i+4) == "by") {
+X			if (NF == i+5) {
+X				tickstep = $(i+5);
+X			}
+X			else {
+X				printf( "\"%s\":%d: ticks [left|right|top|bot] [where] from begin to end [by step]\n",
+X						FILENAME, FNR) | "cat >&2";
+X				errexit(-1);
+X			}
+X		}
+X		else {
+X			tickstep = 1;
+X		}
+X		for (tick = $(i+1); tick <= $(i+3); tick += tickstep) {
+X			t_pos[$2, t_num[$2]] = tick;
+X			++t_num[$2];
+X		}
+X	}
+X	next;
+X}
+X## frame frame-attributes ...
+X# frame-attributes
+X$1 == "frame" {
+X	if (NF == 1) {
+X		printf("\"%s\":%d: frame frame-attributes ...\n",
+X			FILENAME, FNR) | "cat >&2";
+X		errexit(-1);
+X	}
+X	sub(/^[ \t]*frame[ \t]+/, "");
+X	fattr = $0;
+X	next;
+X}
+X## spline
+X## nospline
+X$1 == "spline" {
+X	g_spline[ngs] = "sp";
+X	next;
+X}
+X$1 == "nospline" {
+X	g_spline[ngs] = "";
+X	next;
+X}
+X## range xmin ymin xmax ymax
+X$1 == "range" && $2 ~ NUMBER && $3 ~ NUMBER && $4 ~ NUMBER && $5 ~ NUMBER {
+X	if (NF != 5) {
+X		printf("\"%s\":%d: range xmin ymin xmax ymax\n",
+X			FILENAME, FNR) | "cat >&2";
+X		errexit(-1);
+X	}
+X	xmin = $2;
+X	ymin = $3;
+X	xmax = $4;
+X	ymax = $5;
+X	next;
+X}
+X## ht number
+X# graph height
+X$1 == "ht" && $2 ~ NUMBER {
+X	if (NF != 2) {
+X		printf("\"%s\":%d: ht height\n", FILENAME, FNR) | "cat >&2";
+X		errexit(-1);
+X	}
+X	ht = $2;
+X	resizegraph();
+X	next;
+X}
+X## wid number
+X# graph width
+X$1 == "wid" && $2 ~ NUMBER {
+X	if (NF != 2) {
+X		printf("\"%s\":%d: wid width\n", FILENAME, FNR) | "cat >&2";
+X		errexit(-1);
+X	}
+X	wid = $2;
+X	resizegraph();
+X	next;
+X}
+X## grid [line-style]
+X# graph with grid
+X$1 == "grid" {
+X	if (NF == 1) {
+X		grid = "dotted";
+X	}
+X	else if (NF == 2) {
+X		grid = $2;
+X	}
+X	else {
+X		printf("\"%s\":%d: grid [line-style]\n", FILENAME, FNR) | "cat >&2";
+X		errexit(-1);
+X	}
+X	next;
+X}
+X## mark drawing-character
+X# set default drawing character for this graph
+X$1 == "mark" {
+X	if (NF != 2) {
+X		printf("\"%s\":%d: mark drawing-character\n", FILENAME, FNR) | "cat >&2";
+X		errexit(-1);
+X	}
+X	g_defch[ngs] = $2;
+X	g_flags[ngs] = MARKED;
+X	next;
+X}
+X## .lf line-number file-name
+X# groff's ``.lf line file''
+X$1 == ".lf" {
+X	print $0;
+X	next;
+X}
+X# collecting DATA
+X## next [graph-name] [at] position
+X# next point extraction: awk falls through these actions!!!
+X$1 == "next" && $3 == "at" {
+X	found = 0;
+X	for (i = 0; i <= ngs; ++i) {
+X		if (g_name[i] == $2) {
+X			# alter cg to point temporarily to an other graph
+X			# after collecting data, it shall be restored
+X			cg = i;
+X			++found;
+X			break;
+X		}
+X	}
+X	if (!found) {
+X		printf("\"%s\":%d: illegal graph-name \"%s\": ignored\n",
+X			FILENAME, FNR, $2) | "cat >&2";
+X	}
+X	sub(/^[ \t]*next[ \t]+[a-zA-Z]+[ \t]+at[ \t]*/, "next at ");
+X}
+X$1 == "next" && $2 == "at" {
+X	sub(/^[ \t]*next[ \t]+at[ \t]*/, "next ");
+X}
+X$1 == "next" {
+X	sub(/^[ \t]*next[ \t]*/, "");
+X}
+X# pairs of numbers with opt drawing char
+X$1 ~ NUMBER && $2 ~ NUMBER {
+X	g_x[cg, g_ndata[cg]] = $1;
+X	g_y[cg, g_ndata[cg]] = $2;
+X	if (NF >= 3) {
+X		$1 = $2 = "";
+X		sub(/^[ \t]*/, "");
+X		g_ch[cg, g_ndata[cg]] = $0;	# extra plotting character
+X	}
+X	else {
+X		g_ch[cg, g_ndata[cg]] = "";
+X	}
+X	++g_ndata[cg];			# count number of data points
+X	cg = ngs;				# reset current graph
+X	data = 1;
+X	next;
+X}
+X# a single number with opt drawing char
+X$1 ~ NUMBER && $2 !~ NUMBER {
+X	g_y[cg, g_ndata[cg]] = $1;
+X	g_x[cg, g_ndata[cg]] = g_ndata[cg];
+X	if (NF >= 2) {
+X		$1 = "";
+X		sub(/^[ \t]*/, "");
+X		g_ch[cg, g_ndata[cg]] = $0;	# extra plotting character
+X	}
+X	else {
+X		g_ch[cg, g_ndata[cg]] = "";
+X	}
+X	++g_ndata[cg];
+X	cg = ngs;				# reset current graph
+X	data = 1;
+X	next;
+X}
+X## pic '{' anything '}'
+X# rest of input goes direct to pic
+X$1 != "pic" {
+X	if (warn) {
+X		printf("\"%s\":%d: inputline passed through pic\n",
+X			FILENAME, FNR) | "cat >&2";
+X	}
+X}
+X{
+X	sub(/^[ \t]*pic[ \t]*{[ \t]*/, "");
+X	sub(/[ \t]*}[ \t]*$/, "");
+X	piccode = sprintf("%s%s\n", piccode, $0);
+X	next;
+X}
+XEND {
+X	if (err) {
+X		exit(err);
+X	}
+X	if (grapinput) {
+X		printf("\"%s\":%d: missing .G2 \n", FILENAME, FNR) | "cat >&2";
+X		endgraph();
+X	}
+X	exit(0);
+X}
+X#
+X# subroutine stuff
+X#
+Xfunction errexit(e) {
+X	err = e;
+X	exit(-1);
+X}
+Xfunction initgraph() {
+X	ht = 2;					# default frame size
+X	wid = 3;
+X	fattr = "";				# frame-attributes
+X	grid = "";
+X	ngs = 0;					# number of graphs
+X	cg = 0;					# current graph, may differ from ngs due to next stmnt.
+X	# struct graph {
+X	#	integer	g_flags,		# various flags indicating mark style etc.
+X	#	string	g_lstyle;		# line style
+X	#	string	g_spline;		# draw graph with [sp]line
+X	#	string	g_name;		# graph name
+X	#	string	g_label;		# graph label
+X	#	integer	g_ndata;		# # of data items
+X	#	real		g_x[];		# x coords
+X	#	real		g_y[];		# y coords
+X	#	string	g_ch[];		# optional point drawing character
+X	#	string	g_defch;		# default drawing character
+X	# };
+X	g_defch[0] = DEFCH;
+X	g_defch[1] = "\\(*D";
+X	g_defch[2] = "\\(pl";
+X	g_defch[3] = "\\(sq";
+X	g_defch[4] = "\\(mu";
+X	newticks("left");
+X	newticks("right");
+X	newticks("top");
+X	newticks("bot");
+X	newgraph(ngs);
+X
+X	piccode = "";
+X	xmin = xmax = ymin = ymax = 0;
+X}
+Xfunction resizegraph()
+X{
+X	# left, right, top, bot margin of frame
+X	m_size["left"] = m_size["right"] = wid/6;
+X	m_size["top"] = m_size["bot"] = ht/6;
+X	ticklen = ht/32;			# default len for tick marker
+X}
+Xfunction newgraph(g) {
+X	g_flags[g] = 0;
+X	g_lstyle[g] = DEFLSTYLE;
+X	g_spline[g] = "sp";			# [sp]line used for graph drawing
+X	g_name[g] = "OOPS";
+X	g_label[g] = "";
+X	g_ndata[g] = 0;
+X}
+Xfunction newticks(where) {
+X	t_label[where] = "";
+X	t_where[where] = "out";
+X	t_num[where] = 0;
+X	t_pos[where, 0] = 0;
+X}
+Xfunction endgraph() {
+X	grapinput = 0;
+X	if (!xmin && !xmax && !ymin && !ymax) {	# no range was given
+X		xmin = xmax = g_x[0, 0];
+X		ymin = ymax = g_y[0, 0];
+X		for (g = 0; g <= ngs; ++g) {
+X			for (i = 0; i < g_ndata[g]; ++i) {
+X				if (g_x[g, i] < xmin) {
+X					xmin = g_x[g, i];
+X				}
+X				if (g_x[g, i] > xmax) {
+X					xmax = g_x[g, i];
+X				}
+X				if (g_y[g, i] < ymin) {
+X					ymin = g_y[g, i];
+X				}
+X				if (g_y[g, i] > ymax) {
+X					ymax = g_y[g, i];
+X				}
+X			}
+X		}
+X	}
+X	printf(".PS %g %g\n", wid+m_size["left"]+m_size["right"], ht+m_size["top"]+m_size["bot"]);
+X	printf("# DO NOT EDIT!\n");
+X	printf("# generated from \"%s\" by prag (C) %s\n", FILENAME, MYADDR);
+X	if (data) {	# any data?
+X		cutmarg();
+X		frame();
+X		label();
+X		ticks();
+X		for (g = 0; g <= ngs; ++g) {
+X			drawgraph(g);
+X		}
+X	}
+X	if (piccode != "") {
+X		printf("%s", piccode);
+X	}
+X	printf("reset\n.PE\n");
+X}
+X# cut off margins without a label
+Xfunction cutmarg(	w) {
+X	for (w in m_size) {
+X		if (t_label[w] == "") {
+X			m_size[w] = 0;
+X		}
+X	}
+X}
+X# create frame from graph
+Xfunction frame() {
+X	printf("%s:\tbox invis ht %g wid %g\n",
+X		GNAME, ht+m_size["top"]+m_size["bot"], wid+m_size["left"]+m_size["right"]);
+X	printf("%s:\tbox %s ht %g wid %g with .sw at %s.sw + (%g, %g)\n",
+X		FNAME, fattr, ht, wid, GNAME, m_size["left"], m_size["bot"]);
+X}
+X# center label under x-axis and left from y-axis
+Xfunction label() {
+X	if (t_label["left"]) {
+X		printf("%s%s:\tbox wid %g ht %g invis %s with .e at %s.w\n",
+X			MNAME, "left", m_size["left"], ht, t_label["left"], GNAME);
+X	}
+X	if (t_label["right"]) {
+X		printf("%s%s:\tbox wid %g ht %g invis %s with .w at %s.e\n",
+X			MNAME, "right", m_size["right"], ht, t_label["right"], GNAME);
+X	}
+X	if (t_label["top"]) {
+X		printf("%s%s:\tbox wid %g ht %g invis %s with .s at %s.n\n",
+X			MNAME, "top", wid, m_size["top"], t_label["top"], GNAME);
+X	}
+X	if (t_label["bot"]) {
+X		printf("%s%s:\tbox wid %g ht %g invis %s with .n at %s.s\n",
+X			MNAME, "bot", wid, m_size["bot"], t_label["bot"], GNAME);
+X	}
+X}
+X# create tick marks for all axes
+Xfunction ticks(	i, user_ticks, w) {
+X	user_ticks = 0;
+X	for (i = 0; i < t_num["left"]; ++i) {
+X		printf("line %s %g at %g <%s.sw, %s.nw>\n",
+X			t_where["left"] == "out" ? "left" : "right",
+X			ticklen, w = yscale(t_pos["left", i]), FNAME, FNAME);
+X		printf("\"%s \" at last line.w rjust\n", t_pos["left", i]);
+X		if (w != 0 && w != 1 && grid != "") {
+X			printf("line %s from %g <%s.sw, %s.nw> to %g <%s.se, %s.ne>\n",
+X				grid, w, FNAME, FNAME, w, FNAME, FNAME);
+X		}
+X		++user_ticks;
+X	}
+X	for (i = 0; i < t_num["right"]; ++i) {
+X		printf("line %s %g at %g <%s.se, %s.ne>\n",
+X			t_where["right"] == "out" ? "right" : "left",
+X			ticklen, yscale(t_pos["right", i]), FNAME, FNAME);
+X		printf("\" %s\" at last line.e ljust\n", t_pos["right", i]);
+X		++user_ticks;
+X	}
+X	for (i = 0; i < t_num["top"]; ++i) {
+X		printf("line %s %g at %g <%s.nw, %s.ne>\n",
+X			t_where["bot"] == "out" ? "up" : "down",
+X			ticklen, xscale(t_pos["top", i]), FNAME, FNAME);
+X		printf("\"%s\" at last line.n above\n", t_pos["top", i]);
+X		++user_ticks;
+X	}
+X	for (i = 0; i < t_num["bot"]; ++i) {
+X		printf("line %s %g at %g <%s.sw, %s.se>\n",
+X			t_where["bot"] == "out" ? "down" : "up",
+X			ticklen, w = xscale(t_pos["bot", i]), FNAME, FNAME);
+X		printf("\"%s\" at last line.s below\n", t_pos["bot", i]);
+X		if (w != 0 && w != 1 && grid != "") {
+X			printf("line %s from %g <%s.sw, %s.se> to %g <%s.nw, %s.ne>\n",
+X				grid, w, FNAME, FNAME, w, FNAME, FNAME);
+X		}
+X		++user_ticks;
+X	}
+X	if (!user_ticks) {
+X		xmax = roundceil(MINXTICKS, xmax);
+X		ymax = roundceil(MINYTICKS, ymax);
+X		xmin = roundfloor(MINXTICKS, xmin);
+X		ymin = roundfloor(MINYTICKS, ymin);
+X		ysteps = steps(MINYTICKS, ymin, ymax);
+X		#for (i = 0; i <= ysteps; ++i) {
+X		for (i = 1; i < ysteps; ++i) {
+X			printf("line left %g at %g <%s.sw, %s.nw>\n",
+X				ticklen, w = i/ysteps, FNAME, FNAME);
+X			printf("\"%s\" at last line.w rjust\n", ymin + (ymax - ymin)*i/ysteps);
+X			if (w != 0 && w != 1 && grid != "") {
+X				printf("line %s from %g <%s.sw, %s.nw> to %g <%s.se, %s.ne>\n",
+X					grid, w, FNAME, FNAME, w, FNAME, FNAME);
+X			}
+X		}
+X		xsteps = steps(MINXTICKS, xmin, xmax);
+X		#for (i = 0; i <= xsteps; ++i) {
+X		for (i = 1; i < xsteps; ++i) {
+X			printf("line down %g at %g <%s.sw, %s.se>\n",
+X				ticklen, w = i/xsteps, FNAME, FNAME);
+X			printf("\"%s\" at last line.s below\n", xmin + (xmax - xmin)*i/xsteps);
+X			if (w != 0 && w != 1 && grid != "") {
+X				printf("line %s from %g <%s.sw, %s.se> to %g <%s.nw, %s.ne>\n",
+X					grid, w, FNAME, FNAME, w, FNAME, FNAME);
+X			}
+X		}
+X	}
+X}
+X# scale x-value
+Xfunction xscale(x) {
+X	return((x-xmin)/(xmax-xmin));
+X}
+X# scale y-value
+Xfunction yscale(y) {
+X	return((y-ymin)/(ymax-ymin));
+X}
+X# round ranges, VERY POOR!
+X# round to smallest e*10^log10(val) + n*e .gt. val
+Xfunction roundceil(ex, val,	e, v) {
+X	e = ex;
+X	while (e < val) {
+X		e *= 10;
+X	}
+X	v = val;
+X	if (int(v) % e) {
+X		v = e*(int(v/e) + 1);
+X	}
+X	while (v >= val) {
+X		v -= ex;
+X	}
+X	if (debug) {
+X		printf("roundceil(%g, %g) returns %g\n",
+X			ex, val, v + ex) | "cat >&2";
+X	}
+X	return(v + ex);
+X}
+X# round to greatest e*10^log10(val) - n*e .lt. val
+Xfunction roundfloor(ex, val,	e, v) {
+X	e = ex;
+X	while (e < val) {
+X		e *= 10;
+X	}
+X	if (e > ex) {
+X		e /= 10;
+X	}
+X	v = val;
+X	if (int(v) % e) {
+X		v = e*(int(v/e));
+X	}
+X	while (v <= val) {
+X		v += ex;
+X	}
+X	if (debug) {
+X		printf("roundfloor(%g, %g) returns %g\n",
+X			ex, val, v - ex) | "cat >&2";
+X	}
+X	return(v - ex);
+X}
+X# count of ticks
+Xfunction steps(defsteps, min, max)
+X{
+X	# very simple solution
+X	return(defsteps);
+X}
+X# sorting routine
+Xfunction swap(g, i, j,	t) {
+X	t = g_x[g, i];
+X	g_x[g, i] = g_x[g, j];
+X	g_x[g, j] = t;
+X	t = g_y[g, i];
+X	g_y[g, i] = g_y[g, j];
+X	g_y[g, j] = t;
+X	t = g_ch[g, i];
+X	g_ch[g, i] = g_ch[g, j];
+X	g_ch[g, j] = t;
+X}
+X# insertion sort
+Xfunction sort(g,	i, j) {
+X	for (i = 1; i < g_ndata[g]; ++i) {
+X		for (j = i; j > 0 && g_x[g, j - 1] > g_x[g, j]; --j) {
+X			swap(g, j - 1, j);
+X		}
+X	}
+X}
+X
+X# create data points
+Xfunction drawgraph(g,	i) {
+X	if (g_ndata[g] == 0) {
+X		return;
+X	}
+X	sort(g);
+X	printf("G_%s: # graph no. %d\n", g_name[g], g + 1);
+X	if (g_lstyle[g] == "invis" || g_flags[g] == MARKED) {
+X		for (i = 0; i < g_ndata[g]; ++i) {
+X			printf("\"%s\" at %s.sw + (%g, %g)\n",
+X				g_ch[g, i] != "" ? g_ch[g, i] : (g_defch[g] != "" ? g_defch[g] : DEFCH), 
+X				FNAME, xscale(g_x[g, i])*wid, yscale(g_y[g, i])*ht);
+X		}
+X	}
+X	if (g_lstyle[g] != "invis") {
+X		printf("%sline %s %s from %s.sw + (%g, %g)",
+X			g_spline[g], g_label[g], g_lstyle[g] == "solid" ? "" : g_lstyle[g],
+X			FNAME, xscale(g_x[g, 0])*wid, yscale(g_y[g, 0])*ht);
+X		for (i = 1; i < g_ndata[g]; ++i) {
+X			printf("\t\\\n\tthen to %s.sw + (%g, %g)", FNAME,
+X				xscale(g_x[g, i])*wid, yscale(g_y[g, i])*ht);
+X		}
+X		printf("\n");
+X	}
+X}
+X#vi: set tabstop=5 shiftwidth=5:
+SHAR_EOF
+$TOUCH -am 1115135595 prag-1.0/prag &&
+chmod 0755 prag-1.0/prag ||
+echo "restore of prag-1.0/prag failed"
+set `wc -c prag-1.0/prag`;Wc_c=$1
+if test "$Wc_c" != "16751"; then
+	echo original size 16751, current size $Wc_c
+fi
+# ============= prag-1.0/prag.1 ==============
+echo "x - extracting prag-1.0/prag.1 (Text)"
+sed 's/^X//' << 'SHAR_EOF' > prag-1.0/prag.1 &&
+X.TH PRAG 1 "1 August 1993"
+X.ds Gr prag
+X.if .t
+X.	ps	+2
+X.	vs	+2
+X.	de Cw
+X\\$3\f(CW\\$1\fP\\$2
+X..
+X.	de Cs
+X\f(CW
+X.ps -1
+X.vs -2
+X..
+X.	de Ce
+X.vs +2
+X.ps +1
+X\fP
+X..
+X.fi
+X.SH NAME
+X.B \*(Gr
+X\- compile diagrams for
+X.B pic
+X.SH SYNOPSIS
+X.Cw \*(Gr
+X[
+X.I filename
+X\&.\|.\|.
+X]
+X.SH DESCRIPTION
+X.LP
+X.Cw \&.G1
+X[
+X.I width
+X[
+X.I height
+X]]
+X.br
+X.Cw \&.G2
+X.RS
+X.B \*(Gr
+Xrecognizes its input only between
+X.B \&.G1
+Xand
+X.BR \&.G2 .
+XAll other lines are copied literal to standard output.
+XTwo optional arguments to
+X.B \&.G1
+Xspecify the width and the height.
+X.RE
+X.Cw #
+X.I comment
+X.RS
+XLines starting with a hash mark '#' are treated as comments.
+X.RE
+X.Cw draw
+X.I line-style
+X.RS
+XThe
+X.Cw draw
+Xstatement sets the line style for drawing the graphs.
+XValid arguments are the line styles as known from
+X.BR pic (1)
+Xor the pseudo-style
+X.Cw marked .
+X.Cw marked
+Xwill yield a solid graph with the data points marked.
+XUp to five default marking characters
+X(\e(bu \(bu, \e(*D \(*D, \e(pl \(pl, \e(sq \(sq, \e(mu \(mu)
+Xare used for the first five graphs.
+XIf you don't like these characters,
+Xyou can override them by giving an additional drawing character
+Xto each data point (as second or third argument).
+XUse line style
+X.Cw invis
+Xto draw unconnected data points.
+X.RE
+X.Cw new
+X[
+X.I line-style
+X]
+X.I name
+X[
+X.I label-string
+X]]]
+X.RS
+XThis statement switches a new graph within a diagram.
+XThe line style of the graph is set to
+X.IR line-style .
+XThe graph gets the name
+X.IR name ,
+Xwhich can be referred in subsequent
+X.B pic
+Xstatements
+Xand is labeled with the string
+X.IR label-string .
+X.I label-string
+Xcan be any valid
+X.B pic
+Xstring.
+X.RE
+X.Cw label
+X[
+X.Cw left
+X|
+X.Cw right
+X|
+X.Cw top
+X|
+X.Cw bot
+X]
+X.I label-string
+X.RS
+X.I label-string
+Xis placed at the specified side of the whole diagram.
+X.RE
+X.Cw ticks
+X[
+X.Cw left
+X|
+X.Cw right
+X|
+X.Cw top
+X|
+X.Cw bot
+X]
+X[
+X.I where
+X]
+X.I position
+X\&.\|.\|.
+X.RS
+XTick marks for the specified side are placed at the given positions.
+X.I where
+Xsays to place the ticks inside
+X.Cw in ) (
+Xor outside
+X.Cw out ) (
+Xthe diagram.
+X.RE
+X.Cw ticks
+X[
+X.Cw left
+X| 
+X.Cw right
+X| 
+X.Cw top
+X| 
+X.Cw bot
+X] [
+X.I where
+X] 
+X.Cw from 
+X.I begin 
+X.Cw to 
+X.I end 
+X[
+X.Cw by
+X.I step
+X]
+X.RS
+XThis second variant of the
+X.Cw tick -statement
+Xallows the automatic generation of ticks
+Xin the range from
+X.I begin
+Xto
+X.I end
+Xwith an optional distance
+X.IR step .
+X.RE
+X.Cw frame
+X.I frame-attributes
+X\&.\|.\|.
+X.RS
+XThe
+X.I frame-attributes
+Xare given to the box, that builds the frame of the diagram.
+XValid
+X.B pic
+Xbox attributes can be used.
+XThe internal name of the diagram frame is
+X.Cw FRAME
+Xand of the surrounding box
+X.Cw GRAPH .
+XBoth can be used in
+X.B pic
+Xstatements to get special effects.
+XThe boxes for the top, left, right and bottom margin are
+X.Cw TMARG ,
+X.Cw LMARG ,
+X.Cw RMARG
+Xand
+X.Cw BMARG .
+X.RE
+X.Cw spline
+X.br
+X.Cw nospline
+X.RS
+X.Cw spline
+Xforces \*(Gr to use splines for drawing graphs, which is the default.
+X.Cw nospline
+Xwill use
+X.BR pic 's
+X.Cw line
+Xdirectives respectively.
+X.RE
+X.Cw range
+X.I xmin ymin xmax ymax
+X.RS
+XGraphs are drawn within the range specified.
+X.RE
+X.Cw ht
+X.I number
+X.RS
+XSets the height of the diagram to
+X.IR number .
+X.RE
+X.Cw wid
+X.I number
+X.RS
+XSets the width of the diagram to
+X.IR number .
+X.RE
+X.Cw grid
+X[
+X.I line-style
+X]
+X.RS
+XDraws a grid of
+X.IR line-style ,
+X.Cw dotted
+Xper default.
+X.RE
+X.Cw pic
+X{
+X.I anything
+X}
+X.RS
+X.I Anything
+Xis passed literally through
+X.BR pic .
+X.RE
+X.RS
+X.RE
+X.Cw next
+X[
+X.I graph-name
+X] [
+X.Cw at
+X]
+X.I position
+X.RS
+XSets a new data point for graph
+X.I graph-name
+Xor the current graph at position
+X.IR position .
+X.RE
+X.I position
+X.RS
+X.I Position
+Xis described by an y coordinate and an optional x coordinate.
+XIf the x coordinate is missing, then x is assumed to be
+X0, 1, 2, 3, etc.
+X.RE
+X.I position drawing-char
+X.RS
+XFor each data point an optional (as second or third argument respectively)
+Xdrawing character can be declared.
+XAny
+X.B troff
+Xand
+X.B eqn
+Xcharacter or special character or sequence of characters can be used.
+X.RE
+X.SH EXAMPLES
+X.SS "Example 1
+X.RS
+X.Cs
+X.nf
+X.na
+Xframe invis
+Xpic { line from FRAME.sw to FRAME.se }
+Xpic { line from FRAME.sw to FRAME.nw }
+Xdraw invis
+X0 \e&
+X2.9 NY
+X7.8 NJ
+X3.4 CA
+X1.8 MI
+X3.7 FL
+X.Ce
+X.RE
+Xwill produce:
+X.G1
+X.so ex01.prag
+X.G2
+X.SS "Example 2
+X.RS
+X.Cs
+X.nf
+X.na
+Xwid 4
+Xht 3
+Xgrid dotted
+Xlabel left "execution" "time / sec"
+Xlabel bot "# of msgs"
+Xrange 0 0 5000 25
+Xticks left 0 5 10 15 20 25
+Xticks right 0 5 10 15 20 25
+Xticks top 0 1000 2000 3000 4000 5000
+Xticks bot 0 1000 2000 3000 4000 5000
+Xnew marked MSG "\es-2MSG\es+2" above
+X100 0.19 \e(*D
+X\&.\|.\|.
+Xnext TLITCP at 5000 20.09 \e(mu
+X3000 18.08 \e(mu
+X4000 19.12 \e(mu
+X.Ce
+X.RE
+Xwill produce:
+X.G1
+X.so ex02.prag
+X.G2
+X.SS "Example 3
+X.RS
+X.Cs
+X.nf
+X.na
+Xgrid dotted
+Xdraw marked
+X100 0.19
+X\&.\|.\|.
+X5000 3.69
+Xnew marked
+X0 0
+X400 0.45
+X\&.\|.\|.
+X5000 3.5
+X.Ce
+X.RE
+Xwill produce:
+X.G1
+X.so ex03.prag
+X.G2
+X.SS "Example 4
+X.RS
+X.Cs
+X.nf
+X.na
+Xlabel left "execution time" "seconds"
+Xlabel right "\e(ua message size"
+Xlabel bot "messages sent"
+Xrange 0 0 10000 25
+Xticks left 0 5 10 15 20 25
+Xticks bot 0 1000 5000 10000
+X100	1.3
+X\&.\|.\|.
+X10000	24.6
+X.Ce
+X.RE
+Xwill produce:
+X.G1
+X.so ex04.prag
+X.G2
+X.SS "Example 5
+X.RS
+X.Cs
+X.nf
+X.na
+Xlabel bot "time (in seconds)"
+Xlabel left "memory" "available"
+Xrange 0 0 365 1800
+Xticks left 200 400 600 800 1000 1200 1400 1600 
+Xticks bot 40 80 120 160 200 240 280 320 360
+Xnew
+X0 141
+X\&.\|.\|.
+X365 1309
+Xnew dashed
+Xnospline
+X0 12
+X150 247
+X\&.\|.\|.
+Xnew dashed
+Xnospline
+X210 824
+X360 1508
+X.Ce
+X.RE
+Xwill produce:
+X.G1
+X.so ex05.prag
+X.G2
+X.SS "Example 6
+X.RS
+X.Cs
+X.nf
+X.na
+Xdraw invis
+X1896 54.2
+X1900 49.4
+X\&.\|.\|.
+X1988 43.8
+X.Ce
+X.RE
+Xwill produce:
+X.G1
+X.so ex06.prag
+X.G2
+X.SS "Example 6
+X.RS
+X.Cs
+X.nf
+X.na
+X40 72
+X45 76
+X\&.\|.\|.
+X65 79
+X.Ce
+X.RE
+Xwill produce:
+X.G1
+X.so ex07.prag
+X.G2
+X.SH "SEE ALSO"
+XAT&T Bell Laboratories, Computing Science Technical Report No.\ 116,
+XGRAP \- A Graphics Language for Typesetting.
+XThis can be obtained by sending a mail message to netlib@research.att.com
+Xwith a body of `send\ 116\ from\ research/cstr'.
+X.SH BUGS
+XBug reports or suggested improvements should go to hm@GUUG.de.
+X.SH AUTHOR
+XThis program was contributed by Holger Meyer at University of Rostock,
+XGermany.
+XIt is available via anonymous ftp from ftp.informatik.uni-rostock.de in the
+Xdirectory /pub/local/software.
+SHAR_EOF
+$TOUCH -am 1115135595 prag-1.0/prag.1 &&
+chmod 0644 prag-1.0/prag.1 ||
+echo "restore of prag-1.0/prag.1 failed"
+set `wc -c prag-1.0/prag.1`;Wc_c=$1
+if test "$Wc_c" != "6073"; then
+	echo original size 6073, current size $Wc_c
+fi
+# ============= prag-1.0/prag.1.orig ==============
+echo "x - extracting prag-1.0/prag.1.orig (Text)"
+sed 's/^X//' << 'SHAR_EOF' > prag-1.0/prag.1.orig &&
+X.TH PRAG 1 "1 August 1993"
+X.ds Gr prag
+X.if .t
+X.	de Cw
+X\\$3\f(CW\\$1\fP\\$2
+X..
+X.	de Cs
+X\f(CW
+X.ps -1
+X.vs -2
+X..
+X.	de Ce
+X.vs +2
+X.ps +1
+X\fP
+X..
+X.fi
+X.SH NAME
+X.B \*(Gr
+X\- compile diagrams for
+X.B pic
+X.SH SYNOPSIS
+X.Cw \*(Gr
+X[
+X.I filename
+X\&.\|.\|.
+X]
+X.SH DESCRIPTION
+X.LP
+X.Cw \&.G1
+X[
+X.I width
+X[
+X.I height
+X]]
+X.br
+X.Cw \&.G2
+X.RS
+X.B \*(Gr
+Xrecognizes its input only between
+X.B \&.G1
+Xand
+X.BR \&.G2 .
+XAll other lines are copied literal to standard output.
+XTwo optional arguments to
+X.B \&.G1
+Xspecify the width and the height.
+X.RE
+X.Cw #
+X.I comment
+X.RS
+XLines starting with a hash mark '#' are treated as comments.
+X.RE
+X.Cw draw
+X.I line-style
+X.RS
+XThe
+X.Cw draw
+Xstatement sets the line style for drawing the graphs.
+XValid arguments are the line styles as known from
+X.BR pic (1)
+Xor the pseudo-style
+X.Cw marked .
+X.Cw marked
+Xwill yield a solid graph with the data points marked.
+XUp to five default marking characters
+X(\e(bu \(bu, \e(*D \(*D, \e(pl \(pl, \e(sq \(sq, \e(mu \(mu)
+Xare used for the first five graphs.
+XIf you don't like these characters,
+Xyou can override them by giving an additional drawing character
+Xto each data point (as second or third argument).
+XUse line style
+X.Cw invis
+Xto draw unconnected data points.
+X.RE
+X.Cw new
+X[
+X.I line-style
+X]
+X.I name
+X[
+X.I label-string
+X]]]
+X.RS
+XThis statement switches a new graph within a diagram.
+XThe line style of the graph is set to
+X.IR line-style .
+XThe graph gets the name
+X.IR name ,
+Xwhich can be referred in subsequent
+X.B pic
+Xstatements
+Xand is labeled with the string
+X.IR label-string .
+X.I label-string
+Xcan be any valid
+X.B pic
+Xstring.
+X.RE
+X.Cw label
+X[
+X.Cw left
+X|
+X.Cw right
+X|
+X.Cw top
+X|
+X.Cw bot
+X]
+X.I label-string
+X.RS
+X.I label-string
+Xis placed at the specified side of the whole diagram.
+X.RE
+X.Cw ticks
+X[
+X.Cw left
+X|
+X.Cw right
+X|
+X.Cw top
+X|
+X.Cw bot
+X]
+X[
+X.I where
+X]
+X.I position
+X\&.\|.\|.
+X.RS
+XTick marks for the specified side are placed at the given positions.
+X.I where
+Xsays to place the ticks inside
+X.Cw in ) (
+Xor outside
+X.Cw out ) (
+Xthe diagram.
+X.RE
+X.Cw frame
+X.I frame-attributes
+X\&.\|.\|.
+X.RS
+XThe
+X.I frame-attributes
+Xare given to the box, that builds the frame of the diagram.
+XValid
+X.B pic
+Xbox attributes can be used.
+XThe internal name of the diagram frame is
+X.Cw FRAME
+Xand of the surrounding box
+X.Cw GRAPH .
+XBoth can be used in
+X.B pic
+Xstatements to get special effects.
+XThe boxes for the top, left, right and bottom margin are
+X.Cw TMARG ,
+X.Cw LMARG ,
+X.Cw RMARG
+Xand
+X.Cw BMARG .
+X.RE
+X.Cw spline
+X.br
+X.Cw nospline
+X.RS
+X.Cw spline
+Xforces \*(Gr to use splines for drawing graphs, which is the default.
+X.Cw nospline
+Xwill use
+X.BR pic 's
+X.Cw line
+Xdirectives respectively.
+X.RE
+X.Cw range
+X.I xmin ymin xmax ymax
+X.RS
+XGraphs are drawn within the range specified.
+X.RE
+X.Cw ht
+X.I number
+X.RS
+XSets the height of the diagram to
+X.IR number .
+X.RE
+X.Cw wid
+X.I number
+X.RS
+XSets the width of the diagram to
+X.IR number .
+X.RE
+X.Cw grid
+X[
+X.I line-style
+X]
+X.RS
+XDraws a grid of
+X.IR line-style ,
+X.Cw dotted
+Xper default.
+X.RE
+X.Cw pic
+X{
+X.I anything
+X}
+X.RS
+X.I Anything
+Xis passed literally through
+X.BR pic .
+X.RE
+X.RS
+X.RE
+X.Cw next
+X[
+X.I graph-name
+X] [
+X.Cw at
+X]
+X.I position
+X.RS
+XSets a new data point for graph
+X.I graph-name
+Xor the current graph at position
+X.IR position .
+X.RE
+X.I position
+X.RS
+X.I Position
+Xis described by an y coordinate and an optional x coordinate.
+XIf the x coordinate is missing, then x is assumed to be
+X0, 1, 2, 3, etc.
+X.RE
+X.I position drawing-char
+X.RS
+XFor each data point an optional (as second or third argument respectively)
+Xdrawing character can be declared.
+XAny
+X.B troff
+Xand
+X.B eqn
+Xcharacter or special character or sequence of characters can be used.
+X.RE
+X.SH EXAMPLES
+X.SS "Example 1
+X.RS
+X.Cs
+X.nf
+X.na
+Xframe invis
+Xpic { line from FRAME.sw to FRAME.se }
+Xpic { line from FRAME.sw to FRAME.nw }
+Xdraw invis
+X0 \e&
+X2.9 NY
+X7.8 NJ
+X3.4 CA
+X1.8 MI
+X3.7 FL
+X.Ce
+X.RE
+Xwill produce:
+X.G1
+X.so ex01.prag
+X.G2
+X.SS "Example 2
+X.RS
+X.Cs
+X.nf
+X.na
+Xwid 4
+Xht 3
+Xgrid dotted
+Xlabel left "execution" "time / sec"
+Xlabel bot "# of msgs"
+Xrange 0 0 5000 25
+Xticks left 0 5 10 15 20 25
+Xticks right 0 5 10 15 20 25
+Xticks top 0 1000 2000 3000 4000 5000
+Xticks bot 0 1000 2000 3000 4000 5000
+Xnew marked MSG "\es-2MSG\es+2" above
+X100 0.19 \e(*D
+X\&.\|.\|.
+Xnext TLITCP at 5000 20.09 \e(mu
+X3000 18.08 \e(mu
+X4000 19.12 \e(mu
+X.Ce
+X.RE
+Xwill produce:
+X.G1
+X.so ex02.prag
+X.G2
+X.SS "Example 3
+X.RS
+X.Cs
+X.nf
+X.na
+Xgrid dotted
+Xdraw marked
+X100 0.19
+X\&.\|.\|.
+X5000 3.69
+Xnew marked
+X0 0
+X400 0.45
+X\&.\|.\|.
+X5000 3.5
+X.Ce
+X.RE
+Xwill produce:
+X.G1
+X.so ex03.prag
+X.G2
+X.SS "Example 4
+X.RS
+X.Cs
+X.nf
+X.na
+Xlabel left "execution time" "seconds"
+Xlabel right "\e(ua message size"
+Xlabel bot "messages sent"
+Xrange 0 0 10000 25
+Xticks left 0 5 10 15 20 25
+Xticks bot 0 1000 5000 10000
+X100	1.3
+X\&.\|.\|.
+X10000	24.6
+X.Ce
+X.RE
+Xwill produce:
+X.G1
+X.so ex04.prag
+X.G2
+X.SS "Example 5
+X.RS
+X.Cs
+X.nf
+X.na
+Xlabel bot "time (in seconds)"
+Xlabel left "memory" "available"
+Xrange 0 0 365 1800
+Xticks left 200 400 600 800 1000 1200 1400 1600 
+Xticks bot 40 80 120 160 200 240 280 320 360
+Xnew
+X0 141
+X\&.\|.\|.
+X365 1309
+Xnew dashed
+Xnospline
+X0 12
+X150 247
+X\&.\|.\|.
+Xnew dashed
+Xnospline
+X210 824
+X360 1508
+X.Ce
+X.RE
+Xwill produce:
+X.G1
+X.so ex05.prag
+X.G2
+X.SS "Example 6
+X.RS
+X.Cs
+X.nf
+X.na
+Xdraw invis
+X1896 54.2
+X1900 49.4
+X\&.\|.\|.
+X1988 43.8
+X.Ce
+X.RE
+Xwill produce:
+X.G1
+X.so ex06.prag
+X.G2
+X.SS "Example 6
+X.RS
+X.Cs
+X.nf
+X.na
+X40 72
+X45 76
+X\&.\|.\|.
+X65 79
+X.Ce
+X.RE
+Xwill produce:
+X.G1
+X.so ex07.prag
+X.G2
+X.SH "SEE ALSO"
+XAT&T Bell Laboratories, Computing Science Technical Report No.\ 116,
+XGRAP \- A Graphics Language for Typesetting.
+XThis can be obtained by sending a mail message to netlib@research.att.com
+Xwith a body of `send\ 116\ from\ research/cstr'.
+X.SH BUGS
+XBug reports or suggested improvements should go to hme@informatik.uni-rostock.de.
+X.SH AUTHOR
+XThis program was contributed by Holger Meyer at University of Rostock,
+XGermany.
+XIt is available via anonymous ftp from ftp.informatik.uni-rostock.de in the
+Xdirectory /pub/local/software.
+SHAR_EOF
+$TOUCH -am 1115140095 prag-1.0/prag.1.orig &&
+chmod 0640 prag-1.0/prag.1.orig ||
+echo "restore of prag-1.0/prag.1.orig failed"
+set `wc -c prag-1.0/prag.1.orig`;Wc_c=$1
+if test "$Wc_c" != "5779"; then
+	echo original size 5779, current size $Wc_c
+fi
+# ============= prag-1.0/prag.cat ==============
+echo "x - extracting prag-1.0/prag.cat (Text)"
+sed 's/^X//' << 'SHAR_EOF' > prag-1.0/prag.cat &&
+X
+X
+X
+XPRAG(1)                                                   PRAG(1)
+X
+X
+XNNAAMMEE
+X       pprraagg - compile diagrams for ppiicc
+X
+XSSYYNNOOPPSSIISS
+X       pprraagg [ _f_i_l_e_n_a_m_e ...  ]
+X
+XDDEESSCCRRIIPPTTIIOONN
+X       ..GG11 [ _w_i_d_t_h [ _h_e_i_g_h_t ]]
+X       ..GG22
+X              pprraagg recognizes its input only between ..GG11 and ..GG22.
+X              All other lines are copied literal to standard out-
+X              put.   Two  optional  arguments  to ..GG11 specify the
+X              width and the height.
+X       ## _c_o_m_m_e_n_t
+X              Lines starting with a hash mark '#' are treated  as
+X              comments.
+X       ddrraaww _l_i_n_e_-_s_t_y_l_e
+X              The  ddrraaww statement sets the line style for drawing
+X              the graphs.  Valid arguments are the line styles as
+X              known  from  ppiicc(1)  or  the  pseudo-style  mmaarrkkeedd.
+X              mmaarrkkeedd will yield  a  solid  graph  with  the  data
+X              points  marked.  Up to five default marking charac-
+X              ters (\(bu +o, \(*D _/_\, \(pl +, \(sq [], \(mu x) are
+X              used  for the first five graphs.  If you don't like
+X              these characters, you can override them  by  giving
+X              an  additional drawing character to each data point
+X              (as second or  third  argument).   Use  line  style
+X              iinnvviiss to draw unconnected data points.
+X       nneeww [ _l_i_n_e_-_s_t_y_l_e ] _n_a_m_e [ _l_a_b_e_l_-_s_t_r_i_n_g ]]]
+X              This  statement  switches a new graph within a dia-
+X              gram.  The line style of the graph is set to  _l_i_n_e_-
+X              _s_t_y_l_e.   The graph gets the name _n_a_m_e, which can be
+X              referred  in  subsequent  ppiicc  statements  and   is
+X              labeled with the string _l_a_b_e_l_-_s_t_r_i_n_g.  _l_a_b_e_l_-_s_t_r_i_n_g
+X              can be any valid ppiicc string.
+X       llaabbeell [ lleefftt | rriigghhtt | ttoopp | bboott ] _l_a_b_e_l_-_s_t_r_i_n_g
+X              _l_a_b_e_l_-_s_t_r_i_n_g is placed at the specified side of the
+X              whole diagram.
+X       ttiicckkss  [ lleefftt | rriigghhtt | ttoopp | bboott ] [ _w_h_e_r_e ] _p_o_s_i_t_i_o_n ...
+X              Tick marks for the specified side are placed at the
+X              given  positions.   _w_h_e_r_e  says  to place the ticks
+X              inside (iinn) or outside (oouutt) the diagram.
+X       ttiicckkss [ lleefftt | rriigghhtt | ttoopp | bboott ] [ _w_h_e_r_e ] ffrroomm _b_e_g_i_n ttoo
+X       _e_n_d [ bbyy _s_t_e_p ]
+X              This  second  variant  of the ttiicckk-statement allows
+X              the automatic generation of ticks in the range from
+X              _b_e_g_i_n to _e_n_d with an optional distance _s_t_e_p.
+X       ffrraammee _f_r_a_m_e_-_a_t_t_r_i_b_u_t_e_s ...
+X              The  _f_r_a_m_e_-_a_t_t_r_i_b_u_t_e_s  are  given  to the box, that
+X              builds the frame of the  diagram.   Valid  ppiicc  box
+X              attributes  can  be used.  The internal name of the
+X              diagram frame is FFRRAAMMEE and of the  surrounding  box
+X              GGRRAAPPHH.   Both  can be used in ppiicc statements to get
+X              special effects.  The  boxes  for  the  top,  left,
+X
+X
+X
+X                          1 August 1993                         1
+X
+X
+X
+X
+X
+XPRAG(1)                                                   PRAG(1)
+X
+X
+X              right and bottom margin are TTMMAARRGG, LLMMAARRGG, RRMMAARRGG and
+X              BBMMAARRGG.
+X       sspplliinnee
+X       nnoosspplliinnee
+X              sspplliinnee forces  prag  to  use  splines  for  drawing
+X              graphs,  which  is  the default.  nnoosspplliinnee will use
+X              ppiicc's lliinnee directives respectively.
+X       rraannggee _x_m_i_n _y_m_i_n _x_m_a_x _y_m_a_x
+X              Graphs are drawn within the range specified.
+X       hhtt _n_u_m_b_e_r
+X              Sets the height of the diagram to _n_u_m_b_e_r.
+X       wwiidd _n_u_m_b_e_r
+X              Sets the width of the diagram to _n_u_m_b_e_r.
+X       ggrriidd [ _l_i_n_e_-_s_t_y_l_e ]
+X              Draws a grid of _l_i_n_e_-_s_t_y_l_e, ddootttteedd per default.
+X       ppiicc { _a_n_y_t_h_i_n_g }
+X              _A_n_y_t_h_i_n_g is passed literally through ppiicc.
+X       nneexxtt [ _g_r_a_p_h_-_n_a_m_e ] [ aatt ] _p_o_s_i_t_i_o_n
+X              Sets a new data point for graph _g_r_a_p_h_-_n_a_m_e  or  the
+X              current graph at position _p_o_s_i_t_i_o_n.
+X       _p_o_s_i_t_i_o_n
+X              _P_o_s_i_t_i_o_n  is  described  by  an y coordinate and an
+X              optional x coordinate.   If  the  x  coordinate  is
+X              missing, then x is assumed to be 0, 1, 2, 3, etc.
+X       _p_o_s_i_t_i_o_n _d_r_a_w_i_n_g_-_c_h_a_r
+X              For each data point an optional (as second or third
+X              argument respectively)  drawing  character  can  be
+X              declared.   Any  ttrrooffff and eeqqnn character or special
+X              character or sequence of characters can be used.
+X
+XEEXXAAMMPPLLEESS
+X   EExxaammppllee 11
+X              ffrraammee iinnvviiss
+X              ppiicc {{ lliinnee ffrroomm FFRRAAMMEE..ssww ttoo FFRRAAMMEE..ssee }}
+X              ppiicc {{ lliinnee ffrroomm FFRRAAMMEE..ssww ttoo FFRRAAMMEE..nnww }}
+X              ddrraaww iinnvviiss
+X              00 \\&&
+X              22..99 NNYY
+X              77..88 NNJJ
+X              33..44 CCAA
+X              11..88 MMII
+X              33..77 FFLL
+X
+X       will produce:
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X                          1 August 1993                         2
+X
+X
+X
+X
+X
+XPRAG(1)                                                   PRAG(1)
+X
+X
+X          |
+X          |
+X          |
+X        8-+
+X          |             NJ
+X          |
+X        6-+
+X          |
+X          |
+X        4-+
+X          |                     CA              FL
+X          |      NY
+X         -+
+X        2 |                             MI
+X          |
+X          +-------+------+-------+-------+--------
+X
+X                 1       2       3      4
+X
+X   EExxaammppllee 22
+X              wwiidd 44
+X              hhtt 33
+X              ggrriidd ddootttteedd
+X              llaabbeell lleefftt ""eexxeeccuuttiioonn"" ""ttiimmee // sseecc""
+X              llaabbeell bboott ""## ooff mmssggss""
+X              rraannggee 00 00 55000000 2255
+X              ttiicckkss lleefftt 00 55 1100 1155 2200 2255
+X              ttiicckkss rriigghhtt 00 55 1100 1155 2200 2255
+X              ttiicckkss ttoopp 00 11000000 22000000 33000000 44000000 55000000
+X              ttiicckkss bboott 00 11000000 22000000 33000000 44000000 55000000
+X              nneeww mmaarrkkeedd MMSSGG ""\\ss--22MMSSGG\\ss++22"" aabboovvee
+X              110000 00..1199 \\((**DD
+X              ......
+X              nneexxtt TTLLIITTCCPP aatt 55000000 2200..0099 \\((mmuu
+X              33000000 1188..0088 \\((mmuu
+X              44000000 1199..1122 \\((mmuu
+X
+X       will produce:
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X                          1 August 1993                         3
+X
+X
+X
+X
+X
+XPRAG(1)                                                   PRAG(1)
+X
+X
+X              0|     10|00    20|00   30|00    40|00    50|00
+X           25 -+       +       +      +       +       +-25
+X                       +       +      +       +       +o
+X                       +       +      +       +      []
+X           20 -++++++++++++++++++++++++++++++++++++++++x-20
+X                       +       +TLITCP+       ++ox
+X                       +      x+      +x      [+]
+X               x  x   x+       +      +       +
+X           15 -+++++++++++++++++++++++++o++++++++++++++++-15
+X                       +       +SOCKUDP[[+]]       +
+X execution             +       +      +       +
+Xtime / sec 10 -++++++++++++++++++T+L+I+U+D+P+++++++++++++++++-10
+X                       +      +o[+]      +       +
+X                       +       +      +       +
+X                       +       +      +       +
+X            5 -+++++++++o[+]+++++++++++++++++++++++++++++++-5
+X                  +o    +       + MSG  +      _/+_\      _/_\
+X                  []   +      _/+_\     _/+_\       +
+X            0 -+_/+o[_\] _/_\  _/+_\       +      +       +       +-0
+X              0|     10|00    20|00   30|00    40|00    50|00
+X
+X
+X
+X                           # of msgs
+X
+X
+X
+X   EExxaammppllee 33
+X              ggrriidd ddootttteedd
+X              ddrraaww mmaarrkkeedd
+X              110000 00..1199
+X              ......
+X              55000000 33..6699
+X              nneeww mmaarrkkeedd
+X              00 00
+X              440000 00..4455
+X              ......
+X              55000000 33..55
+X
+X       will produce:
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X                          1 August 1993                         4
+X
+X
+X
+X
+X
+XPRAG(1)                                                   PRAG(1)
+X
+X
+X                  +      +       +       +
+X                  +      +       +       +
+X                  +      +       +       +
+X        4-++++++++++++++++++++++++++++++++++++++++
+X                  +      +       +       +      +o
+X                  +      +       +       +      _/_\
+X        3-++++++++++++++++++++++++++++++++++++++++
+X                  +      +       +      +o+
+X                  +      +       +      _/+_\
+X        2-+++++++++++++++++++++++++o++++++++++++++++
+X                  +      +       +       +
+X                  +      ++o       +       +
+X         -++++++++++++++++++++++++++++++++++++++++
+X        1        +o+      +       +       +
+X            _/+o_\   _/+_\      +       +       +
+X          +o       +     _/+_\      _/+_\       +
+X         _/_\
+X                1000   2000    3000    4000
+X
+X   EExxaammppllee 44
+X              llaabbeell lleefftt ""eexxeeccuuttiioonn ttiimmee"" ""sseeccoonnddss""
+X              llaabbeell rriigghhtt ""\\((uuaa mmeessssaaggee ssiizzee""
+X              llaabbeell bboott ""mmeessssaaggeess sseenntt""
+X              rraannggee 00 00 1100000000 2255
+X              ttiicckkss lleefftt 00 55 1100 1155 2200 2255
+X              ttiicckkss bboott 00 11000000 55000000 1100000000
+X              110000  11..33
+X              ......
+X              1100000000     2244..66
+X
+X       will produce:
+X             25  +
+X
+X             20  +
+X
+X             15  +
+X    execution time
+X        second1s0  +                      |^ message size
+X
+X              5  +
+X
+X              0  + +         +           +
+X                01000      5000       10000
+X                      messages sent
+X
+X
+X
+X   EExxaammppllee 55
+X              llaabbeell bboott ""ttiimmee ((iinn sseeccoonnddss))""
+X              llaabbeell lleefftt ""mmeemmoorryy"" ""aavvaaiillaabbllee""
+X              rraannggee 00 00 336655 11880000
+X              ttiicckkss lleefftt 220000 440000 660000 880000 11000000 11220000 11440000 11660000
+X              ttiicckkss bboott 4400 8800 112200 116600 220000 224400 228800 332200 336600
+X              nneeww
+X
+X
+X
+X                          1 August 1993                         5
+X
+X
+X
+X
+X
+XPRAG(1)                                                   PRAG(1)
+X
+X
+X              00 114411
+X              ......
+X              336655 11330099
+X              nneeww ddaasshheedd
+X              nnoosspplliinnee
+X              00 1122
+X              115500 224477
+X              ......
+X              nneeww ddaasshheedd
+X              nnoosspplliinnee
+X              221100 882244
+X              336600 11550088
+X
+X       will produce:
+X
+X             1600 --                          +
+X                                             + ++
+X             1400 --                       ++++
+X             1200 --                      +++
+X             1000 --                    ++
+X                                    +++++
+X         memory800 --                  ++
+X       availabl6e00 --                 +
+X              400 --               ++++
+X                               +++++
+X              200 --   +++++++++  +
+X                   ++++   ++ +  +  +   +  +  +   +
+X                     40  80120 160200240280 320360
+X
+X                       time (in seconds)
+X
+X
+X
+X   EExxaammppllee 66
+X              ddrraaww iinnvviiss
+X              11889966 5544..22
+X              11990000 4499..44
+X              ......
+X              11998888 4433..88
+X
+X       will produce:
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X                          1 August 1993                         6
+X
+X
+X
+X
+X
+XPRAG(1)                                                   PRAG(1)
+X
+X
+X
+X          +o
+X
+X       52--
+X
+X               +o
+X       49--+o +o
+X                +o  +o
+X                  +o
+X       46--          +o    +o
+X                        +o
+X                                    +o
+X         --            +o                       +o
+X       43                      +o         +o
+X
+X                  +      +       +       +
+X
+X                1914   1933    1952    1971
+X
+X   EExxaammppllee 66
+X              4400 7722
+X              4455 7766
+X              ......
+X              6655 7799
+X
+X       will produce:
+X
+X
+X
+X       86--
+X
+X
+X       82--
+X
+X
+X       78--
+X
+X
+X         --
+X       74
+X
+X                  +      +       +       +
+X
+X                 45     50      55      60
+X
+XSSEEEE AALLSSOO
+X       AT&T Bell Laboratories, Computing Science Technical Report
+X       No. 116, GRAP - A Graphics Language for Typesetting.  This
+X       can be obtained by sending a mail message to
+X       netlib@research.att.com with a body of
+X       `send 116 from research/cstr'.
+X
+XBBUUGGSS
+X       Bug reports or suggested improvements should go to
+X
+X
+X
+X                          1 August 1993                         7
+X
+X
+X
+X
+X
+XPRAG(1)                                                   PRAG(1)
+X
+X
+X       hm@GUUG.de.
+X
+XAAUUTTHHOORR
+X       This program was contributed by Holger Meyer at University
+X       of Rostock, Germany.  It is available via anonymous ftp
+X       from ftp.informatik.uni-rostock.de in the directory
+X       /pub/local/software.
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X                          1 August 1993                         8
+X
+X
+SHAR_EOF
+$TOUCH -am 1115140395 prag-1.0/prag.cat &&
+chmod 0640 prag-1.0/prag.cat ||
+echo "restore of prag-1.0/prag.cat failed"
+set `wc -c prag-1.0/prag.cat`;Wc_c=$1
+if test "$Wc_c" != "15387"; then
+	echo original size 15387, current size $Wc_c
+fi
+# ============= prag-1.0/prag.orig ==============
+echo "x - extracting prag-1.0/prag.orig (Text)"
+sed 's/^X//' << 'SHAR_EOF' > prag-1.0/prag.orig &&
+X#!/bin/nawk -f
+X#	Copyright (C) 1992, 1993 Holger J. Meyer, Rostock, Germany
+X#	hme@informatik.uni-rostock.de
+X#
+X#	See file ``Copyright'' for terms of copyright.
+X#
+X# Module:
+X#	Process a grap(1) like language, to produce graphs.  The input language
+X#	syntax is documented in lines marked with double hash marks ('##').
+X#	The first implementation was much inspired by the graph program from
+X#	``Aho, A.V., Kernighan, B. W., Weinberger, P. J. "The AWK Programming
+X#	Language", Addison-Wesley, Reading, 1988''.
+X#
+X# Source:
+X#	NAWK
+X#
+X# History:
+X#	92/4/20	hme, initial version written
+X#	93/8/24	hme, multiple graphs, grids, etc. added
+X#	93/10/20	hme, labeled margin boxes, generate `reset' before .PE
+X#
+X# Layout:
+X#
+X#	GRAPH
+X#	+----------+------------------------+----------+
+X#	|          |                     ^  |          |
+X#	|          | TMARG              ht/6|          |
+X#	|          |                     v  |          |
+X#	+----------+------------------------+----------+
+X#	| LMARG    | FRAME               ^  | RMARG    |
+X#	|          |                     |  |          |
+X#	|          |                     |  |          |
+X#	|          |                     ht |          |
+X#	|          |                     |  |          |
+X#	|          |                     |  |          |
+X#	|<-wid/6-->|<---------wid--------v->|<--wid/6->|
+X#	+----------+------------------------+----------+
+X#	|          |                     ^  |          |
+X#	|          | BMARG              ht/6|          |
+X#	|          |                     v  |          |
+X#	+----------+------------------------+----------+
+X#
+X#
+XBEGIN {
+X	MYADDR = "hme@informatik.uni-rostock.de";
+X	# number (RE)
+X	NUMBER = "^[-+]?([0-9]+[.]?[0-9]*|[.][0-9]+)" "([eE][-+]?[0-9]+)?$";
+X	GNAME = "GRAPH";			# label for whole picture
+X	FNAME = "FRAME";			# label for frame
+X	MNAME = "MARG";			# label for [top|....] margin boxes
+X	DEFLSTYLE = "solid";
+X	DEFCH = "\\s+2\\(bu\\s-2";
+X	MARKED = 1;
+X	MINXTICKS = 5;
+X	MINYTICKS = 5;
+X	nG1 = 0;
+X	grapinput = 0;
+X	err = 0;
+X	dot_lf = 1;
+X	warn = 1;
+X	debug = 0;
+X}
+X## .G1 [width [height]]
+X# start of graph input
+X/^.G1/ {
+X	++nG1;
+X	grapinput = 1;
+X	data = 0;
+X	initgraph();
+X	if (NF >= 2) {
+X		wid = $2;
+X	}
+X	if (NF >= 3) {
+X		ht = $3;
+X	}
+X	resizegraph();
+X	if (dot_lf) {
+X		printf(".lf %d %s\n", FNR, FILENAME);
+X	}
+X	next;
+X}
+X## .G2
+X# end of graph input -- draw graph
+X/^.G2/ {
+X	if (!grapinput) {
+X		printf("\"%s\":%d: missing previous .G1\n", FILENAME, FNR) |"cat >&2";
+X		errexit(-1);
+X	}
+X	else {
+X		endgraph();
+X		grapinput = 0;
+X	}
+X	if (dot_lf) {
+X		printf(".lf %d %s\n", FNR, FILENAME);
+X	}
+X	next;
+X}
+X# copy all outside from .G1 and .G2
+X!grapinput {
+X	print $0;
+X	next;
+X}
+X## # comment
+X# delete comments
+X/^#/ {
+X	next;
+X}
+X## draw line-style
+X$1 == "draw" {
+X	if (NF != 2) {
+X		printf("\"%s\":%d: draw line-style\n", FILENAME, FNR) | "cat >&2";
+X		errexit(-1);
+X	}
+X	if ($2 == "marked") {
+X		g_flags[ngs] = MARKED;
+X	}
+X	else {
+X		g_lstyle[ngs] = $2;
+X	}
+X	next;
+X}
+X## new [line-style [name [label]]]
+X# begin new graph, put old data points out
+X$1 == "new" {
+X	cg = ++ngs;
+X	newgraph(ngs);
+X	if (NF >= 2) {
+X		if ($2 == "marked") {
+X			g_flags[ngs] = MARKED;
+X		}
+X		else {
+X			g_lstyle[ngs] = $2;
+X		}
+X	}
+X	if (NF >= 3) {
+X		g_name[ngs] = $3;
+X	}
+X	if (NF >= 4) {
+X		$1 = $2 = $3 = "";
+X		sub(/^[ \t]*/, "");
+X		g_label[ngs] = $0;
+X	}
+X	g_ndata[ngs] = 0;
+X	next;
+X}
+X## label [left | right | top | bot] label-string
+X# left, right, top, bottom label
+X$1 == "label" {
+X	pos = $2;
+X	if (pos == "left") {
+X		sub(/^[ \t]*label[ \t]+left[ \t]*/, "");
+X	}
+X	else if (pos == "right") {
+X		sub(/^[ \t]*label[ \t]+right[ \t]*/, "");
+X	}
+X	else if (pos == "top") {
+X		sub(/^[ \t]*label[ \t]+top[ \t]*/, "");
+X	}
+X	else if (pos == "bot") {
+X		sub(/^[ \t]*label[ \t]+bot[ \t]*/, "");
+X	}
+X	else {
+X		printf("\"%s\":%d: label [left|right|top|bot] string ...\n",
+X			FILENAME, FNR) | "cat >&2";
+X		errexit(-1);
+X	}
+X	t_label[pos] = $0;
+X	next;
+X}
+X## ticks [left | right | top | bot] [where] position ...
+X# ticks for x- & y-axis, left, top, right or bottom position
+X$1 == "ticks" {
+X	if (NF <= 3) {
+X		printf("\"%s\":%d: ticks [left|right|top|bot] [where] position ...\n",
+X			FILENAME, FNR) | "cat >&2";
+X		errexit(-1);
+X	}
+X	if ($2 != "left" && $2 != "right" && $2 != "top" && $2 != "bot") {
+X		printf("\"%s\":%d: ticks [left|right|top|bot] [where] position ...\n",
+X			FILENAME, FNR) | "cat >&2";
+X		errexit(-1);
+X	}
+X	i = 3;
+X	t_num[$2] = 0;
+X	if ($3 == "in" || $3 == "out") {
+X		t_where[$2] = $3;
+X		++i;
+X	}
+X	while (i <= NF) {
+X		t_pos[$2, t_num[$2]] = $i;
+X		++t_num[$2];
+X		++i;
+X	}
+X	next;
+X}
+X## frame frame-attributes ...
+X# frame-attributes
+X$1 == "frame" {
+X	if (NF == 1) {
+X		printf("\"%s\":%d: frame frame-attributes ...\n",
+X			FILENAME, FNR) | "cat >&2";
+X		errexit(-1);
+X	}
+X	sub(/^[ \t]*frame[ \t]+/, "");
+X	fattr = $0;
+X	next;
+X}
+X## spline
+X## nospline
+X$1 == "spline" {
+X	g_spline[ngs] = "sp";
+X	next;
+X}
+X$1 == "nospline" {
+X	g_spline[ngs] = "";
+X	next;
+X}
+X## range xmin ymin xmax ymax
+X$1 == "range" && $2 ~ NUMBER && $3 ~ NUMBER && $4 ~ NUMBER && $5 ~ NUMBER {
+X	if (NF != 5) {
+X		printf("\"%s\":%d: range xmin ymin xmax ymax\n",
+X			FILENAME, FNR) | "cat >&2";
+X		errexit(-1);
+X	}
+X	xmin = $2;
+X	ymin = $3;
+X	xmax = $4;
+X	ymax = $5;
+X	next;
+X}
+X## ht number
+X# graph height
+X$1 == "ht" && $2 ~ NUMBER {
+X	if (NF != 2) {
+X		printf("\"%s\":%d: ht height\n", FILENAME, FNR) | "cat >&2";
+X		errexit(-1);
+X	}
+X	ht = $2;
+X	resizegraph();
+X	next;
+X}
+X## wid number
+X# graph width
+X$1 == "wid" && $2 ~ NUMBER {
+X	if (NF != 2) {
+X		printf("\"%s\":%d: wid width\n", FILENAME, FNR) | "cat >&2";
+X		errexit(-1);
+X	}
+X	wid = $2;
+X	resizegraph();
+X	next;
+X}
+X## grid [line-style]
+X# graph with grid
+X$1 == "grid" {
+X	if (NF == 1) {
+X		grid = "dotted";
+X	}
+X	else if (NF == 2) {
+X		grid = $2;
+X	}
+X	else {
+X		printf("\"%s\":%d: grid [line-style]\n", FILENAME, FNR) | "cat >&2";
+X		errexit(-1);
+X	}
+X	next;
+X}
+X## mark drawing-character
+X# set default drawing character for this graph
+X$1 == "mark" {
+X	if (NF != 2) {
+X		printf("\"%s\":%d: mark drawing-character\n", FILENAME, FNR) | "cat >&2";
+X		errexit(-1);
+X	}
+X	g_defch[ngs] = $2;
+X	g_flags[ngs] = MARKED;
+X	next;
+X}
+X## .lf line-number file-name
+X# groff's ``.lf line file''
+X$1 == ".lf" {
+X	print $0;
+X	next;
+X}
+X# collecting DATA
+X## next [graph-name] [at] position
+X# next point extraction: awk falls through these actions!!!
+X$1 == "next" && $3 == "at" {
+X	found = 0;
+X	for (i = 0; i <= ngs; ++i) {
+X		if (g_name[i] == $2) {
+X			# alter cg to point temporarily to an other graph
+X			# after collecting data, it shall be restored
+X			cg = i;
+X			++found;
+X			break;
+X		}
+X	}
+X	if (!found) {
+X		printf("\"%s\":%d: illegal graph-name \"%s\": ignored\n",
+X			FILENAME, FNR, $2) | "cat >&2";
+X	}
+X	sub(/^[ \t]*next[ \t]+[a-zA-Z]+[ \t]+at[ \t]*/, "next at ");
+X}
+X$1 == "next" && $2 == "at" {
+X	sub(/^[ \t]*next[ \t]+at[ \t]*/, "next ");
+X}
+X$1 == "next" {
+X	sub(/^[ \t]*next[ \t]*/, "");
+X}
+X# pairs of numbers with opt drawing char
+X$1 ~ NUMBER && $2 ~ NUMBER {
+X	g_x[cg, g_ndata[cg]] = $1;
+X	g_y[cg, g_ndata[cg]] = $2;
+X	if (NF >= 3) {
+X		$1 = $2 = "";
+X		sub(/^[ \t]*/, "");
+X		g_ch[cg, g_ndata[cg]] = $0;	# extra plotting character
+X	}
+X	else {
+X		g_ch[cg, g_ndata[cg]] = "";
+X	}
+X	++g_ndata[cg];			# count number of data points
+X	cg = ngs;				# reset current graph
+X	data = 1;
+X	next;
+X}
+X# a single number with opt drawing char
+X$1 ~ NUMBER && $2 !~ NUMBER {
+X	g_y[cg, g_ndata[cg]] = $1;
+X	g_x[cg, g_ndata[cg]] = g_ndata[cg];
+X	if (NF >= 2) {
+X		$1 = "";
+X		sub(/^[ \t]*/, "");
+X		g_ch[cg, g_ndata[cg]] = $0;	# extra plotting character
+X	}
+X	else {
+X		g_ch[cg, g_ndata[cg]] = "";
+X	}
+X	++g_ndata[cg];
+X	cg = ngs;				# reset current graph
+X	data = 1;
+X	next;
+X}
+X## pic '{' anything '}'
+X# rest of input goes direct to pic
+X$1 != "pic" {
+X	if (warn) {
+X		printf("\"%s\":%d: inputline passed through pic\n",
+X			FILENAME, FNR) | "cat >&2";
+X	}
+X}
+X{
+X	sub(/^[ \t]*pic[ \t]*{[ \t]*/, "");
+X	sub(/[ \t]*}[ \t]*$/, "");
+X	piccode = sprintf("%s%s\n", piccode, $0);
+X	next;
+X}
+XEND {
+X	if (err) {
+X		exit(err);
+X	}
+X	if (grapinput) {
+X		printf("\"%s\":%d: missing .G2 \n", FILENAME, FNR) | "cat >&2";
+X		endgraph();
+X	}
+X	exit(0);
+X}
+X#
+X# subroutine stuff
+X#
+Xfunction errexit(e) {
+X	err = e;
+X	exit(-1);
+X}
+Xfunction initgraph() {
+X	ht = 2;					# default frame size
+X	wid = 3;
+X	fattr = "";				# frame-attributes
+X	grid = "";
+X	ngs = 0;					# number of graphs
+X	cg = 0;					# current graph, may differ from ngs due to next stmnt.
+X	# struct graph {
+X	#	integer	g_flags,		# various flags indicating mark style etc.
+X	#	string	g_lstyle;		# line style
+X	#	string	g_spline;		# draw graph with [sp]line
+X	#	string	g_name;		# graph name
+X	#	string	g_label;		# graph label
+X	#	integer	g_ndata;		# # of data items
+X	#	real		g_x[];		# x coords
+X	#	real		g_y[];		# y coords
+X	#	string	g_ch[];		# optional point drawing character
+X	#	string	g_defch;		# default drawing character
+X	# };
+X	g_defch[0] = DEFCH;
+X	g_defch[1] = "\\(*D";
+X	g_defch[2] = "\\(pl";
+X	g_defch[3] = "\\(sq";
+X	g_defch[4] = "\\(mu";
+X	newticks("left");
+X	newticks("right");
+X	newticks("top");
+X	newticks("bot");
+X	newgraph(ngs);
+X
+X	piccode = "";
+X	xmin = xmax = ymin = ymax = 0;
+X}
+Xfunction resizegraph()
+X{
+X	# left, right, top, bot margin of frame
+X	lmarg = rmarg = wid/6;
+X	tmarg = bmarg = ht/6;
+X	ticklen = ht/32;			# default len for tick marker
+X}
+Xfunction newgraph(g) {
+X	g_flags[g] = 0;
+X	g_lstyle[g] = DEFLSTYLE;
+X	g_spline[g] = "sp";			# [sp]line used for graph drawing
+X	g_name[g] = "OOPS";
+X	g_label[g] = "";
+X	g_ndata[g] = 0;
+X}
+Xfunction newticks(where) {
+X	t_label[where] = "";
+X	t_where[where] = "out";
+X	t_num[where] = 0;
+X	t_pos[where, 0] = 0;
+X}
+Xfunction endgraph() {
+X	grapinput = 0;
+X	if (!xmin && !xmax && !ymin && !ymax) {	# no range was given
+X		xmin = xmax = g_x[0, 0];
+X		ymin = ymax = g_y[0, 0];
+X		for (g = 0; g <= ngs; ++g) {
+X			for (i = 0; i < g_ndata[g]; ++i) {
+X				if (g_x[g, i] < xmin) {
+X					xmin = g_x[g, i];
+X				}
+X				if (g_x[g, i] > xmax) {
+X					xmax = g_x[g, i];
+X				}
+X				if (g_y[g, i] < ymin) {
+X					ymin = g_y[g, i];
+X				}
+X				if (g_y[g, i] > ymax) {
+X					ymax = g_y[g, i];
+X				}
+X			}
+X		}
+X	}
+X	printf(".PS %g %g\n", wid + lmarg + rmarg, ht + tmarg + bmarg);
+X	printf("# DO NOT EDIT!\n");
+X	printf("# generated from \"%s\" by prag (C) %s\n", FILENAME, MYADDR);
+X	if (data) {	# any data?
+X		frame();
+X		label();
+X		ticks();
+X		for (g = 0; g <= ngs; ++g) {
+X			drawgraph(g);
+X		}
+X	}
+X	if (piccode != "") {
+X		printf("%s", piccode);
+X	}
+X	printf("reset\n.PE\n");
+X}
+X# create frame from graph
+Xfunction frame() {
+X	printf("%s:\tbox invis ht %g wid %g\n",
+X		GNAME, ht+tmarg+bmarg, wid+lmarg+rmarg);
+X	printf("%s:\tbox %s ht %g wid %g with .sw at %s.sw + (%g, %g)\n",
+X		FNAME, fattr, ht, wid, GNAME, lmarg, bmarg);
+X}
+X# center label under x-axis and left from y-axis
+Xfunction label() {
+X	printf("%s%s:\tbox wid %g ht %g invis %s with .e at %s.w\n",
+X		"L", MNAME, lmarg, ht, t_label["left"], GNAME);
+X	printf("%s%s:\tbox wid %g ht %g invis %s with .w at %s.e\n",
+X		"R", MNAME, rmarg, ht, t_label["right"], GNAME);
+X	printf("%s%s:\tbox wid %g ht %g invis %s with .s at %s.n\n",
+X		"T", MNAME, wid, tmarg, t_label["top"], GNAME);
+X	printf("%s%s:\tbox wid %g ht %g invis %s with .n at %s.s\n",
+X		"B", MNAME, wid, bmarg, t_label["bot"], GNAME);
+X}
+X# create tick marks for all axes
+Xfunction ticks(	i, user_ticks, w) {
+X	user_ticks = 0;
+X	for (i = 0; i < t_num["left"]; ++i) {
+X		printf("line %s %g at %g <%s.sw, %s.nw>\n",
+X			t_where["left"] == "out" ? "left" : "right",
+X			ticklen, w = yscale(t_pos["left", i]), FNAME, FNAME);
+X		printf("\"%s \" at last line.w rjust\n", t_pos["left", i]);
+X		if (w != 0 && w != 1 && grid != "") {
+X			printf("line %s from %g <%s.sw, %s.nw> to %g <%s.se, %s.ne>\n",
+X				grid, w, FNAME, FNAME, w, FNAME, FNAME);
+X		}
+X		++user_ticks;
+X	}
+X	for (i = 0; i < t_num["right"]; ++i) {
+X		printf("line %s %g at %g <%s.se, %s.ne>\n",
+X			t_where["right"] == "out" ? "right" : "left",
+X			ticklen, yscale(t_pos["right", i]), FNAME, FNAME);
+X		printf("\" %s\" at last line.e ljust\n", t_pos["right", i]);
+X		++user_ticks;
+X	}
+X	for (i = 0; i < t_num["top"]; ++i) {
+X		printf("line %s %g at %g <%s.nw, %s.ne>\n",
+X			t_where["bot"] == "out" ? "up" : "down",
+X			ticklen, xscale(t_pos["top", i]), FNAME, FNAME);
+X		printf("\"%s\" at last line.n above\n", t_pos["top", i]);
+X		++user_ticks;
+X	}
+X	for (i = 0; i < t_num["bot"]; ++i) {
+X		printf("line %s %g at %g <%s.sw, %s.se>\n",
+X			t_where["bot"] == "out" ? "down" : "up",
+X			ticklen, w = xscale(t_pos["bot", i]), FNAME, FNAME);
+X		printf("\"%s\" at last line.s below\n", t_pos["bot", i]);
+X		if (w != 0 && w != 1 && grid != "") {
+X			printf("line %s from %g <%s.sw, %s.se> to %g <%s.nw, %s.ne>\n",
+X				grid, w, FNAME, FNAME, w, FNAME, FNAME);
+X		}
+X		++user_ticks;
+X	}
+X	if (!user_ticks) {
+X		xmax = roundceil(MINXTICKS, xmax);
+X		ymax = roundceil(MINYTICKS, ymax);
+X		xmin = roundfloor(MINXTICKS, xmin);
+X		ymin = roundfloor(MINYTICKS, ymin);
+X		ysteps = steps(MINYTICKS, ymin, ymax);
+X		#for (i = 0; i <= ysteps; ++i) {
+X		for (i = 1; i < ysteps; ++i) {
+X			printf("line left %g at %g <%s.sw, %s.nw>\n",
+X				ticklen, w = i/ysteps, FNAME, FNAME);
+X			printf("\"%s\" at last line.w rjust\n", ymin + (ymax - ymin)*i/ysteps);
+X			if (w != 0 && w != 1 && grid != "") {
+X				printf("line %s from %g <%s.sw, %s.nw> to %g <%s.se, %s.ne>\n",
+X					grid, w, FNAME, FNAME, w, FNAME, FNAME);
+X			}
+X		}
+X		xsteps = steps(MINXTICKS, xmin, xmax);
+X		#for (i = 0; i <= xsteps; ++i) {
+X		for (i = 1; i < xsteps; ++i) {
+X			printf("line down %g at %g <%s.sw, %s.se>\n",
+X				ticklen, w = i/xsteps, FNAME, FNAME);
+X			printf("\"%s\" at last line.s below\n", xmin + (xmax - xmin)*i/xsteps);
+X			if (w != 0 && w != 1 && grid != "") {
+X				printf("line %s from %g <%s.sw, %s.se> to %g <%s.nw, %s.ne>\n",
+X					grid, w, FNAME, FNAME, w, FNAME, FNAME);
+X			}
+X		}
+X	}
+X}
+X# scale x-value
+Xfunction xscale(x) {
+X	return((x-xmin)/(xmax-xmin));
+X}
+X# scale y-value
+Xfunction yscale(y) {
+X	return((y-ymin)/(ymax-ymin));
+X}
+X# round ranges, VERY POOR!
+X# round to smallest e*10^log10(val) + n*e .gt. val
+Xfunction roundceil(ex, val,	e, v) {
+X	e = ex;
+X	while (e < val) {
+X		e *= 10;
+X	}
+X	v = val;
+X	if (int(v) % e) {
+X		v = e*(int(v/e) + 1);
+X	}
+X	while (v >= val) {
+X		v -= ex;
+X	}
+X	if (debug) {
+X		printf("roundceil(%g, %g) returns %g\n",
+X			ex, val, v + ex) | "cat >&2";
+X	}
+X	return(v + ex);
+X}
+X# round to greatest e*10^log10(val) - n*e .lt. val
+Xfunction roundfloor(ex, val,	e, v) {
+X	e = ex;
+X	while (e < val) {
+X		e *= 10;
+X	}
+X	if (e > ex) {
+X		e /= 10;
+X	}
+X	v = val;
+X	if (int(v) % e) {
+X		v = e*(int(v/e));
+X	}
+X	while (v <= val) {
+X		v += ex;
+X	}
+X	if (debug) {
+X		printf("roundfloor(%g, %g) returns %g\n",
+X			ex, val, v - ex) | "cat >&2";
+X	}
+X	return(v - ex);
+X}
+X# count of ticks
+Xfunction steps(defsteps, min, max)
+X{
+X	# very simple solution
+X	return(defsteps);
+X}
+X# sorting routine
+Xfunction swap(g, i, j,	t) {
+X	t = g_x[g, i];
+X	g_x[g, i] = g_x[g, j];
+X	g_x[g, j] = t;
+X	t = g_y[g, i];
+X	g_y[g, i] = g_y[g, j];
+X	g_y[g, j] = t;
+X	t = g_ch[g, i];
+X	g_ch[g, i] = g_ch[g, j];
+X	g_ch[g, j] = t;
+X}
+X# insertion sort
+Xfunction sort(g,	i, j) {
+X	for (i = 1; i < g_ndata[g]; ++i) {
+X		for (j = i; j > 0 && g_x[g, j - 1] > g_x[g, j]; --j) {
+X			swap(g, j - 1, j);
+X		}
+X	}
+X}
+X
+X# create data points
+Xfunction drawgraph(g,	i) {
+X	if (g_ndata[g] == 0) {
+X		return;
+X	}
+X	sort(g);
+X	printf("G_%s: # graph no. %d\n", g_name[g], g + 1);
+X	if (g_lstyle[g] == "invis" || g_flags[g] == MARKED) {
+X		for (i = 0; i < g_ndata[g]; ++i) {
+X			printf("\"%s\" at %s.sw + (%g, %g)\n",
+X				g_ch[g, i] != "" ? g_ch[g, i] : (g_defch[g] != "" ? g_defch[g] : DEFCH), 
+X				FNAME, xscale(g_x[g, i])*wid, yscale(g_y[g, i])*ht);
+X		}
+X	}
+X	if (g_lstyle[g] != "invis") {
+X		printf("%sline %s %s from %s.sw + (%g, %g)",
+X			g_spline[g], g_label[g], g_lstyle[g] == "solid" ? "" : g_lstyle[g],
+X			FNAME, xscale(g_x[g, 0])*wid, yscale(g_y[g, 0])*ht);
+X		for (i = 1; i < g_ndata[g]; ++i) {
+X			printf("\t\\\n\tthen to %s.sw + (%g, %g)", FNAME,
+X				xscale(g_x[g, i])*wid, yscale(g_y[g, i])*ht);
+X		}
+X		printf("\n");
+X	}
+X}
+X#vi: set tabstop=5 shiftwidth=5:
+SHAR_EOF
+$TOUCH -am 1021170993 prag-1.0/prag.orig &&
+chmod 0755 prag-1.0/prag.orig ||
+echo "restore of prag-1.0/prag.orig failed"
+set `wc -c prag-1.0/prag.orig`;Wc_c=$1
+if test "$Wc_c" != "15572"; then
+	echo original size 15572, current size $Wc_c
+fi
+# ============= prag-1.0/prag.ps ==============
+echo "x - extracting prag-1.0/prag.ps (Text)"
+sed 's/^X//' << 'SHAR_EOF' > prag-1.0/prag.ps &&
+X%!PS-Adobe-3.0
+X%%Creator: groff version 1.09
+X%%CreationDate: Wed Nov 15 14:04:11 1995
+X%%DocumentNeededResources: font Times-Roman
+X%%+ font Times-Bold
+X%%+ font Courier
+X%%+ font Times-Italic
+X%%+ font Symbol
+X%%DocumentSuppliedResources: procset grops 1.09 0
+X%%Pages: 6
+X%%PageOrder: Ascend
+X%%Orientation: Portrait
+X%%EndComments
+X%%BeginProlog
+X%%BeginResource: procset grops 1.09 0
+X/setpacking where{
+Xpop
+Xcurrentpacking
+Xtrue setpacking
+X}if
+X/grops 120 dict dup begin
+X/SC 32 def
+X/A/show load def
+X/B{0 SC 3 -1 roll widthshow}bind def
+X/C{0 exch ashow}bind def
+X/D{0 exch 0 SC 5 2 roll awidthshow}bind def
+X/E{0 rmoveto show}bind def
+X/F{0 rmoveto 0 SC 3 -1 roll widthshow}bind def
+X/G{0 rmoveto 0 exch ashow}bind def
+X/H{0 rmoveto 0 exch 0 SC 5 2 roll awidthshow}bind def
+X/I{0 exch rmoveto show}bind def
+X/J{0 exch rmoveto 0 SC 3 -1 roll widthshow}bind def
+X/K{0 exch rmoveto 0 exch ashow}bind def
+X/L{0 exch rmoveto 0 exch 0 SC 5 2 roll awidthshow}bind def
+X/M{rmoveto show}bind def
+X/N{rmoveto 0 SC 3 -1 roll widthshow}bind def
+X/O{rmoveto 0 exch ashow}bind def
+X/P{rmoveto 0 exch 0 SC 5 2 roll awidthshow}bind def
+X/Q{moveto show}bind def
+X/R{moveto 0 SC 3 -1 roll widthshow}bind def
+X/S{moveto 0 exch ashow}bind def
+X/T{moveto 0 exch 0 SC 5 2 roll awidthshow}bind def
+X/SF{
+Xfindfont exch
+X[exch dup 0 exch 0 exch neg 0 0]makefont
+Xdup setfont
+X[exch/setfont cvx]cvx bind def
+X}bind def
+X/MF{
+Xfindfont
+X[5 2 roll
+X0 3 1 roll 
+Xneg 0 0]makefont
+Xdup setfont
+X[exch/setfont cvx]cvx bind def
+X}bind def
+X/level0 0 def
+X/RES 0 def
+X/PL 0 def
+X/LS 0 def
+X/PLG{
+Xgsave newpath clippath pathbbox grestore
+Xexch pop add exch pop
+X}bind def
+X/BP{
+X/level0 save def
+X1 setlinecap
+X1 setlinejoin
+X72 RES div dup scale
+XLS{
+X90 rotate
+X}{
+X0 PL translate
+X}ifelse
+X1 -1 scale
+X}bind def
+X/EP{
+Xlevel0 restore
+Xshowpage
+X}bind def
+X/DA{
+Xnewpath arcn stroke
+X}bind def
+X/SN{
+Xtransform
+X.25 sub exch .25 sub exch
+Xround .25 add exch round .25 add exch
+Xitransform
+X}bind def
+X/DL{
+XSN
+Xmoveto
+XSN
+Xlineto stroke
+X}bind def
+X/DC{
+Xnewpath 0 360 arc closepath
+X}bind def
+X/TM matrix def
+X/DE{
+XTM currentmatrix pop
+Xtranslate scale newpath 0 0 .5 0 360 arc closepath
+XTM setmatrix
+X}bind def
+X/RC/rcurveto load def
+X/RL/rlineto load def
+X/ST/stroke load def
+X/MT/moveto load def
+X/CL/closepath load def
+X/FL{
+Xcurrentgray exch setgray fill setgray
+X}bind def
+X/BL/fill load def
+X/LW/setlinewidth load def
+X/RE{
+Xfindfont
+Xdup maxlength 1 index/FontName known not{1 add}if dict begin
+X{
+X1 index/FID ne{def}{pop pop}ifelse
+X}forall
+X/Encoding exch def
+Xdup/FontName exch def
+Xcurrentdict end definefont pop
+X}bind def
+X/DEFS 0 def
+X/EBEGIN{
+Xmoveto
+XDEFS begin
+X}bind def
+X/EEND/end load def
+X/CNT 0 def
+X/level1 0 def
+X/PBEGIN{
+X/level1 save def
+Xtranslate
+Xdiv 3 1 roll div exch scale
+Xneg exch neg exch translate
+X0 setgray
+X0 setlinecap
+X1 setlinewidth
+X0 setlinejoin
+X10 setmiterlimit
+X[]0 setdash
+X/setstrokeadjust where{
+Xpop
+Xfalse setstrokeadjust
+X}if
+X/setoverprint where{
+Xpop
+Xfalse setoverprint
+X}if
+Xnewpath
+X/CNT countdictstack def
+Xuserdict begin
+X/showpage{}def
+X}bind def
+X/PEND{
+Xclear
+Xcountdictstack CNT sub{end}repeat
+Xlevel1 restore
+X}bind def
+Xend def
+X/setpacking where{
+Xpop
+Xsetpacking
+X}if
+X%%EndResource
+X%%IncludeResource: font Times-Roman
+X%%IncludeResource: font Times-Bold
+X%%IncludeResource: font Courier
+X%%IncludeResource: font Times-Italic
+X%%IncludeResource: font Symbol
+Xgrops begin/DEFS 1 dict def DEFS begin/u{.001 mul}bind def end/RES 72
+Xdef/PL 841.89 def/LS false def/ENC0[/asciicircum/asciitilde/Scaron
+X/Zcaron/scaron/zcaron/Ydieresis/trademark/quotesingle/.notdef/.notdef
+X/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef
+X/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef
+X/.notdef/.notdef/.notdef/space/exclam/quotedbl/numbersign/dollar/percent
+X/ampersand/quoteright/parenleft/parenright/asterisk/plus/comma/hyphen
+X/period/slash/zero/one/two/three/four/five/six/seven/eight/nine/colon
+X/semicolon/less/equal/greater/question/at/A/B/C/D/E/F/G/H/I/J/K/L/M/N/O
+X/P/Q/R/S/T/U/V/W/X/Y/Z/bracketleft/backslash/bracketright/circumflex
+X/underscore/quoteleft/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y
+X/z/braceleft/bar/braceright/tilde/.notdef/quotesinglbase/guillemotleft
+X/guillemotright/bullet/florin/fraction/perthousand/dagger/daggerdbl
+X/endash/emdash/ff/fi/fl/ffi/ffl/dotlessi/dotlessj/grave/hungarumlaut
+X/dotaccent/breve/caron/ring/ogonek/quotedblleft/quotedblright/oe/lslash
+X/quotedblbase/OE/Lslash/.notdef/exclamdown/cent/sterling/currency/yen
+X/brokenbar/section/dieresis/copyright/ordfeminine/guilsinglleft
+X/logicalnot/minus/registered/macron/degree/plusminus/twosuperior
+X/threesuperior/acute/mu/paragraph/periodcentered/cedilla/onesuperior
+X/ordmasculine/guilsinglright/onequarter/onehalf/threequarters
+X/questiondown/Agrave/Aacute/Acircumflex/Atilde/Adieresis/Aring/AE
+X/Ccedilla/Egrave/Eacute/Ecircumflex/Edieresis/Igrave/Iacute/Icircumflex
+X/Idieresis/Eth/Ntilde/Ograve/Oacute/Ocircumflex/Otilde/Odieresis
+X/multiply/Oslash/Ugrave/Uacute/Ucircumflex/Udieresis/Yacute/Thorn
+X/germandbls/agrave/aacute/acircumflex/atilde/adieresis/aring/ae/ccedilla
+X/egrave/eacute/ecircumflex/edieresis/igrave/iacute/icircumflex/idieresis
+X/eth/ntilde/ograve/oacute/ocircumflex/otilde/odieresis/divide/oslash
+X/ugrave/uacute/ucircumflex/udieresis/yacute/thorn/ydieresis]def
+X/Times-Italic@0 ENC0/Times-Italic RE/Courier@0 ENC0/Courier RE
+X/Times-Bold@0 ENC0/Times-Bold RE/Times-Roman@0 ENC0/Times-Roman RE
+X%%EndProlog
+X%%Page: 1 1
+X%%BeginPageSetup
+XBP
+X%%EndPageSetup
+X/F0 10/Times-Roman@0 SF(PRA)72 48 Q 389.64(G\(1\) PRA)-.4 F(G\(1\))-.4 E
+X/F1 9/Times-Bold@0 SF -.18(NA)72 84 S(ME).18 E/F2 10/Times-Bold@0 SF
+X(prag)108 96 Q F0 2.5<ad63>2.5 G(ompile diagrams for)-2.5 E F2(pic)2.5 E
+XF1(SYNOPSIS)72 112.8 Q/F3 10/Courier@0 SF(prag)108 124.8 Q F0([)2.5 E/F4
+X10/Times-Italic@0 SF(\214lename)2.5 E F0 -.832 1.666(... ])2.5 H F1
+X(DESCRIPTION)72 141.6 Q F3(.G1)108 153.6 Q F0([)2.5 E F4(width)2.5 E F0
+X([)2.5 E F4(height)2.5 E F0(]])2.5 E F3(.G2)108 165.6 Q F2(prag)144
+X177.6 Q F0 .378(recognizes its input only between)2.879 F F2(.G1)2.878 E
+XF0(and)2.878 E F2(.G2)2.878 E F0 5.378(.A)C .378
+X(ll other lines are copied literal to standard)-5.378 F 2.5(output. T)
+X144 189.6 R .2 -.1(wo o)-.8 H(ptional ar).1 E(guments to)-.18 E F2(.G1)
+X2.5 E F0(specify the width and the height.)2.5 E F3(#)108 201.6 Q F4
+X(comment)2.5 E F0
+X(Lines starting with a hash mark '#' are treated as comments.)144 213.6
+XQ F3(draw)108 225.6 Q F4(line-style)2.5 E F0(The)144 237.6 Q F3(draw)
+X2.753 E F0 .253(statement sets the line style for dra)2.753 F .253
+X(wing the graphs.)-.15 F -1.11(Va)5.253 G .253(lid ar)1.11 F .253
+X(guments are the line styles)-.18 F 1.267(as kno)144 249.6 R 1.267
+X(wn from)-.25 F F2(pic)3.767 E F0 1.267(\(1\) or the pseudo-style)B F3
+X(marked)3.767 E F0(.)A F3(marked)6.267 E F0 1.266
+X(will yield a solid graph with the)3.767 F .741(data points mark)144
+X261.6 R 3.241(ed. Up)-.1 F .741(to \214v)3.241 F 3.241(ed)-.15 G(ef)
+X-3.241 E .741(ault marking characters \(\\\(b)-.1 F 3.241<7583>-.2 G
+X3.241(,\\)-3.241 G(\(*D)-3.241 E/F5 10/Symbol SF(D)3.241 E F0 3.241(,\\)
+XC(\(pl)-3.241 E F5(+)3.241 E F0 3.241(,\\)C .4 LW 502.806 261.6 497.806
+X261.6 DL 502.806 256.6 502.806 261.6 DL 497.806 256.6 502.806 256.6 DL
+X497.806 261.6 497.806 256.6 DL 6.741(\(sq ,)481.845 261.6 R(\\\(mu)3.242
+XE F5<b4>3.242 E F0(\))A .316(are used for the \214rst \214v)144 273.6 R
+X2.816(eg)-.15 G 2.816(raphs. If)-2.816 F .316(you don')2.816 F 2.816(tl)
+X-.18 G(ik)-2.816 E 2.815(et)-.1 G .315(hese characters, you can o)-2.815
+XF -.15(ve)-.15 G .315(rride them by gi).15 F(v-)-.25 E 1.372
+X(ing an additional dra)144 285.6 R 1.372
+X(wing character to each data point \(as second or third ar)-.15 F 3.872
+X(gument\). Use)-.18 F(line)3.872 E(style)144 297.6 Q F3(invis)2.5 E F0
+X(to dra)2.5 E 2.5(wu)-.15 G(nconnected data points.)-2.5 E F3(new)108
+X309.6 Q F0([)2.5 E F4(line-style)2.5 E F0(])2.5 E F4(name)2.5 E F0([)2.5
+XE F4(label-string)2.5 E F0(]]])2.5 E .69(This statement switches a ne)
+X144 321.6 R 3.19(wg)-.25 G .69(raph within a diagram.)-3.19 F .689
+X(The line style of the graph is set to)5.689 F F4(line-)3.189 E(style)
+X144 333.6 Q F0 5.756(.T).18 G .757(he graph gets the name)-5.756 F F4
+X(name)3.257 E F0 3.257(,w).18 G .757(hich can be referred in subsequent)
+X-3.257 F F2(pic)3.257 E F0 .757(statements and is)3.257 F
+X(labeled with the string)144 345.6 Q F4(label-string)2.5 E F0(.).22 E F4
+X(label-string)5 E F0(can be an)2.5 E 2.5(yv)-.15 G(alid)-2.75 E F2(pic)
+X2.5 E F0(string.)2.5 E F3(label)108 357.6 Q F0([)2.5 E F3(left)2.5 E F0
+X(|)2.5 E F3(right)2.5 E F0(|)2.5 E F3(top)2.5 E F0(|)2.5 E F3(bot)2.5 E
+XF0(])2.5 E F4(label-string)2.5 E(label-string)144 369.6 Q F0
+X(is placed at the speci\214ed side of the whole diagram.)2.5 E F3(ticks)
+X108 381.6 Q F0([)2.5 E F3(left)2.5 E F0(|)2.5 E F3(right)2.5 E F0(|)2.5
+XE F3(top)2.5 E F0(|)2.5 E F3(bot)2.5 E F0 2.5(][)2.5 G F4(wher)A(e)-.37
+XE F0(])2.5 E F4(position)2.5 E F0 1.666(...)2.5 G -.35(Ti)144 393.6 S
+X.798(ck marks for the speci\214ed side are placed at the gi).35 F -.15
+X(ve)-.25 G 3.298(np).15 G(ositions.)-3.298 E F4(wher)5.798 E(e)-.37 E F0
+X.798(says to place the ticks)3.298 F(inside \()144 405.6 Q F3(in)A F0
+X2.5(\)o)C 2.5(ro)-2.5 G(utside \()-2.5 E F3(out)A F0 2.5(\)t)C
+X(he diagram.)-2.5 E F3(ticks)108 417.6 Q F0([)2.5 E F3(left)2.5 E F0(|)
+X2.5 E F3(right)2.5 E F0(|)2.5 E F3(top)2.5 E F0(|)2.5 E F3(bot)2.5 E F0
+X2.5(][)2.5 G F4(wher)A(e)-.37 E F0(])2.5 E F3(from)2.5 E F4(be)2.5 E
+X(gin)-.4 E F3(to)2.5 E F4(end)2.5 E F0([)2.5 E F3(by)2.5 E F4(step)2.5 E
+XF0(])2.5 E .897(This second v)144 429.6 R .897(ariant of the)-.25 F F3
+X(tick)3.397 E F0 .897(-statement allo)B .897
+X(ws the automatic generation of ticks in the range)-.25 F(from)144 441.6
+XQ F4(be)2.5 E(gin)-.4 E F0(to)2.5 E F4(end)2.5 E F0
+X(with an optional distance)2.5 E F4(step)2.5 E F0(.).19 E F3(frame)108
+X453.6 Q F4(fr)2.5 E(ame-attrib)-.15 E(utes)-.2 E F0 1.666(...)2.5 G(The)
+X144 465.6 Q F4(fr)3.892 E(ame-attrib)-.15 E(utes)-.2 E F0 1.392(are gi)
+X3.892 F -.15(ve)-.25 G 3.892(nt).15 G 3.892(ot)-3.892 G 1.392
+X(he box, that b)-3.892 F 1.392(uilds the frame of the diagram.)-.2 F
+X-1.11(Va)6.392 G(lid)1.11 E F2(pic)3.891 E F0(box)3.891 E(attrib)144
+X477.6 Q .496(utes can be used.)-.2 F .496
+X(The internal name of the diagram frame is)5.496 F F3(FRAME)2.996 E F0
+X.497(and of the surrounding)2.997 F(box)144 489.6 Q F3(GRAPH)2.735 E F0
+X5.235(.B)C .235(oth can be used in)-5.235 F F2(pic)2.735 E F0 .235
+X(statements to get special ef)2.735 F 2.735(fects. The)-.25 F(box)2.735
+XE .235(es for the top, left,)-.15 F(right and bottom mar)144 501.6 Q
+X(gin are)-.18 E F3(TMARG)2.5 E F0(,)A F3(LMARG)2.5 E F0(,)A F3(RMARG)2.5
+XE F0(and)2.5 E F3(BMARG)2.5 E F0(.)A F3(spline)108 513.6 Q(nospline)108
+X525.6 Q(spline)144 537.6 Q F0 .338(forces prag to use splines for dra)
+X2.838 F .339(wing graphs, which is the def)-.15 F(ault.)-.1 E F3
+X(nospline)5.339 E F0 .339(will use)2.839 F F2(pic)144 549.6 Q F0 -.55
+X('s)C F3(line)3.05 E F0(directi)2.5 E -.15(ve)-.25 G 2.5(sr).15 G
+X(especti)-2.5 E -.15(ve)-.25 G(ly).15 E(.)-.65 E F3(range)108 561.6 Q F4
+X(xmin ymin xmax ymax)2.5 E F0(Graphs are dra)144 573.6 Q
+X(wn within the range speci\214ed.)-.15 E F3(ht)108 585.6 Q F4(number)2.5
+XE F0(Sets the height of the diagram to)144 597.6 Q F4(number)2.5 E F0(.)
+X.73 E F3(wid)108 609.6 Q F4(number)2.5 E F0
+X(Sets the width of the diagram to)144 621.6 Q F4(number)2.5 E F0(.).73 E
+XF3(grid)108 633.6 Q F0([)2.5 E F4(line-style)2.5 E F0(])2.5 E(Dra)144
+X645.6 Q(ws a grid of)-.15 E F4(line-style)2.5 E F0(,).18 E F3(dotted)2.5
+XE F0(per def)2.5 E(ault.)-.1 E F3(pic)108 657.6 Q F0({)2.5 E F4
+X(anything)2.5 E F0(})2.5 E F4(Anything)144 669.6 Q F0
+X(is passed literally through)2.5 E F2(pic)2.5 E F0(.)A F3(next)108 681.6
+XQ F0([)2.5 E F4(gr)2.5 E(aph-name)-.15 E F0 2.5(][)2.5 G F3(at)A F0(])
+X2.5 E F4(position)2.5 E F0(Sets a ne)144 693.6 Q 2.5(wd)-.25 G
+X(ata point for graph)-2.5 E F4(gr)2.5 E(aph-name)-.15 E F0
+X(or the current graph at position)2.5 E F4(position)2.5 E F0(.).24 E F4
+X(position)108 705.6 Q -.8(Po)144 717.6 S(sition).8 E F0 .354
+X(is described by an y coordinate and an optional x coordinate.)2.855 F
+X.354(If the x coordinate is miss-)5.354 F
+X(ing, then x is assumed to be 0, 1, 2, 3, etc.)144 729.6 Q 2.5(1A)
+X276.555 768 S(ugust 1993)-2.5 E(1)199.555 E EP
+X%%Page: 2 2
+X%%BeginPageSetup
+XBP
+X%%EndPageSetup
+X/F0 10/Times-Roman@0 SF(PRA)72 48 Q 389.64(G\(1\) PRA)-.4 F(G\(1\))-.4 E
+X/F1 10/Times-Italic@0 SF(position dr)108 84 Q(awing-c)-.15 E(har)-.15 E
+XF0 -.15(Fo)144 96 S 3.276(re).15 G .776
+X(ach data point an optional \(as second or third ar)-3.276 F .777
+X(gument respecti)-.18 F -.15(ve)-.25 G .777(ly\) dra).15 F .777
+X(wing character can)-.15 F 1.156(be declared.)144 108 R(An)6.156 E(y)
+X-.15 E/F2 10/Times-Bold@0 SF(tr)3.656 E(off)-.18 E F0(and)3.656 E F2
+X(eqn)3.656 E F0 1.155
+X(character or special character or sequence of characters can be)3.655 F
+X(used.)144 120 Q/F3 9/Times-Bold@0 SF(EXAMPLES)72 136.8 Q F2(Example 1)
+X87 148.8 Q/F4 9/Courier@0 SF(frame invis)144 158.8 Q
+X(pic { line from FRAME.sw to FRAME.se })144 168.8 Q
+X(pic { line from FRAME.sw to FRAME.nw })144 178.8 Q(draw invis)144 188.8
+XQ 5.4(0\\)144 198.8 S(&)-5.4 E(2.9 NY)144 208.8 Q(7.8 NJ)144 218.8 Q
+X(3.4 CA)144 228.8 Q(1.8 MI)144 238.8 Q(3.7 FL)144 248.8 Q F0
+X(will produce:)108 272.8 Q .4 LW 145.44 437.368 151.272 437.368 DL(2)
+X140.44 439.568 Q 145.44 400.144 151.272 400.144 DL(4)140.44 402.344 Q
+X145.44 362.848 151.272 362.848 DL(6)140.44 365.048 Q 145.44 325.624
+X151.272 325.624 DL(8)140.44 327.824 Q 207.144 480.424 207.144 474.592 DL
+X(1)204.644 488.624 Q 262.944 480.424 262.944 474.592 DL(2)260.444
+X488.624 Q 318.816 480.424 318.816 474.592 DL(3)316.316 488.624 Q 374.688
+X480.424 374.688 474.592 DL(4)372.188 488.624 Q(NY)199.924 422.792 Q(NJ)
+X257.389 331.568 Q(CA)311.871 413.504 Q(MI)368.578 443.24 Q(FL)424.725
+X407.888 Q 430.56 474.592 151.272 474.592 DL 151.272 288.4 151.272
+X474.592 DL F2(Example 2)87 505.824 Q F4(wid 4)144 515.824 Q(ht 3)144
+X525.824 Q(grid dotted)144 535.824 Q(label left "execution" "time / sec")
+X144 545.824 Q(label bot "# of msgs")144 555.824 Q(range 0 0 5000 25)144
+X565.824 Q(ticks left 0 5 10 15 20 25)144 575.824 Q
+X(ticks right 0 5 10 15 20 25)144 585.824 Q
+X(ticks top 0 1000 2000 3000 4000 5000)144 595.824 Q
+X(ticks bot 0 1000 2000 3000 4000 5000)144 605.824 Q
+X(new marked MSG "\\s-2MSG\\s+2" above)144 615.824 Q(100 0.19 \\\(*D)144
+X625.824 Q 1.5(...)144 635.824 S(next TLITCP at 5000 20.09 \\\(mu)144
+X645.824 Q(3000 18.08 \\\(mu)144 655.824 Q(4000 19.12 \\\(mu)144 665.824
+XQ F0(will produce:)108 689.824 Q 2.5(1A)276.555 768 S(ugust 1993)-2.5 E
+X(2)199.555 E EP
+X%%Page: 3 3
+X%%BeginPageSetup
+XBP
+X%%EndPageSetup
+X/F0 10/Times-Roman@0 SF(PRA)72 48 Q 389.64(G\(1\) PRA)-.4 F(G\(1\))-.4 E
+X472.284 301.656 MT 0 -211.032 RL -281.376 0 RL 0 211.032 RL CL .4 LW ST
+X-.15(exe)101.274 209.944 S(cution).15 E(time / sec)101.399 221.944 Q 2.5
+X(#o)288.679 356.632 S 2.5(fm)-2.5 G(sgs)-2.5 E 184.284 301.656 190.908
+X301.656 DL(0)176.784 303.856 Q 184.284 259.464 190.908 259.464 DL(5)
+X176.784 261.664 Q 190.908 259.464 190.908 259.464 DL 194.436 259.464
+X194.436 259.464 DL 197.964 259.464 197.964 259.464 DL 201.42 259.464
+X201.42 259.464 DL 204.948 259.464 204.948 259.464 DL 208.476 259.464
+X208.476 259.464 DL 212.004 259.464 212.004 259.464 DL 215.532 259.464
+X215.532 259.464 DL 219.06 259.464 219.06 259.464 DL 222.516 259.464
+X222.516 259.464 DL 226.044 259.464 226.044 259.464 DL 229.572 259.464
+X229.572 259.464 DL 233.1 259.464 233.1 259.464 DL 236.628 259.464
+X236.628 259.464 DL 240.156 259.464 240.156 259.464 DL 243.684 259.464
+X243.684 259.464 DL 247.14 259.464 247.14 259.464 DL 250.668 259.464
+X250.668 259.464 DL 254.196 259.464 254.196 259.464 DL 257.724 259.464
+X257.724 259.464 DL 261.252 259.464 261.252 259.464 DL 264.78 259.464
+X264.78 259.464 DL 268.308 259.464 268.308 259.464 DL 271.764 259.464
+X271.764 259.464 DL 275.292 259.464 275.292 259.464 DL 278.82 259.464
+X278.82 259.464 DL 282.348 259.464 282.348 259.464 DL 285.876 259.464
+X285.876 259.464 DL 289.404 259.464 289.404 259.464 DL 292.932 259.464
+X292.932 259.464 DL 296.388 259.464 296.388 259.464 DL 299.916 259.464
+X299.916 259.464 DL 303.444 259.464 303.444 259.464 DL 306.972 259.464
+X306.972 259.464 DL 310.5 259.464 310.5 259.464 DL 314.028 259.464
+X314.028 259.464 DL 317.556 259.464 317.556 259.464 DL 321.012 259.464
+X321.012 259.464 DL 324.54 259.464 324.54 259.464 DL 328.068 259.464
+X328.068 259.464 DL 331.596 259.464 331.596 259.464 DL 335.124 259.464
+X335.124 259.464 DL 338.652 259.464 338.652 259.464 DL 342.18 259.464
+X342.18 259.464 DL 345.636 259.464 345.636 259.464 DL 349.164 259.464
+X349.164 259.464 DL 352.692 259.464 352.692 259.464 DL 356.22 259.464
+X356.22 259.464 DL 359.748 259.464 359.748 259.464 DL 363.276 259.464
+X363.276 259.464 DL 366.804 259.464 366.804 259.464 DL 370.26 259.464
+X370.26 259.464 DL 373.788 259.464 373.788 259.464 DL 377.316 259.464
+X377.316 259.464 DL 380.844 259.464 380.844 259.464 DL 384.372 259.464
+X384.372 259.464 DL 387.9 259.464 387.9 259.464 DL 391.428 259.464
+X391.428 259.464 DL 394.884 259.464 394.884 259.464 DL 398.412 259.464
+X398.412 259.464 DL 401.94 259.464 401.94 259.464 DL 405.468 259.464
+X405.468 259.464 DL 408.996 259.464 408.996 259.464 DL 412.524 259.464
+X412.524 259.464 DL 416.052 259.464 416.052 259.464 DL 419.508 259.464
+X419.508 259.464 DL 423.036 259.464 423.036 259.464 DL 426.564 259.464
+X426.564 259.464 DL 430.092 259.464 430.092 259.464 DL 433.62 259.464
+X433.62 259.464 DL 437.148 259.464 437.148 259.464 DL 440.676 259.464
+X440.676 259.464 DL 444.132 259.464 444.132 259.464 DL 447.66 259.464
+X447.66 259.464 DL 451.188 259.464 451.188 259.464 DL 454.716 259.464
+X454.716 259.464 DL 458.244 259.464 458.244 259.464 DL 461.772 259.464
+X461.772 259.464 DL 465.228 259.464 465.228 259.464 DL 468.756 259.464
+X468.756 259.464 DL 472.284 259.464 472.284 259.464 DL 184.284 217.2
+X190.908 217.2 DL(10)171.784 219.4 Q 190.908 217.2 190.908 217.2 DL
+X194.436 217.2 194.436 217.2 DL 197.964 217.2 197.964 217.2 DL 201.42
+X217.2 201.42 217.2 DL 204.948 217.2 204.948 217.2 DL 208.476 217.2
+X208.476 217.2 DL 212.004 217.2 212.004 217.2 DL 215.532 217.2 215.532
+X217.2 DL 219.06 217.2 219.06 217.2 DL 222.516 217.2 222.516 217.2 DL
+X226.044 217.2 226.044 217.2 DL 229.572 217.2 229.572 217.2 DL 233.1
+X217.2 233.1 217.2 DL 236.628 217.2 236.628 217.2 DL 240.156 217.2
+X240.156 217.2 DL 243.684 217.2 243.684 217.2 DL 247.14 217.2 247.14
+X217.2 DL 250.668 217.2 250.668 217.2 DL 254.196 217.2 254.196 217.2 DL
+X257.724 217.2 257.724 217.2 DL 261.252 217.2 261.252 217.2 DL 264.78
+X217.2 264.78 217.2 DL 268.308 217.2 268.308 217.2 DL 271.764 217.2
+X271.764 217.2 DL 275.292 217.2 275.292 217.2 DL 278.82 217.2 278.82
+X217.2 DL 282.348 217.2 282.348 217.2 DL 285.876 217.2 285.876 217.2 DL
+X289.404 217.2 289.404 217.2 DL 292.932 217.2 292.932 217.2 DL 296.388
+X217.2 296.388 217.2 DL 299.916 217.2 299.916 217.2 DL 303.444 217.2
+X303.444 217.2 DL 306.972 217.2 306.972 217.2 DL 310.5 217.2 310.5 217.2
+XDL 314.028 217.2 314.028 217.2 DL 317.556 217.2 317.556 217.2 DL 321.012
+X217.2 321.012 217.2 DL 324.54 217.2 324.54 217.2 DL 328.068 217.2
+X328.068 217.2 DL 331.596 217.2 331.596 217.2 DL 335.124 217.2 335.124
+X217.2 DL 338.652 217.2 338.652 217.2 DL 342.18 217.2 342.18 217.2 DL
+X345.636 217.2 345.636 217.2 DL 349.164 217.2 349.164 217.2 DL 352.692
+X217.2 352.692 217.2 DL 356.22 217.2 356.22 217.2 DL 359.748 217.2
+X359.748 217.2 DL 363.276 217.2 363.276 217.2 DL 366.804 217.2 366.804
+X217.2 DL 370.26 217.2 370.26 217.2 DL 373.788 217.2 373.788 217.2 DL
+X377.316 217.2 377.316 217.2 DL 380.844 217.2 380.844 217.2 DL 384.372
+X217.2 384.372 217.2 DL 387.9 217.2 387.9 217.2 DL 391.428 217.2 391.428
+X217.2 DL 394.884 217.2 394.884 217.2 DL 398.412 217.2 398.412 217.2 DL
+X401.94 217.2 401.94 217.2 DL 405.468 217.2 405.468 217.2 DL 408.996
+X217.2 408.996 217.2 DL 412.524 217.2 412.524 217.2 DL 416.052 217.2
+X416.052 217.2 DL 419.508 217.2 419.508 217.2 DL 423.036 217.2 423.036
+X217.2 DL 426.564 217.2 426.564 217.2 DL 430.092 217.2 430.092 217.2 DL
+X433.62 217.2 433.62 217.2 DL 437.148 217.2 437.148 217.2 DL 440.676
+X217.2 440.676 217.2 DL 444.132 217.2 444.132 217.2 DL 447.66 217.2
+X447.66 217.2 DL 451.188 217.2 451.188 217.2 DL 454.716 217.2 454.716
+X217.2 DL 458.244 217.2 458.244 217.2 DL 461.772 217.2 461.772 217.2 DL
+X465.228 217.2 465.228 217.2 DL 468.756 217.2 468.756 217.2 DL 472.284
+X217.2 472.284 217.2 DL 184.284 175.008 190.908 175.008 DL(15)171.784
+X177.208 Q 190.908 175.008 190.908 175.008 DL 194.436 175.008 194.436
+X175.008 DL 197.964 175.008 197.964 175.008 DL 201.42 175.008 201.42
+X175.008 DL 204.948 175.008 204.948 175.008 DL 208.476 175.008 208.476
+X175.008 DL 212.004 175.008 212.004 175.008 DL 215.532 175.008 215.532
+X175.008 DL 219.06 175.008 219.06 175.008 DL 222.516 175.008 222.516
+X175.008 DL 226.044 175.008 226.044 175.008 DL 229.572 175.008 229.572
+X175.008 DL 233.1 175.008 233.1 175.008 DL 236.628 175.008 236.628
+X175.008 DL 240.156 175.008 240.156 175.008 DL 243.684 175.008 243.684
+X175.008 DL 247.14 175.008 247.14 175.008 DL 250.668 175.008 250.668
+X175.008 DL 254.196 175.008 254.196 175.008 DL 257.724 175.008 257.724
+X175.008 DL 261.252 175.008 261.252 175.008 DL 264.78 175.008 264.78
+X175.008 DL 268.308 175.008 268.308 175.008 DL 271.764 175.008 271.764
+X175.008 DL 275.292 175.008 275.292 175.008 DL 278.82 175.008 278.82
+X175.008 DL 282.348 175.008 282.348 175.008 DL 285.876 175.008 285.876
+X175.008 DL 289.404 175.008 289.404 175.008 DL 292.932 175.008 292.932
+X175.008 DL 296.388 175.008 296.388 175.008 DL 299.916 175.008 299.916
+X175.008 DL 303.444 175.008 303.444 175.008 DL 306.972 175.008 306.972
+X175.008 DL 310.5 175.008 310.5 175.008 DL 314.028 175.008 314.028
+X175.008 DL 317.556 175.008 317.556 175.008 DL 321.012 175.008 321.012
+X175.008 DL 324.54 175.008 324.54 175.008 DL 328.068 175.008 328.068
+X175.008 DL 331.596 175.008 331.596 175.008 DL 335.124 175.008 335.124
+X175.008 DL 338.652 175.008 338.652 175.008 DL 342.18 175.008 342.18
+X175.008 DL 345.636 175.008 345.636 175.008 DL 349.164 175.008 349.164
+X175.008 DL 352.692 175.008 352.692 175.008 DL 356.22 175.008 356.22
+X175.008 DL 359.748 175.008 359.748 175.008 DL 363.276 175.008 363.276
+X175.008 DL 366.804 175.008 366.804 175.008 DL 370.26 175.008 370.26
+X175.008 DL 373.788 175.008 373.788 175.008 DL 377.316 175.008 377.316
+X175.008 DL 380.844 175.008 380.844 175.008 DL 384.372 175.008 384.372
+X175.008 DL 387.9 175.008 387.9 175.008 DL 391.428 175.008 391.428
+X175.008 DL 394.884 175.008 394.884 175.008 DL 398.412 175.008 398.412
+X175.008 DL 401.94 175.008 401.94 175.008 DL 405.468 175.008 405.468
+X175.008 DL 408.996 175.008 408.996 175.008 DL 412.524 175.008 412.524
+X175.008 DL 416.052 175.008 416.052 175.008 DL 419.508 175.008 419.508
+X175.008 DL 423.036 175.008 423.036 175.008 DL 426.564 175.008 426.564
+X175.008 DL 430.092 175.008 430.092 175.008 DL 433.62 175.008 433.62
+X175.008 DL 437.148 175.008 437.148 175.008 DL 440.676 175.008 440.676
+X175.008 DL 444.132 175.008 444.132 175.008 DL 447.66 175.008 447.66
+X175.008 DL 451.188 175.008 451.188 175.008 DL 454.716 175.008 454.716
+X175.008 DL 458.244 175.008 458.244 175.008 DL 461.772 175.008 461.772
+X175.008 DL 465.228 175.008 465.228 175.008 DL 468.756 175.008 468.756
+X175.008 DL 472.284 175.008 472.284 175.008 DL 184.284 132.816 190.908
+X132.816 DL(20)171.784 135.016 Q 190.908 132.816 190.908 132.816 DL
+X194.436 132.816 194.436 132.816 DL 197.964 132.816 197.964 132.816 DL
+X201.42 132.816 201.42 132.816 DL 204.948 132.816 204.948 132.816 DL
+X208.476 132.816 208.476 132.816 DL 212.004 132.816 212.004 132.816 DL
+X215.532 132.816 215.532 132.816 DL 219.06 132.816 219.06 132.816 DL
+X222.516 132.816 222.516 132.816 DL 226.044 132.816 226.044 132.816 DL
+X229.572 132.816 229.572 132.816 DL 233.1 132.816 233.1 132.816 DL
+X236.628 132.816 236.628 132.816 DL 240.156 132.816 240.156 132.816 DL
+X243.684 132.816 243.684 132.816 DL 247.14 132.816 247.14 132.816 DL
+X250.668 132.816 250.668 132.816 DL 254.196 132.816 254.196 132.816 DL
+X257.724 132.816 257.724 132.816 DL 261.252 132.816 261.252 132.816 DL
+X264.78 132.816 264.78 132.816 DL 268.308 132.816 268.308 132.816 DL
+X271.764 132.816 271.764 132.816 DL 275.292 132.816 275.292 132.816 DL
+X278.82 132.816 278.82 132.816 DL 282.348 132.816 282.348 132.816 DL
+X285.876 132.816 285.876 132.816 DL 289.404 132.816 289.404 132.816 DL
+X292.932 132.816 292.932 132.816 DL 296.388 132.816 296.388 132.816 DL
+X299.916 132.816 299.916 132.816 DL 303.444 132.816 303.444 132.816 DL
+X306.972 132.816 306.972 132.816 DL 310.5 132.816 310.5 132.816 DL
+X314.028 132.816 314.028 132.816 DL 317.556 132.816 317.556 132.816 DL
+X321.012 132.816 321.012 132.816 DL 324.54 132.816 324.54 132.816 DL
+X328.068 132.816 328.068 132.816 DL 331.596 132.816 331.596 132.816 DL
+X335.124 132.816 335.124 132.816 DL 338.652 132.816 338.652 132.816 DL
+X342.18 132.816 342.18 132.816 DL 345.636 132.816 345.636 132.816 DL
+X349.164 132.816 349.164 132.816 DL 352.692 132.816 352.692 132.816 DL
+X356.22 132.816 356.22 132.816 DL 359.748 132.816 359.748 132.816 DL
+X363.276 132.816 363.276 132.816 DL 366.804 132.816 366.804 132.816 DL
+X370.26 132.816 370.26 132.816 DL 373.788 132.816 373.788 132.816 DL
+X377.316 132.816 377.316 132.816 DL 380.844 132.816 380.844 132.816 DL
+X384.372 132.816 384.372 132.816 DL 387.9 132.816 387.9 132.816 DL
+X391.428 132.816 391.428 132.816 DL 394.884 132.816 394.884 132.816 DL
+X398.412 132.816 398.412 132.816 DL 401.94 132.816 401.94 132.816 DL
+X405.468 132.816 405.468 132.816 DL 408.996 132.816 408.996 132.816 DL
+X412.524 132.816 412.524 132.816 DL 416.052 132.816 416.052 132.816 DL
+X419.508 132.816 419.508 132.816 DL 423.036 132.816 423.036 132.816 DL
+X426.564 132.816 426.564 132.816 DL 430.092 132.816 430.092 132.816 DL
+X433.62 132.816 433.62 132.816 DL 437.148 132.816 437.148 132.816 DL
+X440.676 132.816 440.676 132.816 DL 444.132 132.816 444.132 132.816 DL
+X447.66 132.816 447.66 132.816 DL 451.188 132.816 451.188 132.816 DL
+X454.716 132.816 454.716 132.816 DL 458.244 132.816 458.244 132.816 DL
+X461.772 132.816 461.772 132.816 DL 465.228 132.816 465.228 132.816 DL
+X468.756 132.816 468.756 132.816 DL 472.284 132.816 472.284 132.816 DL
+X184.284 90.624 190.908 90.624 DL(25)171.784 92.824 Q 478.908 301.656
+X472.284 301.656 DL(0)481.408 303.856 Q 478.908 259.464 472.284 259.464
+XDL(5)481.408 261.664 Q 478.908 217.2 472.284 217.2 DL(10)481.408 219.4 Q
+X478.908 175.008 472.284 175.008 DL(15)481.408 177.208 Q 478.908 132.816
+X472.284 132.816 DL(20)481.408 135.016 Q 478.908 90.624 472.284 90.624 DL
+X(25)481.408 92.824 Q 190.908 84 190.908 90.624 DL(0)188.408 80.2 Q
+X247.14 84 247.14 90.624 DL(1000)237.14 80.2 Q 303.444 84 303.444 90.624
+XDL(2000)293.444 80.2 Q 359.748 84 359.748 90.624 DL(3000)349.748 80.2 Q
+X416.052 84 416.052 90.624 DL(4000)406.052 80.2 Q 472.284 84 472.284
+X90.624 DL(5000)462.284 80.2 Q 190.908 308.28 190.908 301.656 DL(0)
+X188.408 316.48 Q 247.14 308.28 247.14 301.656 DL(1000)237.14 316.48 Q
+X247.14 301.656 247.14 301.656 DL 247.14 298.128 247.14 298.128 DL 247.14
+X294.6 247.14 294.6 DL 247.14 291.072 247.14 291.072 DL 247.14 287.544
+X247.14 287.544 DL 247.14 284.088 247.14 284.088 DL 247.14 280.56 247.14
+X280.56 DL 247.14 277.032 247.14 277.032 DL 247.14 273.504 247.14 273.504
+XDL 247.14 269.976 247.14 269.976 DL 247.14 266.448 247.14 266.448 DL
+X247.14 262.92 247.14 262.92 DL 247.14 259.464 247.14 259.464 DL 247.14
+X255.936 247.14 255.936 DL 247.14 252.408 247.14 252.408 DL 247.14 248.88
+X247.14 248.88 DL 247.14 245.352 247.14 245.352 DL 247.14 241.824 247.14
+X241.824 DL 247.14 238.368 247.14 238.368 DL 247.14 234.84 247.14 234.84
+XDL 247.14 231.312 247.14 231.312 DL 247.14 227.784 247.14 227.784 DL
+X247.14 224.256 247.14 224.256 DL 247.14 220.728 247.14 220.728 DL 247.14
+X217.2 247.14 217.2 DL 247.14 213.744 247.14 213.744 DL 247.14 210.216
+X247.14 210.216 DL 247.14 206.688 247.14 206.688 DL 247.14 203.16 247.14
+X203.16 DL 247.14 199.632 247.14 199.632 DL 247.14 196.104 247.14 196.104
+XDL 247.14 192.576 247.14 192.576 DL 247.14 189.12 247.14 189.12 DL
+X247.14 185.592 247.14 185.592 DL 247.14 182.064 247.14 182.064 DL 247.14
+X178.536 247.14 178.536 DL 247.14 175.008 247.14 175.008 DL 247.14 171.48
+X247.14 171.48 DL 247.14 167.952 247.14 167.952 DL 247.14 164.496 247.14
+X164.496 DL 247.14 160.968 247.14 160.968 DL 247.14 157.44 247.14 157.44
+XDL 247.14 153.912 247.14 153.912 DL 247.14 150.384 247.14 150.384 DL
+X247.14 146.856 247.14 146.856 DL 247.14 143.328 247.14 143.328 DL 247.14
+X139.872 247.14 139.872 DL 247.14 136.344 247.14 136.344 DL 247.14
+X132.816 247.14 132.816 DL 247.14 129.288 247.14 129.288 DL 247.14 125.76
+X247.14 125.76 DL 247.14 122.232 247.14 122.232 DL 247.14 118.704 247.14
+X118.704 DL 247.14 115.248 247.14 115.248 DL 247.14 111.72 247.14 111.72
+XDL 247.14 108.192 247.14 108.192 DL 247.14 104.664 247.14 104.664 DL
+X247.14 101.136 247.14 101.136 DL 247.14 97.608 247.14 97.608 DL 247.14
+X94.08 247.14 94.08 DL 247.14 90.624 247.14 90.624 DL 303.444 308.28
+X303.444 301.656 DL(2000)293.444 316.48 Q 303.444 301.656 303.444 301.656
+XDL 303.444 298.128 303.444 298.128 DL 303.444 294.6 303.444 294.6 DL
+X303.444 291.072 303.444 291.072 DL 303.444 287.544 303.444 287.544 DL
+X303.444 284.088 303.444 284.088 DL 303.444 280.56 303.444 280.56 DL
+X303.444 277.032 303.444 277.032 DL 303.444 273.504 303.444 273.504 DL
+X303.444 269.976 303.444 269.976 DL 303.444 266.448 303.444 266.448 DL
+X303.444 262.92 303.444 262.92 DL 303.444 259.464 303.444 259.464 DL
+X303.444 255.936 303.444 255.936 DL 303.444 252.408 303.444 252.408 DL
+X303.444 248.88 303.444 248.88 DL 303.444 245.352 303.444 245.352 DL
+X303.444 241.824 303.444 241.824 DL 303.444 238.368 303.444 238.368 DL
+X303.444 234.84 303.444 234.84 DL 303.444 231.312 303.444 231.312 DL
+X303.444 227.784 303.444 227.784 DL 303.444 224.256 303.444 224.256 DL
+X303.444 220.728 303.444 220.728 DL 303.444 217.2 303.444 217.2 DL
+X303.444 213.744 303.444 213.744 DL 303.444 210.216 303.444 210.216 DL
+X303.444 206.688 303.444 206.688 DL 303.444 203.16 303.444 203.16 DL
+X303.444 199.632 303.444 199.632 DL 303.444 196.104 303.444 196.104 DL
+X303.444 192.576 303.444 192.576 DL 303.444 189.12 303.444 189.12 DL
+X303.444 185.592 303.444 185.592 DL 303.444 182.064 303.444 182.064 DL
+X303.444 178.536 303.444 178.536 DL 303.444 175.008 303.444 175.008 DL
+X303.444 171.48 303.444 171.48 DL 303.444 167.952 303.444 167.952 DL
+X303.444 164.496 303.444 164.496 DL 303.444 160.968 303.444 160.968 DL
+X303.444 157.44 303.444 157.44 DL 303.444 153.912 303.444 153.912 DL
+X303.444 150.384 303.444 150.384 DL 303.444 146.856 303.444 146.856 DL
+X303.444 143.328 303.444 143.328 DL 303.444 139.872 303.444 139.872 DL
+X303.444 136.344 303.444 136.344 DL 303.444 132.816 303.444 132.816 DL
+X303.444 129.288 303.444 129.288 DL 303.444 125.76 303.444 125.76 DL
+X303.444 122.232 303.444 122.232 DL 303.444 118.704 303.444 118.704 DL
+X303.444 115.248 303.444 115.248 DL 303.444 111.72 303.444 111.72 DL
+X303.444 108.192 303.444 108.192 DL 303.444 104.664 303.444 104.664 DL
+X303.444 101.136 303.444 101.136 DL 303.444 97.608 303.444 97.608 DL
+X303.444 94.08 303.444 94.08 DL 303.444 90.624 303.444 90.624 DL 359.748
+X308.28 359.748 301.656 DL(3000)349.748 316.48 Q 359.748 301.656 359.748
+X301.656 DL 359.748 298.128 359.748 298.128 DL 359.748 294.6 359.748
+X294.6 DL 359.748 291.072 359.748 291.072 DL 359.748 287.544 359.748
+X287.544 DL 359.748 284.088 359.748 284.088 DL 359.748 280.56 359.748
+X280.56 DL 359.748 277.032 359.748 277.032 DL 359.748 273.504 359.748
+X273.504 DL 359.748 269.976 359.748 269.976 DL 359.748 266.448 359.748
+X266.448 DL 359.748 262.92 359.748 262.92 DL 359.748 259.464 359.748
+X259.464 DL 359.748 255.936 359.748 255.936 DL 359.748 252.408 359.748
+X252.408 DL 359.748 248.88 359.748 248.88 DL 359.748 245.352 359.748
+X245.352 DL 359.748 241.824 359.748 241.824 DL 359.748 238.368 359.748
+X238.368 DL 359.748 234.84 359.748 234.84 DL 359.748 231.312 359.748
+X231.312 DL 359.748 227.784 359.748 227.784 DL 359.748 224.256 359.748
+X224.256 DL 359.748 220.728 359.748 220.728 DL 359.748 217.2 359.748
+X217.2 DL 359.748 213.744 359.748 213.744 DL 359.748 210.216 359.748
+X210.216 DL 359.748 206.688 359.748 206.688 DL 359.748 203.16 359.748
+X203.16 DL 359.748 199.632 359.748 199.632 DL 359.748 196.104 359.748
+X196.104 DL 359.748 192.576 359.748 192.576 DL 359.748 189.12 359.748
+X189.12 DL 359.748 185.592 359.748 185.592 DL 359.748 182.064 359.748
+X182.064 DL 359.748 178.536 359.748 178.536 DL 359.748 175.008 359.748
+X175.008 DL 359.748 171.48 359.748 171.48 DL 359.748 167.952 359.748
+X167.952 DL 359.748 164.496 359.748 164.496 DL 359.748 160.968 359.748
+X160.968 DL 359.748 157.44 359.748 157.44 DL 359.748 153.912 359.748
+X153.912 DL 359.748 150.384 359.748 150.384 DL 359.748 146.856 359.748
+X146.856 DL 359.748 143.328 359.748 143.328 DL 359.748 139.872 359.748
+X139.872 DL 359.748 136.344 359.748 136.344 DL 359.748 132.816 359.748
+X132.816 DL 359.748 129.288 359.748 129.288 DL 359.748 125.76 359.748
+X125.76 DL 359.748 122.232 359.748 122.232 DL 359.748 118.704 359.748
+X118.704 DL 359.748 115.248 359.748 115.248 DL 359.748 111.72 359.748
+X111.72 DL 359.748 108.192 359.748 108.192 DL 359.748 104.664 359.748
+X104.664 DL 359.748 101.136 359.748 101.136 DL 359.748 97.608 359.748
+X97.608 DL 359.748 94.08 359.748 94.08 DL 359.748 90.624 359.748 90.624
+XDL 416.052 308.28 416.052 301.656 DL(4000)406.052 316.48 Q 416.052
+X301.656 416.052 301.656 DL 416.052 298.128 416.052 298.128 DL 416.052
+X294.6 416.052 294.6 DL 416.052 291.072 416.052 291.072 DL 416.052
+X287.544 416.052 287.544 DL 416.052 284.088 416.052 284.088 DL 416.052
+X280.56 416.052 280.56 DL 416.052 277.032 416.052 277.032 DL 416.052
+X273.504 416.052 273.504 DL 416.052 269.976 416.052 269.976 DL 416.052
+X266.448 416.052 266.448 DL 416.052 262.92 416.052 262.92 DL 416.052
+X259.464 416.052 259.464 DL 416.052 255.936 416.052 255.936 DL 416.052
+X252.408 416.052 252.408 DL 416.052 248.88 416.052 248.88 DL 416.052
+X245.352 416.052 245.352 DL 416.052 241.824 416.052 241.824 DL 416.052
+X238.368 416.052 238.368 DL 416.052 234.84 416.052 234.84 DL 416.052
+X231.312 416.052 231.312 DL 416.052 227.784 416.052 227.784 DL 416.052
+X224.256 416.052 224.256 DL 416.052 220.728 416.052 220.728 DL 416.052
+X217.2 416.052 217.2 DL 416.052 213.744 416.052 213.744 DL 416.052
+X210.216 416.052 210.216 DL 416.052 206.688 416.052 206.688 DL 416.052
+X203.16 416.052 203.16 DL 416.052 199.632 416.052 199.632 DL 416.052
+X196.104 416.052 196.104 DL 416.052 192.576 416.052 192.576 DL 416.052
+X189.12 416.052 189.12 DL 416.052 185.592 416.052 185.592 DL 416.052
+X182.064 416.052 182.064 DL 416.052 178.536 416.052 178.536 DL 416.052
+X175.008 416.052 175.008 DL 416.052 171.48 416.052 171.48 DL 416.052
+X167.952 416.052 167.952 DL 416.052 164.496 416.052 164.496 DL 416.052
+X160.968 416.052 160.968 DL 416.052 157.44 416.052 157.44 DL 416.052
+X153.912 416.052 153.912 DL 416.052 150.384 416.052 150.384 DL 416.052
+X146.856 416.052 146.856 DL 416.052 143.328 416.052 143.328 DL 416.052
+X139.872 416.052 139.872 DL 416.052 136.344 416.052 136.344 DL 416.052
+X132.816 416.052 132.816 DL 416.052 129.288 416.052 129.288 DL 416.052
+X125.76 416.052 125.76 DL 416.052 122.232 416.052 122.232 DL 416.052
+X118.704 416.052 118.704 DL 416.052 115.248 416.052 115.248 DL 416.052
+X111.72 416.052 111.72 DL 416.052 108.192 416.052 108.192 DL 416.052
+X104.664 416.052 104.664 DL 416.052 101.136 416.052 101.136 DL 416.052
+X97.608 416.052 97.608 DL 416.052 94.08 416.052 94.08 DL 416.052 90.624
+X416.052 90.624 DL 472.284 308.28 472.284 301.656 DL(5000)462.284 316.48
+XQ/F1 10/Symbol SF(D)193.464 302.272 Q(D)216 299.968 Q(D)244.08 297.016 Q
+X(D)300.384 291.256 Q(D)356.688 284.632 Q(D)412.992 279.52 Q(D)469.224
+X272.68 Q 196.524 300.072 MT 11.268 -1.152 RL 7.512 -.768 15.96 -1.644
+X25.344 -2.628 RC 9.384 -.984 23.46 -2.436 42.228 -4.356 RC 18.768 -1.92
+X37.536 -3.996 56.304 -6.228 RC 18.768 -2.232 37.536 -4.188 56.304 -5.868
+XRC 18.768 -1.68 37.536 -3.66 56.304 -5.94 RC 28.152 -3.42 RL ST/F2 8
+X/Times-Roman@0 SF(MSG)325.736 281.44 Q F0<83>194.774 298.096 Q<83>217.31
+X282.472 Q<83>245.39 262.672 Q<83>301.694 223.648 Q<83>357.998 184.624 Q
+X<83>414.302 145.312 Q<83>470.534 107.512 Q 196.524 295.896 MT 11.268
+X-7.812 RL 7.512 -5.208 15.96 -11.124 25.344 -17.748 RC 9.384 -6.624
+X23.46 -16.44 42.228 -29.448 RC 18.768 -13.008 37.536 -26.016 56.304
+X-39.024 RC 18.768 -13.008 37.536 -26.064 56.304 -39.168 RC 18.768
+X-13.104 37.536 -25.956 56.304 -38.556 RC 28.152 -18.9 RL ST F2(SOCKUDP)
+X315.736 196.768 Q 199.024 298.456 194.024 298.456 DL 199.024 293.456
+X199.024 298.456 DL 194.024 293.456 199.024 293.456 DL 194.024 298.456
+X194.024 293.456 DL 221.56 283.768 216.56 283.768 DL 221.56 278.768
+X221.56 283.768 DL 216.56 278.768 221.56 278.768 DL 216.56 283.768 216.56
+X278.768 DL 249.64 265.84 244.64 265.84 DL 249.64 260.84 249.64 265.84 DL
+X244.64 260.84 249.64 260.84 DL 244.64 265.84 244.64 260.84 DL 305.944
+X230.056 300.944 230.056 DL 305.944 225.056 305.944 230.056 DL 300.944
+X225.056 305.944 225.056 DL 300.944 230.056 300.944 225.056 DL 362.248
+X193.48 357.248 193.48 DL 362.248 188.48 362.248 193.48 DL 357.248 188.48
+X362.248 188.48 DL 357.248 193.48 357.248 188.48 DL 362.248 193.48
+X357.248 193.48 DL 362.248 188.48 362.248 193.48 DL 357.248 188.48
+X362.248 188.48 DL 357.248 193.48 357.248 188.48 DL 418.552 157.984
+X413.552 157.984 DL 418.552 152.984 418.552 157.984 DL 413.552 152.984
+X418.552 152.984 DL 413.552 157.984 413.552 152.984 DL 474.784 120.832
+X469.784 120.832 DL 474.784 115.832 474.784 120.832 DL 469.784 115.832
+X474.784 115.832 DL 469.784 120.832 469.784 115.832 DL 196.524 296.256 MT
+X11.268 -7.344 RL 7.512 -4.896 15.96 -10.332 25.344 -16.308 RC 9.384
+X-5.976 23.46 -14.928 42.228 -26.856 RC 18.768 -11.928 37.536 -23.988
+X56.304 -36.18 RC 18.768 -12.192 28.152 -18.288 28.152 -18.288 RC 0 0
+X9.384 -5.928 28.152 -17.784 RC 18.768 -11.856 37.536 -23.976 56.304
+X-36.36 RC 28.152 -18.576 RL ST(TLIUDP)320.184 215.608 Q F1<b4>193.779
+X174.4 Q<b4>216.315 171.232 Q<b4>244.395 167.272 Q<b4>300.699 159.208 Q
+X<b4>357.003 151.216 Q<b4>413.307 142.432 Q<b4>469.539 134.224 Q 196.524
+X172.2 MT 11.268 -1.62 RL 7.512 -1.08 15.96 -2.28 25.344 -3.6 RC 9.384
+X-1.32 23.46 -3.312 42.228 -5.976 RC 18.768 -2.664 37.536 -5.328 56.304
+X-7.992 RC 18.768 -2.664 37.536 -5.46 56.304 -8.388 RC 18.768 -2.928
+X37.536 -5.76 56.304 -8.496 RC 28.152 -4.104 RL ST F2(TLITCP)320.848
+X148.312 Q/F3 10/Times-Bold@0 SF(Example 3)87 397.4 Q/F4 9/Courier@0 SF
+X(grid dotted)144 407.4 Q(draw marked)144 417.4 Q(100 0.19)144 427.4 Q
+X1.5(...)144 437.4 S(5000 3.69)144 447.4 Q(new marked)144 457.4 Q 5.4(00)
+X144 467.4 S(400 0.45)144 477.4 Q 1.5(...)144 487.4 S(5000 3.5)144 497.4
+XQ F0(will produce:)108 521.4 Q 2.5(1A)276.555 768 S(ugust 1993)-2.5 E(3)
+X199.555 E EP
+X%%Page: 4 4
+X%%BeginPageSetup
+XBP
+X%%EndPageSetup
+X/F0 10/Times-Roman@0 SF(PRA)72 48 Q 389.64(G\(1\) PRA)-.4 F(G\(1\))-.4 E
+X430.56 270.192 MT 0 -186.192 RL -279.288 0 RL 0 186.192 RL CL .4 LW ST
+X145.44 232.968 151.272 232.968 DL(1)140.44 235.168 Q 151.272 232.968
+X151.272 232.968 DL 155.88 232.968 155.88 232.968 DL 160.56 232.968
+X160.56 232.968 DL 165.24 232.968 165.24 232.968 DL 169.848 232.968
+X169.848 232.968 DL 174.528 232.968 174.528 232.968 DL 179.208 232.968
+X179.208 232.968 DL 183.816 232.968 183.816 232.968 DL 188.496 232.968
+X188.496 232.968 DL 193.176 232.968 193.176 232.968 DL 197.784 232.968
+X197.784 232.968 DL 202.464 232.968 202.464 232.968 DL 207.144 232.968
+X207.144 232.968 DL 211.752 232.968 211.752 232.968 DL 216.432 232.968
+X216.432 232.968 DL 221.112 232.968 221.112 232.968 DL 225.72 232.968
+X225.72 232.968 DL 230.4 232.968 230.4 232.968 DL 235.008 232.968 235.008
+X232.968 DL 239.688 232.968 239.688 232.968 DL 244.368 232.968 244.368
+X232.968 DL 248.976 232.968 248.976 232.968 DL 253.656 232.968 253.656
+X232.968 DL 258.336 232.968 258.336 232.968 DL 262.944 232.968 262.944
+X232.968 DL 267.624 232.968 267.624 232.968 DL 272.304 232.968 272.304
+X232.968 DL 276.912 232.968 276.912 232.968 DL 281.592 232.968 281.592
+X232.968 DL 286.272 232.968 286.272 232.968 DL 290.88 232.968 290.88
+X232.968 DL 295.56 232.968 295.56 232.968 DL 300.168 232.968 300.168
+X232.968 DL 304.848 232.968 304.848 232.968 DL 309.528 232.968 309.528
+X232.968 DL 314.136 232.968 314.136 232.968 DL 318.816 232.968 318.816
+X232.968 DL 323.496 232.968 323.496 232.968 DL 328.104 232.968 328.104
+X232.968 DL 332.784 232.968 332.784 232.968 DL 337.464 232.968 337.464
+X232.968 DL 342.072 232.968 342.072 232.968 DL 346.752 232.968 346.752
+X232.968 DL 351.432 232.968 351.432 232.968 DL 356.04 232.968 356.04
+X232.968 DL 360.72 232.968 360.72 232.968 DL 365.4 232.968 365.4 232.968
+XDL 370.008 232.968 370.008 232.968 DL 374.688 232.968 374.688 232.968 DL
+X379.296 232.968 379.296 232.968 DL 383.976 232.968 383.976 232.968 DL
+X388.656 232.968 388.656 232.968 DL 393.264 232.968 393.264 232.968 DL
+X397.944 232.968 397.944 232.968 DL 402.624 232.968 402.624 232.968 DL
+X407.232 232.968 407.232 232.968 DL 411.912 232.968 411.912 232.968 DL
+X416.592 232.968 416.592 232.968 DL 421.2 232.968 421.2 232.968 DL 425.88
+X232.968 425.88 232.968 DL 430.56 232.968 430.56 232.968 DL 145.44
+X195.744 151.272 195.744 DL(2)140.44 197.944 Q 151.272 195.744 151.272
+X195.744 DL 155.88 195.744 155.88 195.744 DL 160.56 195.744 160.56
+X195.744 DL 165.24 195.744 165.24 195.744 DL 169.848 195.744 169.848
+X195.744 DL 174.528 195.744 174.528 195.744 DL 179.208 195.744 179.208
+X195.744 DL 183.816 195.744 183.816 195.744 DL 188.496 195.744 188.496
+X195.744 DL 193.176 195.744 193.176 195.744 DL 197.784 195.744 197.784
+X195.744 DL 202.464 195.744 202.464 195.744 DL 207.144 195.744 207.144
+X195.744 DL 211.752 195.744 211.752 195.744 DL 216.432 195.744 216.432
+X195.744 DL 221.112 195.744 221.112 195.744 DL 225.72 195.744 225.72
+X195.744 DL 230.4 195.744 230.4 195.744 DL 235.008 195.744 235.008
+X195.744 DL 239.688 195.744 239.688 195.744 DL 244.368 195.744 244.368
+X195.744 DL 248.976 195.744 248.976 195.744 DL 253.656 195.744 253.656
+X195.744 DL 258.336 195.744 258.336 195.744 DL 262.944 195.744 262.944
+X195.744 DL 267.624 195.744 267.624 195.744 DL 272.304 195.744 272.304
+X195.744 DL 276.912 195.744 276.912 195.744 DL 281.592 195.744 281.592
+X195.744 DL 286.272 195.744 286.272 195.744 DL 290.88 195.744 290.88
+X195.744 DL 295.56 195.744 295.56 195.744 DL 300.168 195.744 300.168
+X195.744 DL 304.848 195.744 304.848 195.744 DL 309.528 195.744 309.528
+X195.744 DL 314.136 195.744 314.136 195.744 DL 318.816 195.744 318.816
+X195.744 DL 323.496 195.744 323.496 195.744 DL 328.104 195.744 328.104
+X195.744 DL 332.784 195.744 332.784 195.744 DL 337.464 195.744 337.464
+X195.744 DL 342.072 195.744 342.072 195.744 DL 346.752 195.744 346.752
+X195.744 DL 351.432 195.744 351.432 195.744 DL 356.04 195.744 356.04
+X195.744 DL 360.72 195.744 360.72 195.744 DL 365.4 195.744 365.4 195.744
+XDL 370.008 195.744 370.008 195.744 DL 374.688 195.744 374.688 195.744 DL
+X379.296 195.744 379.296 195.744 DL 383.976 195.744 383.976 195.744 DL
+X388.656 195.744 388.656 195.744 DL 393.264 195.744 393.264 195.744 DL
+X397.944 195.744 397.944 195.744 DL 402.624 195.744 402.624 195.744 DL
+X407.232 195.744 407.232 195.744 DL 411.912 195.744 411.912 195.744 DL
+X416.592 195.744 416.592 195.744 DL 421.2 195.744 421.2 195.744 DL 425.88
+X195.744 425.88 195.744 DL 430.56 195.744 430.56 195.744 DL 145.44
+X158.448 151.272 158.448 DL(3)140.44 160.648 Q 151.272 158.448 151.272
+X158.448 DL 155.88 158.448 155.88 158.448 DL 160.56 158.448 160.56
+X158.448 DL 165.24 158.448 165.24 158.448 DL 169.848 158.448 169.848
+X158.448 DL 174.528 158.448 174.528 158.448 DL 179.208 158.448 179.208
+X158.448 DL 183.816 158.448 183.816 158.448 DL 188.496 158.448 188.496
+X158.448 DL 193.176 158.448 193.176 158.448 DL 197.784 158.448 197.784
+X158.448 DL 202.464 158.448 202.464 158.448 DL 207.144 158.448 207.144
+X158.448 DL 211.752 158.448 211.752 158.448 DL 216.432 158.448 216.432
+X158.448 DL 221.112 158.448 221.112 158.448 DL 225.72 158.448 225.72
+X158.448 DL 230.4 158.448 230.4 158.448 DL 235.008 158.448 235.008
+X158.448 DL 239.688 158.448 239.688 158.448 DL 244.368 158.448 244.368
+X158.448 DL 248.976 158.448 248.976 158.448 DL 253.656 158.448 253.656
+X158.448 DL 258.336 158.448 258.336 158.448 DL 262.944 158.448 262.944
+X158.448 DL 267.624 158.448 267.624 158.448 DL 272.304 158.448 272.304
+X158.448 DL 276.912 158.448 276.912 158.448 DL 281.592 158.448 281.592
+X158.448 DL 286.272 158.448 286.272 158.448 DL 290.88 158.448 290.88
+X158.448 DL 295.56 158.448 295.56 158.448 DL 300.168 158.448 300.168
+X158.448 DL 304.848 158.448 304.848 158.448 DL 309.528 158.448 309.528
+X158.448 DL 314.136 158.448 314.136 158.448 DL 318.816 158.448 318.816
+X158.448 DL 323.496 158.448 323.496 158.448 DL 328.104 158.448 328.104
+X158.448 DL 332.784 158.448 332.784 158.448 DL 337.464 158.448 337.464
+X158.448 DL 342.072 158.448 342.072 158.448 DL 346.752 158.448 346.752
+X158.448 DL 351.432 158.448 351.432 158.448 DL 356.04 158.448 356.04
+X158.448 DL 360.72 158.448 360.72 158.448 DL 365.4 158.448 365.4 158.448
+XDL 370.008 158.448 370.008 158.448 DL 374.688 158.448 374.688 158.448 DL
+X379.296 158.448 379.296 158.448 DL 383.976 158.448 383.976 158.448 DL
+X388.656 158.448 388.656 158.448 DL 393.264 158.448 393.264 158.448 DL
+X397.944 158.448 397.944 158.448 DL 402.624 158.448 402.624 158.448 DL
+X407.232 158.448 407.232 158.448 DL 411.912 158.448 411.912 158.448 DL
+X416.592 158.448 416.592 158.448 DL 421.2 158.448 421.2 158.448 DL 425.88
+X158.448 425.88 158.448 DL 430.56 158.448 430.56 158.448 DL 145.44
+X121.224 151.272 121.224 DL(4)140.44 123.424 Q 151.272 121.224 151.272
+X121.224 DL 155.88 121.224 155.88 121.224 DL 160.56 121.224 160.56
+X121.224 DL 165.24 121.224 165.24 121.224 DL 169.848 121.224 169.848
+X121.224 DL 174.528 121.224 174.528 121.224 DL 179.208 121.224 179.208
+X121.224 DL 183.816 121.224 183.816 121.224 DL 188.496 121.224 188.496
+X121.224 DL 193.176 121.224 193.176 121.224 DL 197.784 121.224 197.784
+X121.224 DL 202.464 121.224 202.464 121.224 DL 207.144 121.224 207.144
+X121.224 DL 211.752 121.224 211.752 121.224 DL 216.432 121.224 216.432
+X121.224 DL 221.112 121.224 221.112 121.224 DL 225.72 121.224 225.72
+X121.224 DL 230.4 121.224 230.4 121.224 DL 235.008 121.224 235.008
+X121.224 DL 239.688 121.224 239.688 121.224 DL 244.368 121.224 244.368
+X121.224 DL 248.976 121.224 248.976 121.224 DL 253.656 121.224 253.656
+X121.224 DL 258.336 121.224 258.336 121.224 DL 262.944 121.224 262.944
+X121.224 DL 267.624 121.224 267.624 121.224 DL 272.304 121.224 272.304
+X121.224 DL 276.912 121.224 276.912 121.224 DL 281.592 121.224 281.592
+X121.224 DL 286.272 121.224 286.272 121.224 DL 290.88 121.224 290.88
+X121.224 DL 295.56 121.224 295.56 121.224 DL 300.168 121.224 300.168
+X121.224 DL 304.848 121.224 304.848 121.224 DL 309.528 121.224 309.528
+X121.224 DL 314.136 121.224 314.136 121.224 DL 318.816 121.224 318.816
+X121.224 DL 323.496 121.224 323.496 121.224 DL 328.104 121.224 328.104
+X121.224 DL 332.784 121.224 332.784 121.224 DL 337.464 121.224 337.464
+X121.224 DL 342.072 121.224 342.072 121.224 DL 346.752 121.224 346.752
+X121.224 DL 351.432 121.224 351.432 121.224 DL 356.04 121.224 356.04
+X121.224 DL 360.72 121.224 360.72 121.224 DL 365.4 121.224 365.4 121.224
+XDL 370.008 121.224 370.008 121.224 DL 374.688 121.224 374.688 121.224 DL
+X379.296 121.224 379.296 121.224 DL 383.976 121.224 383.976 121.224 DL
+X388.656 121.224 388.656 121.224 DL 393.264 121.224 393.264 121.224 DL
+X397.944 121.224 397.944 121.224 DL 402.624 121.224 402.624 121.224 DL
+X407.232 121.224 407.232 121.224 DL 411.912 121.224 411.912 121.224 DL
+X416.592 121.224 416.592 121.224 DL 421.2 121.224 421.2 121.224 DL 425.88
+X121.224 425.88 121.224 DL 430.56 121.224 430.56 121.224 DL 207.144
+X276.024 207.144 270.192 DL(1000)197.144 284.224 Q 207.144 270.192
+X207.144 270.192 DL 207.144 265.512 207.144 265.512 DL 207.144 260.904
+X207.144 260.904 DL 207.144 256.224 207.144 256.224 DL 207.144 251.544
+X207.144 251.544 DL 207.144 246.936 207.144 246.936 DL 207.144 242.256
+X207.144 242.256 DL 207.144 237.576 207.144 237.576 DL 207.144 232.968
+X207.144 232.968 DL 207.144 228.288 207.144 228.288 DL 207.144 223.608
+X207.144 223.608 DL 207.144 219 207.144 219 DL 207.144 214.32 207.144
+X214.32 DL 207.144 209.64 207.144 209.64 DL 207.144 205.032 207.144
+X205.032 DL 207.144 200.352 207.144 200.352 DL 207.144 195.744 207.144
+X195.744 DL 207.144 191.064 207.144 191.064 DL 207.144 186.384 207.144
+X186.384 DL 207.144 181.776 207.144 181.776 DL 207.144 177.096 207.144
+X177.096 DL 207.144 172.416 207.144 172.416 DL 207.144 167.808 207.144
+X167.808 DL 207.144 163.128 207.144 163.128 DL 207.144 158.448 207.144
+X158.448 DL 207.144 153.84 207.144 153.84 DL 207.144 149.16 207.144
+X149.16 DL 207.144 144.48 207.144 144.48 DL 207.144 139.872 207.144
+X139.872 DL 207.144 135.192 207.144 135.192 DL 207.144 130.512 207.144
+X130.512 DL 207.144 125.904 207.144 125.904 DL 207.144 121.224 207.144
+X121.224 DL 207.144 116.616 207.144 116.616 DL 207.144 111.936 207.144
+X111.936 DL 207.144 107.256 207.144 107.256 DL 207.144 102.648 207.144
+X102.648 DL 207.144 97.968 207.144 97.968 DL 207.144 93.288 207.144
+X93.288 DL 207.144 88.68 207.144 88.68 DL 207.144 84 207.144 84 DL
+X262.944 276.024 262.944 270.192 DL(2000)252.944 284.224 Q 262.944
+X270.192 262.944 270.192 DL 262.944 265.512 262.944 265.512 DL 262.944
+X260.904 262.944 260.904 DL 262.944 256.224 262.944 256.224 DL 262.944
+X251.544 262.944 251.544 DL 262.944 246.936 262.944 246.936 DL 262.944
+X242.256 262.944 242.256 DL 262.944 237.576 262.944 237.576 DL 262.944
+X232.968 262.944 232.968 DL 262.944 228.288 262.944 228.288 DL 262.944
+X223.608 262.944 223.608 DL 262.944 219 262.944 219 DL 262.944 214.32
+X262.944 214.32 DL 262.944 209.64 262.944 209.64 DL 262.944 205.032
+X262.944 205.032 DL 262.944 200.352 262.944 200.352 DL 262.944 195.744
+X262.944 195.744 DL 262.944 191.064 262.944 191.064 DL 262.944 186.384
+X262.944 186.384 DL 262.944 181.776 262.944 181.776 DL 262.944 177.096
+X262.944 177.096 DL 262.944 172.416 262.944 172.416 DL 262.944 167.808
+X262.944 167.808 DL 262.944 163.128 262.944 163.128 DL 262.944 158.448
+X262.944 158.448 DL 262.944 153.84 262.944 153.84 DL 262.944 149.16
+X262.944 149.16 DL 262.944 144.48 262.944 144.48 DL 262.944 139.872
+X262.944 139.872 DL 262.944 135.192 262.944 135.192 DL 262.944 130.512
+X262.944 130.512 DL 262.944 125.904 262.944 125.904 DL 262.944 121.224
+X262.944 121.224 DL 262.944 116.616 262.944 116.616 DL 262.944 111.936
+X262.944 111.936 DL 262.944 107.256 262.944 107.256 DL 262.944 102.648
+X262.944 102.648 DL 262.944 97.968 262.944 97.968 DL 262.944 93.288
+X262.944 93.288 DL 262.944 88.68 262.944 88.68 DL 262.944 84 262.944 84
+XDL 318.816 276.024 318.816 270.192 DL(3000)308.816 284.224 Q 318.816
+X270.192 318.816 270.192 DL 318.816 265.512 318.816 265.512 DL 318.816
+X260.904 318.816 260.904 DL 318.816 256.224 318.816 256.224 DL 318.816
+X251.544 318.816 251.544 DL 318.816 246.936 318.816 246.936 DL 318.816
+X242.256 318.816 242.256 DL 318.816 237.576 318.816 237.576 DL 318.816
+X232.968 318.816 232.968 DL 318.816 228.288 318.816 228.288 DL 318.816
+X223.608 318.816 223.608 DL 318.816 219 318.816 219 DL 318.816 214.32
+X318.816 214.32 DL 318.816 209.64 318.816 209.64 DL 318.816 205.032
+X318.816 205.032 DL 318.816 200.352 318.816 200.352 DL 318.816 195.744
+X318.816 195.744 DL 318.816 191.064 318.816 191.064 DL 318.816 186.384
+X318.816 186.384 DL 318.816 181.776 318.816 181.776 DL 318.816 177.096
+X318.816 177.096 DL 318.816 172.416 318.816 172.416 DL 318.816 167.808
+X318.816 167.808 DL 318.816 163.128 318.816 163.128 DL 318.816 158.448
+X318.816 158.448 DL 318.816 153.84 318.816 153.84 DL 318.816 149.16
+X318.816 149.16 DL 318.816 144.48 318.816 144.48 DL 318.816 139.872
+X318.816 139.872 DL 318.816 135.192 318.816 135.192 DL 318.816 130.512
+X318.816 130.512 DL 318.816 125.904 318.816 125.904 DL 318.816 121.224
+X318.816 121.224 DL 318.816 116.616 318.816 116.616 DL 318.816 111.936
+X318.816 111.936 DL 318.816 107.256 318.816 107.256 DL 318.816 102.648
+X318.816 102.648 DL 318.816 97.968 318.816 97.968 DL 318.816 93.288
+X318.816 93.288 DL 318.816 88.68 318.816 88.68 DL 318.816 84 318.816 84
+XDL 374.688 276.024 374.688 270.192 DL(4000)364.688 284.224 Q 374.688
+X270.192 374.688 270.192 DL 374.688 265.512 374.688 265.512 DL 374.688
+X260.904 374.688 260.904 DL 374.688 256.224 374.688 256.224 DL 374.688
+X251.544 374.688 251.544 DL 374.688 246.936 374.688 246.936 DL 374.688
+X242.256 374.688 242.256 DL 374.688 237.576 374.688 237.576 DL 374.688
+X232.968 374.688 232.968 DL 374.688 228.288 374.688 228.288 DL 374.688
+X223.608 374.688 223.608 DL 374.688 219 374.688 219 DL 374.688 214.32
+X374.688 214.32 DL 374.688 209.64 374.688 209.64 DL 374.688 205.032
+X374.688 205.032 DL 374.688 200.352 374.688 200.352 DL 374.688 195.744
+X374.688 195.744 DL 374.688 191.064 374.688 191.064 DL 374.688 186.384
+X374.688 186.384 DL 374.688 181.776 374.688 181.776 DL 374.688 177.096
+X374.688 177.096 DL 374.688 172.416 374.688 172.416 DL 374.688 167.808
+X374.688 167.808 DL 374.688 163.128 374.688 163.128 DL 374.688 158.448
+X374.688 158.448 DL 374.688 153.84 374.688 153.84 DL 374.688 149.16
+X374.688 149.16 DL 374.688 144.48 374.688 144.48 DL 374.688 139.872
+X374.688 139.872 DL 374.688 135.192 374.688 135.192 DL 374.688 130.512
+X374.688 130.512 DL 374.688 125.904 374.688 125.904 DL 374.688 121.224
+X374.688 121.224 DL 374.688 116.616 374.688 116.616 DL 374.688 111.936
+X374.688 111.936 DL 374.688 107.256 374.688 107.256 DL 374.688 102.648
+X374.688 102.648 DL 374.688 97.968 374.688 97.968 DL 374.688 93.288
+X374.688 93.288 DL 374.688 88.68 374.688 88.68 DL 374.688 84 374.688 84
+XDL/F1 12/Times-Roman@0 SF<83>154.716 265.336 Q<83>177.108 255.256 Q<83>
+X205.044 242.224 Q<83>260.844 216.88 Q<83>316.716 187.504 Q<83>372.588
+X165.112 Q<83>428.46 134.944 Q 156.816 263.136 MT 11.16 -5.04 RL 7.44
+X-3.36 15.816 -7.212 25.128 -11.556 RC 9.312 -4.344 23.28 -10.74 41.904
+X-19.188 RC 18.624 -8.448 37.248 -17.58 55.872 -27.396 RC 18.624 -9.816
+X37.248 -18.444 55.872 -25.884 RC 18.624 -7.44 37.248 -16.188 55.872
+X-26.244 RC 27.936 -15.084 RL ST/F2 10/Symbol SF(D)148.212 272.392 Q(D)
+X170.532 255.616 Q(D)204.084 250.072 Q(D)259.884 267.928 Q(D)315.756
+X265.336 Q(D)371.628 179.296 Q(D)427.5 142.072 Q 151.272 270.192 MT 11.16
+X-8.388 RL 7.44 -5.592 16.74 -9.324 27.9 -11.196 RC 11.16 -1.872 26.052
+X.168 44.676 6.12 RC 18.624 5.952 37.248 8.496 55.872 7.632 RC 18.624
+X-.864 37.248 -15.636 55.872 -44.316 RC 18.624 -28.68 37.248 -49.224
+X55.872 -61.632 RC 27.936 -18.612 RL ST/F3 10/Times-Bold@0 SF(Example 4)
+X87 301.424 Q/F4 9/Courier@0 SF(label left "execution time" "seconds")144
+X311.424 Q(label right "\\\(ua message size")144 321.424 Q
+X(label bot "messages sent")144 331.424 Q(range 0 0 10000 25)144 341.424
+XQ(ticks left 0 5 10 15 20 25)144 351.424 Q(ticks bot 0 1000 5000 10000)
+X144 361.424 Q 14.4(100 1.3)144 371.424 R 1.5(...)144 381.424 S 3.6
+X(10000 24.6)144 391.424 R F0(will produce:)108 415.424 Q 374.4 546.224
+XMT 0 -115.2 RL -172.8 0 RL 0 115.2 RL CL ST -.15(exe)128.97 494.4 S
+X(cution time).15 E(seconds)142.57 506.4 Q F2<ad>387.37 500.4 Q F0
+X(message size)2.5 E(messages sent)259.81 577.224 Q 198 546.224 201.6
+X546.224 DL(0)190.5 548.424 Q 198 523.184 201.6 523.184 DL(5)190.5
+X525.384 Q 198 500.144 201.6 500.144 DL(10)185.5 502.344 Q 198 477.104
+X201.6 477.104 DL(15)185.5 479.304 Q 198 454.064 201.6 454.064 DL(20)
+X185.5 456.264 Q 198 431.024 201.6 431.024 DL(25)185.5 433.224 Q 201.6
+X549.824 201.6 546.224 DL(0)199.1 558.024 Q 218.88 549.824 218.88 546.224
+XDL(1000)208.88 558.024 Q 288 549.824 288 546.224 DL(5000)278 558.024 Q
+X374.4 549.824 374.4 546.224 DL(10000)361.9 558.024 Q 203.328 540.248 MT
+X3.456 -1.152 RL 2.304 -.768 4.896 -1.848 7.776 -3.24 RC 2.88 -1.392
+X15.84 -5.772 38.88 -13.14 RC 23.04 -7.368 37.44 -12.204 43.2 -14.508 RC
+X5.76 -2.304 11.52 -4.452 17.28 -6.444 RC 5.76 -1.992 11.52 -3.912 17.28
+X-5.76 RC 5.76 -1.848 11.52 -3.612 17.28 -5.292 RC 5.76 -1.68 11.52
+X-3.288 17.28 -4.824 RC 8.64 -2.304 RL ST 203.328 540.248 MT 3.456 -1.62
+XRL 2.304 -1.08 4.896 -2.16 7.776 -3.24 RC 2.88 -1.08 15.84 -6.384 38.88
+X-15.912 RC 23.04 -9.528 37.44 -15.444 43.2 -17.748 RC 5.76 -2.304 11.52
+X-4.836 17.28 -7.596 RC 5.76 -2.76 11.52 -5.364 17.28 -7.812 RC 5.76
+X-2.448 11.52 -6.516 17.28 -12.204 RC 5.76 -5.688 11.52 -8.076 17.28
+X-7.164 RC 8.64 1.368 RL ST 203.328 540.248 MT 3.456 -1.836 RL 2.304
+X-1.224 4.896 -2.604 7.776 -4.14 RC 2.88 -1.536 15.84 -7.908 38.88
+X-19.116 RC 23.04 -11.208 37.44 -18.12 43.2 -20.736 RC 5.76 -2.616 11.52
+X-5.688 17.28 -9.216 RC 5.76 -3.528 11.52 -6.984 17.28 -10.368 RC 5.76
+X-3.384 11.52 -6.072 17.28 -8.064 RC 5.76 -1.992 11.52 -4.368 17.28
+X-7.128 RC 8.64 -4.14 RL ST 203.328 539.744 MT 3.456 -2.088 RL 2.304
+X-1.392 4.896 -3.012 7.776 -4.86 RC 2.88 -1.848 15.84 -9.912 38.88
+X-24.192 RC 23.04 -14.28 37.44 -22.884 43.2 -25.812 RC 5.76 -2.928 11.52
+X-6.468 17.28 -10.62 RC 5.76 -4.152 11.52 -7.764 17.28 -10.836 RC 5.76
+X-3.072 11.52 -6.3 17.28 -9.684 RC 5.76 -3.384 11.52 -7.38 17.28 -11.988
+XRC 8.64 -6.912 RL ST F3(Example 5)87 610 Q F4
+X(label bot "time \(in seconds\)")144 620 Q
+X(label left "memory" "available")144 630 Q(range 0 0 365 1800)144 640 Q
+X(ticks left 200 400 600 800 1000 1200 1400 1600)144 650 Q
+X(ticks bot 40 80 120 160 200 240 280 320 360)144 660 Q(new)144 670 Q 5.4
+X(01)144 680 S(41)-5.4 E 1.5(...)144 690 S(365 1309)144 700 Q(new dashed)
+X144 710 Q(nospline)144 720 Q F0 2.5(1A)276.555 768 S(ugust 1993)-2.5 E
+X(4)199.555 E EP
+X%%Page: 5 5
+X%%BeginPageSetup
+XBP
+X%%EndPageSetup
+X/F0 10/Times-Roman@0 SF(PRA)72 48 Q 389.64(G\(1\) PRA)-.4 F(G\(1\))-.4 E
+X/F1 9/Courier@0 SF 5.4(01)144 82 S(2)-5.4 E(150 247)144 92 Q 1.5(...)144
+X102 S(new dashed)144 112 Q(nospline)144 122 Q(210 824)144 132 Q
+X(360 1508)144 142 Q F0(will produce:)108 166 Q 432 325.6 MT 0 -144 RL
+X-216 0 RL 0 144 RL CL .4 LW ST(memory)145.335 261.824 Q -.2(av)144.175
+X273.824 S(ailable)-.05 E(time \(in seconds\))271.56 363.8 Q 211.536
+X309.616 216 309.616 DL(200)194.036 311.816 Q 211.536 293.632 216 293.632
+XDL(400)194.036 295.832 Q 211.536 277.576 216 277.576 DL(600)194.036
+X279.776 Q 211.536 261.592 216 261.592 DL(800)194.036 263.792 Q 211.536
+X245.608 216 245.608 DL(1000)189.036 247.808 Q 211.536 229.624 216
+X229.624 DL(1200)189.036 231.824 Q 211.536 213.568 216 213.568 DL(1400)
+X189.036 215.768 Q 211.536 197.584 216 197.584 DL(1600)189.036 199.784 Q
+X239.688 330.064 239.688 325.6 DL(40)234.688 338.264 Q 263.376 330.064
+X263.376 325.6 DL(80)258.376 338.264 Q 286.992 330.064 286.992 325.6 DL
+X(120)279.492 338.264 Q 310.68 330.064 310.68 325.6 DL(160)303.18 338.264
+XQ 334.368 330.064 334.368 325.6 DL(200)326.868 338.264 Q 358.056 330.064
+X358.056 325.6 DL(240)350.556 338.264 Q 381.672 330.064 381.672 325.6 DL
+X(280)374.172 338.264 Q 405.36 330.064 405.36 325.6 DL(320)397.86 338.264
+XQ 429.048 330.064 429.048 325.6 DL(360)421.548 338.264 Q 216 314.296 MT
+X1.476 2.556 RL .984 1.704 1.968 2.16 2.952 1.368 RC .984 -.792 1.968
+X-.66 2.952 .396 RC .984 1.056 1.968 1.608 2.952 1.656 RC .984 .048 1.968
+X.12 2.952 .216 RC .984 .096 1.968 -.492 2.952 -1.764 RC .984 -1.272
+X1.968 -1.668 2.952 -1.188 RC .984 .48 1.968 .792 2.952 .936 RC .984 .144
+X1.968 .336 2.952 .576 RC .984 .24 1.968 .636 2.952 1.188 RC .984 .552
+X1.968 .756 2.952 .612 RC .984 -.144 1.968 -1.08 2.952 -2.808 RC .984
+X-1.728 1.968 -2.316 2.952 -1.764 RC .984 .552 1.968 .996 2.952 1.332 RC
+X.984 .336 1.968 .456 2.952 .36 RC .984 -.096 1.968 -.024 2.952 .216 RC
+X.984 .24 1.968 .384 2.952 .432 RC .984 .048 1.968 .324 2.952 .828 RC
+X.984 .504 1.968 .396 2.952 -.324 RC .984 -.72 1.968 -1.2 2.952 -1.44 RC
+X.984 -.24 1.968 -.096 2.952 .432 RC .984 .528 1.968 .564 2.952 .108 RC
+X.984 -.456 1.968 -.216 2.952 .72 RC .984 .936 1.968 1.356 2.952 1.26 RC
+X.984 -.096 1.968 -3.948 2.952 -11.556 RC .984 -7.608 1.968 -11.748 2.952
+X-12.42 RC .984 -.672 1.968 -.444 2.952 .684 RC .984 1.128 1.968 1.824
+X2.952 2.088 RC .984 .264 1.968 .348 2.952 .252 RC .984 -.096 1.968 .768
+X2.952 2.592 RC .984 1.824 1.968 2.496 2.952 2.016 RC .984 -.48 1.968
+X-.216 2.952 .792 RC .984 1.008 1.968 1.272 2.952 .792 RC .984 -.48 1.968
+X-.432 2.952 .144 RC .984 .576 1.968 1.26 2.952 2.052 RC .984 .792 1.968
+X.984 2.952 .576 RC .984 -.408 1.968 1.38 2.952 5.364 RC .984 3.984 1.968
+X5.34 2.952 4.068 RC .984 -1.272 1.968 -1.14 2.952 .396 RC .984 1.536
+X1.968 1.416 2.952 -.36 RC .984 -1.776 1.968 -2.868 2.952 -3.276 RC .984
+X-.408 1.968 -3.18 2.952 -8.316 RC .984 -5.136 1.968 -7.68 2.952 -7.632
+XRC .984 .048 1.968 .312 2.952 .792 RC .984 .48 1.968 .744 2.952 .792 RC
+X.984 .048 1.968 .528 2.952 1.44 RC .984 .912 1.968 -12.384 2.952 -39.888
+XRC .984 -27.504 1.968 -41.244 2.952 -41.22 RC .984 .024 1.968 .036 2.952
+X.036 RC .984 0 1.968 0 2.952 0 RC .984 0 1.968 .012 2.952 .036 RC .984
+X.024 1.968 .036 2.952 .036 RC .984 0 1.968 0 2.952 0 RC .984 0 1.968 0
+X2.952 0 RC .984 0 1.968 .024 2.952 .072 RC .984 .048 1.968 .072 2.952
+X.072 RC .984 0 1.968 0 2.952 0 RC .984 0 1.968 0 2.952 0 RC .984 0 1.968
+X0 2.952 0 RC .984 0 1.968 0 2.952 0 RC .984 0 1.968 0 2.952 0 RC .984 0
+X1.968 0 2.952 0 RC .984 0 1.968 0 2.952 0 RC .984 0 1.968 0 2.952 0 RC
+X.984 0 1.968 0 2.952 0 RC .984 0 1.968 0 2.952 0 RC .984 0 1.968 0 2.952
+X0 RC .984 0 1.968 0 2.952 0 RC .984 0 1.968 .012 2.952 .036 RC .984 .024
+X1.968 .036 2.952 .036 RC .984 0 1.968 0 2.952 0 RC .984 0 1.968 0 2.952
+X0 RC .984 0 1.968 0 2.952 0 RC 1.476 0 RL ST 219.528 323.944 216 324.664
+XDL 226.656 322.432 223.128 323.152 DL 233.712 320.92 230.184 321.64 DL
+X240.84 319.408 237.312 320.128 DL 247.968 317.896 244.44 318.616 DL
+X255.024 316.384 251.496 317.104 DL 262.152 314.872 258.624 315.592 DL
+X269.28 313.36 265.752 314.08 DL 276.336 311.848 272.808 312.568 DL
+X283.464 310.408 279.936 311.128 DL 290.592 308.896 287.064 309.616 DL
+X297.648 307.384 294.12 308.104 DL 304.776 305.872 301.248 306.592 DL
+X272.52 321.784 269.28 323.296 DL 279.072 318.76 275.832 320.272 DL
+X285.624 315.736 282.384 317.248 DL 292.248 312.784 289.008 314.296 DL
+X298.8 309.76 295.56 311.272 DL 305.352 306.808 302.112 308.32 DL 311.976
+X303.784 308.736 305.296 DL 318.528 300.76 315.288 302.272 DL 325.08
+X297.808 321.84 299.32 DL 331.704 294.784 328.464 296.296 DL 338.256
+X291.76 335.016 293.272 DL 344.808 288.808 341.568 290.32 DL 351.432
+X285.784 348.192 287.296 DL 357.984 282.76 354.744 284.272 DL 324.648
+X309.04 322.488 311.92 DL 329.04 303.208 326.88 306.088 DL 333.36 297.376
+X331.2 300.256 DL 337.68 291.472 335.52 294.352 DL 342 285.64 339.84
+X288.52 DL 346.32 279.808 344.16 282.688 DL 350.64 273.976 348.48 276.856
+XDL 355.032 268.144 352.872 271.024 DL 359.352 262.24 357.192 265.12 DL
+X363.672 256.408 361.512 259.288 DL 367.992 250.576 365.832 253.456 DL
+X372.312 244.744 370.152 247.624 DL 376.632 238.84 374.472 241.72 DL
+X380.952 233.008 378.792 235.888 DL 385.344 227.176 383.184 230.056 DL
+X389.664 221.344 387.504 224.224 DL 393.984 215.512 391.824 218.392 DL
+X398.304 209.608 396.144 212.488 DL 402.624 203.776 400.464 206.656 DL
+X406.944 197.944 404.784 200.824 DL 411.336 192.112 409.176 194.992 DL
+X343.368 257.776 340.272 259.648 DL 349.488 254.032 346.392 255.904 DL
+X355.608 250.288 352.512 252.16 DL 361.728 246.472 358.632 248.344 DL
+X367.848 242.728 364.752 244.6 DL 373.968 238.912 370.872 240.784 DL
+X380.088 235.168 376.992 237.04 DL 386.208 231.424 383.112 233.296 DL
+X392.328 227.608 389.232 229.48 DL 398.448 223.864 395.352 225.736 DL
+X404.568 220.048 401.472 221.92 DL 410.688 216.304 407.592 218.176 DL
+X416.808 212.56 413.712 214.432 DL 422.928 208.744 419.832 210.616 DL
+X429.048 205 425.952 206.872 DL/F2 10/Times-Bold@0 SF(Example 6)87
+X399.024 Q F1(draw invis)144 409.024 Q(1896 54.2)144 419.024 Q(1900 49.4)
+X144 429.024 Q 1.5(...)144 439.024 S(1988 43.8)144 449.024 Q F0
+X(will produce:)108 473.024 Q 430.56 674.816 MT 0 -186.192 RL -279.288 0
+XRL 0 186.192 RL CL ST 145.44 637.592 151.272 637.592 DL(43)135.44
+X639.792 Q 145.44 600.368 151.272 600.368 DL(46)135.44 602.568 Q 145.44
+X563.072 151.272 563.072 DL(49)135.44 565.272 Q 145.44 525.848 151.272
+X525.848 DL(52)135.44 528.048 Q 207.144 680.648 207.144 674.816 DL(1914)
+X197.144 688.848 Q 262.944 680.648 262.944 674.816 DL(1933)252.944
+X688.848 Q 318.816 680.648 318.816 674.816 DL(1952)308.816 688.848 Q
+X374.688 680.648 374.688 674.816 DL(1971)364.688 688.848 Q/F3 12
+X/Times-Roman@0 SF<83>152.124 500.76 Q<83>163.86 560.304 Q<83>175.596
+X562.824 Q<83>187.404 552.888 Q<83>199.14 575.208 Q<83>210.876 586.368 Q
+X<83>222.684 575.208 Q<83>234.42 593.856 Q<83>246.156 633.528 Q<83>
+X257.892 606.24 Q<83>269.7 600.048 Q<83>304.98 643.464 Q<83>340.26 617.4
+XQ<83>375.54 645.984 Q<83>422.556 629.856 Q F2(Example 6)87 706.048 Q F1
+X(40 72)144 716.048 Q(45 76)144 726.048 Q F0 2.5(1A)276.555 768 S
+X(ugust 1993)-2.5 E(5)199.555 E EP
+X%%Page: 6 6
+X%%BeginPageSetup
+XBP
+X%%EndPageSetup
+X/F0 10/Times-Roman@0 SF(PRA)72 48 Q 389.64(G\(1\) PRA)-.4 F(G\(1\))-.4 E
+X/F1 9/Courier@0 SF 1.5(...)144 82 S(65 79)144 92 Q F0(will produce:)108
+X116 Q 430.56 317.792 MT 0 -186.192 RL -279.288 0 RL 0 186.192 RL CL .4
+XLW ST 145.44 280.568 151.272 280.568 DL(74)135.44 282.768 Q 145.44
+X243.344 151.272 243.344 DL(78)135.44 245.544 Q 145.44 206.048 151.272
+X206.048 DL(82)135.44 208.248 Q 145.44 168.824 151.272 168.824 DL(86)
+X135.44 171.024 Q 207.144 323.624 207.144 317.792 DL(45)202.144 331.824 Q
+X262.944 323.624 262.944 317.792 DL(50)257.944 331.824 Q 318.816 323.624
+X318.816 317.792 DL(55)313.816 331.824 Q 374.688 323.624 374.688 317.792
+XDL(60)369.688 331.824 Q 151.272 299.144 MT 27.936 -18.612 RL 18.624
+X-12.408 37.248 -15.504 55.872 -9.288 RC 18.624 6.216 37.248 -13.944
+X55.872 -60.48 RC 18.624 -46.536 37.248 -63.6 55.872 -51.192 RC 18.624
+X12.408 37.248 27.924 55.872 46.548 RC 27.936 27.936 RL ST/F2 9
+X/Times-Bold@0 SF(SEE ALSO)72 349.024 Q F0 -1.11(AT)108 361.024 S
+X(&T Bell Laboratories, Computing Science T)1.11 E
+X(echnical Report No. 116, GRAP \255 A Graphics Language for)-.7 E -.8
+X(Ty)108 373.024 S 2.5(pesetting. This).8 F(can be obtained by sending a\
+X mail message to netlib@research.att.com with a body of)2.5 E
+X(`send 116 from research/cstr'.)108 385.024 Q F2 -.09(BU)72 401.824 S
+X(GS).09 E F0(Bug reports or suggested impro)108 413.824 Q -.15(ve)-.15 G
+X(ments should go to hm@GUUG.de.).15 E F2 -.45(AU)72 430.624 S(THOR).45 E
+XF0(This program w)108 442.624 Q(as contrib)-.1 E(uted by Holger Me)-.2 E
+X(yer at Uni)-.15 E -.15(ve)-.25 G(rsity of Rostock, German).15 E 3.8
+X-.65(y. I)-.15 H 2.5(ti).65 G 2.5(sa)-2.5 G -.25(va)-2.7 G(ilable via)
+X.25 E(anon)108 454.624 Q(ymous ftp from ftp.informatik.uni-rostock.de i\
+Xn the directory /pub/local/softw)-.15 E(are.)-.1 E 2.5(1A)276.555 768 S
+X(ugust 1993)-2.5 E(6)199.555 E EP
+X%%Trailer
+Xend
+X%%EOF
+SHAR_EOF
+$TOUCH -am 1115140495 prag-1.0/prag.ps &&
+chmod 0640 prag-1.0/prag.ps ||
+echo "restore of prag-1.0/prag.ps failed"
+set `wc -c prag-1.0/prag.ps`;Wc_c=$1
+if test "$Wc_c" != "65864"; then
+	echo original size 65864, current size $Wc_c
+fi
+exit 0

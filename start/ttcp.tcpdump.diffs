@@ -1,0 +1,62 @@
+*** print-tcp.c	Thu Jun 16 01:27:36 1994
+--- ../tcpdump-3.0/print-tcp.c	Fri Mar 17 11:53:39 1995
+***************
+*** 62,67 ****
+--- 62,76 ----
+  #ifndef TCPOPT_TIMESTAMP
+  #define TCPOPT_TIMESTAMP	8	/* timestamps (rfc1323) */
+  #endif
++ #ifndef TCPOPT_CC
++ #define	TCPOPT_CC		11	/* T/TCP CC options (rfc1644) */
++ #endif
++ #ifndef TCPOPT_CCNEW
++ #define	TCPOPT_CCNEW		12	/* T/TCP CC options (rfc1644) */
++ #endif
++ #ifndef TCPOPT_CCECHO
++ #define	TCPOPT_CCECHO		13	/* T/TCP CC options (rfc1644) */
++ #endif
+  
+  struct tha {
+  	struct in_addr src;
+***************
+*** 262,267 ****
+--- 271,309 ----
+  				hlen -= 9;
+  				break;
+    			}
++ 			case TCPOPT_CC:
++ 			{
++ 				(void)printf("cc %lu",
++ 					     cp[1] << 24 | cp[2] << 16 |
++ 					     cp[3] << 8 | cp[4]);
++ 				if (*cp != 6)
++ 					(void)printf("[len %d]", *cp);
++ 				cp += 5;
++ 				hlen -= 5;
++ 				break;
++   			}
++ 			case TCPOPT_CCNEW:
++ 			{
++ 				(void)printf("ccnew %lu",
++ 					     cp[1] << 24 | cp[2] << 16 |
++ 					     cp[3] << 8 | cp[4]);
++ 				if (*cp != 6)
++ 					(void)printf("[len %d]", *cp);
++ 				cp += 5;
++ 				hlen -= 5;
++ 				break;
++   			}
++ 			case TCPOPT_CCECHO:
++ 			{
++ 				(void)printf("ccecho %lu",
++ 					     cp[1] << 24 | cp[2] << 16 |
++ 					     cp[3] << 8 | cp[4]);
++ 				if (*cp != 6)
++ 					(void)printf("[len %d]", *cp);
++ 				cp += 5;
++ 				hlen -= 5;
++ 				break;
++   			}
+  			default:
+  				(void)printf("opt-%d:", cp[-1]);
+  				for (i = *cp++ - 2, hlen -= i + 1; i > 0; --i)

@@ -1,0 +1,3185 @@
+%!PS-Adobe-2.0
+%%Copyright: Copyright (c) 1993 AT&T, All Rights Reserved
+%%Version: 3.4
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%BoundingBox: (atend)
+%%EndComments
+/DpostDict 200 dict def
+DpostDict begin
+%
+% Copyright (c) 1993 AT&T, All Rights Reserved
+%
+% Version 3.4 prologue for troff files.
+%
+
+/#copies 1 store
+/Prologue (dpost.ps) def
+/aspectratio 1 def
+/formsperpage 1 def
+/landscape false def
+/linewidth .3 def
+/magnification 1 def
+/margin 0 def
+/orientation 0 def
+/resolution 720 def
+/rotation 1 def
+/xoffset 0 def
+/yoffset 0 def
+
+/roundpage true def
+/useclippath true def
+/pagebbox [0 0 612 792] def
+
+/R  /Times-Roman def
+/I  /Times-Italic def
+/B  /Times-Bold def
+/BI /Times-BoldItalic def
+/H  /Helvetica def
+/HI /Helvetica-Oblique def
+/HB /Helvetica-Bold def
+/HX /Helvetica-BoldOblique def
+/CW /Courier def
+/CO /Courier def
+/CI /Courier-Oblique def
+/CB /Courier-Bold def
+/CX /Courier-BoldOblique def
+/PA /Palatino-Roman def
+/PI /Palatino-Italic def
+/PB /Palatino-Bold def
+/PX /Palatino-BoldItalic def
+/Hr /Helvetica-Narrow def
+/Hi /Helvetica-Narrow-Oblique def
+/Hb /Helvetica-Narrow-Bold def
+/Hx /Helvetica-Narrow-BoldOblique def
+/KR /Bookman-Light def
+/KI /Bookman-LightItalic def
+/KB /Bookman-Demi def
+/KX /Bookman-DemiItalic def
+/AR /AvantGarde-Book def
+/AI /AvantGarde-BookOblique def
+/AB /AvantGarde-Demi def
+/AX /AvantGarde-DemiOblique def
+/NR /NewCenturySchlbk-Roman def
+/NI /NewCenturySchlbk-Italic def
+/NB /NewCenturySchlbk-Bold def
+/NX /NewCenturySchlbk-BoldItalic def
+/ZD /ZapfDingbats def
+/ZI /ZapfChancery-MediumItalic def
+/S  /S def
+/S1 /S1 def
+/GR /Symbol def
+
+/inch {72 mul} bind def
+/min {2 copy gt {exch} if pop} bind def
+
+/setup {
+	counttomark 2 idiv {def} repeat pop
+
+	landscape {/orientation 90 orientation add def} if
+	/scaling 72 resolution div def
+	linewidth setlinewidth
+	1 setlinecap
+
+	pagedimensions
+	xcenter ycenter translate
+	orientation rotation mul rotate
+	width 2 div neg height 2 div translate
+	xoffset inch yoffset inch neg translate
+	margin 2 div dup neg translate
+	magnification dup aspectratio mul scale
+	scaling scaling scale
+
+	addmetrics
+	0 0 moveto
+} def
+
+/pagedimensions {
+	useclippath userdict /gotpagebbox known not and {
+		/pagebbox [clippath pathbbox newpath] def
+		roundpage currentdict /roundpagebbox known and {roundpagebbox} if
+	} if
+	pagebbox aload pop
+	4 -1 roll exch 4 1 roll 4 copy
+	landscape {4 2 roll} if
+	sub /width exch def
+	sub /height exch def
+	add 2 div /xcenter exch def
+	add 2 div /ycenter exch def
+	userdict /gotpagebbox true put
+} def
+
+/landscapepage {
+	landscape not {
+		0 height scaling div neg translate	% not quite
+		90 rotate
+	} if
+} bind def
+
+/portraitpage {
+	landscape {
+		width scaling div 0 translate	% not quite
+		-90 rotate
+	} if
+} bind def
+
+/addmetrics {
+	/Symbol /S null Sdefs cf
+	/Times-Roman /S1 StandardEncoding dup length array copy S1defs cf
+} def
+
+/pagesetup {
+	/page exch def
+	currentdict /pagedict known currentdict page known and {
+		page load pagedict exch get cvx exec
+	} if
+} def
+
+/decodingdefs [
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg /y exch def counttomark 2 idiv {y moveto show} repeat}
+	{neg moveto {2 index stringwidth pop sub exch div 0 32 4 -1 roll widthshow} repeat}
+	{neg moveto {spacewidth sub 0.0 32 4 -1 roll widthshow} repeat}
+	{counttomark 2 idiv {y moveto show} repeat}
+	{neg setfunnytext}
+] def
+
+/setdecoding {/t decodingdefs 3 -1 roll get bind def} bind def
+
+/w {neg moveto show} bind def
+/m {neg dup /y exch def moveto} bind def
+/done {/lastpage where {pop lastpage} if} def
+
+/f {
+	dup /font exch def findfont exch
+	dup /ptsize exch def scaling div dup /size exch def scalefont setfont
+	linewidth ptsize mul scaling 10 mul div setlinewidth
+	/spacewidth ( ) stringwidth pop def
+} bind def
+
+/changefont {
+	/fontheight exch def
+	/fontslant exch def
+	currentfont [
+		1 0
+		fontheight ptsize div fontslant sin mul fontslant cos div
+		fontheight ptsize div
+		0 0
+	] makefont setfont
+} bind def
+
+/sf {f} bind def
+
+/cf {
+	dup length 2 idiv
+	/entries exch def
+	/chtab exch def
+	/newencoding exch def
+	/newfont exch def
+
+	findfont dup length 1 add dict
+	/newdict exch def
+	{1 index /FID ne {newdict 3 1 roll put}{pop pop} ifelse} forall
+
+	newencoding type /arraytype eq {newdict /Encoding newencoding put} if
+
+	newdict /Metrics entries dict put
+	newdict /Metrics get
+	begin
+		chtab aload pop
+		1 1 entries {pop def} for
+		newfont newdict definefont pop
+	end
+} bind def
+
+%
+% A few arrays used to adjust reference points and character widths in some
+% of the printer resident fonts. If square roots are too high try changing
+% the lines describing /radical and /radicalex to,
+%
+%	/radical	[0 -75 550 0]
+%	/radicalex	[-50 -75 500 0]
+%
+% Move braceleftbt a bit - default PostScript character is off a bit.
+%
+
+/Sdefs [
+	/bracketlefttp		[201 500]
+	/bracketleftbt		[201 500]
+	/bracketrighttp		[-81 380]
+	/bracketrightbt		[-83 380]
+	/braceleftbt		[203 490]
+	/bracketrightex		[220 -125 500 0]
+	/radical		[0 0 550 0]
+	/radicalex		[-50 0 500 0]
+	/parenleftex		[-20 -170 0 0]
+	/integral		[100 -50 500 0]
+	/infinity		[10 -75 730 0]
+] def
+
+/S1defs [
+	/underscore		[0 80 500 0]
+	/endash			[7 90 650 0]
+] def
+end
+%%EndProlog
+%%BeginSetup
+DpostDict begin
+mark
+/rotation 1 def
+/gotpagebbox true def
+/linewidth 0.5 def
+/xoffset 0 def
+/yoffset 0 def
+/#copies 1 store
+/magnification 1 def
+%%FormsPerPage: 1
+/formsperpage 1 def
+%%Patch from lp
+%%EndPatch from lp
+/landscape false def
+/resolution 720 def
+setup
+2 setdecoding
+%
+% Copyright (c) 1993 AT&T, All Rights Reserved
+%
+% Version 3.4 drawing procedures for dpost. Automatically pulled in when
+% needed.
+%
+
+/inpath false def
+/savematrix matrix def
+
+/Dl {
+	inpath
+		{pop pop neg lineto}
+		{newpath neg moveto neg lineto stroke}
+	ifelse
+} bind def
+
+/De {
+	/y1 exch 2 div def
+	/x1 exch 2 div def
+	/savematrix savematrix currentmatrix def
+	neg exch x1 add exch translate
+	x1 y1 scale
+	0 0 1 0 360
+	inpath
+		{1 0 moveto arc savematrix setmatrix}
+		{newpath arc savematrix setmatrix stroke}
+	ifelse
+} bind def
+
+/Da {
+	/dy2 exch def
+	/dx2 exch def
+	/dy1 exch def
+	/dx1 exch def
+	dy1 add neg exch dx1 add exch
+	dx1 dx1 mul dy1 dy1 mul add sqrt
+	dy1 dx1 neg atan
+	dy2 neg dx2 atan
+	inpath
+		{arc}
+		{newpath arc stroke}
+	ifelse
+} bind def
+
+/DA {
+	/dy2 exch def
+	/dx2 exch def
+	/dy1 exch def
+	/dx1 exch def
+	dy1 add neg exch dx1 add exch
+	dx1 dx1 mul dy1 dy1 mul add sqrt
+	dy1 dx1 neg atan
+	dy2 neg dx2 atan
+	inpath
+		{arcn}
+		{newpath arcn stroke}
+	ifelse
+} bind def
+
+/Ds {
+	/y2 exch def
+	/x2 exch def
+	/y1 exch def
+	/x1 exch def
+	/y0 exch def
+	/x0 exch def
+	x0 5 x1 mul add 6 div
+	y0 5 y1 mul add -6 div
+	x2 5 x1 mul add 6 div
+	y2 5 y1 mul add -6 div
+	x1 x2 add 2 div
+	y1 y2 add -2 div
+	inpath
+		{curveto}
+		{newpath x0 x1 add 2 div y0 y1 add -2 div moveto curveto stroke}
+	ifelse
+} bind def
+end
+%%EndSetup
+%%Page: 1 1
+%%PageBoundingBox: (atend)
+DpostDict begin
+/saveobj save def
+mark
+1 pagesetup
+24 PB f
+(RICHARD WESLEY HAMMING)2 3661 1 144 1000 t
+(\(1915-1998\))144 1280 w
+20 PX f
+(Samuel P. Morgan)2 1642 1 144 1560 t
+10 PA f
+( mathematician,)1 769(Richard Wesley Hamming,)2 1319 2 864 1920 t
+( scientist, and professor, died)4 1295(pioneer computer)1 793 2 864 2040 t
+( attack on January 7, 1998, in Mon-)7 1641(of a heart)2 447 2 864 2160 t
+( research)1 398( His)1 208(terey, California, at the age of 82.)6 1482 3 864 2280 t
+( Bell Laboratories in the 1940s,)5 1398(career began at)2 690 2 864 2400 t
+( computers, and)2 734(in the early days of electronic)5 1354 2 864 2520 t
+( Hamming error-)2 776(included the invention of the)4 1312 2 864 2640 t
+( to)1 140( the 1970s he shifted)4 1003( In)1 170(correcting codes.)1 775 4 864 2760 t
+( his death he was Distin-)5 1301(teaching, and at)2 787 2 864 2880 t
+( sci-)1 198(guished Professor Emeritus of computer)4 1890 2 864 3000 t
+( Postgraduate School. He is)4 1277(ence at the Naval)3 811 2 864 3120 t
+( and a)2 317(survived by his wife Wanda, a niece,)6 1771 2 864 3240 t
+(nephew.)864 3360 w
+( friends,)1 364(Dick Hamming, as he was known to)6 1616 2 972 3481 t
+( He)1 184(was born in Chicago on February 11, 1915.)7 1904 2 864 3601 t
+(received a BS in mathematics from the Univer-)7 2088 1 864 3721 t
+( the Uni-)2 409(sity of Chicago in 1937, an MA from)7 1679 2 864 3841 t
+( a PhD in)3 506(versity of Nebraska in 1939, and)5 1582 2 864 3961 t
+( in)1 123(mathematics from the University of Illinois)5 1965 2 864 4081 t
+( thesis was entitled, ``Some)4 1243( doctoral)1 404(1942. His)1 441 3 864 4201 t
+( Value Theory of)3 833(Problems in the Boundary)3 1255 2 864 4321 t
+(Linear Differential Equations.'')2 1368 1 864 4441 t
+( the Univer-)2 549(After brief teaching positions at)4 1431 2 972 4562 t
+( University of Louisville,)3 1107(sity of Illinois and the)4 981 2 864 4682 t
+( in 1945 to work at Los)6 1192(Dick was recruited)2 896 2 864 4802 t
+(Alamos, to run the IBM machines that were)7 2088 1 864 4922 t
+( Project.)1 374(doing calculations for the Manhattan)4 1714 2 864 5042 t
+( where)1 328(Wanda followed him to Los Alamos,)5 1760 2 864 5162 t
+( a desk calculator, work-)4 1139(she was hired to use)4 949 2 864 5282 t
+( for Enrico Fermi and Edward)5 1431(ing eventually)1 657 2 864 5402 t
+( his)1 176( Dick jokingly described)3 1134(Teller. Although)1 778 3 864 5522 t
+( Los Alamos as ``computer janitor'',)5 1610(position at)1 478 2 864 5642 t
+( a vision of the role that)6 1186(the work gave him)3 902 2 864 5762 t
+( destined to play in)4 850(numerical computation was)2 1238 2 864 5882 t
+( of the)2 331(the scientific and technological world)4 1757 2 864 6002 t
+( that experiments were going to)5 1406( saw)1 201(future. He)1 481 3 864 6122 t
+( with computers that were not)5 1557(be possible)1 531 2 864 6242 t
+8 S1 f
+(__________________)864 6342 w
+(_ _____________)1 540 1 864 6442 t
+8 PA f
+( a Distinguished Member of)4 1101(Samuel P. Morgan is)3 813 2 864 6542 t
+( e-mail ad-)2 413( His)1 182( Laboratories.)1 505(Technical Staff at Bell)3 814 4 864 6642 t
+(dress is)1 264 1 864 6742 t
+8 CW f
+(spm@research.bell-labs.com)1176 6742 w
+8 PA f
+(.)2424 6742 w
+( Wanda Hamming and E.)4 927(The author wishes to thank)4 987 2 864 6893 t
+( J. F. Kaiser, H. Loomis, M. D. McIlroy, R.)9 1532(N. Gilbert,)1 382 2 864 6993 t
+( M. H.)2 260(Pinkham, N. L. Schryer, R. L. Urbanke, and)7 1654 2 864 7093 t
+( Notices of)2 400(Wright for their help with this article for)7 1514 2 864 7193 t
+(the Americal Mathematical Society.)3 1249 1 864 7293 t
+10 PA f
+(possible in the laboratory, and he stayed at Los)8 2088 1 3168 1920 t
+( the other)2 441(Alamos for six months after most of)6 1647 2 3168 2040 t
+(scientists had left, ``to figure out,'' as he told)8 2088 1 3168 2160 t
+( in 1993, ``what had happened)5 1404(IEEE Spectrum)1 684 2 3168 2280 t
+(there, and why it had happened that way.'')7 1911 1 3168 2400 t
+( Laboratories in 1946 and)4 1122(Dick arrived at Bell)3 858 2 3276 2521 t
+( of applied mathematicians that)4 1427(joined a group)2 661 2 3168 2641 t
+( communication theorist Claude)3 1507(included the)1 581 2 3168 2761 t
+( The)1 228(Shannon and the statistician John Tukey.)5 1860 2 3168 2881 t
+( itself as chartered to ``do)5 1343(group regarded)1 745 2 3168 3001 t
+(unconventional things in unconventional ways)4 2088 1 3168 3121 t
+( was hired)2 477( Dick)1 263(and still get valuable results.'')4 1348 3 3168 3241 t
+(to do elasticity theory, but the presence of)7 2088 1 3168 3361 t
+( to spend more and)4 961(computers required him)2 1127 2 3168 3481 t
+( them, and his career became cen-)6 1492(more time on)2 596 2 3168 3601 t
+( compu-)1 374(tered on bringing large-scale scientific)4 1714 2 3168 3721 t
+( of his research)3 752( Much)1 337( Bell Labs.)2 510(tation into)1 489 4 3168 3841 t
+( 1960 dealt with error-)4 1192(between 1946 and)2 896 2 3168 3961 t
+(correcting codes and predictor-corrector meth-)4 2088 1 3168 4081 t
+( time he)2 374( this)1 196( At)1 170(ods for numerical integration.)3 1348 4 3168 4201 t
+( interest in digital filters that)5 1278(also developed an)2 810 2 3168 4321 t
+( from)1 244( was)1 202( He)1 183(continued throughout his career.)3 1459 4 3168 4441 t
+( promoted to head a department of)6 1552(time to time)2 536 2 3168 4561 t
+( he explicitly did not)4 1068(researchers, but since)2 1020 2 3168 4681 t
+( these)1 350(want management responsibilities,)2 1738 2 3168 4801 t
+( con-)1 226( My)1 212( end.)1 228(assignments always came to an)4 1422 4 3168 4921 t
+( during the years)3 967(tacts with Dick were)3 1121 2 3168 5041 t
+( first in)2 368(1947-1976 while we were colleagues,)4 1720 2 3168 5161 t
+( Statistics Research Center)3 1158(the Mathematics and)2 930 2 3168 5281 t
+( Research)1 442(and then in the Computing Science)5 1646 2 3168 5401 t
+(Center at Bell Labs.)3 856 1 3168 5521 t
+([[[see early.jpg]]])1 748 1 3168 5641 t
+9 HB f
+(Richard W. Hamming)2 905 1 3941 5641 t
+10 PA f
+( Dick became increasingly inter-)4 1483(After 1960,)1 497 2 3276 5762 t
+( 1960)1 244( Between)1 448( writing.)1 397(ested in teaching and)3 999 4 3168 5882 t
+( while retaining his base at Bell Labs,)7 1665(and 1976,)1 423 2 3168 6002 t
+( visiting or adjunct professorships at)5 1735(he held)1 353 2 3168 6122 t
+( the City College of New)5 1171(Stanford University,)1 917 2 3168 6242 t
+( of California at Irvine,)4 1125(York, the University)2 963 2 3168 6362 t
+( he retired)2 499( 1976)1 246( In)1 163(and Princeton University.)2 1180 4 3168 6482 t
+( to become an adjunct professor)5 1433(from Bell Labs)2 655 2 3168 6602 t
+( science at)2 496(\(later senior lecturer\) of computer)4 1592 2 3168 6722 t
+( became)1 390( He)1 213(the Naval Postgraduate School.)3 1485 3 3168 6842 t
+( Emeritus in 1997, and)4 1018(Distinguished Professor)1 1070 2 3168 6962 t
+(taught his last class in December 1997.)6 1690 1 3168 7082 t
+( were the)2 424(Among Dick's professional honors)3 1556 2 3276 7203 t
+( Award \(1968\), the IEEE Emanuel)5 1508(ACM Turing)1 580 2 3168 7323 t
+( the Harold Pender)3 868(R. Piore Award \(1979\), and)4 1220 2 3168 7443 t
+cleartomark
+showpage
+saveobj restore
+end
+%%PageBoundingBox: 3 32 536 726
+%%EndPage: 1 1
+%%Page: 2 2
+%%PageBoundingBox: (atend)
+DpostDict begin
+/saveobj save def
+mark
+2 pagesetup
+10 PA f
+(- 2 -)2 166 1 2977 480 t
+( of Pennsylvania)2 840(Award of the University)3 1248 2 864 840 t
+( 1988 the IEEE Richard W. Hamming)6 1674(\(1981\), In)1 414 2 864 960 t
+(Medal, ``For exceptional contributions to infor-)5 2088 1 864 1080 t
+( and systems,'' was named)4 1353(mation sciences)1 735 2 864 1200 t
+( In)1 168( the first recipient.)3 883(after him and he was)4 1037 3 864 1320 t
+( the prestigious)2 749(1996 in Munich he received)4 1339 2 864 1440 t
+( Rhein Award for Achieve-)4 1322($130,000 Eduard)1 766 2 864 1560 t
+( Technology for his work on error cor-)7 1743(ment in)1 345 2 864 1680 t
+( was President of the Associ-)5 1289( He)1 186(recting codes.)1 613 3 864 1800 t
+( Machinery \(1958-60\), a)3 1117(ation for Computing)2 971 2 864 1920 t
+( the National Academy of Engineer-)5 1605(member of)1 483 2 864 2040 t
+(ing, and a Fellow of IEEE.)5 1142 1 864 2160 t
+( books, some of which went)5 1363(Dick wrote 9)2 617 2 972 2281 t
+( pub-)1 251( He)1 199( [sidebar].)1 459(through multiple editions)2 1179 4 864 2401 t
+(lished some 75 technical articles, and held)6 2088 1 864 2521 t
+(three patents.)1 601 1 864 2641 t
+12 PB f
+(Error-correcting codes)1 1204 1 864 2762 t
+10 PA f
+( Ham-)1 285(Dick is most famous for inventing the)6 1695 2 972 2883 t
+( and for the)3 598(ming error-correcting codes [1],)3 1490 2 864 3003 t
+( which is central)3 732(concept of Hamming distance,)3 1356 2 864 3123 t
+( brief exposition follows.)3 1092( A)1 128(to coding theory.)2 756 3 864 3243 t
+( stored,)1 341(Data in digital systems are typically)5 1639 2 972 3364 t
+( binary form, as)3 735(transmitted, and processed in)3 1353 2 864 3484 t
+( a single bit is in error, the)7 1303( If)1 139( bits.)1 231(blocks of)1 415 4 864 3604 t
+(message is garbled or the computation spoiled.)6 2088 1 864 3724 t
+( or telephone switch-)3 977(In large-scale computers)2 1111 2 864 3844 t
+( computa-)1 448(ing systems, an enormous number of)5 1640 2 864 3964 t
+( without a single error)4 994(tions must be performed)3 1094 2 864 4084 t
+( himself the task of)4 879( set)1 160( Dick)1 268(in the end result.)3 781 4 864 4204 t
+( and correct)2 551(making the computer itself detect)4 1537 2 864 4324 t
+(isolated errors so that the computation could)6 2088 1 864 4444 t
+( way that would be more efficient)6 1514(proceed, in a)2 574 2 864 4564 t
+( times and)2 477(than simply doing everything three)4 1611 2 864 4684 t
+(accepting the majority result.)3 1287 1 864 4804 t
+( a generalization)2 745(His approach was based on)4 1235 2 972 4925 t
+( simple parity check)3 1012( A)1 169( checking.)1 484(of parity)1 423 4 864 5045 t
+( we have a block of)5 875( Suppose)1 434(works as follows.)2 779 3 864 5165 t
+10 PI f
+(n)864 5285 w
+10 PA f
+(bits and add an \()4 749 1 947 5285 t
+10 PI f
+(n)1704 5285 w
+10 S f
+(+)1784 5285 w
+10 PA f
+( so that the whole)4 787( bit)1 144(1 \)st)1 166 3 1855 5285 t
+( is)1 97( This)1 241( number of 1s in it.)5 833(message has an even)3 917 4 864 5405 t
+( the receiving)2 627( At)1 176( check.)1 315(called an even parity)3 970 4 864 5525 t
+( there are not an even number of 1s in)9 1796(end, if)1 292 2 864 5645 t
+( be an odd num-)4 763(the message, then there must)4 1325 2 864 5765 t
+( bit errors occur)3 709( If)1 120( in the message.)3 709(ber of errors)2 550 4 864 5885 t
+( short and)2 461(independently and if the message is)5 1627 2 864 6005 t
+( the message)2 613(the bit error rate is small, then)6 1475 2 864 6125 t
+( single error, but we)4 937(most probably contains a)3 1151 2 864 6245 t
+(don't know which bit is incorrect.)5 1488 1 864 6365 t
+( multiple parity)2 772(The Hamming codes use)3 1208 2 972 6486 t
+( single-bit errors.)2 792(checks to locate and correct)4 1296 2 864 6606 t
+( now a sum only over bits in)7 1450(Each check is)2 638 2 864 6726 t
+( the simplest case, mes-)4 1102( In)1 161(selected positions.)1 825 3 864 6846 t
+( 2)1 78(sage words of length)3 928 2 864 6966 t
+7 PI f
+(r)1875 6926 w
+10 S f
+(-)1950 6966 w
+10 PI f
+(r)2045 6966 w
+10 S f
+(-)2124 6966 w
+10 PA f
+(1 bits, where)2 567 1 2219 6966 t
+10 PI f
+(r)2814 6966 w
+10 PA f
+(is)2881 6966 w
+(any integer, are to be sent together with)7 1991 1 864 7086 t
+10 PI f
+(r)2913 7086 w
+10 PA f
+(check bits, so that each code word \(message)7 2088 1 864 7206 t
+( contains 2)2 497(bits plus check bits\))3 912 2 864 7326 t
+7 PI f
+(r)2278 7286 w
+10 S f
+(-)2353 7326 w
+10 PA f
+( The)1 231(1 bits.)1 273 2 2448 7326 t
+( are numbered from)3 899(positions of the code word)4 1189 2 864 7446 t
+9 PB f
+( code with)2 426( Hamming)1 461(Table 1:)1 326 3 3492 840 t
+9 PI f
+(r)4728 840 w
+9 S f
+(=)4800 840 w
+9 PA f
+(3)4887 840 w
+9 S f
+(_ _____________________________________)1 1678 1 3373 915 t
+9 PA f
+(Position Decimal)1 1189 1 3817 1025 t
+( Value)1 415(1 2 3 4 5 6 7)6 1125 2 3418 1135 t
+9 S f
+(_ _____________________________________)1 1678 1 3373 1155 t
+9 PB f
+(0 0)1 225 1 3418 1265 t
+9 PA f
+(0)3778 1265 w
+9 PB f
+(0)3958 1265 w
+9 PA f
+( 0)1 321(0 0 0)2 405 2 4138 1265 t
+9 PB f
+(1 1)1 225 1 3418 1375 t
+9 PA f
+(0)3778 1375 w
+9 PB f
+(1)3958 1375 w
+9 PA f
+( 1)1 321(0 0 1)2 405 2 4138 1375 t
+9 PB f
+(0 1)1 225 1 3418 1485 t
+9 PA f
+(0)3778 1485 w
+9 PB f
+(1)3958 1485 w
+9 PA f
+( 2)1 321(0 1 0)2 405 2 4138 1485 t
+9 PB f
+(1 0)1 225 1 3418 1595 t
+9 PA f
+(0)3778 1595 w
+9 PB f
+(0)3958 1595 w
+9 PA f
+( 3)1 321(0 1 1)2 405 2 4138 1595 t
+9 PB f
+(1 0)1 225 1 3418 1705 t
+9 PA f
+(0)3778 1705 w
+9 PB f
+(1)3958 1705 w
+9 PA f
+( 4)1 321(1 0 0)2 405 2 4138 1705 t
+9 PB f
+(0 1)1 225 1 3418 1815 t
+9 PA f
+(0)3778 1815 w
+9 PB f
+(0)3958 1815 w
+9 PA f
+( 5)1 321(1 0 1)2 405 2 4138 1815 t
+9 PB f
+(1 1)1 225 1 3418 1925 t
+9 PA f
+(0)3778 1925 w
+9 PB f
+(0)3958 1925 w
+9 PA f
+( 6)1 321(1 1 0)2 405 2 4138 1925 t
+9 PB f
+(0 0)1 225 1 3418 2035 t
+9 PA f
+(0)3778 2035 w
+9 PB f
+(1)3958 2035 w
+9 PA f
+( 7)1 321(1 1 1)2 405 2 4138 2035 t
+9 PB f
+(1 1)1 225 1 3418 2145 t
+9 PA f
+(1)3778 2145 w
+9 PB f
+(0)3958 2145 w
+9 PA f
+( 8)1 321(0 0 0)2 405 2 4138 2145 t
+9 PB f
+(0 0)1 225 1 3418 2255 t
+9 PA f
+(1)3778 2255 w
+9 PB f
+(1)3958 2255 w
+9 PA f
+( 9)1 321(0 0 1)2 405 2 4138 2255 t
+9 PB f
+(1 0)1 225 1 3418 2365 t
+9 PA f
+(1)3778 2365 w
+9 PB f
+(1)3958 2365 w
+9 PA f
+( 10)1 344(0 1 0)2 405 2 4138 2365 t
+9 PB f
+(0 1)1 225 1 3418 2475 t
+9 PA f
+(1)3778 2475 w
+9 PB f
+(0)3958 2475 w
+9 PA f
+( 11)1 344(0 1 1)2 405 2 4138 2475 t
+9 PB f
+(0 1)1 225 1 3418 2585 t
+9 PA f
+(1)3778 2585 w
+9 PB f
+(1)3958 2585 w
+9 PA f
+( 12)1 344(1 0 0)2 405 2 4138 2585 t
+9 PB f
+(1 0)1 225 1 3418 2695 t
+9 PA f
+(1)3778 2695 w
+9 PB f
+(0)3958 2695 w
+9 PA f
+( 13)1 344(1 0 1)2 405 2 4138 2695 t
+9 PB f
+(0 0)1 225 1 3418 2805 t
+9 PA f
+(1)3778 2805 w
+9 PB f
+(0)3958 2805 w
+9 PA f
+( 14)1 344(1 1 0)2 405 2 4138 2805 t
+9 PB f
+(1 1)1 225 1 3418 2915 t
+9 PA f
+(1)3778 2915 w
+9 PB f
+(1)3958 2915 w
+9 PA f
+( 15)1 344(1 1 1)2 405 2 4138 2915 t
+9 S f
+( \347)1 -1678(_ _____________________________________)1 1678 2 3373 2935 t
+(\347)3373 2895 w
+(\347)3373 2805 w
+(\347)3373 2715 w
+(\347)3373 2625 w
+(\347)3373 2535 w
+(\347)3373 2445 w
+(\347)3373 2355 w
+(\347)3373 2265 w
+(\347)3373 2175 w
+(\347)3373 2085 w
+(\347)3373 1995 w
+(\347)3373 1905 w
+(\347)3373 1815 w
+(\347)3373 1725 w
+(\347)3373 1635 w
+(\347)3373 1545 w
+(\347)3373 1455 w
+(\347)3373 1365 w
+(\347)3373 1275 w
+(\347)3373 1185 w
+(\347)3373 1095 w
+(\347)3373 1005 w
+(\347)4610 2935 w
+(\347)4610 2895 w
+(\347)4610 2805 w
+(\347)4610 2715 w
+(\347)4610 2625 w
+(\347)4610 2535 w
+(\347)4610 2445 w
+(\347)4610 2355 w
+(\347)4610 2265 w
+(\347)4610 2175 w
+(\347)4610 2085 w
+(\347)4610 1995 w
+(\347)4610 1905 w
+(\347)4610 1815 w
+(\347)4610 1725 w
+(\347)4610 1635 w
+(\347)4610 1545 w
+(\347)4610 1455 w
+(\347)4610 1365 w
+(\347)4610 1275 w
+(\347)4610 1185 w
+(\347)4610 1095 w
+(\347)4610 1005 w
+(\347)5051 2935 w
+(\347)5051 2895 w
+(\347)5051 2805 w
+(\347)5051 2715 w
+(\347)5051 2625 w
+(\347)5051 2535 w
+(\347)5051 2445 w
+(\347)5051 2355 w
+(\347)5051 2265 w
+(\347)5051 2175 w
+(\347)5051 2085 w
+(\347)5051 1995 w
+(\347)5051 1905 w
+(\347)5051 1815 w
+(\347)5051 1725 w
+(\347)5051 1635 w
+(\347)5051 1545 w
+(\347)5051 1455 w
+(\347)5051 1365 w
+(\347)5051 1275 w
+(\347)5051 1185 w
+(\347)5051 1095 w
+(\347)5051 1005 w
+10 PA f
+( check bit is in position 1,)6 1135( first)1 205( The)1 220(left to right.)2 528 4 3168 3110 t
+( the positions that)3 851(and is a parity check over)5 1237 2 3168 3230 t
+( their)1 261(have a 1 as the least significant bit of)8 1827 2 3168 3350 t
+( positions 1, 3, 5,)4 732(binary representations \(that is,)3 1356 2 3168 3470 t
+( second check bit is in position 2, and)8 1638( The)1 217(7, ...\).)1 233 3 3168 3590 t
+( check over the positions that have a)7 1637(is a parity)2 451 2 3168 3710 t
+( the second least significant bit of their)7 1894(1 as)1 194 2 3168 3830 t
+( positions 2, 3, 6,)4 732(binary representations \(that is,)3 1356 2 3168 3950 t
+( check bit is in position 4, and)7 1368( third)1 254( The)1 225(7, ...\).)1 241 4 3168 4070 t
+( positions that have a 1 as the third)8 1621(checks the)1 467 2 3168 4190 t
+( bit \(positions 4, 5, 6, 7, 12, ...\),)8 1391(least significant)1 697 2 3168 4310 t
+( no parity checks fail, the code)6 1456( If)1 137( on.)1 183(and so)1 312 4 3168 4430 t
+( one bit of the)4 613( If)1 119(word is assumed to be correct.)5 1356 3 3168 4550 t
+( loca-)1 247(code word is in error, the error is at the)9 1841 2 3168 4670 t
+( representation equals the)3 1231(tion whose binary)2 857 2 3168 4790 t
+(pattern of the failed parity checks.)5 1509 1 3168 4910 t
+(Table 1 shows the Hamming code for)6 1698 1 3276 5031 t
+10 PI f
+(r)5007 5031 w
+10 S f
+(=)5086 5031 w
+10 PA f
+(3.)5181 5031 w
+( bits, in boldface, are in positions 1,)7 1633(The check)1 455 2 3168 5151 t
+( values may)2 545( Their)1 294( each code word.)3 771(2, and 4 of)3 478 4 3168 5271 t
+(be computed from the remaining \(message\))5 2088 1 3168 5391 t
+(bits, which represent the numbers 1 through 15)7 2088 1 3168 5511 t
+(in binary.)1 425 1 3168 5631 t
+( of the)2 335(The photograph shows the reverse)4 1645 2 3276 5752 t
+( carries the par-)3 729(IEEE Hamming medal, which)3 1359 2 3168 5872 t
+(ity check matrix)2 710 1 3168 5992 t
+10 PB f
+(H)3515 6307 w
+10 S f
+(=)3647 6307 w
+(\354)3759 6170 w
+(\357)3759 6270 w
+(\357)3759 6370 w
+(\356)3759 6470 w
+10 PA f
+(1)3865 6457 w
+(1)3865 6317 w
+(1)3865 6177 w
+(0)4013 6457 w
+(1)4013 6317 w
+(1)4013 6177 w
+(1)4161 6457 w
+(0)4161 6317 w
+(1)4161 6177 w
+(1)4309 6457 w
+(1)4309 6317 w
+(0)4309 6177 w
+(0)4457 6457 w
+(0)4457 6317 w
+(1)4457 6177 w
+(0)4605 6457 w
+(1)4605 6317 w
+(0)4605 6177 w
+(1)4753 6457 w
+(0)4753 6317 w
+(0)4753 6177 w
+10 S f
+(\374)4860 6170 w
+(\357)4860 6270 w
+(\357)4860 6370 w
+(\376)4860 6470 w
+10 PA f
+(for the Hamming code of Table 1.)6 1495 1 3168 6642 t
+10 PB f
+(H)4715 6642 w
+10 PA f
+(is used as)2 430 1 4826 6642 t
+(follows. Let)1 562 1 3168 6762 t
+10 PB f
+(r)3774 6762 w
+10 PA f
+( length 7)2 418(be a binary vector of)4 981 2 3857 6762 t
+(representing any received word, not necessar-)5 2088 1 3168 6882 t
+( Boolean arithmetic, cal-)3 1064( Using)1 313(ily a code word.)3 711 3 3168 7002 t
+(culate)3168 7122 w
+10 PB f
+(s)4006 7302 w
+10 S f
+(=)4099 7302 w
+10 PB f
+(Hr)4203 7302 w
+7 PB f
+(t)4330 7262 w
+10 PA f
+(,)4393 7302 w
+(where)3168 7482 w
+10 PB f
+(s)3475 7482 w
+10 PA f
+( If)1 123( 3.)1 106(is a binary vector of length)5 1205 3 3549 7482 t
+10 PB f
+(s)5014 7482 w
+10 PA f
+(= 0,)1 167 1 5089 7482 t
+cleartomark
+showpage
+saveobj restore
+end
+%%PageBoundingBox: 75 28 536 764
+%%EndPage: 2 2
+%%Page: 3 3
+%%PageBoundingBox: (atend)
+DpostDict begin
+/saveobj save def
+mark
+3 pagesetup
+10 PA f
+(- 3 -)2 166 1 2977 480 t
+(then)864 840 w
+10 PB f
+(r)1097 840 w
+10 PA f
+( Otherwise,)1 545(is a code word.)3 698 2 1171 840 t
+10 PB f
+(s)2449 840 w
+10 PA f
+(will coin-)1 424 1 2528 840 t
+( the 7 columns of)4 777(cide with one of)3 724 2 864 960 t
+10 PB f
+(H)2396 960 w
+10 PA f
+(. If)1 148 1 2479 960 t
+10 PB f
+(s)2658 960 w
+10 PA f
+(coin-)2733 960 w
+( the)1 169(cides with)1 458 2 864 1080 t
+10 PI f
+(i)1521 1080 w
+10 PA f
+(th column of)2 573 1 1549 1080 t
+10 PB f
+(H)2152 1080 w
+10 PA f
+(, then the)2 421 1 2235 1080 t
+10 PI f
+(i)2686 1080 w
+10 PA f
+(th bit)1 238 1 2714 1080 t
+(of)864 1200 w
+10 PB f
+(r)986 1200 w
+10 PA f
+( and must be reversed in order)6 1419(is in error,)2 474 2 1059 1200 t
+(to recover the correct code word.)5 1459 1 864 1320 t
+([[[see medal.jpg]]])1 828 1 864 1440 t
+9 HB f
+(Reverse of the IEEE Ham-)4 1208 1 1744 1440 t
+( a parity check matrix for a)6 1170(ming Medal, showing)2 918 2 864 1560 t
+(Hamming error-correcting code)2 1350 1 864 1680 t
+10 PA f
+( interpreted)1 564(Error-correcting codes can be)3 1416 2 972 1801 t
+( the Hamming distance)3 1094(geometrically. Define)1 994 2 864 1921 t
+( number of)2 549(between two code words as the)5 1539 2 864 2041 t
+( The)1 225(positions in which the code words differ.)6 1863 2 864 2161 t
+( between code)2 707(minimum Hamming distance)2 1381 2 864 2281 t
+( a single bit error)4 800( Since)1 294( 1 is 3.)3 307(words in Table)2 687 4 864 2401 t
+( distance 1 from the)4 930(moves a received word a)4 1158 2 864 2521 t
+( unam-)1 338(correct word, single-bit errors can be)5 1750 2 864 2641 t
+(biguously corrected by changing the received)5 2088 1 864 2761 t
+( Furthermore,)1 651(word to the nearest code word.)5 1437 2 864 2881 t
+(Hamming codes are)2 930 1 864 3001 t
+10 PI f
+(perfect)1839 3001 w
+10 PA f
+( that)1 220(, in the sense)3 624 2 2108 3001 t
+( word is at a distance at most 1)8 1431(every received)1 657 2 864 3121 t
+( is easy to verify that the)6 1128( It)1 125( word.)1 297(from a code)2 538 4 864 3241 t
+( of)1 133(number of code words, times the number)6 1955 2 864 3361 t
+( distance no greater than 1)5 1222(words that are at a)4 866 2 864 3481 t
+( number)1 377(from a code word, is equal to the total)8 1711 2 864 3601 t
+( means that every pat-)4 1020( This)1 248(of possible words.)2 820 3 864 3721 t
+( for some)2 429(tern of check failures actually occurs)5 1659 2 864 3841 t
+( More)1 294( in the transmitted word.)4 1129(single-bit error)1 665 3 864 3961 t
+( which undertake to correct more)5 1509(recent codes,)1 579 2 864 4081 t
+( single error, are rarely perfect, that is,)7 1799(than a)1 289 2 864 4201 t
+(some patterns of bit errors can occur that do)8 2088 1 864 4321 t
+(not lead to unambiguous decoding.)4 1572 1 864 4441 t
+(Dick observed that a code having a mini-)7 1980 1 972 4562 t
+(mum Hamming distance 2)3 1184 1 864 4682 t
+10 PI f
+(t)2056 4682 w
+10 S f
+(+)2129 4682 w
+10 PA f
+(1, where)1 379 1 2224 4682 t
+10 PI f
+(t)2630 4682 w
+10 PA f
+(is any)1 262 1 2690 4682 t
+(integer, can correct)2 883 1 864 4802 t
+10 PI f
+(t)1792 4802 w
+10 PA f
+(errors, and if the mini-)4 1081 1 1871 4802 t
+(mum distance is 2)3 827 1 864 4922 t
+10 PI f
+(t)1699 4922 w
+10 S f
+(+)1772 4922 w
+10 PA f
+(2, the code can correct)4 1018 1 1867 4922 t
+10 PI f
+(t)2919 4922 w
+10 PA f
+(errors and detect, but not correct,)5 1514 1 864 5042 t
+10 PI f
+(t)2411 5042 w
+10 S f
+(+)2484 5042 w
+10 PA f
+(1 errors.)1 373 1 2579 5042 t
+(The codes described above are single-error-)5 2088 1 864 5162 t
+( adding an additional parity)4 1274(correcting, and by)2 814 2 864 5282 t
+( word they become double-error-)4 1577(bit to each)2 511 2 864 5402 t
+( codes solved a large part of)6 1331(detecting. These)1 757 2 864 5522 t
+(the maintenance problem for telephone com-)5 2088 1 864 5642 t
+( and ''Hamming)2 803(pany switching equipment,)2 1285 2 864 5762 t
+(bits'' went into computer memories in the late)7 2088 1 864 5882 t
+( the IBM 7030 Stretch)4 1050(1950s, for example, in)3 1038 2 864 6002 t
+(supercomputer.)864 6122 w
+( indicate briefly how the Hamming)5 1639(We can)1 341 2 972 6243 t
+( related to some families of multiple-)6 1667(codes are)1 421 2 864 6363 t
+( are in current use.)4 883(error-correcting codes that)2 1205 2 864 6483 t
+( may)1 232(In general, a linear error-correcting code)5 1856 2 864 6603 t
+( number triple [)3 705(be characterized by the)3 1029 2 864 6723 t
+10 PI f
+(n)2606 6723 w
+10 PA f
+(,)2670 6723 w
+10 PI f
+(k)2727 6723 w
+10 PA f
+(,)2779 6723 w
+10 PI f
+(d)2836 6723 w
+10 PA f
+(],)2894 6723 w
+(where)864 6843 w
+10 PI f
+(n)1176 6843 w
+10 PA f
+(is the number of symbols in the code)7 1686 1 1266 6843 t
+(words,)864 6963 w
+10 PI f
+(k)1201 6963 w
+10 PA f
+(is the number of symbols in the mes-)7 1675 1 1277 6963 t
+(sage words, and)2 765 1 864 7083 t
+10 PI f
+(d)1676 7083 w
+10 PA f
+( minimum distance.)2 922(is the)1 257 2 1773 7083 t
+( code)1 233( ])1 41( 3)1 82( ,)1 33( 4)1 82( 7 ,)2 91(Thus, the code of Table 1 is a [)8 1328 7 864 7203 t
+( coding theory, message words)4 1445(In algebraic)1 535 2 972 7324 t
+(and code words are represented by)5 2088 1 864 7444 t
+( over a Galois)3 716(polynomials with coefficients)2 1372 2 3168 840 t
+(field)3168 960 w
+10 PI f
+(GF)3401 960 w
+10 PA f
+([)3537 960 w
+10 PI f
+(q)3578 960 w
+10 PA f
+(] of order)2 429 1 3632 960 t
+10 PI f
+(q)4093 960 w
+10 PA f
+(, where)1 334 1 4139 960 t
+10 PI f
+(q)4505 960 w
+10 PA f
+(is a power of a)4 673 1 4583 960 t
+( polynomial)1 566(prime. The)1 538 2 3168 1080 t
+10 PI f
+(c)4329 1080 w
+10 PA f
+(\()4378 1080 w
+10 PI f
+(X)4419 1080 w
+10 PA f
+(\) representing a)2 757 1 4499 1080 t
+( multiplying the mes-)3 958(code word is obtained by)4 1130 2 3168 1200 t
+(sage polynomial)1 760 1 3168 1320 t
+10 PI f
+(m)3983 1320 w
+10 PA f
+(\()4069 1320 w
+10 PI f
+(X)4110 1320 w
+10 PA f
+( generator)1 484(\) by a fixed)3 582 2 4190 1320 t
+(polynomial)3168 1440 w
+10 PI f
+(g)3752 1440 w
+10 PA f
+(\()3810 1440 w
+10 PI f
+(X)3851 1440 w
+10 PA f
+( families of)2 584( related)1 384(\). Two)1 357 3 3931 1440 t
+(codes, both invented about 1960, permit the)6 2088 1 3168 1560 t
+( arbitrary number of errors by)5 1376(correction of an)2 712 2 3168 1680 t
+(the use of appropriate redundancy.)4 1563 1 3168 1800 t
+(Bose-Chaudhuri-Hocquenghem \(BCH\))1 1980 1 3276 1921 t
+( have to be\))3 541(codes can be \(although they don't)5 1547 2 3168 2041 t
+(constructed over the field)3 1230 1 3168 2161 t
+10 PI f
+(GF)4456 2161 w
+10 PA f
+( binary)1 346( A)1 161(\( 2 \).)2 157 3 4592 2161 t
+( code word length 2)4 943(BCH code with)2 710 2 3168 2281 t
+7 PI f
+(r)4826 2241 w
+10 S f
+(-)4901 2281 w
+10 PA f
+(1 and)1 260 1 4996 2281 t
+(minimum distance at least 2)4 1348 1 3168 2401 t
+10 PI f
+(t)4524 2401 w
+10 S f
+(+)4597 2401 w
+10 PA f
+(1, so that it)3 564 1 4692 2401 t
+(will correct)1 504 1 3168 2521 t
+10 PI f
+(t)3702 2521 w
+10 PA f
+( be constructed)2 679(errors, can always)2 812 2 3765 2521 t
+(with at most)2 574 1 3168 2641 t
+10 PI f
+(rt)3777 2641 w
+10 PA f
+( the code)2 419( is,)1 131( That)1 262(check digits.)1 560 4 3884 2641 t
+(will have performance at least as good as)7 1817 1 3168 2761 t
+([ 2)1 91 1 3557 2941 t
+7 PI f
+(r)3653 2901 w
+10 S f
+(-)3728 2941 w
+10 PA f
+( 2)1 82(1 ,)1 83 2 3823 2941 t
+7 PI f
+(r)3993 2901 w
+10 S f
+(-)4068 2941 w
+10 PA f
+(1)4163 2941 w
+10 S f
+(-)4253 2941 w
+10 PI f
+(rt)4348 2941 w
+10 PA f
+(, 2)1 107 1 4428 2941 t
+10 PI f
+(t)4543 2941 w
+10 S f
+(+)4616 2941 w
+10 PA f
+(1 ])1 91 1 4711 2941 t
+10 PI f
+(.)4842 2941 w
+10 PA f
+(When)3168 3121 w
+10 PI f
+(t)3472 3121 w
+10 S f
+(=)3545 3121 w
+10 PA f
+(1, this BCH code is equivalent to a)7 1616 1 3640 3121 t
+( up to a)3 345(Hamming single-error-correcting code,)2 1743 2 3168 3241 t
+(permutation.)3168 3361 w
+( are constructed)2 776(Reed-Solomon \(RS\) codes)2 1204 2 3276 3482 t
+(over a field)2 529 1 3168 3602 t
+10 PI f
+(GF)3737 3602 w
+10 PA f
+(\()3873 3602 w
+10 PI f
+(q)3914 3602 w
+10 PA f
+(\), where)1 375 1 3968 3602 t
+10 PI f
+(q)4382 3602 w
+10 PA f
+(is a prime power)3 789 1 4467 3602 t
+(and)3168 3722 w
+10 PI f
+(q)3366 3722 w
+10 S f
+(>)3452 3722 w
+10 PA f
+( codes are maximum)3 930(2. Reed-Solomon)1 779 2 3547 3722 t
+( that is, the code con-)5 962(distance separable codes,)2 1126 2 3168 3842 t
+(structed over)1 594 1 3168 3962 t
+10 PI f
+(GF)3796 3962 w
+10 PA f
+(\()3932 3962 w
+10 PI f
+(q)3973 3962 w
+10 PA f
+( distance)1 400(\) with minimum)2 744 2 4027 3962 t
+10 PI f
+(d)5206 3962 w
+10 PA f
+(is described by the triple)4 1088 1 3168 4082 t
+([)3837 4262 w
+10 PI f
+(q)3878 4262 w
+10 S f
+(-)3964 4262 w
+10 PA f
+(1 ,)1 83 1 4059 4262 t
+10 PI f
+(q)4174 4262 w
+10 S f
+(-)4260 4262 w
+10 PI f
+(d)4355 4262 w
+10 PA f
+(,)4413 4262 w
+10 PI f
+(d)4470 4262 w
+10 PA f
+(].)4528 4262 w
+( RS)1 166( ])1 41( 33)1 132( ,)1 33( 223)1 182( 255 ,)2 191(For example, NASA uses a [)5 1343 7 3168 4442 t
+(code over)1 446 1 3168 4562 t
+10 PI f
+(GF)3653 4562 w
+10 PA f
+(\( 2)1 91 1 3789 4562 t
+7 PA f
+(8)3885 4522 w
+10 PA f
+( communica-)1 587(\) for deep-space)2 733 2 3936 4562 t
+( widely used application, a)4 1317( another)1 398(tion. In)1 373 3 3168 4682 t
+( are used)2 399( code)1 234( ])1 41( 5)1 82( ,)1 33( 24)1 132( 28 ,)2 141( code and a [)4 564( ])1 41( 5)1 82( ,)1 33( 28)1 132([ 32 ,)2 174 13 3168 4802 t
+( correct burst errors)3 877(in an interleaved scheme to)4 1211 2 3168 4922 t
+(of length up to 4000 bits on compact discs [2].)9 2008 1 3168 5042 t
+( the cur-)2 380(In a sense, Dick's 1950 paper set off)7 1600 2 3276 5163 t
+( theory and applica-)3 943(rent avalanche of coding)3 1145 2 3168 5283 t
+( left it to others to ride the)7 1261(tions, although he)2 827 2 3168 5403 t
+(avalanche.)3168 5523 w
+12 PB f
+(Numerical analysis)1 1056 1 3168 5644 t
+10 PA f
+( early work was in numerical)5 1305(Much of Dick's)2 675 2 3276 5765 t
+( of his contributions to this field)6 1462(analysis. One)1 626 2 3168 5885 t
+(was the Hamming predictor-corrector \(PC\) set)5 2088 1 3168 6005 t
+(for ordinary differential equations.)3 1539 1 3168 6125 t
+( an ordinary differ-)3 870(Numerical integration of)2 1110 2 3276 6246 t
+(ential equation, say)2 929 1 3168 6366 t
+10 PI f
+(y)4157 6366 w
+10 S f
+(\242)4218 6361 w
+(=)4300 6366 w
+10 PI f
+(f)4412 6366 w
+10 PA f
+(\()4456 6366 w
+10 PI f
+(x)4497 6366 w
+10 PA f
+(,)4555 6366 w
+10 PI f
+(y)4588 6366 w
+10 PA f
+( of)1 147(\), consists)1 463 2 4646 6366 t
+(finding approximate values of)3 1424 1 3168 6486 t
+10 PI f
+(y)4646 6486 w
+10 PA f
+(at a set of)3 506 1 4750 6486 t
+(equispaced values of)2 935 1 3168 6606 t
+10 PI f
+(x)4135 6606 w
+10 PA f
+( method was a)3 661(. Milne's)1 410 2 4185 6606 t
+( Milne pre-)2 574( Briefly,)1 413(once-popular approach.)1 1101 3 3168 6726 t
+(dicts the next value of)4 970 1 3168 6846 t
+10 PI f
+(y)4163 6846 w
+10 PA f
+(using the predictor)2 844 1 4238 6846 t
+10 PI f
+(y)3272 7031 w
+10 S1 f
+(_)3274 6963 w
+7 PI f
+(n)3333 7051 w
+7 S f
+(+)3388 7051 w
+7 PA f
+(1)3438 7051 w
+10 S f
+(=)3521 7031 w
+10 PI f
+(y)3616 7031 w
+7 PI f
+(n)3677 7051 w
+7 S f
+(-)3732 7051 w
+7 PA f
+(3)3782 7051 w
+10 S f
+(+)3841 7031 w
+10 PA f
+(\( 4)1 91 1 3912 7031 t
+10 PI f
+(h /)1 88 1 4011 7031 t
+10 PA f
+(3 \) [ 2)3 190 1 4107 7031 t
+10 PI f
+(y)4305 7031 w
+7 PI f
+(n)4360 7050 w
+10 S f
+(\242)4360 7026 w
+(-)4423 7031 w
+10 PI f
+(y)4494 7031 w
+7 PI f
+(n)4549 7050 w
+7 S f
+(-)4604 7050 w
+7 PA f
+(1)4654 7050 w
+10 S f
+(\242)4549 7026 w
+(+)4713 7031 w
+10 PA f
+(2)4784 7031 w
+10 PI f
+(y)4842 7031 w
+7 PI f
+(n)4897 7050 w
+7 S f
+(-)4952 7050 w
+7 PA f
+(2)5002 7050 w
+10 S f
+(\242)4897 7026 w
+10 PA f
+(] ,)1 98 1 5053 7031 t
+(where)3168 7211 w
+10 PI f
+(h)3490 7211 w
+10 PA f
+(is the step size, or spacing between)6 1670 1 3586 7211 t
+(values of)1 406 1 3168 7331 t
+10 PI f
+(x)3607 7331 w
+10 PA f
+( the value of)3 566( then corrects)2 609(. Milne)1 342 3 3657 7331 t
+10 PI f
+(y)5206 7331 w
+10 PA f
+(using the corrector)2 833 1 3168 7451 t
+cleartomark
+showpage
+saveobj restore
+end
+%%PageBoundingBox: 75 31 536 764
+%%EndPage: 3 3
+%%Page: 4 4
+%%PageBoundingBox: (atend)
+DpostDict begin
+/saveobj save def
+mark
+4 pagesetup
+10 PA f
+(- 4 -)2 166 1 2977 480 t
+10 PI f
+(y)1026 846 w
+7 PI f
+(n)1087 866 w
+7 S f
+(+)1142 866 w
+7 PA f
+(1)1192 866 w
+10 S f
+(=)1275 846 w
+10 PI f
+(y)1370 846 w
+7 PI f
+(n)1431 866 w
+7 S f
+(-)1486 866 w
+7 PA f
+(1)1536 866 w
+10 S f
+(+)1595 846 w
+10 PA f
+(\()1666 846 w
+10 PI f
+(h /)1 88 1 1707 846 t
+10 PA f
+(3 \) [)2 132 1 1803 846 t
+10 PI f
+(y)1943 846 w
+10 S1 f
+(_)1945 778 w
+7 PI f
+(n)1998 865 w
+7 S f
+(+)2053 865 w
+7 PA f
+(1)2103 865 w
+10 S f
+(\242)2007 827 w
+(+)2162 846 w
+10 PA f
+(4)2233 846 w
+10 PI f
+(y)2291 846 w
+7 PI f
+(n)2346 865 w
+10 S f
+(\242)2346 841 w
+(+)2409 846 w
+10 PI f
+(y)2480 846 w
+7 PI f
+(n)2535 865 w
+7 S f
+(-)2590 865 w
+7 PA f
+(1)2640 865 w
+10 S f
+(\242)2535 841 w
+10 PA f
+(])2691 846 w
+10 PI f
+(.)2764 846 w
+10 PA f
+( values of)2 467(For any PC method, the starting)5 1524 2 864 1026 t
+10 PI f
+(y)2902 1026 w
+10 PA f
+( some other method, such)4 1171(have to be found by)4 917 2 864 1146 t
+(as Runge-Kutta.)1 713 1 864 1266 t
+( unstable,)1 446(Unfortunately, Milne's method is)3 1534 2 972 1387 t
+( due to roundoff noise are ampli-)6 1491(that is, errors)2 597 2 864 1507 t
+( problem)1 419( The)1 236(fied as the solution progresses.)4 1433 3 864 1627 t
+( be serious if one is trying to follow a)9 1713(may not)1 375 2 864 1747 t
+( \()1 41( as the solution exp)4 864(growing solution, such)2 1021 3 864 1867 t
+10 S f
+(l)2798 1867 w
+10 PI f
+(x)2861 1867 w
+10 PA f
+(\))2919 1867 w
+(of)864 1987 w
+10 PI f
+(y)1029 1987 w
+10 S f
+(\242)1090 1982 w
+(= l)1 150 1 1163 1987 t
+10 PI f
+(y)1321 1987 w
+10 PA f
+(when)1448 1987 w
+10 S f
+(l >)1 150 1 1772 1987 t
+10 PA f
+( if one)2 375(0. However,)1 615 2 1962 1987 t
+(attempts to track a decreasing solution, such as)7 2088 1 864 2107 t
+(exp \()1 201 1 864 2227 t
+10 S f
+(l)1073 2227 w
+10 PI f
+(x)1136 2227 w
+10 PA f
+(\) when)1 314 1 1194 2227 t
+10 S f
+(l <)1 150 1 1542 2227 t
+10 PA f
+(0, the roundoff noise even-)4 1220 1 1732 2227 t
+(tually swamps the desired solution.)4 1576 1 864 2347 t
+( study [3] of PC meth-)5 1037(Dick made a general)3 943 2 972 2468 t
+( predictor together with cor-)4 1288(ods using Milne's)2 800 2 864 2588 t
+(rectors of the form)3 820 1 864 2708 t
+10 PI f
+(y)864 2888 w
+7 PI f
+(n)925 2908 w
+7 S f
+(+)980 2908 w
+7 PA f
+(1)1030 2908 w
+10 S f
+(=)1113 2888 w
+10 PI f
+(ay)1208 2888 w
+7 PI f
+(n)1313 2908 w
+10 S f
+(+)1376 2888 w
+10 PI f
+(by)1447 2888 w
+7 PI f
+(n)1554 2908 w
+7 S f
+(-)1609 2908 w
+7 PA f
+(1)1659 2908 w
+10 S f
+(+)1718 2888 w
+10 PI f
+(cy)1789 2888 w
+7 PI f
+(n)1891 2908 w
+7 S f
+(-)1946 2908 w
+7 PA f
+(2)1996 2908 w
+10 S f
+(+)1734 3074 w
+10 PI f
+(h)1805 3074 w
+10 PA f
+([)1863 3074 w
+10 PI f
+(dy)1904 3074 w
+10 S1 f
+(_)1956 3006 w
+7 PI f
+(n)2009 3093 w
+7 S f
+(+)2064 3093 w
+7 PA f
+(1)2114 3093 w
+10 S f
+(\242)2018 3055 w
+(+)2173 3074 w
+10 PI f
+(ey)2244 3074 w
+7 PI f
+(n)2338 3093 w
+10 S f
+(\242)2338 3069 w
+(+)2401 3074 w
+10 PI f
+(fy)2480 3074 w
+7 PI f
+(n)2563 3093 w
+7 S f
+(-)2618 3093 w
+7 PA f
+(1)2668 3093 w
+10 S f
+(\242)2563 3069 w
+10 PA f
+(] ,)1 74 1 2719 3074 t
+(where)864 3254 w
+10 PI f
+(a)1169 3254 w
+10 PA f
+(,)1221 3254 w
+10 PI f
+(b)1278 3254 w
+10 PA f
+(,)1332 3254 w
+10 PI f
+(. . .)2 91 1 1389 3254 t
+10 PA f
+(,)1488 3254 w
+10 PI f
+(f)1553 3254 w
+10 PA f
+( Based)1 316(are arbitrary constants.)2 1027 2 1609 3254 t
+(on various criteria, he proposed the corrector,)6 2023 1 864 3374 t
+10 PI f
+(y)864 3554 w
+7 PI f
+(n)925 3574 w
+7 S f
+(+)980 3574 w
+7 PA f
+(1)1030 3574 w
+10 S f
+(=)1113 3554 w
+10 PA f
+(\( 1)1 91 1 1208 3554 t
+10 PI f
+(/)1307 3554 w
+10 PA f
+(8 \) [ 9)3 190 1 1345 3554 t
+10 PI f
+(y)1543 3554 w
+7 PI f
+(n)1604 3574 w
+10 S f
+(-)1667 3554 w
+10 PI f
+(y)1738 3554 w
+7 PI f
+(n)1799 3574 w
+7 S f
+(-)1854 3574 w
+7 PA f
+(2)1904 3574 w
+10 PA f
+(])1955 3554 w
+10 S f
+(+)1559 3740 w
+10 PA f
+(\( 3)1 91 1 1630 3740 t
+10 PI f
+(h /)1 88 1 1729 3740 t
+10 PA f
+(8 \) [)2 132 1 1825 3740 t
+10 PI f
+(y)1965 3740 w
+10 S1 f
+(_)1967 3672 w
+7 PI f
+(n)2020 3759 w
+7 S f
+(+)2075 3759 w
+7 PA f
+(1)2125 3759 w
+10 S f
+(\242)2029 3721 w
+(+)2184 3740 w
+10 PA f
+(2)2255 3740 w
+10 PI f
+(y)2313 3740 w
+7 PI f
+(n)2368 3759 w
+10 S f
+(\242)2368 3735 w
+(+)2431 3740 w
+10 PI f
+(y)2502 3740 w
+7 PI f
+(n)2557 3759 w
+7 S f
+(-)2612 3759 w
+7 PA f
+(1)2662 3759 w
+10 S f
+(\242)2557 3735 w
+10 PA f
+(])2713 3740 w
+10 PI f
+(.)2786 3740 w
+10 PA f
+( stable, that is,)3 777(The Hamming corrector is)3 1311 2 864 3920 t
+( for equations)2 621(roundoff errors are damped out,)4 1467 2 864 4040 t
+(like)864 4160 w
+10 PI f
+(y)1067 4160 w
+10 S f
+(\242)1128 4155 w
+(= l)1 150 1 1201 4160 t
+10 PI f
+(y)1359 4160 w
+10 PA f
+(when)1450 4160 w
+10 S f
+(l)1738 4160 w
+10 PA f
+( as)1 134(is negative, so long)3 892 2 1834 4160 t
+10 PI f
+(h)2902 4160 w
+10 PA f
+(satisfies)864 4280 w
+10 S f
+(-)1237 4280 w
+10 PA f
+(2. 6)1 133 1 1308 4280 t
+10 S f
+(<)1481 4280 w
+10 PI f
+(h)1576 4280 w
+10 S f
+(l <)1 150 1 1634 4280 t
+10 PA f
+(0.)1824 4280 w
+( for a)2 278(The Hamming PC set held the field)6 1702 2 972 4401 t
+( the Adams-)2 687( Recently)1 506( years.)1 359(number of)1 536 4 864 4521 t
+( an extra value of the)5 956(Bashforth set, which uses)3 1132 2 864 4641 t
+(derivative and has a slightly larger stability)6 2088 1 864 4761 t
+( the)1 191( However,)1 515(region, has found favor [4,5].)4 1382 3 864 4881 t
+( to be solved often plays)5 1101(nature of the problem)3 987 2 864 5001 t
+( integration)1 556(a role in choosing a numerical)5 1532 2 864 5121 t
+(method.)864 5241 w
+( on numerical anal-)3 881(Dick's greatest influence)2 1099 2 972 5362 t
+(ysis was probably through his two books on)7 2088 1 864 5482 t
+( books were organized for)4 1161( The)1 217(the subject [4,6].)2 710 3 864 5602 t
+(the nonspecialist user, with general methods)5 2088 1 864 5722 t
+( always with an)3 750(subsuming special cases, and)3 1338 2 864 5842 t
+( were)1 245( They)1 274(eye toward what works in practice.)5 1569 3 864 5962 t
+( in)1 127(unique in their focus on the whole context)7 1961 2 864 6082 t
+( should function.)2 784(which the numerical analyst)3 1304 2 864 6202 t
+( the user of numerical meth-)5 1298(Dick insisted that)2 790 2 864 6322 t
+(ods should consider both the source of the)7 2088 1 864 6442 t
+( the results were)3 745(problem and the use to which)5 1343 2 864 6562 t
+( enjoyed working with)3 1091( He)1 210( put.)1 232(going to be)2 555 4 864 6682 t
+( and engineers, and was)4 1169(physicists, chemists,)1 919 2 864 6802 t
+( dealing with ``walk-in'')3 1137(remarkably adept at)2 951 2 864 6922 t
+( extended over a large)4 1029( clientele)1 402(problems. His)1 657 3 864 7042 t
+(part of Bell Labs.)3 746 1 864 7162 t
+( books were full of unobtru-)5 1330(Finally, Dick's)1 650 2 972 7283 t
+( example, he suggested a)4 1146( For)1 212( ideas.)1 291(sive good)1 439 4 864 7403 t
+( of systematic)2 607(technique for estimating the level)4 1481 2 3168 840 t
+( ``black box'' func-)3 880(inaccuracy in a computed)3 1208 2 3168 960 t
+( observed that taking higher-order)4 1671(tion. He)1 417 2 3168 1080 t
+( a set of function values tends)6 1464(differences of)1 624 2 3168 1200 t
+( telltale)1 329(eventually to produce quantities with a)5 1759 2 3168 1320 t
+( at which point the)4 849(pattern of alternating signs,)3 1239 2 3168 1440 t
+( the remaining numbers reflects the)5 1767(size of)1 321 2 3168 1560 t
+( obser-)1 304( This)1 246( computation.)1 621(absolute error in the)3 917 4 3168 1680 t
+( scientific computing)2 926(vation is routinely used in)4 1162 2 3168 1800 t
+(to estimate accuracy when only function val-)6 2088 1 3168 1920 t
+(ues are available.)2 759 1 3168 2040 t
+12 PB f
+(Digital filters)1 744 1 3168 2161 t
+10 PA f
+( filters began)2 609(Dick's contributions to digital)3 1371 2 3276 2282 t
+( Bell Labs and were ini-)5 1047(during his first years at)4 1041 2 3168 2402 t
+( association with Ralph)3 1053(tially stimulated by his)3 1035 2 3168 2522 t
+( this field he)3 570( In)1 151(Blackman and John Tukey [7].)4 1367 3 3168 2642 t
+( the invention of the Hamming)5 1392(is credited with)2 696 2 3168 2762 t
+(window, which may be explained as follows.)6 1991 1 3168 2882 t
+( filter is real-)3 567(In mathematical terms, a digital)4 1413 2 3276 3003 t
+(ized by a linear combination of equi-spaced)6 2088 1 3168 3123 t
+( function of time, taken over an)6 1503(samples of a)2 585 2 3168 3243 t
+(interval)3168 3363 w
+10 PI f
+(T)3537 3363 w
+10 PA f
+( example, if the input function is)6 1432(. For)1 226 2 3598 3363 t
+10 PI f
+(u)3168 3483 w
+10 PA f
+(\()3232 3483 w
+10 PI f
+(t)3273 3483 w
+10 PA f
+( there are 2)3 514(\) and)1 234 2 3314 3483 t
+10 PI f
+(N)4070 3483 w
+10 S f
+(+)4188 3483 w
+10 PA f
+(1 samples, the output)3 973 1 4283 3483 t
+(of the filter at a particular time as)7 1472 1 3168 3603 t
+7 PI f
+(n)3711 3933 w
+7 S f
+(= -)1 89 1 3766 3933 t
+7 PI f
+(N)3866 3933 w
+15 S f
+(S)3771 3863 w
+7 PI f
+(N)3788 3733 w
+10 PI f
+(c)3928 3833 w
+7 PI f
+(n)3980 3853 w
+10 PI f
+(u)4035 3833 w
+10 PA f
+(\()4099 3833 w
+10 PI f
+(t)4140 3833 w
+10 S f
+(+)4213 3833 w
+10 PI f
+(nT /)1 155 1 4308 3833 t
+10 PA f
+(2)4471 3833 w
+10 PI f
+(N)4529 3833 w
+10 PA f
+(\) ,)1 98 1 4615 3833 t
+(where the)1 441 1 3168 4093 t
+10 PI f
+(c)3634 4093 w
+7 PI f
+(n)3686 4113 w
+10 PA f
+(are the filter weights.)3 938 1 3758 4093 t
+(The properties of a digital filter are defined)7 1980 1 3276 4214 t
+( time)1 253(in terms of its effect on the harmonic)7 1835 2 3168 4334 t
+(function)3168 4454 w
+10 PI f
+(u)3585 4454 w
+10 PA f
+(\()3649 4454 w
+10 PI f
+(t)3690 4454 w
+10 PA f
+(\))3731 4454 w
+10 S f
+(=)3812 4454 w
+10 PA f
+(exp \( 2)2 259 1 3907 4454 t
+10 S f
+(p)4174 4454 w
+10 PI f
+(ift)4237 4454 w
+10 PA f
+( the filter)2 447(\). Usually)1 475 2 4334 4454 t
+(is designed to pass a particular frequency, say)7 2088 1 3168 4574 t
+10 PI f
+(f)3168 4694 w
+7 PA f
+(0)3207 4714 w
+10 PA f
+( discriminate against nearby frequen-)4 1668(, and to)2 338 2 3250 4694 t
+( to make the center frequency)5 1353( order)1 279(cies. In)1 340 3 3168 4814 t
+10 PI f
+(f)5174 4814 w
+7 PA f
+(0)5213 4834 w
+10 PA f
+( to introduce phases)3 969(explicit, it is convenient)3 1119 2 3168 4934 t
+(into the weight coefficients by writing)5 1681 1 3168 5054 t
+3791 5216 3791 6296 Dl
+5231 5216 3791 5216 Dl
+5231 6296 5231 5216 Dl
+3791 6296 5231 6296 Dl
+3791 6368 3791 6296 Dl
+(\2611)3741 6478 w
+4151 6368 4151 6296 Dl
+(\2610.5)4064 6478 w
+4511 6368 4511 6296 Dl
+(0)4486 6478 w
+4871 6368 4871 6296 Dl
+(0.5)4809 6478 w
+5231 6368 5231 6296 Dl
+(1)5206 6478 w
+3719 6296 3791 6296 Dl
+(0)3644 6316 w
+3719 6080 3791 6080 Dl
+(0.2)3569 6100 w
+3719 5864 3791 5864 Dl
+(0.4)3569 5884 w
+3719 5648 3791 5648 Dl
+(0.6)3569 5668 w
+3719 5432 3791 5432 Dl
+(0.8)3569 5452 w
+3719 5216 3791 5216 Dl
+(1)3644 5236 w
+10 PI f
+(a)3405 5776 w
+7 PI f
+(n)3460 5796 w
+10 PI f
+(n / N)2 180 1 4421 6616 t
+3798 6209 3791 6209 Dl
+3805 6209 3798 6209 Dl
+3813 6207 3806 6208 Dl
+3820 6206 3813 6207 Dl
+3827 6204 3820 6206 Dl
+3834 6201 3827 6203 Dl
+3841 6198 3834 6200 Dl
+3849 6194 3842 6197 Dl
+3856 6189 3849 6193 Dl
+3863 6186 3856 6190 Dl
+3870 6180 3863 6185 Dl
+3877 6175 3870 6180 Dl
+3885 6170 3878 6175 Dl
+3892 6162 3885 6168 Dl
+3899 6155 3892 6162 Dl
+3906 6148 3899 6155 Dl
+3913 6141 3906 6148 Dl
+3921 6133 3914 6140 Dl
+3928 6124 3921 6132 Dl
+3935 6115 3928 6123 Dl
+3942 6105 3935 6114 Dl
+3949 6095 3942 6105 Dl
+3957 6085 3950 6095 Dl
+3964 6075 3957 6085 Dl
+3971 6064 3964 6074 Dl
+3978 6053 3971 6064 Dl
+3985 6041 3978 6052 Dl
+3993 6030 3986 6041 Dl
+4000 6017 3993 6029 Dl
+4007 6005 4000 6017 Dl
+4014 5993 4007 6005 Dl
+4021 5980 4014 5992 Dl
+4029 5967 4022 5979 Dl
+4036 5952 4029 5965 Dl
+4043 5938 4036 5951 Dl
+4050 5925 4043 5938 Dl
+4057 5910 4050 5924 Dl
+4065 5896 4058 5910 Dl
+4072 5881 4065 5895 Dl
+4079 5866 4072 5881 Dl
+4086 5851 4079 5866 Dl
+4093 5836 4086 5851 Dl
+4101 5821 4094 5836 Dl
+4108 5806 4101 5821 Dl
+4115 5790 4108 5805 Dl
+4122 5775 4115 5790 Dl
+4129 5759 4122 5774 Dl
+4137 5744 4130 5759 Dl
+4144 5728 4137 5743 Dl
+4151 5713 4144 5728 Dl
+4158 5697 4151 5712 Dl
+4165 5681 4158 5696 Dl
+4173 5666 4166 5681 Dl
+4180 5651 4173 5666 Dl
+4187 5635 4180 5650 Dl
+4194 5620 4187 5635 Dl
+4201 5604 4194 5619 Dl
+4209 5589 4202 5604 Dl
+4216 5573 4209 5588 Dl
+4223 5558 4216 5573 Dl
+4230 5544 4223 5559 Dl
+4237 5530 4230 5544 Dl
+4245 5515 4238 5529 Dl
+4252 5501 4245 5515 Dl
+4259 5488 4252 5501 Dl
+4266 5474 4259 5487 Dl
+4273 5460 4266 5473 Dl
+4281 5448 4274 5460 Dl
+4288 5434 4281 5446 Dl
+4295 5421 4288 5433 Dl
+4302 5408 4295 5420 Dl
+4309 5396 4302 5408 Dl
+4317 5385 4310 5396 Dl
+4324 5373 4317 5384 Dl
+4331 5361 4324 5372 Dl
+4338 5351 4331 5361 Dl
+4345 5340 4338 5350 Dl
+4353 5329 4346 5339 Dl
+4360 5319 4353 5329 Dl
+4367 5311 4360 5320 Dl
+4374 5303 4367 5311 Dl
+4381 5293 4374 5301 Dl
+4389 5286 4382 5293 Dl
+4396 5278 4389 5285 Dl
+4403 5270 4396 5277 Dl
+4410 5263 4403 5270 Dl
+4417 5257 4410 5263 Dl
+4425 5252 4418 5257 Dl
+4432 5245 4425 5250 Dl
+4439 5240 4432 5245 Dl
+4446 5236 4439 5240 Dl
+4453 5231 4446 5235 Dl
+4461 5228 4454 5231 Dl
+4468 5226 4461 5228 Dl
+4475 5222 4468 5224 Dl
+4482 5219 4475 5221 Dl
+4489 5218 4482 5219 Dl
+4497 5217 4490 5218 Dl
+4504 5216 4497 5216 Dl
+4511 5216 4504 5216 Dl
+4518 5216 4511 5216 Dl
+4525 5216 4518 5216 Dl
+4533 5217 4526 5216 Dl
+4540 5219 4533 5218 Dl
+4547 5221 4540 5219 Dl
+4554 5223 4547 5221 Dl
+4561 5226 4554 5224 Dl
+4569 5231 4562 5228 Dl
+4576 5235 4569 5231 Dl
+4583 5239 4576 5235 Dl
+4590 5245 4583 5240 Dl
+4597 5250 4590 5245 Dl
+4605 5255 4598 5250 Dl
+4612 5263 4605 5257 Dl
+4619 5270 4612 5263 Dl
+4626 5277 4619 5270 Dl
+4633 5284 4626 5277 Dl
+4641 5292 4634 5285 Dl
+4648 5301 4641 5293 Dl
+4655 5309 4648 5301 Dl
+4662 5320 4655 5311 Dl
+4669 5330 4662 5320 Dl
+4677 5339 4670 5329 Dl
+4684 5349 4677 5339 Dl
+4691 5360 4684 5350 Dl
+4698 5372 4691 5361 Dl
+4705 5383 4698 5372 Dl
+4713 5395 4706 5384 Dl
+4720 5408 4713 5396 Dl
+4727 5420 4720 5408 Dl
+4734 5432 4727 5420 Dl
+4741 5445 4734 5433 Dl
+4749 5458 4742 5446 Dl
+4756 5473 4749 5460 Dl
+4763 5486 4756 5473 Dl
+4770 5500 4763 5487 Dl
+4777 5515 4770 5501 Dl
+4785 5529 4778 5515 Dl
+4792 5543 4785 5529 Dl
+4799 5559 4792 5544 Dl
+4806 5574 4799 5559 Dl
+4813 5588 4806 5573 Dl
+4821 5603 4814 5588 Dl
+4828 5619 4821 5604 Dl
+4835 5634 4828 5619 Dl
+4842 5650 4835 5635 Dl
+4849 5665 4842 5650 Dl
+4857 5681 4850 5666 Dl
+4864 5696 4857 5681 Dl
+4871 5711 4864 5696 Dl
+4878 5727 4871 5712 Dl
+4885 5743 4878 5728 Dl
+4893 5758 4886 5743 Dl
+4900 5774 4893 5759 Dl
+4907 5789 4900 5774 Dl
+4914 5805 4907 5790 Dl
+4921 5820 4914 5805 Dl
+4929 5836 4922 5821 Dl
+4936 5851 4929 5836 Dl
+4943 5866 4936 5851 Dl
+4950 5881 4943 5866 Dl
+4957 5895 4950 5881 Dl
+4965 5909 4958 5895 Dl
+4972 5924 4965 5910 Dl
+4979 5937 4972 5924 Dl
+4986 5951 4979 5938 Dl
+4993 5964 4986 5951 Dl
+5001 5977 4994 5965 Dl
+5008 5991 5001 5979 Dl
+5015 6004 5008 5992 Dl
+5022 6017 5015 6005 Dl
+5029 6029 5022 6017 Dl
+5037 6040 5030 6029 Dl
+5044 6052 5037 6041 Dl
+5051 6063 5044 6052 Dl
+5058 6074 5051 6064 Dl
+5065 6084 5058 6074 Dl
+5073 6095 5066 6085 Dl
+5080 6105 5073 6095 Dl
+5087 6114 5080 6105 Dl
+5094 6122 5087 6114 Dl
+5101 6131 5094 6123 Dl
+5109 6139 5102 6132 Dl
+5116 6147 5109 6140 Dl
+5123 6155 5116 6148 Dl
+5130 6162 5123 6155 Dl
+5137 6168 5130 6162 Dl
+5145 6173 5138 6168 Dl
+5152 6180 5145 6175 Dl
+5159 6185 5152 6180 Dl
+5166 6189 5159 6185 Dl
+5173 6194 5166 6190 Dl
+5181 6196 5174 6193 Dl
+5188 6199 5181 6197 Dl
+5195 6202 5188 6200 Dl
+5202 6205 5195 6203 Dl
+5209 6207 5202 6206 Dl
+5217 6208 5210 6207 Dl
+5224 6208 5217 6208 Dl
+5231 6209 5224 6209 Dl
+9 PB f
+(Figure 1. Hamming window weight coefficients)5 1963 1 3230 6854 t
+10 PI f
+(c)3619 7034 w
+7 PI f
+(n)3671 7054 w
+10 S f
+(=)3767 7034 w
+10 PI f
+(a)3871 7034 w
+7 PI f
+(n)3926 7054 w
+10 PA f
+(exp \()1 201 1 3981 7034 t
+10 S f
+(-)4198 7034 w
+10 PI f
+(n)4269 7034 w
+10 S f
+(p)4333 7034 w
+10 PI f
+(if)4396 7034 w
+7 PA f
+(0)4463 7054 w
+10 PI f
+(T / N)2 185 1 4514 7034 t
+10 PA f
+(\))4707 7034 w
+10 PI f
+(.)4780 7034 w
+10 PA f
+(Then we are interested in the function)6 1680 1 3168 7214 t
+10 PI f
+(U)3359 7444 w
+10 PA f
+(\()3445 7444 w
+10 PI f
+(f)3502 7444 w
+10 PA f
+(\))3554 7444 w
+10 S f
+(=)3644 7444 w
+7 PI f
+(n)3748 7544 w
+7 S f
+(= -)1 89 1 3803 7544 t
+7 PI f
+(N)3903 7544 w
+15 S f
+(S)3808 7474 w
+7 PI f
+(N)3825 7344 w
+10 PI f
+(a)3965 7444 w
+7 PI f
+(n)4020 7464 w
+10 PA f
+(exp [)1 201 1 4075 7444 t
+10 PI f
+(n)4284 7444 w
+10 S f
+(p)4348 7444 w
+10 PI f
+(i)4411 7444 w
+10 PA f
+(\()4447 7444 w
+10 PI f
+(f)4504 7444 w
+10 S f
+(-)4556 7444 w
+10 PI f
+(f)4635 7444 w
+7 PA f
+(0)4674 7464 w
+10 PA f
+(\))4725 7444 w
+10 PI f
+(T / N)2 185 1 4774 7444 t
+10 PA f
+(] ,)1 98 1 4967 7444 t
+cleartomark
+showpage
+saveobj restore
+end
+%%PageBoundingBox: 75 23 536 764
+%%EndPage: 4 4
+%%Page: 5 5
+%%PageBoundingBox: (atend)
+DpostDict begin
+/saveobj save def
+mark
+5 pagesetup
+10 PA f
+(- 5 -)2 166 1 2977 480 t
+( \( 2)2 99( response to exp)3 824(which is the)2 602 3 864 840 t
+10 S f
+(p)2397 840 w
+10 PI f
+(ift)2460 840 w
+10 PA f
+(\) and is)2 395 1 2557 840 t
+( coeffi-)1 337( The)1 255(called the frequency transform.)3 1496 3 864 960 t
+(cients)864 1080 w
+10 PI f
+(a)1143 1080 w
+7 PI f
+(n)1198 1100 w
+10 PA f
+(are called the filter window.)4 1244 1 1270 1080 t
+(The frequency transform)2 1115 1 972 1201 t
+10 PI f
+(U)2120 1201 w
+10 PA f
+(\()2206 1201 w
+10 PI f
+(f)2263 1201 w
+10 PA f
+(\) typically has)2 637 1 2315 1201 t
+( lobe, at)2 361(a principal maximum, or main)4 1385 2 864 1321 t
+10 PI f
+(f)2643 1321 w
+7 PA f
+(0)2682 1341 w
+10 PA f
+(, and)1 227 1 2725 1321 t
+( lobes, at other fre-)4 865(subsidiary maxima, or side)3 1223 2 864 1441 t
+( applications it is desirable)4 1242( some)1 276(quencies. In)1 570 3 864 1561 t
+( side lobes as low)4 772(to keep the magnitudes of the)5 1316 2 864 1681 t
+(as possible with respect to the main lobe.)7 1809 1 864 1801 t
+( of filter coefficients [7,8])4 1187(Dick found a set)3 793 2 972 1922 t
+(that are particularly effective in suppressing)5 2088 1 864 2042 t
+( coefficients of the Hamming)4 1367( The)1 240(side lobes.)1 481 3 864 2162 t
+(window are given by)3 940 1 864 2282 t
+10 PI f
+(a)1306 2462 w
+7 PI f
+(n)1361 2482 w
+10 S f
+(=)1457 2462 w
+10 PA f
+(0. 54)1 183 1 1561 2462 t
+10 S f
+(+)1784 2462 w
+10 PA f
+( cos)1 173(0. 46)1 183 2 1879 2462 t
+10 PI f
+(n)2267 2462 w
+10 S f
+(p)2331 2462 w
+10 PI f
+(/ N)1 116 1 2394 2462 t
+10 PA f
+(for)864 2642 w
+10 S f
+(-)1086 2642 w
+10 PI f
+(N)1157 2642 w
+10 S f
+(\243)1267 2642 w
+10 PI f
+(n)1354 2642 w
+10 S f
+(\243)1442 2642 w
+10 PI f
+(N)1529 2642 w
+10 PA f
+( Hamming window,)2 1034(. The)1 311 2 1607 2642 t
+(which has also been called a raised cosine on a)9 2088 1 864 2762 t
+(pedestal, is shown in Fig. 1 above.)6 1505 1 864 2882 t
+1440 3044 1440 4124 Dl
+2880 3044 1440 3044 Dl
+2880 4124 2880 3044 Dl
+1440 4124 2880 4124 Dl
+1368 4124 1440 4124 Dl
+(\26160)1193 4144 w
+1368 3764 1440 3764 Dl
+(\26140)1193 3784 w
+1368 3404 1440 3404 Dl
+(\26120)1193 3424 w
+1368 3044 1440 3044 Dl
+(0)1293 3064 w
+10 PI f
+(U)1027 3604 w
+10 PA f
+(dB)1155 3604 w
+10 PI f
+(f)2026 4444 w
+10 S f
+(-)2110 4444 w
+10 PI f
+(f)2213 4444 w
+7 PA f
+(0)2252 4464 w
+10 PA f
+1443 3044 1440 3044 Dl
+1446 3044 1443 3044 Dl
+1450 3044 1447 3044 Dl
+1453 3044 1450 3044 Dl
+1457 3044 1454 3044 Dl
+1461 3045 1458 3045 Dl
+1464 3046 1461 3046 Dl
+1468 3046 1465 3046 Dl
+1471 3047 1468 3047 Dl
+1475 3048 1472 3047 Dl
+1479 3049 1476 3049 Dl
+1482 3050 1479 3049 Dl
+1486 3052 1483 3051 Dl
+1489 3053 1486 3052 Dl
+1493 3055 1490 3054 Dl
+1497 3055 1494 3054 Dl
+1500 3057 1497 3056 Dl
+1504 3060 1501 3058 Dl
+1507 3061 1504 3060 Dl
+1511 3064 1508 3062 Dl
+1515 3066 1512 3064 Dl
+1518 3068 1515 3066 Dl
+1522 3070 1519 3068 Dl
+1525 3072 1522 3070 Dl
+1529 3074 1526 3072 Dl
+1533 3077 1530 3075 Dl
+1536 3080 1533 3078 Dl
+1540 3082 1537 3080 Dl
+1543 3085 1540 3083 Dl
+1547 3088 1544 3086 Dl
+1551 3092 1548 3090 Dl
+1554 3095 1551 3092 Dl
+1558 3099 1555 3096 Dl
+1561 3102 1558 3099 Dl
+1565 3106 1562 3103 Dl
+1569 3109 1566 3106 Dl
+1572 3114 1569 3110 Dl
+1576 3117 1573 3114 Dl
+1579 3122 1576 3118 Dl
+1583 3126 1580 3122 Dl
+1587 3130 1584 3126 Dl
+1590 3135 1587 3131 Dl
+1594 3141 1591 3136 Dl
+1597 3145 1594 3140 Dl
+1601 3150 1598 3145 Dl
+1605 3155 1602 3150 Dl
+1608 3160 1605 3155 Dl
+1612 3165 1609 3160 Dl
+1615 3171 1612 3166 Dl
+1619 3177 1616 3172 Dl
+1623 3182 1620 3177 Dl
+1626 3188 1623 3183 Dl
+1630 3195 1627 3189 Dl
+1633 3201 1630 3195 Dl
+1637 3207 1634 3201 Dl
+1641 3214 1638 3208 Dl
+1644 3221 1641 3214 Dl
+1648 3228 1645 3221 Dl
+1651 3236 1648 3229 Dl
+1655 3243 1652 3236 Dl
+1659 3251 1656 3244 Dl
+1662 3258 1659 3251 Dl
+1666 3266 1663 3259 Dl
+1669 3275 1666 3267 Dl
+1673 3283 1670 3275 Dl
+1677 3292 1674 3284 Dl
+1680 3302 1677 3293 Dl
+1684 3310 1681 3301 Dl
+1687 3320 1684 3311 Dl
+1691 3331 1688 3321 Dl
+1695 3340 1692 3330 Dl
+1698 3350 1695 3340 Dl
+1702 3361 1699 3351 Dl
+1705 3372 1702 3362 Dl
+1709 3384 1706 3373 Dl
+1713 3395 1710 3384 Dl
+1716 3408 1713 3396 Dl
+1720 3421 1717 3409 Dl
+1723 3434 1720 3421 Dl
+1727 3447 1724 3434 Dl
+1731 3462 1728 3448 Dl
+1734 3477 1731 3462 Dl
+1738 3492 1735 3477 Dl
+1741 3508 1738 3492 Dl
+1745 3525 1742 3509 Dl
+1749 3543 1746 3525 Dl
+1752 3561 1749 3543 Dl
+1756 3581 1753 3562 Dl
+1759 3603 1756 3582 Dl
+1763 3625 1760 3603 Dl
+1767 3650 1764 3626 Dl
+1770 3676 1767 3650 Dl
+1774 3705 1771 3676 Dl
+1777 3738 1774 3706 Dl
+1781 3775 1778 3738 Dl
+1785 3819 1782 3776 Dl
+1788 3874 1785 3820 Dl
+1792 3946 1789 3874 Dl
+1795 4065 1792 3947 Dl
+1799 4122 1796 4065 Dl
+1803 4087 1800 4124 Dl
+1806 3989 1803 4086 Dl
+1810 3936 1807 3988 Dl
+1813 3903 1810 3936 Dl
+1817 3879 1814 3902 Dl
+1821 3863 1818 3879 Dl
+1824 3853 1821 3864 Dl
+1828 3845 1825 3852 Dl
+1831 3838 1828 3843 Dl
+1835 3837 1832 3839 Dl
+1839 3837 1836 3837 Dl
+1842 3837 1839 3836 Dl
+1846 3841 1843 3838 Dl
+1849 3846 1846 3841 Dl
+1853 3852 1850 3846 Dl
+1857 3860 1854 3853 Dl
+1860 3871 1857 3861 Dl
+1864 3882 1861 3871 Dl
+1867 3895 1864 3882 Dl
+1871 3911 1868 3896 Dl
+1875 3929 1872 3911 Dl
+1878 3949 1875 3929 Dl
+1882 3972 1879 3949 Dl
+1885 3999 1882 3972 Dl
+1889 4032 1886 4000 Dl
+1893 4071 1890 4032 Dl
+1896 4123 1893 4072 Dl
+1900 4123 1897 4122 Dl
+1903 4124 1900 4124 Dl
+1907 4124 1904 4124 Dl
+1911 4124 1908 4124 Dl
+1914 4124 1911 4124 Dl
+1918 4124 1915 4124 Dl
+1921 4119 1918 4124 Dl
+1925 4094 1922 4118 Dl
+1929 4076 1926 4093 Dl
+1932 4065 1929 4076 Dl
+1936 4057 1933 4064 Dl
+1939 4053 1936 4057 Dl
+1943 4053 1940 4053 Dl
+1947 4054 1944 4052 Dl
+1950 4061 1947 4055 Dl
+1954 4072 1951 4062 Dl
+1957 4085 1954 4071 Dl
+1961 4104 1958 4085 Dl
+1965 4123 1962 4105 Dl
+1968 4124 1965 4124 Dl
+1972 4124 1969 4124 Dl
+1975 4124 1972 4124 Dl
+1979 4124 1976 4124 Dl
+1983 4124 1980 4124 Dl
+1986 4124 1983 4124 Dl
+1990 4124 1987 4124 Dl
+1993 4092 1990 4124 Dl
+1997 4055 1994 4092 Dl
+2001 4024 1998 4054 Dl
+2004 3998 2001 4023 Dl
+2008 3975 2005 3997 Dl
+2011 3956 2008 3975 Dl
+2015 3938 2012 3955 Dl
+2019 3923 2016 3938 Dl
+2022 3910 2019 3923 Dl
+2026 3898 2023 3910 Dl
+2029 3887 2026 3897 Dl
+2033 3877 2030 3887 Dl
+2037 3869 2034 3877 Dl
+2040 3862 2037 3869 Dl
+2044 3855 2041 3861 Dl
+2047 3849 2044 3854 Dl
+2051 3843 2048 3848 Dl
+2055 3839 2052 3843 Dl
+2058 3836 2055 3839 Dl
+2062 3834 2059 3836 Dl
+2065 3831 2062 3833 Dl
+2069 3829 2066 3830 Dl
+2073 3829 2070 3829 Dl
+2076 3828 2073 3828 Dl
+2080 3828 2077 3828 Dl
+2083 3829 2080 3828 Dl
+2087 3831 2084 3830 Dl
+2091 3834 2088 3832 Dl
+2094 3837 2091 3834 Dl
+2098 3842 2095 3838 Dl
+2101 3847 2098 3842 Dl
+2105 3853 2102 3847 Dl
+2109 3860 2106 3854 Dl
+2112 3867 2109 3860 Dl
+2116 3877 2113 3868 Dl
+2119 3887 2116 3877 Dl
+2123 3900 2120 3888 Dl
+2127 3914 2124 3900 Dl
+2130 3930 2127 3914 Dl
+2134 3949 2131 3931 Dl
+2137 3971 2134 3949 Dl
+2141 3998 2138 3972 Dl
+2145 4031 2142 3998 Dl
+2148 4075 2145 4032 Dl
+2152 4123 2149 4076 Dl
+2155 4124 2152 4124 Dl
+2159 4124 2156 4124 Dl
+2163 4124 2160 4124 Dl
+2166 4124 2163 4124 Dl
+2170 4076 2167 4124 Dl
+2173 4031 2170 4075 Dl
+2177 3997 2174 4030 Dl
+2181 3969 2178 3996 Dl
+2184 3946 2181 3969 Dl
+2188 3927 2185 3946 Dl
+2191 3910 2188 3926 Dl
+2195 3895 2192 3909 Dl
+2199 3883 2196 3895 Dl
+2202 3871 2199 3882 Dl
+2206 3861 2203 3871 Dl
+2209 3853 2206 3861 Dl
+2213 3845 2210 3852 Dl
+2217 3839 2214 3845 Dl
+2220 3833 2217 3838 Dl
+2224 3827 2221 3832 Dl
+2227 3823 2224 3827 Dl
+2231 3820 2228 3823 Dl
+2235 3817 2232 3819 Dl
+2238 3815 2235 3817 Dl
+2242 3813 2239 3814 Dl
+2245 3813 2242 3813 Dl
+2249 3812 2246 3812 Dl
+2253 3812 2250 3812 Dl
+2256 3812 2253 3812 Dl
+2260 3814 2257 3813 Dl
+2263 3817 2260 3815 Dl
+2267 3819 2264 3817 Dl
+2271 3823 2268 3820 Dl
+2274 3827 2271 3823 Dl
+2278 3833 2275 3828 Dl
+2281 3838 2278 3833 Dl
+2285 3845 2282 3839 Dl
+2289 3853 2286 3846 Dl
+2292 3862 2289 3854 Dl
+2296 3872 2293 3862 Dl
+2299 3883 2296 3872 Dl
+2303 3896 2300 3884 Dl
+2307 3911 2304 3897 Dl
+2310 3927 2307 3911 Dl
+2314 3947 2311 3928 Dl
+2317 3971 2314 3948 Dl
+2321 3997 2318 3970 Dl
+2325 4031 2322 3998 Dl
+2328 4076 2325 4032 Dl
+2332 4123 2329 4077 Dl
+2335 4124 2332 4124 Dl
+2339 4124 2336 4124 Dl
+2343 4124 2340 4124 Dl
+2346 4124 2343 4124 Dl
+2350 4079 2347 4124 Dl
+2353 4035 2350 4078 Dl
+2357 4001 2354 4034 Dl
+2361 3973 2358 4000 Dl
+2364 3951 2361 3973 Dl
+2368 3932 2365 3951 Dl
+2371 3915 2368 3931 Dl
+2375 3901 2372 3915 Dl
+2379 3889 2376 3901 Dl
+2382 3879 2379 3889 Dl
+2386 3868 2383 3877 Dl
+2389 3860 2386 3868 Dl
+2393 3853 2390 3860 Dl
+2397 3846 2394 3852 Dl
+2400 3841 2397 3846 Dl
+2404 3835 2401 3840 Dl
+2407 3833 2404 3836 Dl
+2411 3829 2408 3832 Dl
+2415 3826 2412 3828 Dl
+2418 3824 2415 3825 Dl
+2422 3823 2419 3824 Dl
+2425 3823 2422 3823 Dl
+2429 3822 2426 3822 Dl
+2433 3822 2430 3822 Dl
+2436 3824 2433 3823 Dl
+2440 3824 2437 3823 Dl
+2443 3827 2440 3825 Dl
+2447 3830 2444 3828 Dl
+2451 3834 2448 3831 Dl
+2454 3839 2451 3835 Dl
+2458 3845 2455 3840 Dl
+2461 3851 2458 3845 Dl
+2465 3858 2462 3851 Dl
+2469 3865 2466 3858 Dl
+2472 3875 2469 3866 Dl
+2476 3885 2473 3875 Dl
+2479 3896 2476 3885 Dl
+2483 3909 2480 3897 Dl
+2487 3924 2484 3909 Dl
+2490 3940 2487 3924 Dl
+2494 3960 2491 3941 Dl
+2497 3984 2494 3961 Dl
+2501 4011 2498 3984 Dl
+2505 4045 2502 4011 Dl
+2508 4090 2505 4046 Dl
+2512 4123 2509 4090 Dl
+2515 4124 2512 4124 Dl
+2519 4124 2516 4124 Dl
+2523 4124 2520 4124 Dl
+2526 4124 2523 4124 Dl
+2530 4093 2527 4124 Dl
+2533 4049 2530 4092 Dl
+2537 4015 2534 4048 Dl
+2541 3988 2538 4014 Dl
+2544 3965 2541 3987 Dl
+2548 3946 2545 3965 Dl
+2551 3930 2548 3946 Dl
+2555 3916 2552 3930 Dl
+2559 3903 2556 3915 Dl
+2562 3893 2559 3903 Dl
+2566 3883 2563 3892 Dl
+2569 3875 2566 3882 Dl
+2573 3867 2570 3874 Dl
+2577 3861 2574 3867 Dl
+2580 3856 2577 3861 Dl
+2584 3850 2581 3855 Dl
+2587 3848 2584 3851 Dl
+2591 3844 2588 3847 Dl
+2595 3841 2592 3843 Dl
+2598 3839 2595 3841 Dl
+2602 3838 2599 3839 Dl
+2605 3838 2602 3838 Dl
+2609 3837 2606 3837 Dl
+2613 3837 2610 3837 Dl
+2616 3839 2613 3838 Dl
+2620 3840 2617 3839 Dl
+2623 3843 2620 3841 Dl
+2627 3846 2624 3843 Dl
+2631 3850 2628 3847 Dl
+2634 3855 2631 3851 Dl
+2638 3860 2635 3855 Dl
+2641 3866 2638 3860 Dl
+2645 3873 2642 3866 Dl
+2649 3881 2646 3874 Dl
+2652 3891 2649 3882 Dl
+2656 3900 2653 3890 Dl
+2659 3911 2656 3900 Dl
+2663 3924 2660 3912 Dl
+2667 3941 2664 3926 Dl
+2670 3956 2667 3940 Dl
+2674 3976 2671 3957 Dl
+2677 4000 2674 3977 Dl
+2681 4027 2678 4000 Dl
+2685 4061 2682 4027 Dl
+2688 4106 2685 4062 Dl
+2692 4123 2689 4106 Dl
+2695 4124 2692 4124 Dl
+2699 4124 2696 4124 Dl
+2703 4124 2700 4124 Dl
+2706 4124 2703 4124 Dl
+2710 4109 2707 4124 Dl
+2713 4065 2710 4108 Dl
+2717 4031 2714 4064 Dl
+2721 4005 2718 4031 Dl
+2724 3981 2721 4003 Dl
+2728 3963 2725 3981 Dl
+2731 3946 2728 3962 Dl
+2735 3932 2732 3946 Dl
+2739 3919 2736 3931 Dl
+2742 3909 2739 3919 Dl
+2746 3899 2743 3908 Dl
+2749 3891 2746 3899 Dl
+2753 3883 2750 3890 Dl
+2757 3877 2754 3883 Dl
+2760 3872 2757 3877 Dl
+2764 3867 2761 3872 Dl
+2767 3863 2764 3866 Dl
+2771 3860 2768 3863 Dl
+2775 3857 2772 3859 Dl
+2778 3855 2775 3857 Dl
+2782 3854 2779 3855 Dl
+2785 3854 2782 3854 Dl
+2789 3854 2786 3854 Dl
+2793 3854 2790 3854 Dl
+2796 3855 2793 3854 Dl
+2800 3857 2797 3855 Dl
+2803 3859 2800 3857 Dl
+2807 3862 2804 3859 Dl
+2811 3866 2808 3863 Dl
+2814 3871 2811 3866 Dl
+2818 3877 2815 3872 Dl
+2821 3883 2818 3877 Dl
+2825 3889 2822 3882 Dl
+2829 3897 2826 3890 Dl
+2832 3906 2829 3897 Dl
+2836 3917 2833 3907 Dl
+2839 3928 2836 3917 Dl
+2843 3940 2840 3928 Dl
+2847 3956 2844 3941 Dl
+2850 3972 2847 3956 Dl
+2854 3992 2851 3973 Dl
+2857 4015 2854 3992 Dl
+2861 4044 2858 4016 Dl
+2865 4077 2862 4044 Dl
+2868 4121 2865 4077 Dl
+2872 4123 2869 4122 Dl
+2875 4124 2872 4124 Dl
+2879 4124 2876 4124 Dl
+1440 4196 1440 4124 Dl
+(0)1415 4306 w
+1800 4196 1800 4124 Dl
+(2/T)1714 4306 w
+2160 4196 2160 4124 Dl
+(4/T)2074 4306 w
+2520 4196 2520 4124 Dl
+(6/T)2434 4306 w
+2880 4196 2880 4124 Dl
+(8/T)2794 4306 w
+9 PB f
+(Figure 2. Hamming window frequency transform)5 2023 1 896 4682 t
+10 PA f
+(The series for)2 620 1 972 4803 t
+10 PI f
+(U)1631 4803 w
+10 PA f
+(\()1717 4803 w
+10 PI f
+(f)1774 4803 w
+10 PA f
+(\) can be summed explic-)4 1126 1 1826 4803 t
+( with any value of)4 818(itly for a Hamming window)4 1270 2 864 4923 t
+10 PI f
+(N)864 5043 w
+10 PA f
+( the limiting value for large)5 1264(. However,)1 524 2 942 5043 t
+10 PI f
+(N)2766 5043 w
+10 PA f
+(is)2881 5043 w
+( to normalization it is)4 945( Up)1 188(particularly simple.)1 866 3 864 5163 t
+10 PI f
+(U)864 5403 w
+10 PA f
+(\()950 5403 w
+10 PI f
+(f)1007 5403 w
+10 PA f
+(\))1059 5403 w
+10 S f
+(=)1149 5403 w
+10 PA f
+([)1466 5473 w
+10 S f
+(p)1507 5473 w
+10 PA f
+(\()1570 5473 w
+10 PI f
+(f)1627 5473 w
+10 S f
+(-)1679 5473 w
+10 PI f
+(f)1758 5473 w
+7 PA f
+(0)1797 5493 w
+10 PA f
+(\))1848 5473 w
+10 PI f
+(T)1897 5473 w
+10 PA f
+(])1966 5473 w
+( sin [)2 226(0. 54)1 183 2 1278 5323 t
+10 S f
+(p)1695 5323 w
+10 PA f
+(\()1758 5323 w
+10 PI f
+(f)1815 5323 w
+10 S f
+(-)1867 5323 w
+10 PI f
+(f)1946 5323 w
+7 PA f
+(0)1985 5343 w
+10 PA f
+(\))2036 5323 w
+10 PI f
+(T)2085 5323 w
+10 PA f
+(])2154 5323 w
+10 S1 f
+(_ __________________)1 939 1 1263 5373 t
+10 S f
+(+)1124 5713 w
+(p)1584 5793 w
+7 PA f
+(2)1644 5753 w
+10 S f
+(-)1727 5793 w
+10 PA f
+([)1822 5793 w
+10 S f
+(p)1863 5793 w
+10 PA f
+(\()1926 5793 w
+10 PI f
+(f)1983 5793 w
+10 S f
+(-)2035 5793 w
+10 PI f
+(f)2114 5793 w
+7 PA f
+(0)2153 5813 w
+10 PA f
+(\))2204 5793 w
+10 PI f
+(T)2253 5793 w
+10 PA f
+(])2322 5793 w
+7 PA f
+(2)2360 5753 w
+10 PA f
+( [)1 65(0. 46)1 183 2 1253 5633 t
+10 S f
+(p)1509 5633 w
+10 PA f
+(\()1572 5633 w
+10 PI f
+(f)1629 5633 w
+10 S f
+(-)1681 5633 w
+10 PI f
+(f)1760 5633 w
+7 PA f
+(0)1799 5653 w
+10 PA f
+(\))1850 5633 w
+10 PI f
+(T)1899 5633 w
+10 PA f
+( [)1 65(] sin)1 202 2 1968 5633 t
+10 S f
+(p)2243 5633 w
+10 PA f
+(\()2306 5633 w
+10 PI f
+(f)2363 5633 w
+10 S f
+(-)2415 5633 w
+10 PI f
+(f)2494 5633 w
+7 PA f
+(0)2533 5653 w
+10 PA f
+(\))2584 5633 w
+10 PI f
+(T)2633 5633 w
+10 PA f
+(])2702 5633 w
+10 S1 f
+(_ ______________________________)1 1512 1 1238 5683 t
+10 PI f
+(.)2800 5713 w
+10 PA f
+( log)1 172(The quantity 20)2 694 2 972 5974 t
+7 PA f
+(10)1849 5994 w
+10 S f
+(\357)1951 5991 w
+10 PI f
+(U)1999 5974 w
+10 PA f
+(\()2085 5974 w
+10 PI f
+(f)2142 5974 w
+10 PA f
+(\))2194 5974 w
+10 PI f
+(/ U)1 116 1 2235 5974 t
+10 PA f
+(\()2359 5974 w
+10 PI f
+(f)2416 5974 w
+7 PA f
+(0)2455 5994 w
+10 PA f
+(\))2506 5974 w
+10 S f
+(\357)2539 5991 w
+10 PA f
+(, that is,)2 349 1 2603 5974 t
+( of the frequency trans-)4 1106(the normalized value)2 982 2 864 6094 t
+( trans-)1 283( The)1 219( Fig. 2.)2 295(form in decibels, is plotted in)5 1291 4 864 6214 t
+(form is symmetric about)3 1134 1 864 6334 t
+10 PI f
+(f)2040 6334 w
+10 S f
+(=)2124 6334 w
+10 PI f
+(f)2227 6334 w
+7 PA f
+(0)2266 6354 w
+10 PA f
+(, and the lobe)3 643 1 2309 6334 t
+( to the width)3 584(widths are inversely proportional)3 1504 2 864 6454 t
+10 PI f
+(T)864 6574 w
+10 PA f
+( highest side lobe is)4 874( The)1 220( time window.)2 648(of the)1 256 4 954 6574 t
+(42.68 dB below the main lobe.)5 1318 1 864 6694 t
+( a uniform window, in)4 1206(For comparison,)1 774 2 972 6815 t
+(which all the coefficients)3 1147 1 864 6935 t
+10 PI f
+(a)2055 6935 w
+7 PI f
+(n)2110 6955 w
+10 PA f
+(are equal, corre-)2 752 1 2200 6935 t
+(sponds to the transform)3 1059 1 864 7055 t
+10 PI f
+(U)1309 7295 w
+10 PA f
+(\()1395 7295 w
+10 PI f
+(f)1452 7295 w
+10 PA f
+(\))1504 7295 w
+10 S f
+(=)1594 7295 w
+10 PA f
+([)1803 7365 w
+10 S f
+(p)1844 7365 w
+10 PA f
+(\()1907 7365 w
+10 PI f
+(f)1964 7365 w
+10 S f
+(-)2016 7365 w
+10 PI f
+(f)2095 7365 w
+7 PA f
+(0)2134 7385 w
+10 PA f
+(\))2185 7365 w
+10 PI f
+(T)2234 7365 w
+10 PA f
+(])2303 7365 w
+(sin [)1 194 1 1723 7215 t
+10 S f
+(p)1925 7215 w
+10 PA f
+(\()1988 7215 w
+10 PI f
+(f)2045 7215 w
+10 S f
+(-)2097 7215 w
+10 PI f
+(f)2176 7215 w
+7 PA f
+(0)2215 7235 w
+10 PA f
+(\))2266 7215 w
+10 PI f
+(T)2315 7215 w
+10 PA f
+(])2384 7215 w
+10 S1 f
+(_ ______________)1 724 1 1708 7265 t
+10 PA f
+(,)2482 7295 w
+( below)1 299(whose highest side lobe is only 13.27 dB)7 1789 2 3168 840 t
+(the main lobe.)2 626 1 3168 960 t
+( involves various tradeoffs,)3 1257(Window design)1 723 2 3276 1081 t
+( width of the main)4 904(for example, between the)3 1184 2 3168 1201 t
+( largest side lobe, and the)5 1128(lobe, the height of the)4 960 2 3168 1321 t
+( Differ-)1 351( lobes.)1 287(rate of rolloff of the distant side)6 1450 3 3168 1441 t
+( have been designed to)4 1084(ent window functions)2 1004 2 3168 1561 t
+( Hamming)1 478(meet different requirements, but the)4 1610 2 3168 1681 t
+( widely used)2 657(window is perhaps the most)4 1431 2 3168 1801 t
+(because of its simplicity and effectiveness.)5 1859 1 3168 1921 t
+( filters led him)3 669(Dick's long interest in digital)4 1311 2 3276 2042 t
+( is now)2 337(to write a succinct monograph [8] that)6 1751 2 3168 2162 t
+( literature on)2 601( of the)2 303( Much)1 320(in its third edition.)3 864 4 3168 2282 t
+(digital filter design appears in electrical engi-)6 2088 1 3168 2402 t
+( of the)2 313(neering journals and makes heavy use)5 1775 2 3168 2522 t
+( book aims to)3 617( Dick's)1 335(terminology of that field.)3 1136 3 3168 2642 t
+( mathematical ideas that underlie the)5 1676(make the)1 412 2 3168 2762 t
+( design of filters available to a)6 1506(analysis and)1 582 2 3168 2882 t
+( hallmark of Dick's writing)4 1232( A)1 138(broad audience.)1 718 3 3168 3002 t
+( jargon \(``let's not)3 868(was his attempt to avoid)4 1220 2 3168 3122 t
+( book on digital)3 732( His)1 216( falutin' index''\).)2 756(raise the)1 384 4 3168 3242 t
+( The)1 224(filters is a classic example of this writing.)7 1864 2 3168 3362 t
+(book is filled with his unique insights, which)7 2088 1 3168 3482 t
+( reference for practitioners)3 1225(make it a valuable)3 863 2 3168 3602 t
+(of the digital filter design art.)5 1293 1 3168 3722 t
+([[[see cat.jpg]]])1 657 1 3168 3842 t
+9 HB f
+( Shiro)1 261(Dick Hamming and his cat)4 1140 2 3855 3842 t
+(in 1996.)1 330 1 3168 3962 t
+10 PA f
+( computing just)2 709(Dick came into the world of)5 1271 2 3276 4083 t
+(as it was emerging from the era of desk calcu-)9 2088 1 3168 4203 t
+(lators and entering the era of electronic com-)7 2088 1 3168 4323 t
+( more clearly)2 577( saw, much sooner and)4 1021(puters. He)1 490 3 3168 4443 t
+( the daily)2 482(than most of his colleagues, how)5 1606 2 3168 4563 t
+( at Bell Labs would)4 886(work of almost everybody)3 1202 2 3168 4683 t
+( the early)2 460( In)1 166( depend on computers.)3 1091(come to)1 371 4 3168 4803 t
+( predicted that half the budget of Bell)7 1706(1960s he)1 382 2 3168 4923 t
+( his)1 178(Labs would eventually go to computing;)5 1910 2 3168 5043 t
+( was much)2 507(estimate, which proved to be low,)5 1581 2 3168 5163 t
+( made it his busi-)4 757( He)1 181(higher than anyone else's.)3 1150 3 3168 5283 t
+( the)1 221(ness to educate the organization for)5 1867 2 3168 5403 t
+(change.)3168 5523 w
+(As a numerical mathematician, he under-)5 1980 1 3276 5644 t
+( teach scientists and engineers how to)6 1759(took to)1 329 2 3168 5764 t
+( problems in a)3 722(use computers to solve their)4 1366 2 3168 5884 t
+( ``The)1 263( best-known maxim,)2 935( His)1 220(hands-on way.)1 670 4 3168 6004 t
+(purpose of computing is insight, not num-)6 2088 1 3168 6124 t
+( would watch)2 644(bers,'' anticipated that the user)4 1444 2 3168 6244 t
+(the computation as it proceeded and might use)7 2088 1 3168 6364 t
+( results to gain additional insight)5 1540(the ongoing)1 548 2 3168 6484 t
+(into the original problem.)3 1135 1 3168 6604 t
+( numerical mathematics)2 1105(Dick's approach to)2 875 2 3276 6725 t
+( world)1 300( Today's)1 410( in its day.)3 479(was highly effective)2 899 4 3168 6845 t
+(of software libraries is superficially quite dif-)6 2088 1 3168 6965 t
+( numerical)1 503( most users of)3 712(ferent. Nowadays,)1 873 3 3168 7085 t
+( software packages)2 934(mathematics depend on)2 1154 2 3168 7205 t
+(that are written by specialists and may be)7 2088 1 3168 7325 t
+( in the modern)3 669( However,)1 494(highly sophisticated.)1 925 3 3168 7445 t
+cleartomark
+showpage
+saveobj restore
+end
+%%PageBoundingBox: 75 32 536 764
+%%EndPage: 5 5
+%%Page: 6 6
+%%PageBoundingBox: (atend)
+DpostDict begin
+/saveobj save def
+mark
+6 pagesetup
+10 PA f
+(- 6 -)2 166 1 2977 480 t
+( faster computers)2 830(world of canned software,)3 1258 2 864 840 t
+( complex problems,)2 986(and bigger and more)3 1102 2 864 960 t
+( to, users are)3 585(Dick's maxims for, and warnings)4 1503 2 864 1080 t
+(more important than ever before.)4 1472 1 864 1200 t
+( user would not)3 714(Dick was concerned that the)4 1266 2 972 1321 t
+(understand the algorithms and/or would use)5 2088 1 864 1441 t
+( main concern today is)4 1078( The)1 237(them incorrectly.)1 773 3 864 1561 t
+( problem to the)3 773(communicating the physical)2 1315 2 864 1681 t
+( noted that ``a)3 616( Dick)1 258(software package correctly.)2 1214 3 864 1801 t
+( any)1 205(good theoretician can account for almost)5 1883 2 864 1921 t
+( is produced, right or wrong'', which)6 1637(result that)1 451 2 864 2041 t
+( important to be able to tell if we have)9 1712(makes it)1 376 2 864 2161 t
+( computing)1 537( of)1 141( Customers)1 557(a sensible answer.)2 853 4 864 2281 t
+( to be skeptical of the results)6 1433(software need)1 655 2 864 2401 t
+( the soft-)2 415( worry here isn't that)4 988(produced. The)1 685 3 864 2521 t
+( the problem,)2 617(ware tools will incorrectly solve)4 1471 2 864 2641 t
+( problem)1 415( real worry is that the)5 1020( The)1 231(as posed.)1 422 4 864 2761 t
+( the problem the user)4 1063(as posed may not be)4 1025 2 864 2881 t
+( mon-)1 263(wants solved. Because of the difficulty of)6 1825 2 864 3001 t
+( a large software)3 795(itoring what goes on inside)4 1293 2 864 3121 t
+( diagnostics that)2 769(package, and of interpreting)3 1319 2 864 3241 t
+( different parts of the package,)5 1379(may come from)2 709 2 864 3361 t
+( in advance some)3 858(it is important to lay out)5 1230 2 864 3481 t
+(checkable conditions that the solution must)5 2088 1 864 3601 t
+( systems)1 389(satisfy \(such as conservation laws for)5 1699 2 864 3721 t
+( is still)2 305( There)1 316(of partial differential equations\).)3 1467 3 864 3841 t
+( for Dick's emphasis on common-)5 1510(no substitute)1 578 2 864 3961 t
+(sense computing.)1 771 1 864 4081 t
+(Dick Hamming made seminal contributions)4 1980 1 972 4202 t
+( its early days, and as a)6 1070(to computer science in)3 1018 2 864 4322 t
+( had strong opin-)3 766( He)1 182( never dull.)2 506(person he was)2 634 4 864 4442 t
+( voice)1 272( His)1 219( to express them.)3 792(ions and he liked)3 805 4 864 4562 t
+( a way that few)4 705(comes through in his books, in)5 1383 2 864 4682 t
+( liked to give)3 671( He)1 213( achieve.)1 415(technical authors)1 789 4 864 4802 t
+( whom)1 319(people advice, especially young people)4 1769 2 864 4922 t
+( and entertain with his)4 1198(he would educate)2 890 2 864 5042 t
+(often-repeated lecture, ``You and Your)4 2088 1 864 5162 t
+( platform,)1 440( enjoyed the speaker's)3 986(Research''. He)1 662 3 864 5282 t
+(and on occasion he enjoyed ``hamming'' with a)7 2088 1 864 5402 t
+(small)864 5522 w
+10 PI f
+(h)1145 5522 w
+10 PA f
+( might agree or disagree with a)6 1480(. One)1 277 2 1195 5522 t
+( agreed with him)3 792(Hamming pronouncement \(I)2 1296 2 864 5642 t
+( ever met)2 443(much of the time\), but no one who)7 1645 2 864 5762 t
+(him or heard him is likely to forget him.)8 1773 1 864 5882 t
+10 PB f
+(References)864 6003 w
+10 PA f
+( W. H)2 282([1] R.)1 242 2 864 6124 t
+8 PA f
+(AMMING)1388 6124 w
+10 PA f
+(,)1756 6124 w
+10 PI f
+(Error-Detecting and Error-)2 1133 1 1819 6124 t
+(Correcting Codes,)1 730 1 1014 6244 t
+10 PA f
+(Bell Sys. Tech. J.)3 727 1 1774 6244 t
+10 PB f
+(29)2531 6244 w
+10 PA f
+(\(1950\),)2661 6244 w
+(147-160.)1014 6364 w
+( B. W)2 262([2] S.)1 228 2 864 6485 t
+8 PA f
+(ICKER)1354 6485 w
+10 PA f
+( B)1 100(, V. K.)2 296 2 1599 6485 t
+8 PA f
+(HARGAVA)1995 6485 w
+10 PA f
+(, eds.,)1 265 1 2420 6485 t
+10 PI f
+(Reed-)2724 6485 w
+( Their Applications,)2 845(Solomon Codes and)2 831 2 1014 6605 t
+10 PA f
+(IEEE)2735 6605 w
+(Press, New York, 1994.)3 1014 1 1014 6725 t
+( H)1 135( W.)1 176([3] R.)1 242 3 864 6846 t
+8 PA f
+(AMMING)1417 6846 w
+10 PA f
+(,)1785 6846 w
+10 PI f
+(Stable Predictor-Corrector)1 1090 1 1862 6846 t
+( Ordinary Differential Equations,)3 1365(Methods for)1 488 2 1014 6966 t
+10 PA f
+(J.)2894 6966 w
+(Assoc. Comput. Mach.)2 1000 1 1014 7086 t
+10 PB f
+(6)2039 7086 w
+10 PA f
+(\(1959\), 37-47.)1 574 1 2114 7086 t
+( W. H)2 272([4] R.)1 242 2 864 7207 t
+8 PA f
+(AMMING)1378 7207 w
+10 PA f
+(,)1746 7207 w
+10 PI f
+(Numerical Methods for Sci-)3 1148 1 1804 7207 t
+(entists and Engineers,)2 907 1 1014 7327 t
+10 PA f
+(2nd ed., McGraw-Hill,)2 1002 1 1950 7327 t
+(New York, 1973.)2 732 1 1014 7447 t
+( L)1 114([5] L.)1 236 2 3168 840 t
+8 PA f
+(APIDUS)3518 840 w
+10 PA f
+(and J. H S)3 525 1 3874 840 t
+8 PA f
+(EINFELD)4399 840 w
+10 PA f
+(,)4746 840 w
+10 PI f
+(Numerical)4825 840 w
+( Ordinary Differential Equations,)3 1461(Solution of)1 477 2 3318 960 t
+10 PA f
+(Academic Press, New York, 1971.)4 1481 1 3318 1080 t
+( W. H)2 342([6] R.)1 242 2 3168 1201 t
+8 PA f
+(AMMING)3752 1201 w
+10 PA f
+(,)4120 1201 w
+10 PI f
+(Introduction to Applied)2 1043 1 4213 1201 t
+(Numerical Analysis,)1 911 1 3318 1321 t
+10 PA f
+(McGraw-Hill, New)1 928 1 4328 1321 t
+(York, 1971.)1 493 1 3318 1441 t
+( B. B)2 209([7] R.)1 242 2 3168 1562 t
+8 PA f
+(LACKMAN)3619 1562 w
+10 PA f
+(and J. W. T)3 506 1 4080 1562 t
+8 PA f
+(UKEY)4586 1562 w
+10 PA f
+(,)4809 1562 w
+10 PI f
+(The Mea-)1 391 1 4865 1562 t
+( from the Point of)4 789(surement of Power Spectra)3 1149 2 3318 1682 t
+(View of Communications Engineering,)3 1703 1 3318 1802 t
+10 PA f
+(Bell)5089 1802 w
+(Sys. Tech. J.)2 520 1 3318 1922 t
+10 PB f
+(7)3863 1922 w
+10 PA f
+(\(1958\), 185-282 and 485-569.)3 1226 1 3938 1922 t
+( H)1 143( W.)1 184([8] R.)1 242 3 3168 2043 t
+8 PA f
+(AMMING)3737 2043 w
+10 PA f
+(,)4105 2043 w
+10 PI f
+(Digital Filters,)1 636 1 4190 2043 t
+10 PA f
+(3rd ed.,)1 370 1 4886 2043 t
+(Prentice-Hall, Englewood Cliffs, 1989.)3 1677 1 3318 2163 t
+10 PB f
+(Hamming's Books)1 842 1 3168 2284 t
+10 PA f
+([sidebar])4035 2284 w
+10 PI f
+(Numerical Methods for Scientists and Engineers)5 2055 1 3168 2405 t
+10 PA f
+(,)5231 2405 w
+( 1973; Dover)2 677(McGraw-Hill, 1962; 2nd ed.)3 1411 2 3168 2525 t
+(reprint 1985; translated into Russian.)4 1625 1 3168 2645 t
+10 PI f
+( Revolution)1 589(Calculus and the Computer)3 1466 2 3168 2766 t
+10 PA f
+(,)5231 2766 w
+(Houghton-Mifflin, 1968.)1 1072 1 3168 2886 t
+10 PI f
+( Analysis)1 447(Introduction to Applied Numerical)3 1608 2 3168 3007 t
+10 PA f
+(,)5231 3007 w
+(McGraw-Hill, 1971.)1 866 1 3168 3127 t
+10 PI f
+(Computers and Society)2 936 1 3168 3248 t
+10 PA f
+(, McGraw-Hill, 1972.)2 916 1 4112 3248 t
+10 PI f
+(Digital Filters)1 624 1 3168 3369 t
+10 PA f
+( 2nd ed.)2 451(, Prentice-Hall, 1977;)2 1005 2 3800 3369 t
+( ed. 1989; translated into several)5 1641(1983; 3rd)1 447 2 3168 3489 t
+(European languages.)1 931 1 3168 3609 t
+10 PI f
+( Information Theory)2 884(Coding and)1 503 2 3168 3730 t
+10 PA f
+(, Prentice-Hall,)1 693 1 4563 3730 t
+(1980; 2nd ed. 1986.)3 828 1 3168 3850 t
+10 PI f
+( Calculus,)1 458(Methods of Mathematics Applied to)4 1630 2 3168 3971 t
+(Probability and Statistics)2 1021 1 3168 4091 t
+10 PA f
+(, Prentice-Hall, 1985.)2 909 1 4197 4091 t
+10 PI f
+(The Art of Probability for Scientists and Engineers)7 2055 1 3168 4212 t
+10 PA f
+(,)5231 4212 w
+(Addison-Wesley, 1991.)1 1015 1 3168 4332 t
+10 PI f
+( Doing Science and Engineering: Learn-)5 1660(The Art of)2 428 2 3168 4453 t
+(ing to Learn)2 521 1 3168 4573 t
+10 PA f
+(, Gordon and Breach, 1997.)4 1242 1 3697 4573 t
+10 PB f
+(Ham-)5001 4573 w
+(ming Maxims)1 630 1 3168 4693 t
+10 PA f
+([sidebar])3823 4693 w
+( insight, not num-)3 802(The purpose of computing is)4 1286 2 3168 4814 t
+(bers.)3168 4934 w
+( right problem the wrong)4 1170(It is better to do the)5 918 2 3168 5055 t
+( right)1 257(way than to do the wrong problem the)7 1831 2 3168 5175 t
+(way.)3168 5295 w
+( important problems, it's)3 1128(If you don't work on)4 960 2 3168 5416 t
+(not likely you'll do important work.)5 1596 1 3168 5536 t
+( that an airplane can stay up)6 1345(If the prediction)2 743 2 3168 5657 t
+(depends on the difference between Riemann)5 2088 1 3168 5777 t
+( in)1 113(and Lebesgue integration, I don't want to fly)7 1975 2 3168 5897 t
+(it.)3168 6017 w
+cleartomark
+showpage
+saveobj restore
+end
+%%PageBoundingBox: 75 31 536 764
+%%EndPage: 6 6
+%%Trailer

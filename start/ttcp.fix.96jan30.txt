@@ -1,0 +1,191 @@
+To: Richard Stevens <rstevens@noao.edu>
+Subject: Fwd: T/TCP - window scaling bug
+Date: Tue, 30 Jan 1996 17:33:23 +0100
+From: Andras Olah <olah@cs.utwente.nl>
+
+Rich,
+
+Here's a bug which has just been fixed in FreeBSD.
+
+Andras
+
+------- Forwarded Messages
+
+From:    David Greenman <davidg@Root.COM>
+To:      olah@freebsd.org
+Subject: TCP bug?
+Date:    Tue, 30 Jan 1996 00:26:15 PST
+
+   Any comments?
+
+- -DG
+
+David Greenman
+Core Team/Principal Architect, The FreeBSD Project
+
+- ------- Forwarded Message
+
+From: Jerry Chen <chen@Ipsilon.COM>
+Date: Mon, 29 Jan 1996 17:25:26 -0800
+To: bugs@freebsd.org
+Subject: a TCP bug in FreeBSD 2.1?
+
+In tcp_output() of FreeBSD 2.1
+
+559     /*
+560      * Calculate receive window.  Don't shrink window,
+561      * but avoid silly window syndrome.
+562      */
+563     if (win < (long)(so->so_rcv.sb_hiwat / 4) && win < (long)tp->t_maxseg) 
+ 
+564             win = 0;
+565     if (win > (long)TCP_MAXWIN << tp->rcv_scale)
+566             win = (long)TCP_MAXWIN << tp->rcv_scale;
+567     if (win < (long)(tp->rcv_adv - tp->rcv_nxt))
+568             win = (long)(tp->rcv_adv - tp->rcv_nxt);
+569     ti->ti_win = htons((u_short) (win>>tp->rcv_scale));
+
+It seems to me there is a bug.  To trigger it, the application has to set
+the recv window to 64 K bytes.  The symptom is that the first time you
+run a test such as ttcp, it is okay.  However, the second time and later
+when you run the same test, the recv window on the receiving side will 
+be 0 during the 3 way handshaking (connection setup).  The xmit side will 
+not be able to xmit any data and has to wait for about 5 seconds.  When 
+the persist timer expires, the xmit side will probe by sending 1 byte data.
+This will cause the recv window on the receiving side to be 65535 bytes 
+and then everything is fine.  But we lose 5 seconds already and this hurts 
+performance.
+
+Why does the recv side advertise the 0 recv window?  Because the value
+for win is 64K in line 568 during the connection setup.  In line 569, 64k 
+becomes 0 during the long to u_short conversion.  
+
+In line 566, win is set to 65535.
+
+The first time we run it, (tp->rcv_adv - tp->rcv_nxt) will be 0 during
+the connection setup.  The second time and later when we run the same
+test, it will be 64K when TCP is sending out the SYN and ACK.  That is 
+why the problem does not show up when we run the test for the first time.  
+What causes the difference?  It comes from the code in tcp_input() for 
+transaction TCP:
+
+678         if ((to.to_flag & TOF_CC) != 0) {
+679             if (taop->tao_cc != 0 && CC_GT(to.to_cc, taop->tao_cc)) {
+680                 taop->tao_cc = to.to_cc;
+681                 tp->t_state = TCPS_ESTABLISHED;
+682
+683                 /*
+684                  * If there is a FIN, or if there is data and the
+685                  * connection is local, then delay SYN,ACK(SYN) in
+686                  * the hope of piggy-backing it on a response
+687                  * segment.  Otherwise must send ACK now in case
+688                  * the other side is slow starting.
+689                  */
+690                 if ((tiflags & TH_FIN) || (ti->ti_len != 0 &&
+691                     in_localaddr(inp->inp_faddr)))
+692                         tp->t_flags |= (TF_DELACK | TF_SENDSYN);
+693                 else
+694                         tp->t_flags |= (TF_ACKNOW | TF_SENDSYN);
+695                 tp->rcv_adv += tp->rcv_wnd;
+
+The above code is executed when tao_cc is non-zero.  The first time the
+test is run, tao_cc is 0.  So, TCP behaves differently between the first
+time and later times.
+
+Jerry 
+
+- ------- End of Forwarded Message
+
+------- Message 2
+
+From:    Andras Olah <olah>
+To:      davidg@Root.COM
+Subject: Re: TCP bug? 
+Date:    Tue, 30 Jan 1996 17:26:47 +0100
+
+On Tue, 30 Jan 1996 00:26:15 PST, David Greenman wrote:
+>    Any comments?
+
+I've fixed the problem.  I've tested it here (2.1R), but the problem
+exists in current as well.  The patch should work OK.  To reproduce the
+bug, you have to start ttcp -r -s -b 65536 on the server side, and connect
+with another ttcp twice.  In tcpdump, you should see a `win 0' on the SYN
+from the server.
+
+The bug in a nutshell: when a connection enters the ESTBLS state
+using T/TCP, then window scaling wasn't properly handled.  The fix
+is twofold.  
+
+1) When the 3WHS completes, make sure that we update our window
+scaling state variables (the second part of the diff).
+
+2) When setting the `virtual advertized window' (it's needed for SWS
+avoidance to work when T/TCP is used), then make sure that we do not
+try to offer a window that is larger than the maximum window without
+scaling (TCP_MAXWIN).  It's needed because scaling becomes effective
+only when our SYN is acked (some time later).
+
+Andras
+
+*** tcp_input.c.orig	Tue Dec 19 13:37:43 1995
+- --- tcp_input.c	Tue Jan 30 15:57:20 1996
+***************
+*** 707,713 ****
+  				tp->t_flags |= (TF_DELACK | TF_SENDSYN);
+  			else
+  				tp->t_flags |= (TF_ACKNOW | TF_SENDSYN);
+! 			tp->rcv_adv += tp->rcv_wnd;
+  			tcpstat.tcps_connects++;
+  			soisconnected(so);
+  			tp->t_timer[TCPT_KEEP] = TCPTV_KEEP_INIT;
+- --- 707,719 ----
+  				tp->t_flags |= (TF_DELACK | TF_SENDSYN);
+  			else
+  				tp->t_flags |= (TF_ACKNOW | TF_SENDSYN);
+! 
+! 			/*
+! 			 * Limit the `virtual advertised window' to TCP_MAXWIN
+! 			 * here.  Even if we requested window scaling, it will
+! 			 * become effective only later when our SYN is acked.
+! 			 */
+! 			tp->rcv_adv += min(tp->rcv_wnd, TCP_MAXWIN);
+  			tcpstat.tcps_connects++;
+  			soisconnected(so);
+  			tp->t_timer[TCPT_KEEP] = TCPTV_KEEP_INIT;
+***************
+*** 1283,1295 ****
+  		 */
+  		if (tp->t_flags & TF_SENDSYN) {
+  			/*
+! 			 *   T/TCP: Connection was half-synchronized, and our
+! 			 *   SYN has been ACK'd (so connection is now fully
+! 			 *   synchronized).  Go to non-starred state and
+! 			 *   increment snd_una for ACK of SYN.
+  			 */
+  			tp->t_flags &= ~TF_SENDSYN;
+  			tp->snd_una++;
+  		}
+  
+  process_ACK:
+- --- 1289,1308 ----
+  		 */
+  		if (tp->t_flags & TF_SENDSYN) {
+  			/*
+! 			 * T/TCP: Connection was half-synchronized, and our
+! 			 * SYN has been ACK'd (so connection is now fully
+! 			 * synchronized).  Go to non-starred state,
+! 			 * increment snd_una for ACK of SYN, and check if
+! 			 * we can do window scaling.
+  			 */
+  			tp->t_flags &= ~TF_SENDSYN;
+  			tp->snd_una++;
++ 			/* Do window scaling? */
++ 			if ((tp->t_flags & (TF_RCVD_SCALE|TF_REQ_SCALE)) ==
++ 				(TF_RCVD_SCALE|TF_REQ_SCALE)) {
++ 				tp->snd_scale = tp->requested_s_scale;
++ 				tp->rcv_scale = tp->request_r_scale;
++ 			}
+  		}
+  processack:
+
+------- End of Forwarded Messages

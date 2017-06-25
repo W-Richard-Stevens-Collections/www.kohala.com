@@ -1,0 +1,2057 @@
+<HTML>
+<HEAD>
+<TITLE>
+Errata for UNIX Network Programming, Volume 1
+</TITLE>
+</HEAD>
+
+<BODY>
+
+<CENTER>
+<H2>Errata for UNIX Network Programming, Volume 1</H2>
+</CENTER>
+
+<P>
+This file contains all typos found in the book
+<I>UNIX Network Programming, Volume 1, Second Edition: Networking APIs:
+	Sockets and XTI</I> by W. Richard Stevens,
+	Prentice Hall, 1998, ISBN 0-13-490012-X.
+
+<UL>
+<LI>Last updated July 23, 1999.
+
+<LI>Note: The smallest number in the list of numbers above the ISBN towards
+	the bottom of the copyright page specifies the printing.
+	For example "10 9 8 7 6 5 4 3 2 1" specifies the first printing.
+
+<LI>See also the <A HREF="typos.unpv12e.html#comments">Comments to Readers</A>
+	 at the end of this file.
+</UL>
+<HR>
+<UL>
+<LI>The following errors have not been corrected in any printing.
+</UL>
+
+<TABLE BORDER>
+<TR>
+	<TH>Page
+	<TH>Description
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">306
+	<TD>The horizontal rules at the beginning and end of Figure 11.19
+	should say <TT>libgai/gai_hdr.h</TT> and not <TT>libgai/gai_hdr.c</TT>
+	(990715).
+</TABLE>
+
+<UL>
+<LI>The following errors are corrected in the 5th printing and later.
+</UL>
+
+<TABLE BORDER>
+<TR>
+	<TH>Page
+	<TH>Description
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">7
+	<TD>Indented paragraph near bottom of page:
+	there is a space before the comma in "<TT>socket</TT> function ,"
+	that needs to be removed (990129).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">59
+	<TD>8th line from bottom of page: replace "obsolescent" with
+	"obsolete" (990330).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">99
+	<TD>7th line from bottom of page: replace
+	"pointed to by *<I>addrlen</I>" with
+	"referenced by *<I>addrlen</I>" (990330).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">107
+	<TD>3rd line above "Descriptor Reference Counts":
+	replace "In this section" with "In that section" (990330).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">113
+	<TD>Caption for Figure 5.2:
+	append "(improved in Figure 5.12)" (981009).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">117
+	<TD>2nd last line of Section 5.6: replace
+	"and <TT>ttyin</TT> if the process" with
+	"or <TT>ttyin</TT> or <TT>ttyout</TT> if the process" (990423).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">122
+	<TD>Caption for Figure 5.7:
+	append "(improved in Figure 5.11)" (981009).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">125
+	<TD>Last sentence above "Difference between ..." heading:
+	"This tells the kernel" should be "This option tells the kernel"
+	and the last half of the sentence following the semicolon
+	("it blocks only if there are children still executing")
+	should be removed (981125).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">157
+	<TD>Caption for Figure 6.9:
+	append "(improved in Figure 6.13)" (981009).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">157
+	<TD>2nd sentence of Section 6.5: replace "First lets" with
+	"First let's" (990330).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">178
+	<TD>7th, 6th, and 5th lines above Section 7.3: replace
+	"<I>optval</I> is an integer" with
+	"<TT>*</TT><I>optval</I> is an integer",
+	"<I>optval</I> is zero" with
+	"<TT>*</TT><I>optval</I> is zero", and
+	"a nonzero <I>optval</I>" with
+	"a nonzero <TT>*</TT><I>optval</I>" (990330).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">193
+	<TD>Last line of first indented paragraph: replace
+	"returns the maximum size" with
+	"is the maximum size" (990330).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">193
+	<TD>5th line beneath "<TT>SO_RCVLOWAT</TT> and <TT>SO_SNDLOWAT</TT>
+	Functions": replace "for a TCP and UDP sockets" with
+	"for TCP and UDP sockets" (990330).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">197
+	<TD>There are some inconsistencies in the text formatting
+	when describing the socket options.  On pages 197-201 the
+	following headings should have
+	"<TT><B>Socket Option</B></TT>" following the option name:
+	<TT><B>IP_HDRINCL</B></TT>,
+	<TT><B>IP_RECVDSTADDR</B></TT>,
+	<TT><B>IP_RECVIF</B></TT>,
+	<TT><B>IP_TOS</B></TT>,
+	<TT><B>IP_TTL</B></TT>,
+	<TT><B>ICMP6_FILTER</B></TT>,
+	<TT><B>IPV6_ADDRFORM</B></TT>,
+	<TT><B>IPV6_CHECKSUM</B></TT>,
+	<TT><B>IPV6_DSTOPTS</B></TT>,
+	<TT><B>IPV6_HOPLIMIT</B></TT>,
+	<TT><B>IPV6_HOPOPTS</B></TT>,
+	<TT><B>IPV6_PKTINFO</B></TT>,
+	<TT><B>IPV6_PKTOPTIONS</B></TT>,
+	<TT><B>IPV6_RTHDR</B></TT>,
+	<TT><B>IPV6_UNICAST_HOPS</B></TT> (981222).
+	Note that <TT><B>IPV6_NEXTHOP</B></TT> is not in this list
+	because it is not a socket option.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">203
+	<TD>3rd line following Figure 7.13:
+	"we have the six packets" should be
+	"we have the eight packets" (981222).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">222
+	<TD>3rd line from bottom of page: replace
+	"destination IP addresses" with
+	"destination IP address" (990330).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">229
+	<TD>Line 8 of Figure 8.19: replace
+	"<TT>MAXLINE</TT>" with
+	"<TT>DGLEN</TT>" (990330).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">229
+	<TD>4th line from bottom of page: replace
+	"which was a slow 80386" with
+	"a slow 80386" (990330).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">246
+	<TD>3rd line following box defining <TT>gethostbyname2</TT>:
+	"<TT>family</TT> argument" should be "<I>family</I> argument",
+	that is, the font should be Italic (981231).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">249
+	<TD>First line of item "3.":
+	"<TT>family</TT> argument" should be "<I>family</I> argument",
+	that is, the font should be Italic (981231).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">268
+	<TD>5th line from top of page:
+	"An IPv6 server could call this function" should be
+	"An IPv6 server could call this macro" (981231).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">290
+	<TD>Caption for Figure 11.9:
+	append "(see also Figure 11.10)" (981009).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">398
+	<TD>3rd line from bottom of page:
+	"In this section we provide" should be
+	"In this chapter we provide" (990109).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">410
+	<TD>In the code snippet at the beginning of Section 15.4,
+	"<TT>(SA)</TT>" should be
+	"<TT>(SA *)</TT>" (981207).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">451
+	<TD>With the addition of the new line of code to Figure 17.6
+	with the 4th printing, the line numbers for the code descriptions
+	on page 451 should change:
+	"26-28" should be "26-29" and
+	"29-33" should be "30-34" (981208).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">466
+	<TD>Comment on line 41 of Figure 17.20:	
+	"<TT>call can free()</TT>" should be
+	"<TT>caller can free()</TT>" (990117).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">514
+	<TD>Caption for Figure 19.19: change "SNTP packet" to "NTP packet"
+	(990220).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">524
+	<TD>Line 7 of Figure 19.27:
+	<TT>size_t</TT> should be
+	<TT>ssize_t</TT> (981009).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">524
+	<TD>Last line of page: change "SNTP packet" to "NTP packet"
+	(990220).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">525
+	<TD>Last line of page: change "SNTP packet" to "NTP packet"
+	(990220).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">526
+	<TD>Caption for code line 59: change "SNTP packet" to "NTP packet"
+	(990220).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">528
+	<TD>The prompt should be "<TT>bsdi #</TT>" instead of "<TT>bsdi %</TT>"
+	since the program must be run as superuser to bind the
+	reserved port (123) (981009).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">571
+	<TD>Caption for Figure 21.5: change
+	"that uses <TT>select</TT>" to
+	"that (incorrectly) uses <TT>select</TT>" (981009).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">595
+	<TD>2nd to last line of description for lines 42-45: replace
+	"the flag <TT>nqueue</TT>" with
+	"the counter <TT>nqueue</TT>" (990423).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">607
+	<TD>Caption for Figure 23.3:
+	append "(see also Exercise 23.5)" (981009).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">658
+	<TD>2nd line of 2nd bullet, near top of page:
+	"Complete IPv6 packets" should be
+	"Complete IPv6 packets (including extension headers)" (981019).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">659
+	<TD>Last sentence on page, replace with:
+	"For a raw IPv6 socket everything other than any extension headers
+	are passed to the socket (e.g., Figures 25.11 and 25.21)."
+	(981019).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">660
+	<TD>2nd indented paragraph near top of page:
+	"passed to a raw IPv6 socket" should be
+	"received on a raw IPv6 socket" (981019).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">686
+	<TD>Figure 25.26: the arrow between the application and UDP
+	should be double-headed (as in the next figure) (981019).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">691
+	<TD>Middle down page:
+	"We expect ICMP host unreachables" should be
+	"We assume <TT>icmpd</TT> is running and expect ICMP host
+	unreachables" (981019).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">705
+	<TD>10th line from bottom of page:
+	"read only from BPF" should be
+	"only read from BPF" (981106).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">707
+	<TD>Halfway down page:
+	"Specifying a protocol of <TT>ETH_P_ALL</TT>" should be
+	"Specifying a protocol of <TT>ETH_P_</TT><I>xxx</I>" (981106).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">716
+	<TD>Line 71 of Figure 26.10:
+	"<TT>ui->ui_sum</TT>" should be
+	"<TT>ntohs(ui->ui_sum)</TT>" (981210).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">732
+	<TD>The WebStone URL is now <TT>http://www.mindcraft.com/webstone/</TT>
+	(990307).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">734
+	<TD>5th line from top of page: replace
+	"We do this after the client completes" to
+	"We type this key after the client completes," (990307).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">737
+	<TD>9th line from bottom of page:
+	"which we shown" should be
+	"which we show" (981109).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">751
+	<TD>5th line of description for lines 56-66:
+	"will be close" should be
+	"will be closed" (981109).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">760
+	<TD>4th line of second bullet:
+	"a monitoring" should be
+	"monitoring" (981109).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">773
+	<TD>5th line from bottom of page: replace <TT>t_tcv</TT>
+	with <TT>t_rcv</TT> (990423).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">785
+	<TD>2nd line above Section 29.3: replace "<TT>netconfig</TT> file"
+	with "<TT>/etc/netconfig</TT> file" (990423).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">807
+	<TD>Lines 24 and 28 of Figure 30.6: replace the word "socket"
+	in the comments with "endpoint" (990423).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">822
+	<TD>2nd line of description for lines 26-33: replace
+	"releases the memory that it allocated" with
+	"releases the memory that <TT>netdir_getbyname</TT> allocated" (990423).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">855
+	<TD>Last paragraph of Section 33.4: replace two occurrences of
+	"<TT>flagsp</TT>" with
+	"<I>flagsp</I>" (that is, it should be italic,
+	not a constant-width font)
+	and replace one occurrence of
+	"<TT>bandp</TT>" with
+	"<I>bandp</I>" (that is, it should be italic,
+	not a constant-width font) (990423).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">881
+	<TD>4th line from end of Chapter: replace
+	"<TT>S_</TT><I>xxx</I> functions" with
+	"<TT>S_</TT><I>xxx</I> flags" (990423).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">931
+	<TD>In the answer to exercise 6.6 "<TT>shutdown</TT> always sends"
+	should be "<TT>shutdown</TT> with <TT>SHUT_WR</TT> or
+	<TT>SHUT_RDWR</TT> always sends" (990214).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">981
+	<TD>The entry "<TT>h_errno</TT> member" should be
+	"<TT>h_errno</TT> variable" (981231).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">983
+	<TD>Add pages "463, 466-467" to the index entry for
+	"<TT>if_nameindex</TT> structure" (990423).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">992
+	<TD>Delete the index entry for "<TT>pcap_pkthdr</TT> function"
+	(990314).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">998
+	<TD>Delete the index entries for
+	"<TT>SETBLOCK</TT> constant",
+	"<TT>SETBLOCKALL</TT> constant",
+	"<TT>SETPASS</TT> constant", and
+	"<TT>SETPASSALL</TT> constant" (990428).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">1000
+	<TD>Change "<TT>so_timeo</TT> structure" to
+	"<TT>so_timeo</TT> member" (990315).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">1000
+	<TD>For the <TT>socket</TT> function,
+	change "206-207" to just "207" (981229).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">1004
+	<TD>Delete the index entry for "<TT>t_tcv</TT> function"
+	(990423).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">1008
+	<TD>Delete the reference to page 343 from the
+	"<TT>wait</TT> function" entry (990423).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">1009
+	<TD>Delete the index entry for "<TT>xti_serv_dev</TT> device"
+	and add page 921 to the index entry for
+	"<TT>xti_serv_dev</TT> variable" (990423).
+</TABLE>
+
+<UL>
+<LI>The following errors are corrected in the 4th printing and later.
+</UL>
+
+<TABLE BORDER>
+<TR>
+	<TH>Page
+	<TH>Description
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">x
+	<TD>In the Table of Contents, the Section title for 19.3:
+	"A LAN" should be
+	"a LAN" (980916).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">xix
+	<TD>2nd line under "Source Code and Errata Availability":
+	replace the <TT>ftp://</TT> URL with
+	"my home page, listed at the end of the Preface" (981007).
+	(The source code is still available from that URL, but numerous
+	readers have had problems with FTP, so HTTP is preferable.)
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">xx
+	<TD>13th line from top of page:
+	"Justis Addis" should be
+	"Justus Addiss" (981008).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">12
+	<TD>2nd line of second indented paragraph: "p. 184" should be
+	"p. 182" (of Kernighan and Pike) (980711).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">80
+	<TD>Figure 3.17, line 25: "<TT>int  n, rc</TT>"
+	should be "<TT>ssize_t  n, rc</TT>" (980713).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">81
+	<TD>Box with prototype for <TT>isfdtype</TT>:
+	first argument should be <TT>fd</TT> and not <TT>sockfd</TT>
+	(since any type of descriptor argument is OK) (980713).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">104
+	<TD>2nd line from bottom: "in the file table (pp. 58-59 of APUE)"
+	should be "in the file table entry (pp. 57-60 of APUE)" (980422).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">105
+	<TD>1st line beneath Figure 4.13: replace "file table" with "file
+	table entry" (980422).  Similarly in the next line, replace "file
+	table" with "file table entry".  Similarly in the 4th line beneath
+	the figure, replace "file tables" with "file table entries".
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">105
+	<TD>Caption for Figure 4.14: "before call to <TT>accept</TT>"
+	should be "before call to <TT>accept</TT> returns" (980714).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">118
+	<TD>Last line of bullet "3": change "(Figure 2.5)" to
+	"(Figures 2.4 and 2.5)" (980422).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">124
+	<TD>In the code snippet in the middle of the page <TT>(SA)</TT>
+	should be <TT>(SA *)</TT> (980715).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">143
+	<TD>3rd line of Section 6.1: "<TT>read</TT> (by calling our
+	<TT>readline</TT> function)," should be
+	"<TT>fgets</TT> (on standard input)" (980718).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">154
+	<TD>4th line of item 2c: "for the <TT>SO_ERROR</TT>"
+	should be "with the <TT>SO_ERROR</TT>" (980718).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">156
+	<TD>Caption for Figure 6.8: <TT>strcli</TT> should be
+	<TT>str_cli</TT> (980713).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">179
+	<TD>Description for <TT>TCP_KEEPALIVE</TT> should be changed to
+	"idle time in seconds before probing" to be more accurate (980628).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">193
+	<TD>Last line of 2nd paragraph of "<TT>SO_RCVLOWAT</TT> ..." section:
+	"have a send buffer it" should be "have a send buffer; it" (980721).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">194
+	<TD>2nd line of 2nd indented paragraph: "516 ot" should be "516 of"
+	(980721).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">197
+	<TD>5th line from bottom of page: "(noticeably" should be
+	"(notably" (980721).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">202
+	<TD>8th line of "<TT>TCP_MAXSEG</TT> Socket Option" section:
+	"is in use because" should be "is in use, because" (980721).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">215
+	<TD>6th line above Figure 8.5: "socket, before" should be
+	"socket before" (980724).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">226
+	<TD>2nd line beneath Figure 8.16: "the server" should be
+	"the servers" (980724).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">256
+	<TD>5th line of 3rd paragraph of Section 9.11:
+	"Section 9.3" should be
+	"Section 9.4" (980730).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">266
+	<TD>Last line of 2nd bullet: "IPv4 clients" should be
+	"IPv4 sockets" (980804).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">268
+	<TD>3rd line beneath item "2.": "an <TT>exec</TT>" should be
+	"a <TT>fork</TT>" (980804).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">271
+	<TD>3rd line above Exercises: "the <TT>IN6_IS_ADDR_V4MAPPED</TT> can"
+	should be "the <TT>IN6_IS_ADDR_V4MAPPED</TT> macro can" (980422).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">279
+	<TD>Figure 11.3, <TT>EAI_FAIL</TT>: "nonrecoverable" should be
+	"unrecoverable" (980807).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">279
+	<TD>Figure 11.3, <TT>EAI_NONAME</TT>: "nor service provided"
+	should be "or service not provided" (980807).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">281
+	<TD>Figure 11.4: 4th box under "Result":
+	"IPv6 as <TT>sockaddr_in6{}</TT>s" should be
+	"IPv6 <TT>sockaddr_in6{}</TT>s" (980807).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">287
+	<TD>Caption for Figure 11.7: <TT>getaddrinfo</TT> should be
+	<TT>tcp_connect</TT> (980807).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">290
+	<TD>Caption for Figure 11.9: <TT>getaddrinfo</TT> should be
+	<TT>tcp_listen</TT> (980807).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">292
+	<TD>Caption for Figure 11.10: <TT>getaddrinfo</TT> should be
+	<TT>tcp_listen</TT> (980903).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">293
+	<TD>Example at top of page "<TT>daytimetcpcli /tmp/rendezvous 0</TT>"
+	should be "<TT>daytimetcpcli /local /tmp/rendezvous</TT>" (980807).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">300
+	<TD>3rd line from top of page: "Similarly the" should be
+	"Similarly" (980807).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">312
+	<TD>3rd line of description for lines 101-106: "even of" should be
+	"even if" (980807).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">315
+	<TD>The last sentence in the description of lines 28-36 ("We keep a
+	counter ...") should be moved to the end of the description for
+	lines 12-27 as the first use of this counter is on line 18 (980807).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">320
+	<TD>1st line on page: "we shown" should be "we show" (980807).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">333
+	<TD>2nd line of 1st indented paragraph: "possible" should be
+	"possibly" (980809).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">335
+	<TD>3rd line of description for lines 10-11: "This automatically runs
+	the process" should be "This automatically runs the child process"
+	(980809).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">337
+	<TD>6th line of description for lines 19-20:
+	"anywhere in the filesystem" should be
+	"in any filesystem" (980809).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">339
+	<TD>1st line on page: "The date and time" should be
+	"The date, time, and FQDN" (980809).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">340
+	<TD>2nd line of item "4.": "a TCP socket" should be
+	"a listening TCP socket" (980809).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">350
+	<TD>1st line of "<TT>connect</TT> with a Timeout using
+	<TT>SIGALRM</TT>" section: "a upper limit" should be
+	"an upper limit" (980811).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">350
+	<TD>Line 11 of Figure 13.1: the "<TT>(struct sockaddr *)</TT>"
+	cast is not needed (980811).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">351
+	<TD>The description for lines 11-16 should be for lines 11-15 (980811).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">351
+	<TD>The description for lines 17-18 should be for lines 16-18 (980811).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">353
+	<TD>Paragraph above "<TT>recvfrom</TT> with a Timeout ..." section:
+	"We do not block in the call to <TT>recvfrom</TT>" should be
+	"We do not call <TT>recvfrom</TT>" (980811).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">365
+	<TD>Last line of paragraph following code: "no another" should be
+	"not another" (980811).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">372
+	<TD>4th line from top of page: "of normal sequence" should be
+	"of the normal sequence" (980811).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">374
+	<TD>1st line of 2nd indented paragraph: "dependence of" should be
+	"dependence on" (980811).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">378
+	<TD>6th line of item "8.": "Unix domain socket" should be "Unix
+	domain datagram socket" (980811).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">382
+	<TD>2nd line of 2nd paragraph of item "1." towards the bottom of the
+	page: "parent;" should be "parent," (980811).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">391
+	<TD>Line numbers "27-37" should be "26-36" (980811).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">405
+	<TD>Example near top of page: <TT>tcpcli01</TT> should be
+	<TT>tcpcli02</TT> (980903).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">405
+	<TD>Example near middle of page: "<TT>sort diag</TT>" should be
+	"<TT>sort diag -</TT>" (the hyphen means standard input) (980903).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">411
+	<TD>Line 12: remove the unneeded cast
+	"<TT>(struct sockaddr *)</TT>" (980903).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">416
+	<TD>Description of lines 11-17: "structure is filled in"
+	should be "structures are filled in" (980903).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">427
+	<TD>Figure 16.1, descriptions for
+	<TT>FIOSETOWN</TT> and <TT>FIOGETOWN</TT>:
+	replace "socket" with "file" (980904).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">437
+	<TD>4th line of description of lines 32-49: "Figure 16.3"
+	should be "Figure 16.2" (980904).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">437
+	<TD>Last line on page: append to the end of this sentence
+	"and that <TT>ifi_next</TT> is initialized to a null pointer"
+	(980904).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">441
+	<TD>2nd line of description of lines 14-17:
+	"returned by <TT>gethostbyname</TT>"
+	should be "returned by <TT>my_addrs</TT>" (980904).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">443
+	<TD>3rd line of Exercise 16.3:
+	"Section 16.5" should be "Section 16.6" (980904).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">450
+	<TD>Line 3 of Figure 17.6: "<TT>/*  * sizeof(struct sockaddr_in6)</TT>"
+	should be "<TT>/* sizeof(struct sockaddr_in6) * 8</TT>" (980904).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">450
+	<TD>The <TT>getrt</TT> program fails to set the <TT>sin_len</TT>
+	field of the socket address structure that is sent to the kernel.
+	For most user socket functions this is not required (see the bottom
+	of p. 58) but this is needed with routing sockets.  The fix is to
+	add the line
+	<PRE>
+	sin->sin_len = sizeof(struct sockaddr_in);
+	</PRE>
+	between lines 26 and 27 (980610).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">451
+	<TD>Description of lines 26-28:
+	"All we set are the address family" should be
+	"All we set are the address length, the address family," (980904).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">453
+	<TD>Lines 10 and 14 of Figure 17.9: <TT>struct sockaddr</TT> should be
+	<TT>SA</TT> (980904).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">454
+	<TD>Line 3 of Figure 17.10: <TT>struct sockaddr</TT> should be
+	<TT>SA</TT> (980904).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">458
+	<TD>Line 8 of Figure 17.14: <TT>mib[5]</TT> should be
+	<TT>mib[4]</TT> (980904).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">466
+	<TD>2nd line of text: "interface names and addresses"
+	should be "interface names and indexes" (980904).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">473
+	<TD>7th line from top of page: the third byte of the Ethernet
+	address of the host in the middle of Figures 18.3 and 18.4
+	should be <TT>8c</TT> and not <TT>9c</TT> (980905).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">476
+	<TD>Line 28 of Figure 18.5: the final argument to
+	<TT>Sock_ntop</TT> should be <TT>len</TT>
+	and not <TT>servlen</TT> (980905).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">477
+	<TD>1st word of 1st line of text: "strings"
+	should be "a string" (980905).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">477
+	<TD>1st line of text: delete "and port number" (980905).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">477
+	<TD>1st/2nd lines of text: "These are"
+	should be "This is" (980905).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">477
+	<TD>Middle of page (3rd line below example):
+	"definition of a broadcast datagram" should be
+	"destination of a broadcast datagram" (980905).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">479
+	<TD>Line 33 of Figure 18.6: the final argument to
+	<TT>Sock_ntop</TT> should be <TT>len</TT>
+	and not <TT>servlen</TT> (980905).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">479
+	<TD>In the caption for Figure 18.6 append
+	"(incorrect solution)" (980713).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">481
+	<TD>Line 38 of Figure 18.7: the final argument to
+	<TT>Sock_ntop</TT> should be <TT>len</TT>
+	and not <TT>servlen</TT> (980905).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">482
+	<TD>1st line of paragraph above Figure 18.8:
+	"Posix.1g and none" should be "Posix.1g; none" (980905).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">483
+	<TD>Line 26 of Figure 18.9: the final argument to
+	<TT>Sock_ntop</TT> should be <TT>len</TT>
+	and not <TT>servlen</TT> (980905).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">484
+	<TD>2nd line of description for lines 45-50:
+	"possible interrupting" should be
+	"possibly interrupting" (980905).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">485
+	<TD>Line 29 of Figure 18.10:
+	"<TT>pselect error</TT>" should be
+	"<TT>select error</TT>" (980905).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">485
+	<TD>Line 36 of Figure 18.10: the final argument to
+	<TT>Sock_ntop</TT> should be <TT>len</TT>
+	and not <TT>servlen</TT> (980905).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">490
+	<TD>Section title for 19.3: "A LAN" should be
+	"a LAN" (980916).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">493
+	<TD>2nd line of Section 19.4: "The benefit in" should be
+	"The benefit of" (980916).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">495
+	<TD>Last sentence on page:
+	"All 10" should be
+	"All five" and
+	"but the four that join" should be
+	"but the two that join" (980904).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">501
+	<TD>Code description for lines "36-48" should be for lines "36-50"
+	(980916).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">502
+	<TD>Lines 39-46 of Figure 19.9:
+	the final <TT>else</TT> on line 45 should be associated with
+	the <TT>if</TT> on line 39, that is, the code should be
+<PRE>
+if (ifindex > 0) {
+    mreq6.ipv6mr_interface = ifindex;
+} else if (ifname != NULL) {
+    if ( (mreq6.ipv6mr_interface = if_nametoindex(ifname)) == 0) {
+        errno = ENXIO;  /* i/f name not found */
+        return(-1);
+    }
+} else
+    mreq6.ipv6mr_interface = 0;
+</PRE>
+	(980916).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">506
+	<TD>2nd line of description for lines 15-23:
+	"buffer and skip" should be
+	"buffer, skip" (980916).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">512
+	<TD>Lines 23-26 of Figure 19.18: the <TT>printf</TT> on lines 25-26
+	should be associated with the true portion of the <TT>if</TT>
+	on line 23. that is, the code should be
+<PRE>
+if (ifi->ifi_flags & IFF_MULTICAST) {
+    Mcast_join(sockfd, mcastsa, salen, ifi->ifi_name, 0);
+    printf("joined %s on %s\n",
+           Sock_ntop(mcastsa, salen), ifi->ifi_name);
+}
+</PRE>
+	(980916).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">513
+	<TD>Code description for lines "23-24" should be for lines "23-27"
+	and code description for lines "29-35" should be for lines "30-36"
+	(980916).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">517
+	<TD>Last sentence on page that spans to top of next page:
+	"A value of 1 as the second argument ...".
+	This sentence, along with the next sentence on page 518
+	("We then pass the <TT>IFI_ALIAS</TT> ..."),
+	should both appear at the end of the description for lines 15-17
+	(980916).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">523
+	<TD>2nd line of text: <TT>CLIENT_MODE</TT> should be
+	<TT>MODE_CLIENT</TT> (980916).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">523
+	<TD>1st sentence of description for lines 4-19:
+	"address is stored" should be
+	"addresses are stored" and
+	"size of the corresponding datagram" should be
+	"sizes of the corresponding datagrams" (980916).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">525
+	<TD>Lines 38, 42, 44, 47, 49, 51, 55:
+	the argument <TT>aptr-&gt;addr_salen</TT> should be <TT>len</TT>
+	(the value-result argument returned by <TT>recvfrom</TT>) (980916).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">528
+	<TD>1st line of text (example):
+	"<TT>sntp</TT>" should be
+	"<TT>sntp 224.0.1.1</TT>"
+	(the IP address is a required command-line argument on p. 518)
+	(980916).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">535
+	<TD>Figure 20.3: the sizes of the structure members
+	are not shown correctly to scale:
+	<TT>cmsg_len</TT>, <TT>cmsg_level</TT>, and <TT>cmsg_type</TT>
+	are all integers (typically 4 bytes each, recall p. 363)
+	and all the remaining members are 1-byte fields,
+	except for the interface index, which is a 2-byte field
+	(recall p. 446) (980922).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">537
+	<TD>6th line of indented paragraph: "an unknown error"
+	should be "an unknown option" (980922).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">542
+	<TD>5th line from top: "over both UDP or TCP"
+	should be "over both UDP and TCP" (980922).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">543
+	<TD>Two-thirds of the way down the page:
+	"the next <I>RTT</I> is 8 seconds" should be
+	"the next <I>RTO</I> is 8 seconds" (980922).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">546
+	<TD>2nd line of description of lines 1-5: <TT>rtt_into</TT>
+	should be <TT>rtt_info</TT> (980922).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">550
+	<TD>Description of lines 3-8 should be for lines 3-7 (980922).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">552
+	<TD>1st line of description of lines 62-78: "The argument"
+	should be "The second argument" (980922).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">553
+	<TD>Second indented paragraph: "received interface"
+	should be "receiving interface" (980922).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">554
+	<TD>Code description for lines "25-41" should be for lines "25-42"
+	(980922).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">555
+	<TD>Between lines 35 and 36 add a new line containing
+	<TT>Close(sockfd);</TT> (980922).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">555
+	<TD>Code description for lines "42-46" should be for lines "43-47",
+	code description for lines "49-61" should be for lines "50-62", and
+	code description for line "62" should be for line "63"
+	(980922).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">556
+	<TD>Line 77 (after addition of new line of code):
+	the final argument to <TT>Sendto</TT> should be
+	<TT>len</TT> and not <TT>clilen</TT> (980922).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">556
+	<TD>Code description for lines "64-65" should be for lines "65-66" and
+	code description for lines "70-77" should be for lines "71-78"
+	(980922).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">566
+	<TD>9th line from bottom of page:
+	"socket receive buffer" should be
+	"socket send buffer" (980924).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">584
+	<TD>2nd line from bottom of page:
+	<TT>maxnprobes</TT> should be
+	<TT>maxnalarms</TT> (980924).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">595
+	<TD>1st/2nd line of 1st indented paragraph:
+	"asynchronous I/O" should be
+	"signal-driven I/O" (980927).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">603
+	<TD>3rd line from bottom of page:
+	"Figure 23.13" should be
+	"Figure 23.14" (981008).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">616
+	<TD>last line of 1st paragraph:
+	"is free" should be
+	"is freed" (981008).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">620
+	<TD>line 10 of Figure 23.13:
+	"<TT>int f_tid</TT>" should be
+	"<TT>pthread_t f_tid</TT>" (981008).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">633
+	<TD>1st line of Exercise 23.5:
+	"Figure 23.4" should be
+	"Figure 23.3" (981008).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">640
+	<TD>3rd and 4th lines below indented paragraph:
+	"right-shift the addresses ... after the header." should be
+	"swap the first 4 bytes with the following 4 bytes and add 4
+	to the length field." (981007).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">641
+	<TD>Line 44:
+	"<TT>*hop1</TT>" should be
+	"<TT>hop1</TT>" (981007).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">641
+	<TD>Line 57: the comment should be
+	"<TT>/* subtract dest IP addr */</TT>" (981007).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">641
+	<TD>3rd line of description of lines 48-64:
+	"3-byte header." should be
+	"3-byte header, except the destination IP address." (981007).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">646
+	<TD>4th line from bottom of page:
+	"RFC 1883 [Hinden and Deering 1995]" should be
+	"RFC 1883 [Deering and Hinden 1995]" (981007).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">651
+	<TD>6th line from top of page:
+	"The bit labeled 0 is for the first hop." should be
+	"The bit labeled 0 is for the last hop." (981007).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">651
+	<TD>7th line from top of page:
+	"RFC 1883 [Hinden and Deering 1995]" should be
+	"RFC 1883 [Deering and Hinden 1995]" (981007).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">653
+	<TD>2nd line of indented paragraph:
+	"RFC 1883 [Hinden and Deering 1995]" should be
+	"RFC 1883 [Deering and Hinden 1995]" (981007).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">750
+	<TD>Line 38: the first argument to <TT>select</TT> should be
+	"<TT>maxfd + 1</TT>" (980723).
+	Recall the indented paragraph at the top of p. 153!
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">886
+	<TD>1st line of 1st indented paragraph:
+	"RFC 1883 [Hinden and Deering 1995]" should be
+	"RFC 1883 [Deering and Hinden 1995]" (981007).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">886
+	<TD>4th and 5th lines of 5th bullet:
+	"<TT>IPV6_UNICAST_HOPS</TT> and <TT>IPV6_MULTICAST_HOPS</TT>
+	socket options (Section 7.8)." should be
+	"<TT>IPV6_UNICAST_HOPS</TT> and <TT>IPV6_MULTICAST_HOPS</TT>
+	(Sections 7.8 and 19.5) socket options."
+	(980730).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">896
+	<TD>2nd line of parenthetical comment in Figure A.14:
+	"ICMP or ICMPv6" should be "ICMPv4 or ICMPv6" (980711).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">911
+	<TD>3rd line of Section C.4: "test small test"
+	should be "small test" (980903).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">924
+	<TD>The <TT>strcat</TT> on line 78 can write one byte beyond
+	the end of the buffer (980514).  One solution is to change line 68
+	to "<TT>char buf[MAXLINE + 1];</TT>" and then change the two
+	<TT>sizeof(buf)</TT> (lines 71 and 77) to <TT>MAXLINE</TT>.
+	This guarantees that the buffer is always terminated by a newline
+	followed by a null byte.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">926
+	<TD>Solution to 2.1: <TT>http://www.internic.net</TT> should now be
+	<A HREF="http://www.ietf.org"><TT>http://www.ietf.org</TT></A>.
+	Also, <TT>ftp://ds.internic.net/rfc</TT> should now be
+	<A HREF="ftp://ftp.isi.edu/in-notes">
+		<TT>ftp://ftp.isi.edu/in-notes</TT></A>.
+	Finally, <TT>rfc-index</TT> should now be <TT>rfc-index.txt</TT>.
+	"Go backward from these obsolete RFCs" should be
+	"Go forward from these obsolete RFCs" (the RFC indexes are now
+	in increasing order, they used to be in decreasing order).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">927
+	<TD>In the solution to 4.2, the second argument to <TT>Sock_ntop</TT>
+	should be <TT>len</TT> and not <TT>sizeof(cliaddr)</TT>,
+	since <TT>len</TT> is the value-result
+	that might be modified by <TT>Getsockname</TT> (980714).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">930
+	<TD>Next to last line of solution to Exercise 5.10: "two 32-bit values"
+	should be "one 32-bit value" (980715).  On the last line of this
+	solution, "two 64-bit values" should be "one 64-bit value".
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">945
+	<TD>7th line of solution to 12.2:
+	"each service generates a single datagram" should be
+	"each generates at most a single datagram" (980809).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">945
+	<TD>Last line of solution to 12.3: "a organization's" should be
+	"an organization's" (980809).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">946
+	<TD>First line of solution to 13.4: "the falling" should be "falling"
+	(980811).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">948
+	<TD>Line 52: the test in the for loop should be "<TT>k <= j</TT>"
+	not "<TT>k < j</TT>" (the descriptor that failed the
+	<TT>connect</TT> must also be closed) (980811).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">949
+	<TD>Line 69: <TT>Close(pipefd[1])</TT> should be
+	<TT>Close(pfd)</TT> (980811).  (It is the same descriptor,
+	but this is more consistent, given the <TT>#define</TT>
+	at the beginning of the program.)
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">954
+	<TD>Between lines 41 and 42 add a new line containing
+	<TT>Close(sockfd);</TT> (980922).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">955
+	<TD>Line 83 (after addition of previous fix):
+	the final argument to <TT>Sendto</TT> should be
+	<TT>len</TT> and not <TT>salen</TT> (980922).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">957
+	<TD>4th line of solution to Exercise 23.2:
+	"in the state" should be
+	"in this state" (981008).
+	Also add the sentence "The server will also run out of
+	descriptors (eventually)." to the end of this solution.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">963
+	<TD>See the entry above for p. 926 regarding the location of RFC
+	repositories.
+	<A HREF="http://www.ietf.org"><TT>http://www.ietf.org</TT></A>
+	should be the starting point for locating Internet Drafts.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">972
+	<TD>Change "Addis, J." to "Addiss, J." (981008).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">974
+	<TD>Delete entry for <TT>CLIENT_MODE</TT> (980916).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">979
+	<TD>Change "file table, 383" to "file table entry, 104-105, 383"
+	(980422).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">980
+	<TD>Delete page "441" from the entry for <TT>gethostbyname</TT>
+	(980904).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">984
+	<TD>Delete page "83" from the entry for <TT>inet_ntoa</TT> (980422).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">989
+	<TD>Add page "523" to the entry for <TT>MODE_CLIENT</TT> (980416).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">996
+	<TD>Delete entry for <TT>rtt_into</TT> structure (980922).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">1001
+	<TD>In the entry for <TT>str_cli</TT>,
+	change "155, 157" to "155-157" (980713).
+<TR>
+	<TD>&nbsp;
+	<TD>Inside back cover ("Structure definitions"):
+	add "<TT>ifi_info</TT> 431" and
+	"<TT>ntpdata</TT> 511" (980916).
+</TABLE>
+
+<UL>
+<LI>The following errors are corrected in the 3rd printing and later.
+</UL>
+
+<TABLE BORDER>
+<TR>
+	<TH>Page
+	<TH>Description
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">5
+	<TD>Line above Figure 1.4: "with the both LANs" should be
+	"with both LANs" (971215).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">10
+	<TD>End of first paragraph of text: "using the <TT>getaddrinfo</TT>
+	function" should be "using the <TT>getaddrinfo</TT> function
+	(which is called by <TT>tcp_connect</TT>)" (980102).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">15
+	<TD>Last line of page: "Section 12.5" should be
+	"Section "12.4" (980227).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">35
+	<TD>4th line below "TCP Options": add an end-of-sentence period
+	between "connection" and "We" (980403).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">57
+	<TD>2nd to last line: "these structure begins" should be "these
+	structures begin" (971217).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">75
+	<TD>3rd line from bottom: "<TT>INETADDRSTRLEN</TT> plus 5 bytes
+	for IPv4 (16 + 5 = 21)" should be "<TT>INETADDRSTRLEN</TT> plus
+	6 bytes for IPv4 (16 + 6 = 22)" (980326).  The value 6 is for
+	the decimal-point separator between the IP address and the port,
+	plus up to 5 digits for the port.
+	<P>
+	Similarly the next line should be "plus 6 bytes for IPv6
+	(46 + 6 = 52)".
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">83
+	<TD>First line of Exercise 3.3: "The <TT>inet_ntoa</TT>" should be
+	"The <TT>inet_aton</TT>" (980416).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">95
+	<TD>Second indented paragraph: "lost in history" should be "lost
+	to history" (9800416).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">118
+	<TD>Last line of bullet "3": <TT>FIN_WAIT_1</TT> should be
+	<TT>FIN_WAIT_2</TT> (980416).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">124
+	<TD>3rd line from top: "functions falls" should be
+	"functions fall" (971217).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">124
+	<TD>3rd line above Section 5.10: "When <TT>connect</TT> is
+	interrupted by a caught signal that is not automatically restarted"
+	should be "When <TT>connect</TT> is interrupted by a caught signal
+	and is not automatically restarted (p. 466 of TCPv2)" (980416).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">153
+	<TD>2nd line of first indented paragraph: "descriptors sets"
+	should be "descriptor sets" (980220).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">188
+	<TD>Second line of indented paragraph near top of page:
+	"one-hundreds" should be "one-hundredths" (980121).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">188
+	<TD>Last line of indented paragraph near top of page:
+	"32.767 seconds" should be "327.67 seconds" (971201).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">214
+	<TD>The filename on the horizontal rules for Figure 8.3 should be
+	<TT>udpserv01.c</TT>, not <TT>ucpserv01.c</TT> (971201).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">218
+	<TD>5th line from top: "It the client's request" should be
+	"If the client's request" (971217).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">228
+	<TD>Figure 8.18: the font for the figure caption is wrong (980109).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">268
+	<TD>16th line from top: "requires an <TT>LPORT</TT> command"
+	should be "requires an <TT>LPRT</TT> command" (971202).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">359
+	<TD>Line above Figure 13.7: "because we mentioned that it is not used"
+	should be "because, as we mentioned, it is not used" (971209).
+	(This is not a typo, just improved wording.)
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">365
+	<TD>Last sentence of Section 13.6: "allocating space the" should be
+	"allocating space for the" (971222).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">371
+	<TD>1st line of Section 13.10: "three way" should be "three ways"
+	(971209).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">371
+	<TD>1st bullet of Section 13.10: "<TT>SIGALRM</TT> function"
+	should be "<TT>SIGALRM</TT> signal" (971209).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">386
+	<TD>3rd line under "<TT>fork</TT> and <TT>exec</TT>":
+	"We call <TT>snprintf</TT> are because" should be
+	"We call <TT>snprintf</TT> because" (971203).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">390
+	<TD>1st line of 2nd indented paragraph: "even thought" should be
+	"even though" (971203).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">401
+	<TD>2nd line of description for lines 36-40:
+	"(<TT>tooptr</TT> equals <TT>to</TT>)" should
+	be "(<TT>tooptr</TT> equals <TT>toiptr</TT>)" (971217).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">402
+	<TD>Code line 39 should be: <TT>if (tooptr == toiptr)</TT>
+	(971217).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">416
+	<TD>4th line from top of page: "of the server the file from" should be
+	"of the server to read the file from" (971222).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">427
+	<TD>Figure 16.1, <TT>FIOASYNC</TT> entry: "i/o" should be
+	"I/O" (980105).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">449
+	<TD>5th line from bottom of page: <TT>rmt_addrs</TT> should be
+	<TT>rtm_addrs</TT> (971203).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">450
+	<TD>4th line from top of page: "which if" should be
+	"which of" (971203).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">452
+	<TD>5th line from top of page: "four socket address structure"
+	should be "four socket address structures" (971227).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">459
+	<TD>Figure 17.15: there is a memory leak:
+	if the second <TT>sysctl</TT> on line 17 fails,
+	the memory allocated on line 15 is not freed.
+	The fix is to add a call to </TT>free</TT> between lines 17 and 18,
+	with the appropriate <TT>{</TT> and <TT>}</TT> also (980323).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">459
+	<TD>With the above correction, change the line numbers "15-19"
+	below the figure to "15-21" (980323).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">473
+	<TD>4th line from bottom of page: add the sentence "(We assume the IP
+	address bound is <TT>INADDR_ANY</TT>, as is typical.) to the end
+	of the paragraph ending with "the socket." (971204).  This is not
+	a typo but is being added for clarification.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">475
+	<TD>4th line from bottom of page: "and a signal handler is installed
+	for <TT>SIGCHLD</TT>" should be "and a signal handler is installed for
+	<TT>SIGALRM</TT>" (971203).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">495
+	<TD>Top line of page: "steps takes" should be "steps taken" (971203).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">497
+	<TD>1st line of 1st indented paragraph: "per socket This" should have a
+	period after "socket" (971209).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">498
+	<TD>6th line from top of page: "should be use" should be
+	"should be used" (971203).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">499
+	<TD>In the function prototypes for <TT>mcast_join</TT> and
+	<TT>mcast_leave</TT>, the second argument should be named
+	<TT>sa</TT> and not <TT>addr</TT> to be consistent
+	with the descriptions that follow (980120).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">514
+	<TD>Line 23 of Figure 19.19: <TT>htonl</TT> should be
+	<TT>ntohl</TT> (980302).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">542
+	<TD>Item "2." about halfway down the page: "the the" should be "the"
+	(980201).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">548
+	<TD>Description of code lines 45-47: Delete the entire sentence "The
+	variable <TT>alrm_flag</TT> ... by the signal handler." (980209).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">594
+	<TD>Code line 46 of Figure 22.4: <TT>SIGGIO</TT> should be
+	<TT>SIGIO</TT> (971203).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">607
+	<TD>There is a coding error in Figures 23.3 and 23.4:
+	the first argument to <TT>Pthread_create</TT> is a <TT>NULL</TT>
+	pointer, which is not allowed by pthreads (980209).  Even if you
+	don't need the thread ID for the newly created thread, you must
+	still allocate a variable of type <TT>pthread_t</TT> and pass
+	the pointer to that variable as the first argument.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">608
+	<TD>Second sentence of text: "The first argument is a null pointer ..."
+	must be removed (see entry above for p. 607) (980209).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">608
+	<TD>With the correction above for p. 607 the line numbers in the
+	margin should now be "17-21" and "23-30" (980209).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">609
+	<TD>In the function <TT>doit</TT> at the top of the page
+	the calls to <TT>str_echo</TT> and <TT>Close</TT>
+	can be expressed more simply as (971203):
+	<PRE>
+	str_echo(connfd);
+	Close(connfd);
+	</PRE>
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">609
+	<TD>With the correction below for p. 610 the line numbers in
+	the margin should now be "17-22" and "28-29" (980209).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">610
+	<TD>Figure 23.4: See entry above for p. 607 (980209).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">611
+	<TD>Figure 23.5: <TT>getc_unblocked</TT> should be
+	<TT>getc_unlocked</TT> (980223).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">611
+	<TD>Last line of page: change "Figures 23.4 and" to "Figures 23.3 and"
+	for consistency with previous paragraph (971204).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">621
+	<TD>Figure 23.14: Move line 49 before line 47.  There is a chance
+	(albeit slight) that the thread could terminate before
+	<TT>pthread_create</TT> returns, in which case setting the
+	<TT>F_CONNECTING</TT> flag would wipe out the <TT>F_DONE</TT> flag
+	(980306).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">631
+	<TD>Code at bottom of page: move the line
+	"<TT>fptr->f_flags = F_DONE</TT>" down,
+	between the calls to <TT>Pthread_mutex_lock</TT> and <TT>ndone++;</TT>
+	Else there is a potential deadlock if two threads terminate at
+	about the same time, both set <TT>F_DONE</TT>,
+	but only one increments <TT>ndone</TT> and terminates (980309).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">632
+	<TD>Figure: 23.19: same fix as listed above for Figure 23.14
+	on p. 621 (980404).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">636
+	<TD>Last sentence of indented paragraph near bottom of page:
+	"allow the user" reads better as "allow the application".
+	"<TT>IP_OPTIONS</TT> socket options" should be
+	"<TT>IP_OPTIONS</TT> socket option" (971204).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">638
+	<TD>5th line from top: change "datagram." to "datagram when it leaves
+	the source host." (971204).  This is not a typo but is being added
+	for clarity.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">646
+	<TD>2nd/3rd line of text: "two high-order bits specifies" should be
+	"two high-order bits specify" (971205).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">646
+	<TD>Description when the two high-order bits are "<TT>11</TT>":
+	"the error is sent only of" should be
+	"the error is sent only if" (971205).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">647
+	<TD>Last line of second paragraph beneath Figure 24.9: "(Figure 24.7)"
+	should be "(Figure 24.8)" (980306).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">649
+	<TD>4th line above Section 24.6: "value if -1" should be "value is -1"
+	(980206).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">654
+	<TD>2nd line of Exercise 24.3: "What would be do" should be
+	"What would we do" (980309).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">661
+	<TD>Line below Figure 25.1: "Figures A.15 and A.16 shows":
+	both "shows" on this line should be "show" (971205).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">662
+	<TD>Figure 25.3: bottom ellipse beneath <TT>sig_alrm</TT>
+	labeled <TT>proc_v6</TT> should be labeled <TT>send_v6</TT>
+	(971205).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">673
+	<TD>2nd line of 2nd paragraph: "building its own IPv4 header"
+	should be "building their own IPv4 header" (971208).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">676
+	<TD>Line 50 of Figure 25.17: "cannot ping" should be
+	"cannot traceroute" (971208).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">677
+	<TD>1st/2nd lines of description for code lines 12-15:
+	"low-order 15 bits" should be "low-order 16 bits" (971208).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">691
+	<TD>Last line of indented paragraph at top of page:
+	<TT>EAGAIN</TT> should be <TT>EINVAL</TT> (971208).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">725
+	<TD>3rd line from top: "(Figure 26.7)" should be
+	"(Figure 26.8)" (980316).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">740
+	<TD>6th line beneath "Effect of Too Many Children":
+	"remaining three columns" should be "remaining four columns" (980319).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">822
+	<TD>Figure 31.2: the small box containing the pointer to the
+	<TT>t_unitdata{}</TT> should be labeled <TT>tudptr</TT>: (980403).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">872
+	<TD>Last line of page: "The second argument" should be
+	"The <TT>iov</TT> argument" (980408).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">892
+	<TD>2nd line beneath Figure A.7: "a aggregatable" should be
+	"an aggregatable" (980413).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">900
+	<TD>3rd and 5th lines of Bullet "4.": "HR2" should be "MR2" (971214).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">917
+	<TD>Line 107: "<TT>AF_LOCAL</TT> and <TT>AF_LOCAL</TT>" should be
+	"<TT>AF_LOCAL</TT> and <TT>PF_LOCAL</TT>" (980311).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">927
+	<TD>In the solution to 4.2, <TT>Sock_ntop</TT> should have
+	two arguments, not three: remove the final <TT>NULL</TT>
+	argument (980326).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">938
+	<TD>3rd line following Figure E.9: "it's call" should be
+	"its call" (971203).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">977
+	<TD>Delete page number 691 from the index entry for <TT>EAGAIN</TT>
+	(971208).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">979
+	<TD>Move page number "118" from the entry for <TT>FIN_WAIT_1</TT>
+	to the entry for <TT>FIN_WAIT_2</TT> (980416).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">980
+	<TD><TT>getc_unblocked</TT> should be <TT>getc_unlocked</TT> (980223).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">996
+	<TD>Delete the index entry for <TT>rmt_addrs</TT>
+	and change "448, 450" in the entry for <TT>rtm_addrs</TT>
+	to be "448-450" (971203).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">998
+	<TD>Change "476" in the index entry for <TT>SIGALRM</TT>
+	to be "475-476" (971203).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">998
+	<TD>Delete page number 475 from the index entry for <TT>SIGCHLD</TT>
+	(971203).
+</TABLE>
+
+<UL>
+<LI>The following errors are corrected in the 2nd printing and later.
+</UL>
+
+<TABLE BORDER>
+<TR>
+	<TH>Page
+	<TH>Description
+<TR>
+	<TD>&nbsp;
+	<TD>inside front cover:
+	Add bold page number 325 for <TT>freeaddrinfo</TT>,
+	307 for <TT>getaddrinfo</TT>, and 326 for <TT>getnameinfo</TT> (970920).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">xv
+	<TD>3rd/2nd lines from bottom of page: "of the my" should be
+	"of my" (970925).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">19
+	<TD>7th line from top of page: "our of order" should be
+	"out of order" (971113).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">19
+	<TD>9th line from top of page: "the lower three layers" should be
+	"the lower four layers"  (971105).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">39
+	<TD>Last line of page: "less that 1460" should be
+	"less than 1460" (971113).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">44
+	<TD>Figures 2.8, 2.9, and 2.10 are "backwards" in that all other
+	figures have the client on the left and the server on the right
+	(971118).  For consistency Figure 2.7 should have its arrow going
+	to the right.
+	In the first printing there is no typo to fix, but the left-right
+	orientation will be corrected in the second printing.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">47
+	<TD>2nd bullet, 3rd line: "A router that receives an IPv4 datagram with
+	the DF bit set generates" should be "A router that receives an IPv4
+	datagram with the DF bit set whose size exceeds the outgoing link's
+	MTU generates" (971107).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">52
+	<TD>Final paragraph of Section 2.11: "The next three are UDP-based"
+	should be "The next five are UDP-based" (971114).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">72
+	<TD>2nd sentence after box describing <TT>inet_pton</TT> and
+	<TT>inet_ntop</TT>: "If family is not supported, both functions
+	return -1 with <TT>errno</TT>":
+	replace "-1" with "an error" (971107).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">81
+	<TD>Line above box describing <TT>isfdtype</TT>:
+	<TT>fdistype</TT> should be <TT>isfdtype</TT> (971107).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">83
+	<TD>5th line of Exercise 3.3: "three numbers separated by four decimal
+	points" should be "four numbers separated by three decimal points
+	(971107).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">105
+	<TD>Figures 4.14, 4.15, 4.16, and 4.17 are "backwards" in that
+	all other figures have the client on the left and the server
+	on the right (971118).
+	In the first printing there is no typo to fix, but the left-right
+	orientation will be corrected in the second printing.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">116
+	<TD>First example: "<TT>bsdi % tcpserv &</TT>" should be
+	"<TT>bsdi % tcpserv01 &</TT>" (971118).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">116
+	<TD>Third example: "<TT>bsdi % tcpcli 127.0.0.1</TT>" should be
+	"<TT>bsdi % tcpcli01 127.0.0.1</TT>" (971118).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">117
+	<TD><TT>ps -l</TT> output: Both occurrences of <TT>tcpserv</TT>
+	should be <TT>tcpserv01</TT>. Also, <TT>tcpcli</TT> should be
+	<TT>tcpcli01</TT> (971118).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">117
+	<TD>Middle of page: "The PID and PPID columns shows":
+	"shows" should be "show" (971114).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">117
+	<TD>Middle of page, line following previous typo:
+	Both occurrences of <TT>tcpserv</TT> should be <TT>tcpserv01</TT>
+	(971118).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">117
+	<TD>Example at bottom of page: <TT>tcpcli</TT> should be
+	<TT>tcpcli01</TT> (971118).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">118
+	<TD><TT>ps</TT> output at bottom of page:
+	<TT>./tcpserv</TT> should be <TT>tcpserv01</TT>
+	and <TT>(tcpserv)</TT> should be <TT>(tcpserv01)</TT> (971118).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">125
+	<TD>Figure 5.9 should be labeled as 5.8, and Figure 5.8 on p. 126
+	should be labeled as 5.9.  The two text references to these figures
+	at the bottom of p. 125 must then be swapped (971114).
+	<P>
+	In the first printing, all is OK (other than the two figures
+	appearing out of order, which is aesthetically incorrect) and
+	there is nothing to fix, but the ordering will be corrected in
+	the second printing.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">127
+	<TD>In the example at the top of the page <TT>tcpcli03</TT>
+	should be <TT>tcpcli04</TT> (971118).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">127
+	<TD><TT>ps</TT> output: <TT>./tcpserv03</TT> should be
+	<TT>tcpserv03</TT> (971118).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">141
+	<TD>Exercise 5.1, 3rd line: "Terminate the server" should be
+	"Terminate the client" (971124).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">141
+	<TD>Exercise 5.6, 5th line: "<TT>write</TT> a few more bytes
+	to the pipe" should be "<TT>write</TT> a few more bytes
+	to the socket" (971124).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">147
+	<TD>2nd line following "Signal Driven I/O Model": "shown a summary"
+	should be "show a summary" (971124).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">147
+	<TD>2nd line from bottom of page: "the data is read to" should be
+	"the data is ready to" (971124).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">195
+	<TD>2nd line from top: "would be to call" should be "would call"
+	(971119).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">280
+	<TD>4th line of 3rd bullet: "returned <TT>sockaddr_in6</TT>
+	structures" should be "returned as <TT>sockaddr_in6</TT>
+	structures" (971013).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">280
+	<TD>Last line of final bullet: "type of socket address structure
+	returned" should be "type of socket address structure is
+	returned" (971013).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">288
+	<TD>Description of code lines 25-26: <TT>socked</TT> should be
+	<TT>socket</TT> (971013).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">359
+	<TD>Figure 13.7 should be centered on the page (971101).
+	In the first printing, all is OK and there is nothing to fix, 
+	but the centering will be corrected in the second printing.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">398
+	<TD>2nd line from the top: "error or <TT>EWOULDBLOCK</TT>"
+	should be "error of <TT>EWOULDBLOCK</TT>" (971120).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">407
+	<TD>Figure 15.10 should be labeled as 15.9, and Figure 15.9
+	on p. 408 should be labeled as 15.10.  The two text references
+	to these figures on p. 407 must then be swapped (971124).
+	<P>
+	In the first printing, all is OK (other than the two figures
+	appearing out of order, which is aesthetically incorrect) and
+	there is nothing to fix, but the ordering and the resulting
+	references will be corrected in the second printing.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">408
+	<TD>Half-way down page, "In Figure 15.9": "Figure 15.9" should be
+	"Figure 15.10" (971124, see note with typo on p. 407).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">409
+	<TD>"8.7 sec, fork (Figure 15.9)": "Figure 15.9" should be
+	"Figure 15.10" (971124, see note with typo on p. 407).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">422
+	<TD>4th line of Section 15.6: "connection ready" should be
+	"connection is ready" (971120).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">424
+	<TD>Exercises 15.1-15.3: "Figure 15.9" should be "Figure 15.10"
+	(971124, see note with typo on p. 407).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">605
+	<TD>First line of Section 23.3: "Figure 15.9" should be "Figure 15.10"
+	(971124, see note with typo on p. 407).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">730
+	<TD>Section 27.2, list item "4.": "Figure 15.9" should be
+	"Figure 15.10" (971124, see note with typo on p. 407).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">892
+	<TD>2nd line after Figure A.7: "are <TT>010</TT>" should be
+	"are <TT>001</TT>" (971114).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">892
+	<TD>2nd line following "Aggregatable Global Unicast Addresses"
+	heading: "3-bit prefix of <TT>010</TT>" should be
+	"3-bit prefix of <TT>001</TT>" (971114).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">893
+	<TD>1st bullet at top of page: "format prefix (<TT>010</TT>)"
+	should be "format prefix (<TT>001</TT>)" (971114).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">979
+	<TD>Delete the entry for <TT>fdistype</TT> (971107).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">988
+	<TD>Index entry for "Lucchnia" should be "Lucchina" (971103).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">990
+	<TD>Add pages 209 and 357 to the entry for "Nagle algorithm" (971103).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">992
+	<TD>Delete the index entry for "Pasxon" and add page 47 to the entry
+	for "Paxson" (971103).
+</TABLE>
+
+<UL>
+<LI><A NAME="comments">The following are Comments to the Reader,
+	they are not typos to be fixed, but general comments,
+	suggestions, and the like.</A>
+</UL>
+
+<TABLE BORDER>
+<TR>
+	<TH>Page
+	<TH>Comment
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">27
+	<TD>The C9X proposed revision to ANSI C (p. 15)
+	would add a new row to this table:
+	the datatype <TT>long long</TT> with a size of 64 bits
+	in both the ILP32 and LP64 models.
+	Also, <A HREF="http://www.lysator.liu.se/c/"</A>
+	<TT>http://www.lysator.liu.se/c/</TT></A>
+	contains lots of information on ANSI C.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">126
+	<TD>In Figure 5.9, notice that lines 11-14 can be taken out of the
+	for loop.  My coding style is not to do this, unless the code is
+	part of a loop that greatly affects the program's execution speed,
+	which is not the case here.  Ditto for line 12 on p. 157.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">155
+	<TD>The declarations shown for <TT>FD_SETSIZE</TT> have
+	traditionally been found in the <TT>&lt;sys/types.h&gt;</TT> header
+	(4.4BSD and 4.4BSD-Lite2) but newer BSD-derived kernels
+	and SVR4-derived kernels have these
+	declarations in <TT>&lt;sys/select.h&gt;</TT>.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">155
+	<TD>It is worth noting that some applications
+	(typically event-driven servers that want to multiplex
+	lots of descriptors, more than 1024)
+	are starting to use <TT>poll</TT> instead of <TT>select</TT>,
+	to avoid problems with a limit on the number of descriptors.
+	It is also worth noting that typical implementations of
+	<TT>select</TT> can have scaling problems when the
+	number of descriptors gets large, as described in:
+	<P>
+	Banga, G., and Mogul, J. C. 1998.
+	"<A HREF="http://www.cs.rice.edu/~gaurav/my_papers/usenix98.ps">
+	Scalable Kernel Performance for Internet Servers
+	under Realistic Loads</A>,"
+	<I>Proceedings of the 1998 USENIX Annual Technical Conference</I>,
+	pp. 1-12, New Orleans, LA.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">162
+	<TD>There is another type of failure with the client-server
+	that can be seen when using the <TT>str_cli</TT> function from
+	Figure 6.13 along with the faster version of <TT>readline</TT>
+	from Figure 3.17 and extending the server to return multiple lines
+	for a given input from the client: the socket can be marked
+	readable by <TT>select</TT>, the client calls <TT>readline</TT>,
+	<TT>my_read</TT> reads multiple lines into its buffer,
+	<TT>readline</TT> returns the first of these lines to the client,
+	and then <TT>select</TT> (p. 162) no longer indicates that
+	the socket is readable because all the input has already been
+	read by <TT>my_read</TT> and is sitting in its buffer.
+	The client is then hung.
+
+	<P>I see two ways around this, when one line of input from the
+	client can generate any amount of output from the server.
+	First is to split the client into two processes (Figure 15.9)
+	or two threads (Figure 23.1).
+	Then each direction of data flow is totally independent of the other.
+	The second is to change Figure 6.13 so that when the
+	socket is readable, don't just read one line,
+	but read everything that is in the socket's input buffer,
+	and output that to standard output.
+
+	<P>If you really wanted a lock-step approach,
+	so that the client is not allowed to enter another request
+	until all the server output has been received for the current request,
+	then you need some way for the server to tell the client
+	that its reply is complete.
+	HTTP 1.0 essentially does this by using a separate TCP connection
+	for each client request, and having the server close the connection
+	to signify the end of each response.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">165
+	<TD>One reader has pointed out that keeping the client array
+	contiguous simplifies the code.  The suggestion is as follows:
+	<P> Delete lines 21-22.
+	Replace lines 31-37 with:
+<PRE>
+	if (++maxi == FD_SETSIZE)
+		err_quit("too many clients");
+	client[maxi] = connfd;
+</PRE>
+	Delete lines 41-42.
+	Replace lines 47-48 with:
+<PRE>
+	sockfd = client[i];
+</PRE>
+	Replace line 54 with:
+<PRE>
+	client[i--] = client[maxi--];
+</PRE>
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">219
+	<TD>Although the source code is not shown for
+	<TT>udpcliserv/udpcli02.c</TT>,
+	this program should set the length field of the socket address
+	structure on systems that support this field.  One way is to write
+<PRE>
+	#ifdef	HAVE_SOCKADDR_SA_LEN
+		servaddr.sin_len = sizeof(servaddr);
+	#endif
+</PRE>
+	when filling in the socket address structure.  If this is not done,
+	the call to <TT>memcmp</TT> in Figure 8.9 will fail on systems
+	that set this value in the socket address structure returned by
+	<TT>recvfrom</TT>.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">220
+	<TD>Indented paragraph: Under Solaris 2.5.1 it appears that the source
+	IP address of the server's reply is the last configured IP address
+	for the outgoing interface.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">334
+	<TD>Be aware that most implementations of <TT>openlog</TT>
+	just save a pointer to the <I>ident</I> string;
+	they do not make a copy of this string.
+	That means that this string should not be allocated on the stack,
+	because if the corresponding stack frame is gone when
+	<TT>syslog</TT> is called at some later time,
+	the saved pointer will not point to the <I>ident</I> string.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">367
+	<TD>There is an interesting problem with the code in Figure 13.14.
+	The function does not <TT>fclose</TT> the two standard I/O streams,
+	counting instead on on the <TT>exit(0)</TT> in the <TT>main</TT>
+	function to close all open standard I/O streams.
+	But since both standard I/O streams use the same underlying descriptor,
+	the first <TT>fclose</TT> will succeed,
+	closing the underlying descriptor, but the second
+	<TT>fclose</TT> will fail with an error of <TT>EBADF</TT>.
+	You can see this error by inserting
+	<TT>Fclose(fpout); Fclose(fpin);</TT> between lines 10 and 11.
+	The easiest fix is to replace line 8 with
+	<TT>fpout = Fdopen(Dup(sockfd), "w");</TT>,
+	which also requires that you define the (trivial) wrapper function
+	<TT>Dup</TT>.  This does use one additional descriptor
+	but avoids the <TT>fclose</TT> error.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">382
+	<TD>Item "2." at the top of the page: just to reiterate:
+	<TT>exec</TT> does not create a new process:
+	a new program is executed in the context of the calling process.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">411
+	<TD>There is a descriptor leak in the <TT>connect_nonb</TT>
+	function, in that the error returns on lines 27 and 40
+	<TT>close</TT> the descriptor, but the error returns on
+	lines 14 and 32 do not <TT>close</TT> the descriptor.
+	I think the two calls to <TT>close</TT> on lines 25 and 38
+	should be removed.  My reasoning is that when <TT>connect</TT>
+	fails, the application must <TT>close</TT> the descriptor
+	to avoid a leakage, so the application should do the same if
+	<TT>connect_nonb</TT> fails.
+	<P>
+	In this same function, the call to <TT>Fcntl</TT> on line 36
+	should really be moved between lines 41 and 42, to avoid the call
+	in the case of an error.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">483
+	<TD>There are two potential timing problems with Figure 18.9.  First
+	consider what happens if the signal is delivered between the time
+	that <TT>recvfrom</TT> returns and the storing of its return value
+	in <TT>n</TT>.
+	The datagram is considered lost (even though it was received)
+	but a UDP application should be able to handle lost datagrams.
+	But if this same technique is used with a TCP application, the
+	data is lost forever (since TCP acknowledged the data and delivered
+	it to the application).
+	<P>
+	The <TT>dg_cli</TT> function on page 485 that uses IPC has a similar
+	problem: the signal can be delivered between <TT>recvfrom</TT>
+	returning OK and storing the return value in <TT>n</TT>.
+	This can be solved by turning off the alarm after <TT>select</TT>
+	returns.  Another exercise for the reader with Figure 18.10
+	is to not use <TT>alarm</TT> but use <TT>select</TT>'s
+	timer instead.
+	<P>
+	Second, there is no guarantee that the time between the call
+	to <TT>alarm</TT> and the first call to <TT>sigsetjmp</TT>
+	is less than the alarm time (5 seconds).
+	One way around this is to set another flag after calling
+	<TT>sigsetjmp</TT> and test this flag in the signal handler:
+	if the flag is not yet set, do not call <TT>siglongjmp</TT>
+	and just reset the alarm.
+	<P>
+	The bottom line here is that for robustness in these possible
+	scenarios, avoid <TT>siglongjmp</TT> and use either
+	<TT>pselect</TT> or the IPC method.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">525
+	<TD>In Figure 19.28 you can simplify lines 36-50 by factoring out
+	the first <TT>printf</TT> that is common to all three cases.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">539
+	<TD>In the middle of the page there could be a 4th scenario:
+	Return <TT>MSG_TRUNC</TT> but return the excess bytes to the
+	application in subsequent read operations.
+	One reader reports that Solaris 2.3 does this.
+	I no longer have access to Solaris 2.3, and if it really does this,
+	is clearly a bug.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">548
+	<TD>There is a nonfatal race condition with Figure 20.9: if
+	<TT>SIGALRM</TT> is delivered between lines 59 and 60
+	after a successful <TT>recvmsg</TT>,
+	this will cause an unnecessary retransmission.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">548
+	<TD>One reader has suggested replacing lines 57-60 with
+<PRE>
+do {
+    do {
+        n = Recvmsg(fd, &msgrecv, 0);
+    } while (n < sizeof recvhdr);
+
+        /* calculate & store new RTT estimator values */
+    rtt_stop(&rttinfo, rtt_ts(&rttinfo) - recvhdr.ts);
+} while (recvhdr.seq != sendhdr.seq);
+
+alarm(0);       /* stop SIGALRM timer */
+</PRE>
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">581
+	<TD>One reader provides the following comments on the
+	heartbeat functions described in Section 21.5,
+	and the possibility of the urgent data leaking into
+	the normal band of data.
+	(These comments reiterate a basic belief of mine,
+	that out-of-band is a bad thing, and if you really need
+	a second channel for some reason, create a second TCP connection.)
+
+	<P>
+	Later, I was thinking what a really nice solution it is
+	because it comes almost for free (in terms of bandwidth).
+	That lead me to think about what would happen if heartbeats
+	backed up on the sender (because of a closed send window, say).
+	Specifically, I wondered whether some of the early urgent bytes
+	could leak into to the main-band data.
+	<P>
+	I checked my kernel, and there didn't seem to be any protection
+	on the send side--i.e., when a user sends urgent data,
+	<TT>tcp_usr_send</TT> (in <TT>tcp_usrreq.c</TT>)
+	just sets <TT>snd_up</TT> without worrying about any previous
+	_unsent_ urgent bytes.  There is a remark in <TT>tcp_input</TT>
+	(see TCPv2, page 984, lines 1075-1078) that urgent bytes
+	could indeed get into the user data if there were
+	multiple urgent bytes pending.
+	<P>
+	I then changed one of the programs from <TT>unpv12e/oob</TT>
+	to send 8192 bytes of '1' as normal data, an OOB byte ('2'),
+	1024 more bytes of '1' as normal data, and another OOB byte ('3').
+	I then changed <TT>tcprecv05.c</TT> to sleep 5 seconds
+	and then read and print all the data it receives.
+	<P>
+	When I ran the two programs, <TT>sig_urg</TT> printed the
+	value of 3, and the 2 was in the user data.
+	All of this is a long winded way of saying that the
+	heartbeat functions might lead to data corruption.
+	It's pretty unlikely because two or more unsent urgent bytes
+	have to back up on the send side, but it clearly can happen.
+	<P>
+	I can't think of a transparent way (i.e., without having to check
+	the user data for a special byte etc.) to fix this other than
+	having only one urgent byte in flight at a time.
+	That is, rather than declaring a connection dead if
+	5 consecutive 3 second heartbeats are missed,
+	send a heartbeat every 15 seconds and declare the connection dead
+	if you don't get it back before the 15 second timer fires again.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">696
+	<TD>Lines 38-42 of Figure 25.37 are redundant, since the same
+	operations were done in lines 18-22 of Figure 25.35, and we
+	would not be in <TT>readable_conn</TT> had
+	<TT>readable_listen</TT> not been called previously.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">721
+	<TD>Lines 13 and 30 of Figure 26.14 could be removed
+	since only one pass is made around the loop each time
+	the function is called.
+	But in the general case, you might want to handle
+	an unknown datalink type without terminating,
+	in which case the loop is needed.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">914
+	<TD>In the description of <TT>lsof</TT> I say that
+	"the size or offset of the file (not meaningful for a socket)".
+	The author of this program offers the following insight:
+
+	<P>A socket's offset can be very useful.
+	In most UNIX dialects the offset comes from the file structure's
+	<TT>f_offset</TT>.
+	That structure member is incremented each time bytes are
+	transferred to or from the file.
+	So a changing offset value for a socket can mean that
+	data transfers are taking place.
+
+	<P>I use this feature to watch incoming ftp transfers
+	with a custom Perl script that uses <TT>lsof</TT> field output
+	and the <TT>lsof</TT> repeat feature.
+	Usually I run it with the <TT>lsof</TT> repeat time set to
+	30 seconds, but here is some sample output for a test transfer
+	from <TT>vic.cc</TT> to <TT>vic.cc</TT> and a 1 second repeat time:
+<PRE>
+=====
+ 3822    9r        0x600    1129991    28942
+              /usr/ftp/pub/tools/unix/lsof/lsof_4.34_W.tar.Z
+        10u   0x10169de8     901120      TCP
+              vic.cc.purdue.edu:ftp-data->vic.cc.purdue.edu:listen
+                                (ESTABLISHED QR=0 QS=4096)
+=====
+ 3822    9r        0x600    1129991    28942
+              /usr/ftp/pub/tools/unix/lsof/lsof_4.34_W.tar.Z
+        10u   0x10169de8    1024000      TCP
+              vic.cc.purdue.edu:ftp-data->vic.cc.purdue.edu:listen
+                                (ESTABLISHED QR=0 QS=0)
+=====
+</PRE>
+
+	<P>The fourth column is <TT>SIZE/OFF</TT> and you'll notice
+	it increments as the ftp server pumps data to the ftp client.
+
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">968
+	<TD>A newer version of [Paxson 1996] is available:
+	<P>
+	Paxson, V. 1997.  "End-to-End Routing Behavior in the Internet,"
+	<I>IEEE/ACM Transactions of Networking</I>,
+	vol. 5, no. 5, pp. 601-615 (Oct.).
+	<A HREF="ftp://ftp.ee.lbl.gov/papers/vp-routing-TON.ps.Z">
+	ftp://ftp.ee.lbl.gov/papers/vp-routing-TON.ps.Z</A>
+</TABLE>

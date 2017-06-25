@@ -1,0 +1,25 @@
+From: van@ee.lbl.gov (Van Jacobson)
+Newsgroups: comp.protocols.tcp-ip
+Subject: Re: traceroute history: why UDP?
+Date: 8 Feb 1999 08:36:20 GMT
+Organization: Lawrence Berkeley National Laboratory, Berkeley CA
+Message-ID: <79m7m4$reh$1@dog.ee.lbl.gov>
+References: <79lub9$8e81@oberon.sweden.hp.com>
+
+In article <79lub9$8e81@oberon.sweden.hp.com>,
+	stevesk@sweden.hp.com (Kevin Steves) writes:
+> Were ICMP probes considered in 1988 when Van wrote traceroute?
+
+The very first traceroute (never released) used icmp echo.  RFC792 (the
+icmp spec) contains the words:
+
+   The ICMP messages typically report errors in the processing of
+   datagrams.  To avoid the infinite regress of messages about messages
+   etc., no ICMP messages are sent about ICMP messages.
+
+During the first night of testing I found that more than half the
+router vendors of the time had taken this at face value & would not
+return an ICMP Time Exceeded for an ICMP Echo.  That's when I changed
+to UDP.
+
+ - Van

@@ -1,0 +1,585 @@
+
+Internet Draft                                                 R. Braden
+Expires: December 1993                                               ISI
+                                                           June 21, 1993
+
+
+             TCP Extensions for High Performance: An Update
+
+Status of This Memo
+
+   This document is an Internet-Draft.  Internet-Drafts are working
+   documents of the Internet Engineering Task Force (IETF), its Areas,
+   and its Working Groups.  Note that other groups may also distribute
+   working documents as Internet-Drafts.
+
+   Internet-Drafts are draft documents valid for a maximum of six
+   months.  Internet-Drafts may be updated, replaced, or obsoleted by
+   other documents at any time.  It is not appropriate to use Internet-
+   Drafts as reference material or to cite them other than as a
+   ``working draft'' or ``work in progress.''
+
+Abstract
+
+   This memo is a contribution to the TCP Large Windows (TCPLW) Working
+   Group.  It presents some suggested modifications to RFC-1323, which
+   defined TCP extensions to improve performance over large
+   bandwidth*delay product paths and to provide reliable operation over
+   very high-speed paths.
+
+1. INTRODUCTION
+
+   RFC-1323 [Jacobson92] defined a set of extensions to the TCP protocol
+   [Postel81] to improve performance over large bandwidth*delay product
+   paths and to provide reliable operation over very high-speed paths.
+
+   Specifically, RFC-1323 defined three new mechanisms.
+
+   (1)  Window Scale Option
+
+        A new TCP option, "Window Scale" allows windows larger than
+        2**16 bytes.  This option defines an implicit scale factor,
+        which is used to multiply the window size value found in a TCP
+        header to obtain the true window size.
+
+   (2)  RTTM: Round-Trip Time Measurement
+
+        A new TCP option "Timestamps" is introduced, and a mechanism
+        called "RTTM"  (Round Trip Time Measurement) uses this option to
+        obtain improved measurement of round trip times (RTTs).
+
+
+
+Braden                   Expires: December 1993                 [Page 1]
+
+
+
+
+Internet Draft     TCP Performance Extensions: Update          June 1993
+
+
+   (3)  PAWS: Protect Against Wrapped Sequence
+
+        The Timestamps option is used by the PAWS mechanism to extend
+        TCP reliability to transfer rates well beyond the foreseeable
+        upper limit of network bandwidths, with reasonably large values
+        of the Maximum Segment Lifetime (MSL).
+
+   The present document summarizes several minor issues and
+   clarifications that have accumulated since RFC-1323 was published.
+
+2. MODIFICATIONS TO RFC-1323
+
+   2.1  RTTM: Clarify Relationship to Karn's Algorithm
+
+      TCP requires that the RTO (retransmission timeout) values used for
+      successive retransmissions of the same segment form an increasing
+      sequence [Postel81]; this is known as "retransmission back-off".
+      TCP implementations have previously been required [RFC-1323] to
+      use Phil Karn's algorithm [Karn87], which states that (1)
+      retransmission back-off will persist until the next ACK is
+      received for a data segment that has never been retransmitted, and
+      that (2) no RTT measurements will be made from acknowledgments of
+      retransmitted data segments.  Karn's algorithm was designed to
+      allow reliable RTT estimates despite an ambiguity when an ACK is
+      received for a retransmitted data segment: the ACK may have been
+      created from either the original or the retransmission [Zhang86].
+
+      However, as RFC-1323 implied but did not clearly state, the RTTM
+      mechanism replaces Karn's algorithm.  With the RTTM mechanism in
+      operation, an ACK segment will echo the timestamp from whichever
+      data segment triggered the ACK.  This removes the ambiguity in RTT
+      measurement that required the Karn algorithm.  For compatibility,
+      however, an implementation of RFC-1323 must still be prepared to
+      use the Karn algorithm when talking with a host that does not
+      implement RFC-132.
+
+      Overriding the Karn algorithm was implied by the following
+      statement on page 14 of RFC-1323, which was independent of whether
+      or not the new data being acknowledged has been retransmitted:
+
+           "A TSecr value received in a segment is used to update the
+           averaged RTT measurement only if the segment acknowledges
+           some new data, i.e., only if it advances the left edge of the
+           send window."
+
+
+
+
+
+
+
+Braden                   Expires: December 1993                 [Page 2]
+
+
+
+
+Internet Draft     TCP Performance Extensions: Update          June 1993
+
+
+   2.2  RTTM: Discuss When RTT Measurements are Made
+
+      The RFC-1323 text quoted immediately above implies that duplicate
+      acknowledgments will not contribute to measurement of the RTT,
+      even with RTTM in use.
+
+      Suppose that exactly one segment is lost from a window of N
+      segments.  If there are no delayed ACKs or lost segments, this
+      will result in a string of N-1 duplicate ACKs arriving at the
+      sender.  RTTM can make no new RTT measurement for at least N
+      packet times, so the first new measurement will come from the ACK
+      triggered by retransmission of the lost packet.  Therefore, the
+      discussion under bullet (B) on page 15 of RFC-1323 is gratuitous:
+      no matter which timestamp is echoed in a duplicate ACK segment, it
+      (the echoed timestamp) will be ignored.
+
+      This issue deserves further discussion.  We see that with one
+      dropped segment per window, RTTM may result in only one RTT
+      measurement per window.  However, this is still a significant
+      improvement over a standard TCP without RTTM, which will make even
+      fewer measurements; it cannot measure the retransmitted packet,
+      due to Karn's algorithm.
+
+      However, we should ask whether it would be possible to do any
+      better than one measurement per RTT.  The reason for making a new
+      RTT measurement only when new data is acknowledged is to avoid
+      artificial inflation of the RTT value, as illustrated by the
+      diagram on the top of page 14 of RFC-1323.  We would need an
+      alternative criterion for making a measurement that would also
+      prevent such inflation of the RTT measurements.
+
+      For example, suppose that the transmitter made a new RTT
+      measurement only when it had outstanding data, i.e., only when
+      SND_NXT > SND_UNA.  The following example, involving simultaneous
+      data transmission from both sides, shows that this alternative
+      criterion may still allow RTT inflation.  Here the TSrecent values
+      on each side are shown in parentheses, and TCP A sends data blocks
+      a, b, ... and TCP B sends data blocks x, y, ...
+
+
+
+
+
+
+
+
+
+
+
+
+
+Braden                   Expires: December 1993                 [Page 3]
+
+
+
+
+Internet Draft     TCP Performance Extensions: Update          June 1993
+
+
+
+         TCP  A                                          TCP B
+
+       (TSrecent)                                      (TSrecent)
+
+      1.         <a,TSval=1,TSecr=1...>         ------>       (1)
+
+      2.  (127)  <-----      <X,ACK(a),TSval=127,TSecr=1>    (1)
+
+      3.  (127)  <ACK(x),TSval=5,TSecr=127>    ------>       (5)
+
+             . . . ( Pause for 60 timestamp clock ticks ) . . . .
+
+      4.  (127)  <b,ACK(x),TSval=65,TSecr=127> --->  ...
+
+      5.            ... <--- <y,ACK(a),TSval=191,TSecr=5>    (5)
+
+      4'.               <b,ACK(x),TSval=65,TSecr=127> --->  (65)
+
+      5'.  (191)  <-- <y,ACK(a),TSval=191,TSecr=5>
+
+      6.            ... <--- <y,ACK(b),TSval=195,TSecr=65>  (65)
+
+      7.  (191)  <b,ACK(y),TSval=68,TSecr=191> --->  ...
+
+
+      In this symmetrical data transfer example, both sides send data
+      simultaneously (lines 4 and 5) after a pause of roughly 60 time
+      units.  When these segments arrive (lines 4' and 5'), each side
+      has outstanding data and by the proposed rule would use the TSecr
+      to update its RTT estimate.  However, this would result in
+      inflating ech of these RTT estimates by the 60 time units.
+
+      We believe that the only way to ensure that the measured RTT is
+      accurate is to accept TSecr only when new data is acknowledged.
+      Thus, the RFC-1323 tule quoted at the end of the preceding section
+      is the best that can be done, and duplicate ACKs cannot update the
+      RTT estimate.
+
+   2.3  RTTM: Which Timestamp to Echo?
+
+      RFC-1323 presented the following algorithm to control which
+      timestamp is echoed:
+
+      (1)  "The connection state is augmented with two 32-bit slots:
+           TS.Recent holds a timestamp to be echoed in TSecr whenever a
+           segment is sent, and Last.ACK.sent holds the ACK field from
+           the last segment sent.  Last.ACK.sent will equal RCV.NXT
+
+
+
+Braden                   Expires: December 1993                 [Page 4]
+
+
+
+
+Internet Draft     TCP Performance Extensions: Update          June 1993
+
+
+           except when ACKs have been delayed.
+
+      (2)  If Last.ACK.sent falls within the range of sequence numbers
+           of an incoming segment:
+
+              SEG.SEQ <= Last.ACK.sent < SEG.SEQ + SEG.LEN
+
+           then the TSval from the segment is copied to TS.Recent;
+           otherwise, the TSval is ignored.
+
+      (3)  When a TSopt is sent, its TSecr field is set to the current
+           TS.Recent value."
+
+      Step (2) of this algorithm is incorrect in two regards: (1) it
+      will fail to update TSrecent for a retransmitted segment that
+      resulted from a lost ACK, and (2) it will fail if SEG.LEN = 0
+      [Borman93,Skibo93].
+
+      The correct step (2) is actually simpler.  It is as follows:
+
+           (2)  If: SEG.TSval >= TSrecent and SEG.SEQ <= Last.ACK.sent
+                then SEG.TSval is copied to TS.Recent; otherwise, it is
+                ignored.
+
+      Observe that this algorithm explicitly constructs a monotonic
+      sequence of TSrecent values.  The case SEG.TSval = TSrecent is
+      included here for consistency with the PAWS test.
+
+      Note also that RFC-1323 presented this algorithm *correctly* in
+      Section 4.2.1 discussing PAWS, but *incorrectly* in the Event
+      Processing rules on page 35.
+
+   2.4  Implementation of TCP Options
+
+      The major implementation chore in the RFC-1323 extensions is
+      probably the modifications to allow TCP options in data segments.
+      This code must obey the limits set by the MSS (maximum segment
+      size) and by the connected network MTU (maximum transmission
+      unit).  This issue has sometimes been misunderstood, perhaps
+      partly due to a past imprecision in terminology (e.g., what is a
+      "segment"?).  In addition, prior attempts to clarify these issues
+      have been unfortunately obscure [RFC-1122].
+
+      To send a segment, the general procedure for a TCP should be:
+
+      (a)  Get a packet buffer and create a TCP header in it.
+
+      (b)  Format any required TCP options into the buffer.
+
+
+
+Braden                   Expires: December 1993                 [Page 5]
+
+
+
+
+Internet Draft     TCP Performance Extensions: Update          June 1993
+
+
+      (c)  Copy 'len' bytes of data into the buffer, where:
+
+                len = min( data_to_send, maxseg, maxoptdata - optlen );
+
+      Here:
+
+      *    data_to_send = Amount of data to be sent.
+
+      *    maxseg = "Normal" data length in a segment.
+
+      *    maxoptdata =  Largest <data + TCP options> area permitted.
+
+      *    optlen = length of TCP options added in (b).
+
+      Finally, we must define how to compute 'maxseg' and 'maxoptdata'.
+
+          maxoptdata = min( Received_MSS, pathMTU - 40) -
+
+                                      <max IP option length>
+
+          maxseg = maxoptdata - <size of 'normal' TCP options>
+
+      Here "Received_MSS" is the value received in an MSS option in a
+      SYN segment, or 536 if none is received.  The MTU over the path,
+      "pathMTU", may be found by MTU Discovery, or it may be determined
+      by the following heuristic:  use "interface_MTU" if the
+      destination is on the connected network, else use 576.  In normal
+      usage today, there are no IP options to be considered.
+
+      An MSS option is intended to specify ONLY a property of the remote
+      host, independent of the path: the largest IP datagram that can be
+      received and reassembled (less 40).  For those hosts that have no
+      limit on datagram size, it would not be incorrect to specify
+      "infinity" (65535) in its MSS option.  However, a more sensible
+      choice would be "interface_MTU".
+
+      Note also that 'maxseg' is also used by the SWS (silly-window
+      syndrome) and congestion control algorithms of TCP [RFC-1122], and
+      it may correspond to the "normal" data block size for a segment
+      used in bulk transmission.
+
+3. SUMMARY OF ALGORITHMS
+
+   Appendix E of RFC-1323 defined the overall algorithm as modifications
+   of the TCP Event Processing rules.  This section contains a more
+   concise and algorithmic description.
+
+   We define the following symbols:
+
+
+
+Braden                   Expires: December 1993                 [Page 6]
+
+
+
+
+Internet Draft     TCP Performance Extensions: Update          June 1993
+
+
+   Options
+
+       WSopt:       TCP Window Scale Option
+       TSopt:       TCP Timestamps Option
+
+   Option Fields
+
+       shift.cnt:   Window scale byte in WSopt.
+       TSval:       32-bit Timestamp Value field in TSopt.
+       TSecr:       32-bit Timestamp Reply field in TSopt.
+
+   Option Fields in Current Segment
+
+       SEG.TSval:   TSval field from TSopt in current segment.
+       SEG.TSecr:   TSecr field from TSopt in current segment.
+       SEG.WSopt:   8-bit value in WSopt
+
+   Clock Values
+
+       my.TSclock:      Local source of 32-bit timestamp values
+       my.TSclock.rate: Period of my.TSclock (1 ms to 1 sec per tick).
+
+   Per-Connection State Variables
+
+       TS.Recent:       Latest received Timestamp
+       Last.ACK.sent:   Last ACK field sent
+
+       Snd.TS.OK:       1-bit flag
+       Snd.WS.OK:       1-bit flag
+
+       Rcv.Wind.Scale:  Receive window scale power
+       Snd.Wind.Scale:  Send window scale power
+
+       Start.Time:      my.TSclock value when segment being timed was
+                        sent (used by pre-1323 code).
+
+   Procedure
+
+       Update_SRTT( m ) Procedure to update the smoothed RTT and RTT variance
+                        estimates, using the rules of [Jacobson88], given m,
+                        a new RTT measurement.
+
+
+   PSEUDO-CODE SUMMARY:
+
+   Create new TCB => {
+         Rcv.wind.scale =
+             MIN( 14, MAX( 0, floor(log2(receive buffer space)) - 15 ) );
+
+
+
+Braden                   Expires: December 1993                 [Page 7]
+
+
+
+
+Internet Draft     TCP Performance Extensions: Update          June 1993
+
+
+         Snd.wind.scale = 0;
+         Last.ACK.sent = 0;
+         Snd.TS.OK = Snd.WS.OK = FALSE;
+   }
+
+
+   Send initial {SYN} segment => {
+
+          SEG.WND = MIN( RCV.WND, 65535 );
+          Include in segment: TSopt(TSval=my.TSclock, TCecr=0);
+          Include in segment: WSopt = Rcv.wind.scale;
+   }
+
+
+   Send {SYN, ACK} segment => {
+
+          SEG.ACK = Last.ACK.sent = RCV.NXT;
+          SEG.WND = MIN( RCV.WND, 65535 );
+          if (Snd.TS.OK) then
+                 Include in segment: TSopt(TSval=my.TSclock, TSecr=TS.Recent);
+          if (Snd.WS.OK) then
+                 Include in segment: WSopt = Rcv.wind.scale;
+   }
+
+
+   Receive {SYN} or {SYN,ACK} segment => {
+
+          if (Segment contains TSopt) then {
+                 TS.Recent = SEG.TSval;
+                 Snd.TS.OK = TRUE;
+                 if (is {SYN,ACK} segment) then
+                       Update_SRTT(
+                            (my.TSclock - SEG.TSecr)*my.TSclock.rate ) ;
+          }
+
+          if Segment contains WSopt) then {
+                 Snd.wind.scale = SEG.WSopt;
+                 Snd.WS.OK = TRUE;
+          }
+          else
+                 Rcv.wind.scale = Snd.wind.scale = 0;
+   }
+
+
+
+   Send non-SYN segment => {
+
+          SEG.ACK = Last.ACK.sent = RCV.NXT;
+
+
+
+Braden                   Expires: December 1993                 [Page 8]
+
+
+
+
+Internet Draft     TCP Performance Extensions: Update          June 1993
+
+
+          SEG.WND = MIN( RCV.WND >> Rcv.wind.scale, 65535 );
+          if (Snd.TS.OK) then
+                 Include in segment: TSopt(TSval=my.TSclock, TSecr=TS.Recent);
+   }
+
+
+   Receive non-SYN segment in (state >= ESTABLISHED) => {
+
+          Window = (SEG.WND << Snd.wind.scale);
+                /* Use 32-bit 'Window' instead of 16-bit 'SEG.WND'
+                 * in rest of processing.
+                 */
+
+          if (Segment contains TSopt) then {
+                 if (SEG.TSval < TS.Recent && Idle less than 25 days) then {
+                        if (Send.TS.OK
+                            AND (NOT RST) ) then {
+                                 /* Timestamp too old =>
+                                  *    segment is unacceptable.
+                                  */
+                              Send ACK segment;
+                              Discard segment and return;
+                        }
+                 }
+                 else {
+                        if (SEG.SEQ =< Last.ACK.sent) then
+                               TS.Recent = SEG.TSval;
+                 }
+          }
+
+          if (SEG.ACK > SND.UNA) then {
+                       /* (At least part of) first segment in
+                        * retransmission queue has been ACKd
+                        */
+                 if (Segment contains TSopt) then
+                        Update_SRTT(
+                           (my.TSclock - SEG.TSecr)/my.TSclock.rate);
+                 else
+                        Update_SRTT( /* for compatibility */
+                           (my.TSclock - Start.Time)/my.TSclock.rate);
+          }
+   }
+
+
+
+
+
+
+
+
+
+Braden                   Expires: December 1993                 [Page 9]
+
+
+
+
+Internet Draft     TCP Performance Extensions: Update          June 1993
+
+
+4.  REFERENCES
+
+
+     [Borman93]  Borman, D., Private communication, 1993.
+
+      [Jacobson88]  Jacobson, V., "Congestion Avoidance and Control",
+      SIGCOMM '88, Stanford, CA., August 1988.
+
+      [Jacobson92]  Jacobson, V., Braden, R., and D. Borman, "TCP
+      Extensions for High Performance", RFC-1323, May 1992.
+
+      [Karn87]  Karn, P. and C. Partridge, "Estimating Round-Trip Times
+      in Reliable Transport Protocols", Proc. SIGCOMM '87, Stowe, VT,
+      August 1987.
+
+      [Postel81]  Postel, J., "Transmission Control Protocol - DARPA
+      Internet Program Protocol Specification", RFC 793, DARPA,
+      September 1981.
+
+      [RFC-1122]  Braden, R., Ed., "Requirements for Internet Hosts --
+      Communication Layers", RFC-1122, October 1989.
+
+      [Skibo93]  Skibo, T., Private communication, 1993.
+
+      [Zhang86]  Zhang, L., "Why TCP Timers Don't Work Well", Proc.
+      SIGCOMM '86, Stowe, Vt., August 1986.
+
+
+Security Considerations
+
+   Security issues are not discussed in this memo.
+
+Authors' Addresses
+
+
+   Bob Braden
+   University of Southern California
+   Information Sciences Institute
+   4676 Admiralty Way
+   Marina del Rey, CA 90292
+
+   Phone: (213) 822-1511
+   EMail: Braden@ISI.EDU
+
+
+
+
+
+
+
+
+Braden                   Expires: December 1993                [Page 10]
+

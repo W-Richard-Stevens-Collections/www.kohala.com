@@ -1,0 +1,53 @@
+Article 3639 of comp.protocols.nfs:
+Newsgroups: comp.protocols.nfs,comp.unix.ultrix
+Subject: Re: Holy Turbocharger Batman, (evil, cheating) NFS async writes fly
+Message-ID: <1992Mar2.191711.9935@PA.dec.com>
+Date: 2 Mar 92 19:17:11 GMT
+Organization: DEC Western Research
+ 
+In article <kr027eINN6bl@appserv.Eng.Sun.COM> lm@slovax.Eng.Sun.COM (Larry McVoy
+) writes:
+>So, Vern, buddy old pal, how about ponying up to the bar with some
+>data?  In particular, I'd like you to provide us with the analysis that
+>you have done that compares data loss due to server crashes versus
+>corrupted packets.
+ 
+I'm not going to take sides in the battle between Sun and SGI.  But
+since Larry asks for some data, and since I work in a research lab,
+I did a little experiment.
+ 
+I ran a busy NFS server for 40 days and 40 nights (well, 39 days 20:24
+so far) and then used "netstat -s" to count UDP checksum errors.  The
+system saw 5 during that period (they might all have happened during
+the same millisecond, I dunno).  So, if I were completely irresponsible
+with statistics, I would say that UDP data errors occur 5 times as
+often as system crashes.  But, of course, my sample size is too small
+(and not at all properly chosen; we have other servers that show no
+UDP errors, although they haven't all been running for 40/5 = 8 days)
+and it's quite possible that the corrupt UDP packets would not have caused
+data errors (e.g., if the corruption caused a program to die, instead).
+ 
+Perhaps a more interesting calculation is to see if these 5 UDP
+checksum errors are much of a surprise.  Well, the server received
+a total of 1.4*10^8 UDP packets during the period, and so we get about
+one corrupt packet out of every 27 million.  The system has detected
+about 446 corrupted Ethernet packets (out of 1.7*10^8 received), which
+means that about 1% (5 out of 451) of corrupted packets make it past
+the Ethernet CRC.  That's not so hot; on a dirtier net, the number
+of bad packets not caught by the Ethernet CRC might be a long higher.
+ 
+It's actually worse than this; we've also seen 14 bad IP header checksums
+and 350 bad TCP checksums.  I have no idea why the TCP checksum error
+count is so high (given that TCP receives about 1/3 as many packets
+as UDP on this system), although I suspect that many of our TCP
+connections are "long-distance" (most of the UDP packets stay on
+our LAN) and so are more exposed to routers, bridges, serial lines,
+unsanitary Ethernets, etc.  It's a good thing that the TCP checksum
+is mandatory.
+ 
+Bottom line: don't trust the Ethernet CRC.  Do end-to-end error checking.
+If your data is (are?) valuable, don't even trust the UDP checksum; it's
+easy to construct an example of data corruption that the UDP (or TCP)
+checksum won't catch (such as permuting the order of words in the packet).
+ 
+-Jeff

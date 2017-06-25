@@ -1,0 +1,60 @@
+
+INTRODUCTION   4 
+
+     The Big Picture   4 
+     Unix Process Control   6 
+     Client-Server Model   9 
+     Connections and Associations   11 
+     Byte Order   13 
+     Port Numbers   15 
+     Concurrent Servers   16 
+
+ELEMENTARY TCP SOCKETS   20 
+
+     TCP Socket Functions   20 
+     Socket Addresses   22 
+     Value-Result Arguments   25 
+     socket Function   26 
+     bind Function   28 
+     connect Function   30 
+     TCP Daytime Client   32 
+     listen Function   35 
+     accept Function   37 
+     getsockname and getpeername Functions   41 
+     Byte Ordering Routines   42 
+     Internet Address Conversion Routines   43 
+
+TCP CLIENT-SERVER EXAMPLE   44 
+
+     An Echo Server   44 
+     Utility Routines   45 
+     TCP Server   48 
+     TCP Client   51 
+     TCP Example Summary   53 
+
+ELEMENTARY UDP SOCKETS   66 
+
+     UDP Socket Functions   66 
+     connect Function (UDP)   67 
+     send, sendto, recv, and recvfrom Functions   71 
+
+UDP CLIENT-SERVER EXAMPLE   75 
+
+     UDP Server   75 
+     UDP Client   77 
+     UDP Example Summary   79 
+
+ADVANCED SOCKETS   85 
+
+     close Function   85 
+     shutdown Function   88 
+     setsockopt and getsockopt Functions   90 
+     Unix Domain Protocols   94 
+     I/O Multiplexing: select Function   95 
+     Constructing Internet Addresses   99 
+        getaddrinfo Function   101 
+        getnameinfo Function   103 
+     Preforked Servers   106 
+     Threaded Servers   109 
+     I/O Timeouts   111 
+     Broadcasting   114 

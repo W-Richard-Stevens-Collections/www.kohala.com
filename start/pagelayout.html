@@ -1,0 +1,514 @@
+<HTML>
+<HEAD>
+<TITLE>
+Page Layout
+</TITLE>
+</HEAD>
+
+<BODY>
+
+<P>
+The <I>Chicago Manual of Style</I> (14th Edition, Section 19.40) says
+<BLOCKQUOTE>
+"Makeup is a highly skilled procedure.
+If the text is merely divided mechanically into portions of equal length,
+without regard to where the divisions fall,
+some of the pages that result are bound to be unacceptable
+logically or aesthetically: they will incorporate bad breaks."
+</BLOCKQUOTE>
+This is especially true for a programming text,
+which normally contains lots of programs, figures, and tables.
+
+<P>
+This document is an attempt to describe how I perform page layout
+for the books that I write, using some real examples.
+These examples are from <I>UNIX Network Programming</I>
+Volume 1, Second Edition (1998).
+
+<HR>
+<MENU>
+<LI><A HREF="pagelayout.html#example">The big picture: Layout of 4 pages</A>
+<LI><A HREF="pagelayout.html#hyphens">Hyphenation</A>
+<LI><A HREF="pagelayout.html#figs">Figure placement</A>
+<LI><A HREF="pagelayout.html#progs">Program code</A>
+<LI><A HREF="pagelayout.html#tweaks">Additional tweaks</A>
+<LI><A HREF="pagelayout.html#refs">References</A>
+</MENU>
+
+<HR>
+<H2><A NAME="example">The big picture: Layout of 4 pages</A></H2>
+
+<P>
+I do all my page layout by hand, chapter by chapter.
+I start by running troff on a chapter and print the pages 2-up,
+side by side, so that I can see what the facing pages look like.
+I use the shell pipeline
+<TT>make -s Chap.ioctl | ps.odd | 2up | lp</TT>
+where <TT>ps.odd</TT> is a short <TT>awk</TT>
+program that inserts a blank page at the beginning of standard input.
+
+<P>
+Here is an
+<A HREF="troffbefore.ps">example</A>
+(40 Kbytes PostScript) showing the second, third, fourth, and fifth pages
+from Chapter 16.
+These pages are how things "fell out" without doing anything.
+<UL>
+
+<P><LI>  The long line at the bottom is the bottom margin.
+The three widest hash marks above it are at 1, 2, and 3 lines
+from the bottom margin.  The three smaller hash marks in between
+are at 0.5, 1.5, and 2.5 lines from the bottom.
+This gives me a visual indication of how far I have to go
+before reaching the bottom margin.
+
+<P><LI>  I don't show the opening page of the chapter, but the first
+problem is that the heading "Section 16.2 <TT>ioctl</TT> Function"
+is at the end of the opening page, with the first line of text on
+the next page (428).
+While the troff macros can contain a "need command",
+stating that a specific amount of vertical space is required
+on the current page, otherwise cause a page break,
+I have removed these from the version of the <TT>-ms</TT> macros
+that I use.
+Occasionally I need to violate this a little,
+and since I lay out each page by hand,
+I put in the page breaks where I want them.
+
+<P><LI>  The table, Figure 16.1, does not fit on p. 428, so troff
+automatically does a page break to the top of p. 429.
+While that is OK, it leaves almost half of page 428 blank.
+
+<P><LI>  The program in Figure 16.2 has a page break in the middle,
+which I try to avoid.
+
+<P><LI>  The next figure, Figure 16.3 (which is not shown)
+does not fit on p. 431, so a page break occurs,
+but this again leaves almost half a page blank.
+
+</UL>
+
+<P>
+Here are the
+<A HREF="troffafter.ps">final pages</A>
+from this example.
+I have left the hash marks in at the bottom,
+but naturally I delete these before the final PostScript is generated.
+Here are the changes that I made in doing the layout.
+Note that the page numbers have changed also.
+<UL>
+
+<P><LI>  I added <TT>.sp 4.0v</TT> between the chapter title and the
+first section heading,
+to move the last line of the opening page down the the bottom margin.
+This also forces the heading for Section 16.2 onto a new page.
+If you go through the book and measure the distance between
+the chapter titles and the first section heading that follows,
+most differ--it is rare to have everything just fall into place.
+
+<P><LI>  Figure 16.1 was "floated" to the top of p. 427.
+This is easy to do with troff's <TT>-ms</TT> macros:
+you place a <TT>.KF</TT> before the figure,
+and then add <TT>.sp 1.0v</TT> and <TT>.KE</TT> after the figure.
+The reason for the spacing at the end of the float
+is because the text that ends up beneath the figure on the page
+may not be the text that logically follows the figure's reference.
+
+<P><LI>  Now the text following the figure reference
+("Section 16.3  Socket Operations") just gets placed onto the page.
+I was able to have a nice clean page break at the bottom of p. 426
+between the <TT>SIOCATMARK</TT> entry and the
+<TT>SIOCPGRP</TT> entry that follows.
+This did not happen by accident ...
+
+<P><LI>  Normally there is one vertical space (12 points normally)
+for the blank lines within the boxes showing the function prototypes and
+function returns (i.e., the box for <TT>ioctl</TT> near the top of p. 426).
+But I reduced these two to <TT>.sp 0.9v</TT> to get a little more
+space on the page.
+
+<P><LI>  The next tweak that I had to make to get some more space on p. 426
+was place <TT>.sp -0.2v</TT> before the "Section 16.3" heading.
+Normally there are 24 points of space between the last line of a section
+and the next section heading, but I removed 2.4 points of this space
+(0.2 of the normal 12-point spacing).
+If I had not made this change and the previous change,
+the last line of the <TT>SIOCATMARK</TT> entry would have ended up
+on the next page, which is undesirable.
+This takes care of p. 426.
+
+<P><LI>  The page break between pages 427 and 428
+came out OK: this natural page break was between
+lines 2 and 3 of the first paragraph of Section 16.4, which is perfect,
+giving 2 lines on the bottom of p. 427 and 2 lines at the top of p. 428.
+But the two facing page bottoms (pp. 426 and 427) were not aligned
+as close as possible.
+One should always try to get the facing page bottoms at the same point
+on the two pages.
+That is one reason you have to look at the facing pages like this
+when doing page layout (with the even page number on the left,
+and the odd page number on the right).
+(In <I>lingua publisha</I> it's verso and recto; I say left and right.)
+To align the page bottoms I changed the <TT>.sp 1.0v</TT> that was
+added earlier when Figure 16.1 was floated to <TT>.sp 1.1v</TT>.
+I could have also added the extra one-tenth space before the
+"Section 16.4  File Operations" heading,
+but whenever I have a figure floated to the top of a page,
+and I need to add space to that page,
+I first add space beneath the floated figure.
+That takes care of p. 427.
+
+<P><LI>  The first change to pages 428-429 was to float Figure 16.2
+to the top of p. 429, so that the program code is all on one page.
+When doing a programming text I always try to keep program code
+in one piece on a given page, as the top priority in the layout.
+
+<P><LI>  But notice that three lines after the reference to Figure 16.2
+is the reference to Figure 16.3, another figure that does not fit on
+either p. 428 or 429.
+The only thing to do here is float Figure 16.3 to the top of p. 430
+(which is not shown in these sample pages).
+This moves the figure two pages ahead of its reference,
+which is not desirable, but there is no way around it in this situation.
+What I did to compensate was add a page number reference
+(second line of second paragraph of Section 16.5)
+since the figure is now two pages ahead.
+
+<P><LI>  In the third paragraph of Section 16.5 is the reference to
+Figure 16.4, and it too had to float to p. 430, following Figure 16.3.
+In fact, both figures completely fill p. 430,
+with some extra space between the two figures,
+so that the label beneath the bottom figure is at the bottom of the page.
+
+<P><LI>  Things now got messy because following Figures 16.3 and 16.4
+comes Figure 16.5, a program listing, that is referenced at the bottom
+of p. 429.  I did not want the first part of the program listing on
+the bottom of p. 429, and the remainder at the top of p. 431
+(remember that Figures 16.3 and 16.4 occupy p. 430),
+so it was time to give up with pages 428 and 429,
+and just accept the fact that they could not be "filled"
+all the way to the bottom.
+
+<P><LI>  Pages 428 and 429 now need to be "finished",
+given the page breaks that are caused by the figures.
+Both pages are short by about 1.5 lines,
+and while I could add space to get both page bottoms to the bottom margin,
+I don't think this is necessary,
+as long as the two page bottoms are even with each other.
+
+<P><LI>  The first space I added (0.3v) is between the last line of code
+in Figure 16.2 and the horizontal rule beneath it,
+because the comment on this line of code extends way to the right,
+and overlaps slightly with the filename at the end of the rule.
+There are only a few of these cases in the book,
+and I just fix them by hand like here.
+
+<P><LI>  There are two blank lines in the program code in Figure 16.2
+(around the definition of <TT>IFNAMSIZ</TT>)
+and these are normally converted to <TT>.sp 0.7v</TT>
+because a full 12-point space is too much in a program listing.
+One of the first things I do when I need more space is convert these to 0.8v.
+
+<P><LI>  The last change made to get the page bottoms even is to change
+the normal 1.0v space following a floated figure beneath Figure 16.2 to 2.8v.
+This aligns the page bottoms, and doing this is trial and error
+(one reason I show the hash marks at the bottom of the page is to
+be able to measure things like this).
+
+</UL>
+
+<P>
+As you can see, much of this is trial and error,
+and you don't just sit down and do an entire chapter in
+one fell swoop.
+The normal scenario goes like this.
+I print the first copy of the chapter,
+make the changes that I think are needed on the first few pages,
+then look at the pages using something like
+
+<P>
+<TT>make -s "PAGES=-o425-435" Chap.ioctl | ps.odd | 2up | pageview -right -geometry 1100x800+0+0 -</TT>
+<P>
+
+<P>I do all my writing on a SparcStation and use Sun's <TT>pageview</TT>
+program to preview PostScript on my 17-inch color monitor.
+Troff's <TT>-o</TT> option lets me specify the pages for which I want it
+to generate PostScript, and in this example I look at only the 11 pages
+starting with page 425.
+
+<P>
+After making some changes, I rerun troff, and look at the result,
+and make more changes.
+As I move through a chapter, finishing pages,
+I increment the starting and ending page numbers to be viewed with the
+<TT>-o</TT> option.
+I find that to layout <I>N</I> pages, it takes about <I>N/2</I>
+troff runs.
+It takes me about 3.5 minutes per final page,
+so for a 1,000-page book this totals to just over 58 hours.
+
+<P>
+Is my technique ideal?  Not really, but it gives me complete
+control over how my pages look,
+and I think the appearance of a book is very important,
+especially a programming book.
+I keep thinking of writing a program to do all this for me,
+but the amount of work appears enormous.
+I think the approach is to have troff just generate a long stream
+of PostScript, assuming an infinitely long page,
+and then do the page layout on the resulting PostScript,
+just moving it around on the pages.
+But then I would really have to learn PostScript (ugh)
+and you somehow have to generate the running headers and page numbers.
+
+<HR>
+<H2><A NAME="hyphens">Hyphenation</A></H2>
+
+<P>
+The last line of a right hand page should not end with a hyphen.
+This has been a style rule for many years,
+yet it is amazing that most word processors do not do this!
+I just smile when I pick up a book produced with something
+like Frame and you immediately find these errors.
+Needless to say, troff does this correctly,
+and has for 20+ years.
+A friend commented to me that normal evolution would have gone
+Word to Frame to troff,
+but instead, the computer industry has gone the other way!
+
+<P>
+Occasionally, however, hand tweaks are needed.
+Page 875 originally ended at the word "out-of-band",
+with "out-" on the bottom of this page and "of-band"
+at the top of the next page.
+(Troff allows this, since the word contains an explicit hyphen.)
+To avoid this I first added backslash-p to the word before:
+<TT>that\p out-of-band data</TT>.
+This tells troff to end the line when it hits the backslash-p,
+and the resulting line is spread out to fill the line length.
+
+<P>
+While this is OK,
+I then noticed the word "by" that terminated the line above it,
+and the line above was quite tight
+(the interword space appeared quite minimal).
+So to make these two lines even better,
+and avoid the hyphen at the end of the page,
+I wrote <TT>provided\p by</TT> to move "by" down one line,
+producing two lines that both looked better.
+
+<P>
+Another example like this is the bottom of page 927.
+I preprocess all my files through some <TT>sed</TT> scripts,
+before troff sees them.
+One tweak I make is to change all figure references,
+such as "Figure 5.5" into <TT>Fig\%ure\~5.5</TT>.
+The backslash-% is an explicit hyphenation indicator
+and the backslash-tilde is gtroff's unbreakable space
+that then stretches like a normal interword space
+when the line is adjusted.
+What I am telling troff is not to break a line with "Figure"
+at the end and "5.5" at the beginning of the next line,
+because I would rather have "Fig-" at the end of the line
+and "ure 5.5" at the beginning of the next line.
+(I learned this trick from Chapter 14 of Knuth's
+<A HREF="http://www.amazon.com/exec/obidos/ISBN=0201134470/wrichardstevensA/">
+<I>The TeXBook</I></A>,
+a wealth of typesetting information, even if you do not use TeX.)
+
+<P>
+The problem with this example is that page 927 then ended with "Fig-",
+since the word had an explicit hyphenation indicator.
+In the preceding line, the term "3 bytes" was split with "3"
+at the end of the line and "bytes" at the beginning of the next line.
+To fix these two line I typed <TT>first\p 3 bytes</TT>
+and then <TT>in\p Figure 5.5</TT>.
+
+<P>
+Another potential hyphenation problem is when the last word
+of a paragraph is hyphenated, and the part on the line by itself
+is a small suffix.
+Look at the sentence preceding Figure 26.11 on page 717.
+Originally the last word "signal" was hyphenated,
+causing "nal" to be the entire second line.
+To prevent this I wrote <TT>\%signal</TT>,
+which tells troff not to hyphenate the word,
+forcing the end of the line before "signal" is output.
+While I was able to do this on page 717,
+notice that I could not do this on the fourth line from
+the bottom of page 716: "happen-ing".
+If I had told troff not to hyphenate this word,
+the interword spacing on the line would have appeared excessive.
+This is one of those decisions that you just have to make.
+
+<P>
+The <I>Chicago Manual of Style</I> (14th Edition, Section 6.58) says
+that no more than three succeeding lines should be allowed to
+end with hyphens.
+Vanilla troff does not handle this, but gtroff does.
+I specify <TT>.hlm 2</TT> so that no more than
+two lines in a row can end in a hyphen.
+
+<HR>
+<H2><A NAME="figs">Figure placement</A></H2>
+
+<P>
+Ideally all figures should appear sequentially and then
+their text references should also be in order.
+That's how I write my books.
+Look at the top of page 667: the reference is to Figure 25.8,
+but Figure 25.7 appears next,
+even though it is not referenced until later on page 667.
+Indeed, the <TT>tv_sub</TT> function on page 667 is not referenced
+until line 21 of the <TT>proc_v4</TT> function on page 668.
+Figure 25.8 would have fit on page 667,
+but I moved it to keep it and Figure 25.9 together.
+(Both of these figures would not have fit on page 667.)
+I thought it was more important to keep these two figures together
+(showing the two pointers into the headers along with the three lengths
+on the same page as the code), than to keep the figure references in order.
+
+<P>
+Another slight violation of the rules is on page 729:
+Figures 27.2 and 27.3 appear on this page,
+but they are not even referenced until the next page (730).
+I did this to keep these two figures along with Figure 27.1
+together, on facing pages.
+Since all three figures are referenced throughout this chapter,
+keeping them together on facing pages just makes sense.
+
+<P>
+By default, the troff macros that I use center each picture on the page,
+based on the picture's width (calculated by pic).
+But there are occasions when you have multiple pictures on a page,
+and you want them lined up.
+Page 242, Figures 9.2 and 9.3 are one example:
+I had to add an invisible box to the right of Figure 9.2
+so that it aligned "correctly" with Figure 9.3.
+Page 809, Figures 30.7 and 30.8 are another example.
+
+<HR>
+<H2><A NAME="progs">Program code</A></H2>
+
+<P>
+An overall goal is to keep all program listings on a single page.
+First, this promotes the coding style of trying to keep each
+function to one page or less,
+and second it is much easier to read a piece of code that you
+can see as one piece.
+When I have functions that exceed one page,
+I break them into pieces, showing each piece as a separate figure,
+hopefully on a single page.
+
+<P>
+When I first wrote Chapter 28, Figure 28.13 was in two pieces:
+the first figure contained lines 1-34, and the second lines 35-55.
+But when I was laying out this chapter the placement of the first figure
+ended right at the bottom of the page.
+I combined the two figures into one.
+By getting rid of one figure, I also saved the room occupied by
+the two sentences leading into the second figure,
+the vertical space to that figure, the rule above the figure,
+the rule below the figure, and the figure caption
+(with its space above and below).
+This ended up making the book two pages smaller:
+notice that the chapter ends on page 782 right at the bottom
+of a left hand page.
+Had I retained the second figure by itself,
+the chapter would have spilled over to page 783,
+requiring a blank page 784,
+causing Chapter 29 to start on page 785.
+
+<P>
+Sometimes it is just not possible to keep a program listing on
+a single page, without adding lots of blank space to a page.
+In that case I just break the listing across a page boundary,
+being careful where the break occurs (with regard to C).
+If the first part is on a left-hand page,
+and the second part on a right-hand page,
+that is great, but it does not always work out this way.
+Page 324 is an example: I purposely put the page break
+between the final <TT>case</TT> and the <TT>default</TT>.
+
+<HR>
+<H2><A NAME="tweaks">Additional tweaks</A></H2>
+
+<P>
+Normally I do not change the vertical spacing between text lines,
+but page 910 is an example of when to do this.
+The page was about one-half of a vertical space too short
+(the page bottom was not even with page 911),
+but there is no place to add the extra space
+(no headings or the like).
+There are 45 lines in the option summary,
+and 45/0.5v yields 0.011v,
+so I added the line <TT>.vs +0.011v</TT>
+to increase the line spacing for the option summary.
+
+<P>
+When I laid out the Bibliography,
+the first troff run had the Bibliography end on page 969.
+This means the Index will start on page 971,
+giving me page 970 to "play with".
+What I did was lay out each page of the Bibliography
+about 2 lines "short"; that is, there is an extra space of about 2 lines
+at the bottom of each page of the Bibliography.
+My reason for doing this is that the most common change that I make
+to the Bibliography when the book is reprinted
+(when I get to correct typos and the like) is to add something,
+often an URL that I have found for a paper in the Bibliography.
+By giving myself some room on each page,
+it makes this easier for me in the future.
+I do the same thing with the Index,
+because the most common change that I make to the index
+with a reprint is to add, not to delete.
+
+<P>
+To align the page bottoms of the Bibliography I first go through
+it and set all the page breaks, ignoring the evenness.
+Then I measure how much space remains at the bottom of each page,
+divide it by the number of entries on that page minus one,
+and just insert that much space between each entry.
+For example, page 964 needed 3.6 lines of vertical space,
+and 3.6v/16 is 0.2250v, so there are 16 <TT>.sp 0.2250v</TT>
+commands on that page.
+<HR>
+<H2><A NAME="refs">References</A></H2>
+
+<P>
+The paper <I>Page Makeup by Postprocessing Text Formatter Output</I> by
+Brian W. Kernighan and Christopher J. Van Wyk,
+<EM>Computing Systems</EM>,
+Vol. 2, No. 2, pp. 103-113, 1989,
+is required reading for anyone really interested in page layout.
+This paper describes a program that does the page layout,
+but alas, the program was only available with the latest versions
+of Bell Lab's troff, which was not widely available.
+You can see the results of this program by looking at some of the
+books published by Bell Lab's authors since 1989.
+
+<P>
+The paper <I>Breaking Paragraphs into Lines</I> by
+Donald E. Knuth and Michael F. Plass,
+<EM>Software--Practice and Experience</EM>,
+Vol. 11, pp. 1119-1184, 1981,
+describes the TeX way of breaking paragraphs into lines,
+using a dynamic programming algorithm.
+I wish troff did this operation as well as TeX.
+This paper has been reprinted in Knuth's
+<A HREF="http://www.amazon.com/exec/obidos/ISBN=1575860104/wrichardstevensA/">
+<I>Digital Typography</I></A> book.
+
+<P>
+As mentioned earlier,
+<A HREF="http://www.amazon.com/exec/obidos/ISBN=0201134470/wrichardstevensA/">
+<I>The TeXbook</I></A> by Donald E. Knuth
+(Addison-Wesley, 1984), is a wealth of typesetting information.
+
+<P>
+<A HREF="index.html">
+<IMG SRC="gifs/left-arrow.gif" ALT="left arrow" WIDTH=36 HEIGHT=23></A>
+Back to W. Richard Stevens' Home Page
+
+</BODY>
+</HTML>

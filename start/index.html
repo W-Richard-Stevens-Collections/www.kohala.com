@@ -1,0 +1,679 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+	"http://www.w3.org/TR/REC-html40/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+W. Richard Stevens' Home Page
+</TITLE>
+</HEAD>
+
+<BODY>
+<H2>
+<!-- uncomment photo
+<IMG SRC="gifs/taos1995.gif" ALIGN="MIDDLE" ALT="Rich Stevens picture"
+ WIDTH=275 HEIGHT=175>
+-->
+W. Richard Stevens' Home Page</H2>
+<IMG SRC="gifs/vi.gif" ALIGN="BOTTOM" ALT="powered by vi logo"
+ WIDTH=123 HEIGHT=36>
+
+<HR>
+<MENU>
+<LI><A HREF="index.html#books">Books by Richard Stevens</A>
+<LI><A HREF="index.html#papersmine">Papers by Richard Stevens</A>
+<LI><A HREF="index.html#papersothers">Papers (of others)</A>
+<LI><A HREF="classes/classes.html">Classes by Richard Stevens</A>
+<LI><A HREF="troff/troff.html">Troff resources</A>
+<LI><A HREF="index.html#typesetting">Typesetting</A>
+<LI><A HREF="index.html#sources">Miscellaneous source code</A>
+<LI><A HREF="index.html#mcast">IP Multicasting information</A>
+<LI><A HREF="index.html#bio">Biography</A>
+<LI><A HREF="rstevensfaq.html">Rich Stevens' FAQ</A>
+<LI><A HREF="ttcp.html">T/TCP home page</A> (TCP for Transactions)
+<LI><A HREF="recipes/recipes.html">Recipes</A>
+<LI><A HREF="mylinks/mylinks.html">favorite links</A>
+</MENU>
+<HR>
+
+<H2><A NAME="books">Books by Richard Stevens (reverse chronological)</A></H2>
+<OL>
+
+<LI VALUE=7><EM><A HREF="unpv22e/unpv22e.html">
+    UNIX Network Programming, Volume 2, Second Edition:
+    Interprocess Communications</A></EM>,
+    Prentice Hall, 1999.
+    <IMG SRC="gifs/new.gif" ALT="new logo" WIDTH=28 HEIGHT=15><BR>
+
+<P>
+<LI VALUE=6><EM><A HREF="unpv12e.html">
+    UNIX Network Programming, Volume 1, Second Edition: Networking APIs: Sockets and XTI</A></EM>,
+    Prentice Hall, 1998.
+    <!--IMG SRC="gifs/new.gif"--><BR>
+<P>
+<LI VALUE=5><EM><A HREF="tcpipiv3.html">
+    TCP/IP Illustrated, Volume 3: TCP for Transactions, HTTP, NNTP,
+and the UNIX Domain Protocols</A></EM>,
+    Addison-Wesley, 1996.<BR>
+<P>
+<LI VALUE=4><EM><A HREF="tcpipiv2.html">
+    TCP/IP Illustrated, Volume 2: The Implementation</A></EM>,
+    Addison-Wesley, 1995.<BR>
+<P>
+<LI VALUE=3><EM><A HREF="tcpipiv1.html">
+    TCP/IP Illustrated, Volume 1: The Protocols</A></EM>,
+    Addison-Wesley, 1994.<BR>
+<P>
+<LI VALUE=2><EM><A HREF="apue.html">
+    Advanced Programming in the UNIX Environment</A></EM>,
+    Addison-Wesley, 1992.<BR>
+<P>
+<LI VALUE=1><EM><A HREF="unp.html">
+    UNIX Network Programming</A></EM>,
+    Prentice Hall, 1990.<BR>
+</OL>
+
+<HR>
+<H2><A NAME="papersmine">Papers by Richard Stevens (reverse chronological)</A></H2>
+<UL>
+
+<LI>Allman, M., Paxson, V., Stevens, W. R. 1999.
+    "TCP Congestion Control,"
+    <EM>RFC 2581</EM>.
+    <UL>
+    <LI><A HREF="ftp://ftp.isi.edu/in-notes/rfc2581.txt">
+        ASCII text</A><BR>
+    </UL>
+
+<P>
+<LI>Gilligan, R. E., Thomson, S., Bound, J., and Stevens, W. R. 1999.
+    "Basic Socket Interface Extensions for IPv6,"
+    <EM>RFC 2553</EM>.
+    <UL>
+    <LI><A HREF="ftp://ftp.isi.edu/in-notes/rfc2553.txt">
+        ASCII text</A><BR>
+    </UL>
+
+<P>
+<LI>Stevens, W. R., and Thomas, M. 1998.
+    "Advanced Sockets API for IPv6,"
+    <EM>RFC 2292</EM>.
+    <UL>
+    <LI><A HREF="ftp://ftp.isi.edu/in-notes/rfc2292.txt">
+        ASCII text</A><BR>
+    </UL>
+
+<P>
+<LI>Stevens, W. R., and Pendry, J.-S. 1995.
+    "Portals in 4.4BSD,"
+    <EM>Proceedings of the 1995 Winter USENIX Technical Conference</EM>,
+    pp. 1-10, New Orleans, La.
+    <UL>
+    <LI><A HREF="portals.summ.html">
+        Abstract and Summary</A><BR>
+    <LI><A HREF="portals.ps">
+        PostScript</A> (87K)<BR>
+    </UL>
+
+<P>
+<LI>Stevens, W. R. 1989.
+    "Heuristics for Disk Drive Positioning in 4.3BSD,"
+    <EM>Computing Systems</EM>,
+    vol. 2, no. 3,
+    pp. 251-274 (Summer).
+    <UL>
+    <LI><A HREF="diskposn.summ.html">
+        Abstract and Summary</A><BR>
+    <LI><A HREF="diskposn.ps">
+        PostScript</A> (102K)<BR>
+    </UL>
+
+</UL>
+
+<HR>
+<H2><A NAME="papersothers">Papers of Others (alphabetical)</A></H2>
+
+Some of the following are papers that I have referenced in my books,
+often Usenet postings, that are not easily obtainable.
+Others are just papers that I think are interesting.
+Enjoy--most are classics.
+
+<UL>
+
+<LI>Borman, D. A. 1997,
+    "<A HREF="borman.97jan30.txt">
+     Re: Frequency of RST terminated connections</A>,"
+    end2end-interest Mailing List,
+    Jan. 30, 1997.
+    A note that the upper limit of port 5000 for the ephemeral port numbers
+    was a typo that occurred around 1986 right before 4.3BSD was released.
+    The upper limit was meant to be 50,000.
+
+<P>
+<LI>Borman, D. A. 1997,
+    "<A HREF="borman.97jun06.txt">
+     Re: SYN/RST cookies</A>,"
+    tcp-impl Mailing List,
+    June 6, 1997.
+    A note that the concept of the listen() backlog is a limit on the
+    number of established connections.  The purpose of this limit is
+    to prevent TCP from accepting new connection requests when the
+    application is not accept()ing them.
+
+<P>
+<LI>Braden, R. T. 1993,
+    "<A HREF="tcplw-extensions.txt">
+     TCP Extensions for High Performance: An Update</A>,"
+    Internet Draft,
+    June 21, 1993.
+    Unfortunately this Internet Draft expired quite a while ago and was
+    never published as an RFC.  Nevertheless, the ideas in the draft appear
+    in all current implementations of RFC 1323.
+
+<P>
+<LI>I have always been a fan of Richard W. Hamming.
+    I did not keep very many of the textbooks that I acquired in
+    graduate school, but kept all four of his books
+    (along with all my Knuth, Kernighan, and Kleinrock books).
+    Here is a wonderful <A HREF="papers.others/hammingbio.ps">biography
+    and obituary</A> of Hamming (6 pages of PostScript),
+    which includes a nice summary of his major accomplishments.
+    <A HREF="gifs/hamming.html">Here</A> are the three photos
+    that go with the biography.
+
+    <P>I will never forget having learned about digital filters from
+    the classic Digital Signal Processing books of the 1970s
+    (Oppenheim and Schafer, etc.) and then finding Hamming's
+<A HREF="http://www.amazon.com/exec/obidos/ISBN=048665088X/wrichardstevensA/">
+    Digital Filters</A> book, and wondering why all the classic texts
+    made the topic so hard to understand when Hamming could make it
+    so easy to understand.
+    Some readers have told me that they find that my books
+    make a complicated subject (such as network programming)
+    easy to understand--if that is true,
+    then it is due to the influence of writers like Richard Hamming
+    and Brian Kernighan.
+
+<P>
+<LI>Jacobson, V. 1987,
+    "<A HREF="http://www.kohala.com/start/vanj.87jun15.txt">
+     Re: Interpacket Arrival Variance and Mean</A>,"
+    June 15, 1987.
+    An explanation and example C code for estimating the mean and variance
+    of a series of measurements.
+
+<P>
+<LI>Jacobson, V. 1987,
+    "<A HREF="http://www.kohala.com/start/vanj.87nov16.txt">
+     Re: Your congestion scheme</A>,"
+    Nov. 16, 1987.
+    An early email on slow start and congestion avoidance.
+
+<P>
+<LI>Jacobson, V. 1988,
+    "<A HREF="http://www.kohala.com/start/vanj.88feb11.txt">
+     Dynamic Congestion Avoidance / Control</A>,
+    Feb. 11, 1988.
+    Another early posting on congestion avoidance.
+
+<P>
+<LI>Jacobson, V. 1988,
+    "<A HREF="http://www.kohala.com/start/vanj.88jul20.txt">
+     Some Interim Notes on the BSD Network Speedup</A>,"
+    Usenet, comp.protocols.tcp-ip Newsgroup,
+    Message-ID &lt;8807200426.AA01221@helios.ee.lbl.gov&gt;,
+    July 20, 1988.
+
+<P>
+<LI>Jacobson, V. 1988,
+    "<A HREF="http://www.kohala.com/start/vanj.88oct24.txt">
+     4BSD TCP Ethernet Throughput</A>,"
+    tcp-ip Mailing List,
+    Oct. 24, 1988.
+
+<P>
+<LI>Jacobson, V. 1988,
+    "<A HREF="http://www.kohala.com/start/vanj.88nov23.txt">
+     Performance</A>,"
+    Usenet, comp.protocols.tcp-ip Newsgroup,
+    Message-ID &lt;8811231121.AA19744@helios.ee.lbl.gov&gt;,
+    Nov. 23, 1988.
+
+<P>
+<LI>Jacobson, V. 1990,
+    "<A HREF="http://www.kohala.com/start/vanj.90apr30.txt">
+     Modified TCP Congestion Avoidance Algorithm</A>,"
+    end2end-interest Mailing List,
+    Apr. 30, 1990.
+
+<P>
+<LI>Jacobson, V. 1992,
+    "<A HREF="ftp://ftp.ee.lbl.gov/talks/vj-nkarch.ps.Z">
+     Design Changes to the Kernel Network Architecture for 4.4BSD</A>,
+     4.4BSD Class, Berkeley, Calif., May 1992.
+     These overheads contains additional details about the changes described
+     in [Partridge 1993] and [Jacobson 1993].  Note that despite the title,
+     these changes never made it into the 4.4BSD release.
+
+<P>
+<LI>Jacobson, V. 1993,
+    "<A HREF="ftp://ftp.ee.lbl.gov/talks/vj-nws93-1.ps.Z">
+     Some Design Issues for High-Speed Networks</A>,"
+     Networkshop '93, Melbourne, Australia, Nov. 1993.
+     Additional details about the changes described in [Partridge 1993].
+
+<P>
+<LI>Jacobson, V. 1994,
+    "<A HREF="http://www.kohala.com/start/vanj.94mar14.txt">
+     Problems With Arizona's Vegas</A>,"
+    end2end-tf Mailing List,
+    Mar. 14, 1994.
+    <A HREF="http://www.kohala.com/start/vanj.94mar14.ps">PostScript illustration</A> referenced in
+    this posting.
+
+<P>
+<LI>Jacobson, V. 1994,
+    "<A HREF="http://www.kohala.com/start/vanj.94jun27.txt">
+     Re: half baked anycastoff idea...</A>,"
+    end2end-interest Mailing List,
+    Jun. 27, 1994.
+    A note that 4.4BSD intended to incorporate a lazy accept for TCP.
+
+<P>
+<LI>Jacobson, V. 1999,
+    "<A HREF="papers.others/vanj.99feb08.txt">
+     Re: traceroute history: why UDP?</A>,"
+    Usenet, comp.protocols.tcp-ip Newsgroup,
+    Message-ID: &lt;79m7m4$reh$1@dog.ee.lbl.gov&gt;,
+    Feb. 8, 1999.
+    People have wondered why traceroute uses UDP probes instead of
+    ICMP echo probes (which apparently Microsoft traceroute uses).
+    Here is the answer from the original author.
+
+<P>
+<LI><A HREF="http://www.cs.bell-labs.com/who/bwk/index.html">Brian
+    Kernighan's</A> home page contains some classic software
+    along with the source code for the one true awk.
+    (I am a big fan of awk, and use it a lot.)
+
+<P>
+<LI>Readers (and copy editors) are occasionally surprised
+    by my use of compound words, instead of using either the
+    open or hyphenated form.
+    That is, I write <I>filesystem</I> instead of either
+    <I>file system</I> or <I>file-system</I>.
+    The <I>Chicago Manual of Style</I> acknowledges this trend (Section 6.38).
+    Don Knuth has a wonderul
+    <A HREF="papers.others/knuth.email.html">paragraph</A>
+    about why we should write <I>email</I> instead of <I>e-mail</I>
+    and just accept the fact now that it will become a compound word.
+
+<P>
+<LI>Lanciani, D. 1996,
+    "<A HREF="lanciani.96apr10.txt">
+     Re: sockets: AF_INET vs. PF_INET</A>,"
+    Usenet, comp.protocols.tcp-ip Newsgroup,
+    Message-ID: &lt;3561@news.IPSWITCH.COM&gt;,
+    Apr. 1996.
+    Contains a copy of the 4.1cBSD manual page for the original socket()
+    function, showing why the PF_ constants existed, independent of
+    the AF_ constants.
+
+<P>
+<LI>Libes, D. 1990,
+    "<A HREF="libes.timers.txt">
+     Implementing Software Timers</A>,"
+    C User's Journal, Nov. 1990.
+    A handy set of C functions to implement any number of software timers
+    in a process using a single timer signal.
+
+<P>
+<LI>Maslen, T. M. 1997,
+    "<A HREF="maslen.97may01.txt">
+     Re: gethostbyXXXX() and threads</A>,"
+    Usenet, comp.programming.threads Newsgroup,
+    Message-ID: &lt;maslen.862463530@shellx&gt;,
+    May 1997.
+    An interesting history of the development of the Solaris
+    gethostbyXXXX_r() functions.
+
+<P>
+<LI>Mogul, J. 1992,
+    "<A HREF="mogul.92mar02.txt">
+     Re: Holy Turbocharger Batman, (evil, cheating) NFS async writes fly</A>,"
+    Usenet, comp.protocols.nfs Newsgroup,
+    Message-ID: &lt;1992Mar2.191711.9935@PA.dec.com&gt;,
+    March 1992.
+
+<P>
+<LI>Muuss, M. J.,
+    "<A HREF="http://ftp.arl.mil/~mike/ping.html">
+     The Story of the PING Program</A>."
+    A history of the PING program, by its original author.
+    <P>
+    There exists a children's book
+ <A HREF="http://www.amazon.com/exec/obidos/ISBN=0140502416/wrichardstevensA/">
+    <I>The Story About Ping</I></A>, that, sadly, is not about this command.
+    Nevertheless, a funny
+    <A HREF="papers.others/ping.amazon.html">review</A>
+    of this book was posted to Amazon in March 1999.
+    Amazon promptly removed the review (no sense of humor?),
+    then put it back.
+
+<P>
+<LI>Partridge, C. 1993,
+    "<A HREF="http://www.kohala.com/start/vanj.93sep07.txt">
+     Jacobson on TCP in 30 Instructions</A>,"
+    Usenet, comp.protocols.tcp-ip Newsgroup,
+    Message-ID &lt;1993Sep8.213239.28992@sics.se&gt;,
+    Sept. 1993.
+
+<P>
+<LI>Partridge, C., and Pink, S. 1993.
+    "<A HREF="fasterudp.ps">
+     A Faster UDP</A>,"
+    <EM>IEEE/ACM Transactions on Networking</EM>,
+    vol. 1, no. 4,
+    pp. 429-440
+    (PostScript, 148K).
+
+<P>
+<LI>This is a summary of the accidental priority inversion that occurred
+    with the Mars
+    <A HREF="papers.others/pathfinder.html">Pathfinder</A>
+    mission in July, 1997.
+    This summary is by Mike Jones, dated December 7, 1997,
+    and was then widely circulated after it appeared in Peter G. Neumann's
+    moderated Risks Forum (comp.risks) on December 9, 1997
+    in issue RISKS-19.49.
+
+<P>
+<LI>Paxson, V. 1995,
+    "<A HREF="paxson.95sep29.txt">
+     Re: Traceroute and TTL</A>,"
+    Usenet, comp.protocols.tcp-ip Newsgroup,
+    Message-ID &lt;48407@dog.ee.lbl.gov&gt;
+    Sept. 1995.
+    30% of measured Internet routes are asymmetrical.
+    See the next reference for the final version of the SIGCOMM paper
+    that is referenced in the posting.
+
+<P>
+<LI>Paxson, V. 1996,
+    "<A HREF="ftp://ftp.ee.lbl.gov/papers/routing.SIGCOMM.ps.Z">
+     End-to-End Routing Behavior in the Internet</A>,"
+    SIGCOMM 1996,
+    Aug. 1996.
+
+<P>
+<LI>Jon Postel passed away unexpectedly on October 16, 1998.
+    <A HREF="papers.others/postel.txt">Here</A>
+    are three wonderful acknowledgments of Jon's many contributions
+    to the Internet by Dave Farber, Vint Cerf, and Bob Braden.
+
+<P>
+<LI><A HREF="http://www.cs.bell-labs.com/who/dmr/index.html">Dennis
+    Ritchie's</A> home page contains some classic papers:
+    "The Evolution of the Unix Time-sharing System,"
+    "The Development of the C Language," and
+    "A Stream Input/Output System," for example.
+
+<P>
+<LI>Shimomura, T. 1995,
+    "<A HREF="shimomura.95jan25.txt">
+     Technical details of the attack described by Markoff in NYT</A>,"
+    Usenet, comp.protocols.tcp-ip Newsgroup,
+    Message-ID &lt;3g5gkl$5j1@ariel.sdsc.edu&gt;,
+    Jan. 1995.
+    A technical explanation of the Internet break-in of December 1994
+    along with the CERT advisory.
+
+<P>
+<LI>RPC Mailing List Discussion, 1995,
+    "<A HREF="papers.others/rpc.comments.txt">
+     RPC is a poor solution anyway, so why bother?</A>,"
+    end2end-interest Mailing List,
+    Feb. 1995.
+    Whenever I teach RPC I always mention that it is a controversial
+    topic.  This is a collection of eight postings by some knowledgeable
+    people on the topic of RPC, some pro, some con.
+    This discussion was generated by the proposal from Sun to publish
+    their RPC specifications as RFCs
+    (which were published as RFCs
+    <A HREF="ftp://ftp.isi.edu/in-notes/rfc1831.txt">1831</A>,
+    <A HREF="ftp://ftp.isi.edu/in-notes/rfc1832.txt">1832</A>, and
+    <A HREF="ftp://ftp.isi.edu/in-notes/rfc1833.txt">1833</A>,
+    preceded by the agreement detailed in RFC
+    <A HREF="ftp://ftp.isi.edu/in-notes/rfc1790.txt">1790</A>).
+
+<P>
+<LI>Torek, C. 1994,
+    "<A HREF="torek.94dec31.txt">
+     Re: Delay in re-using TCP/IP port</A>,"
+    Usenet, comp.unix.wizards Newsgroup,
+    Message-ID &lt;199501010028.QAA16863@elf.bsdi.com&gt;,
+    Dec. 1994.
+    A great explanation of why the SO_REUSEADDR socket option
+    is needed with the bind() function.
+
+<P>
+<LI>Unix International, 1991,
+    "<A HREF="dlpi.2.0.0.ps">
+     Data Link Provider Interface Specification, Revision 2.0.0</A>,"
+    Aug. 1991.  (1.4 Mbytes PostScript, 185 pages.)
+    This paper and the next two are the only publicly available
+    documentation that I am aware of for the System V Release 4
+    STREAMS interfaces to the datalink layer, network layer,
+    and transport layer.  They used to be available on the
+    Unix International FTP site, when UI existed.
+
+<P>
+<LI>Unix International, 1992,
+    "<A HREF="npi.2.0.0.ps">
+     Network Provider Interface Specification, Revision 2.0.0</A>,"
+    Aug. 1992.  (860 Kbytes PostScript, 146 pages.)
+
+<P>
+<LI>Unix International, 1992,
+    "<A HREF="tpi.1.5.ps">
+     Transport Provider Interface Specification, Revision 1.5</A>,"
+    Dec. 1992.  (360 Kbytes PostScript, 51 pages.)
+    The Transport Provider Interface is what sockets, XTI, and TLI
+    talk to on an SVR4 system.
+
+<P>
+<LI>White, J. E. 1975.
+    "<A HREF="papers.others/rfc707.txt">
+    A High-Level Framework for Network-Based Resource Sharing</A>,"
+    RFC 707, Dec. 1975.
+    This is probably one of the first papers describing RPC
+    (remote procedure calls).  Most RFC indexes list this RFC as
+    not being on-line, but someone found a copy of it for posterity.
+    This paper also appeared in the Proceedings of the National Computer
+    Conference in June 1976, and that is how it is normally referenced
+    in RPC papers and texts.
+
+</UL>
+
+<HR>
+<H2><A NAME="typesetting">Typesetting</A></H2>
+
+<P>
+This section contains some notes on how I write books.
+
+<UL>
+<LI><A HREF="pagelayout.html">Page layout</A>.
+<LI><A HREF="indexing.html">Indexing</A>.
+<LI><A HREF="chartjunk.html">Chartjunk</A>.
+
+</UL>
+
+<HR>
+<H2><A NAME="sources">Miscellaneous Source Code</A></H2>
+
+<UL>
+<LI>This used to be a tar file containing the Posix.1g
+    <TT>getaddrinfo()</TT> function that supports both IPv4 and IPv6.
+
+    <P>
+    You should now go to <A HREF="unpv12e.html">here</A> and fetch
+    the source code from this book, which contains the implementation,
+    and the sample chapter, which describes the implementation in
+    great detail.
+
+</UL>
+
+<HR>
+<H2><A NAME="mcast">IP Multicasting Information</A></H2>
+
+<UL>
+<LI><A HREF="mcast.api.txt">
+    IP multicast API information</A>.
+    This describes the multicast API (application programming interface)
+    using sockets for IPv4.
+    It is from Steve Deering's original multicast release README (1989)
+    but is still valid.
+    Section 5 of
+    <A HREF="ftp://ftp.isi.edu/in-notes/rfc2553.txt">RFC 2553</A>
+    describes the multicast API for IPv6.
+
+<P>
+<LI>There is a complete description of multicasting in general
+    along with a detailed description of the IPv4 and IPv6 multicast API
+    using sockets in <A HREF="unpv12e.html">this book</A>,
+    with four example programs.
+    Even if you don't want to buy the book,
+    fetch the source code for the book,
+    and look at the <TT>mcast_</TT> functions in the <TT>lib/</TT> directory
+    along with the example programs in the <TT>mysdr</TT>,
+    <TT>mcast</TT>, <TT>ssntp</TT>, and <TT>sntp</TT> directories.
+
+<P>
+<!-- A HREF="http://www.3com.com/isc/501303.html">paper</A -->
+<LI>This <A HREF="papers.others/draft-ietf-mboned-intro-multicast-03.txt">paper</A>
+    by Semeria and Maufer
+    is a nice introduction to multicasting in general, and multicast routing.
+
+<P>
+<LI><A HREF="mtest.c">
+    <TT>mtest.c</TT></A>:
+    the test program from Steve Deering's original multicast release.
+    Use it as another example of the multicast API.
+
+</UL>
+
+<HR>
+<H2><A NAME="bio">Biography</A></H2>
+
+I received the B.S.E. in Aerospace Engineering from the University of
+Michigan (1973), and the M.S. (1978) and Ph.D. (1982) in Systems
+Engineering (image processing major, physiology minor)
+from the University of Arizona.
+
+<P>
+I have had many lives as a programmer.
+After getting my B.S.E. I spent 2 years writing operating systems in
+assembler, 7 years in the astronomy world (at Kitt Peak National Observatory
+in Tucson, doing real-time data acquisition and image processing), then
+8 years as Vice President of a health-care software startup in Connecticut
+(Health Systems International).
+Since 1990 I have been self-employed, living in Tucson, writing
+books full-time with occasional teaching of classes based on the books.
+<P>
+In what seems to be a previous life (1970s) I was a flight instructor,
+although most of my flying these days is in the back of a commercial airliner
+or down the steeps at Taos Ski Valley.
+I am willing to admit that my first programming language was Fortran,
+that I once programmed in Forth and Cobol,
+and that I still have (from my undergraduate years)
+both my IBM green card and my slide rule
+(which Kelly Johnson calls a "Michigan calculator").
+
+<P>
+Here is a <A HREF="bio1.html">longer biography</A>,
+mainly about how I got into computers and Unix.
+
+<P>
+Here is a chronological list of the various
+<A HREF="bio3.html">computer systems and programming languages</A>
+that I have used.
+
+<H2>Where are you from?</H2>
+
+<P>
+Chronologically and geographically I have lived lots of places.
+When someone asks me "where are you from?" or "where did you grow up?"
+my reply begins with "it's a long story".
+<UL>
+<LI>1951: I was born in Luanshya, Northern Rhodesia (now Zambia).
+My father (an American, although he had spent much of his youth
+in Southern Africa and Tasmania) was working at the
+Roan Antelope Copper Mine,
+where he had worked as a metallurgical engineer
+since graduating from Columbia University in 1937.
+My mother (also an American) had gone to Northern Rhodesia to visit
+her brother (another mining engineer from Columbia),
+met my father, got married, and stayed 16 years longer than planned.
+<P>
+<LI>1956-1960: Salt Lake City, Utah.
+My father was working for Kennecott Copper Corp. (Bingham Canyon).
+<P>
+<LI>1960-1964: Hurley, New Mexico.
+My father was working for Kennecott Copper Corp. (Chino Mines).
+<P>
+<LI>1964: Washington, D.C.
+My father was at the Brookings Institution for 6 months.
+<P>
+<LI>1964-1971: Phalaborwa, South Africa.
+My parents went to South Africa for the development and opening
+of the new Palabora Copper Mine in the northeastern Transvaal.
+(Phalaborwa is one of the gates into the Kruger Game Reserve.)
+<P>
+<LI>1964-1968: Waynesboro, Virginia.
+When my parents moved to South Africa I was about to start high school,
+and had my choice of a boarding school in the U.S. or an
+English-style boarding school in South Africa.
+I chose the former and attended Fishburne Military School for 4 years,
+going "home" to South Africa each summer.
+<P>
+<LI>1968-1973: Ann Arbor, Michigan,
+attending the University of Michigan.
+<P>
+<LI>1969: Sallisaw, Oklahoma.  I had a summer job with Bechtel Corp.
+at the construction of the Kerr McGee uranium treatment plant in Gore, OK.
+<P>
+<LI>1971, 1972: Carrollton, Georgia.
+I had summer jobs with the Southwire Corp.,
+the first summer as a computer operator,
+and the second summer as a programmer.
+<P>
+<LI>1973-1975: Santa Ana, California.
+After graduating from Michigan,
+I worked for 2 years at Singer's M & M Computer Division
+as a programmer.
+<P>
+<LI>1975-1982: Tucson, Arizona.
+I worked full-time for Kitt Peak Observatory
+and attended graduate school at the University of Arizona.
+Yes, it is possible to obtain a Ph.D. while working full-time,
+although you don't have much free time.
+<P>
+<LI>1982-1990: New Haven, Connecticut.
+I worked for Health Systems International.
+<P>
+<LI>1990-present: Tucson, Arizona.
+</UL>
+
+<HR>
+
+<A HREF="http://www.bsdi.com/">
+<IMG SRC="gifs/bsdi400x80.gif" ALIGN="LEFT" ALT="powered by BSDI logo"
+ WIDTH=400 HEIGHT=80>
+</A>
+
+<A HREF="http://validator.w3.org/check?uri=http://www.kohala.com/start/index.html">
+<IMG BORDER=0 SRC="gifs/vh40.gif"
+	 ALIGN="RIGHT" HEIGHT=31 WIDTH=88 ALT="Valid HTML 4.0!">
+</A>
+
+</BODY>
+</HTML>

@@ -1,0 +1,4 @@
+If you ended up at this page, you followed an old link from somewhere.
+
+The current errata for "UNIX Network Programming, Volume 1" is now in
+an HTML format at http://www.kohala.com/~rstevens/typos.unpv12e.html.

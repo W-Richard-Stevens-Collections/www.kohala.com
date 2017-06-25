@@ -1,0 +1,198 @@
+<HTML>
+<HEAD>
+<TITLE>
+Indexing
+</TITLE>
+</HEAD>
+
+<BODY>
+
+<H2>How I perform indexing</H2>
+
+<P>
+This document is an attempt to describe how I do the indexing
+for the books that I write.
+I think the index of a technical book is critical,
+as I find myself always referring to the index of books that I read,
+and I get frustrated when I cannot find terms in the index.
+
+<P>
+Creating the index is part mechanical (adding all the flags to the
+troff files specifying which terms to index),
+and then a lot of proofing and tweaking.
+The first step is to get the
+<A HREF="troff/indexing.tools.txt">software</A>
+(shell scripts and awk scripts) described in the paper
+<A HREF="troff/cstr128.ps">
+<I>Tools for Printing Indexes</I></A>
+by Jon L. Bentley and Brian W. Kernighan,
+<EM>Electronic Publishing</EM>,
+Vol. 1, No. 1, pp. 3-17, 1981,
+as this is the software that I use.
+
+<P>
+Here are the steps that I take, looking for terms to index,
+using <I>UNIX Network Programming</I>, Volume 1, second edition
+for the example.
+
+<UL>
+
+<P><LI>  I first go through all the chapters and look at the
+section headings.
+For example, Section 19.2 begins
+
+<PRE>
+    .n2 "Multicast Addresses"
+    <I>the contents of the section</I>
+</PRE>
+
+so I added a <TT>%begin</TT> line after this,
+and a matching <TT>%end</TT> at the end of the section.
+
+<PRE>
+    .n2 "Multicast Addresses"
+    .       ix %begin multicast address
+    <I>the contents of the section</I>
+    .       ix %end multicast address
+</PRE>
+
+<TT>.ix</TT> is my troff macro to generate an index entry and I
+always put a tab between the period in column 1 and this macro name,
+to make it easier to spot the index macros in the file.
+
+<P><LI>  After the numbered section headings (<TT>.n2</TT> macros)
+I go through all the unnumbered section headings (<TT>.SH</TT> macros)
+and do the same thing.
+
+<P><LI>  Next is to look at all the chapter headings and see
+if the entire chapter should be indexed.
+For example, Chapter 19 of UNPv1 contains a
+<TT>%begin multicast</TT> at the beginning and a <TT>%end</TT> at the end.
+
+<P><LI>  I use a macro named <TT>.CW</TT> to print a word in a
+constant-width font.
+For example, there are 9,346 of these in UNPv1, as in
+<PRE>
+    When using the
+    .CW recvmsg
+    and
+    .CW sendmsg
+    functions
+</PRE>
+When I am done writing a book
+I go through all of these, and change the second letter
+of the macro name to a single lower case character,
+which is another macro of mine that still prints the word
+in a constant-width font,
+plus it generates an index entry with an appropriate tag on the end.
+For example, to generate two index entries for the functions in
+this example, I change the above to
+<PRE>
+    When using the
+    .Cf recvmsg
+    and
+    .Cf sendmsg
+    functions
+</PRE>
+This is shorter and easier to read than the equivalent
+<PRE>
+    When using the
+    .CW recvmsg
+    .       ix [recvmsg]~function
+    and
+    .CW sendmsg
+    .       ix [sendmsg]~function
+    functions
+</PRE>
+What I actually do is <TT>grep</TT> for all these <TT>.CW</TT> macros,
+manipulate the output with the standard Unix tools,
+generating an editor script that changes the <TT>.CW</TT> macros.
+For UNP v1 this handled about 7,000 of the 9,000+ entries,
+leaving only about 2,000 macros to go through by hand.
+
+The new macros that I define are
+<TT>.Ca</TT> for a datatype,
+<TT>.Cb</TT> for a structure member,
+<TT>.Cc</TT> for a constant,
+<TT>.Cd</TT> for a device,
+<TT>.Ce</TT> for a error,
+<TT>.Cf</TT> for a function or system call,
+<TT>.Ch</TT> for a header,
+<TT>.Ci</TT> for a file,
+<TT>.Cl</TT> for a label,
+<TT>.Cm</TT> for a macro,
+<TT>.Cn</TT> for a environment variable,
+<TT>.Co</TT> for a socket option,
+<TT>.Cp</TT> for a program,
+<TT>.Cs</TT> for a signal,
+<TT>.Ct</TT> for a structure,
+<TT>.Cv</TT> for a variable, and
+<TT>.Cx</TT> for a XTI option.
+
+<P><LI>  Next is to go through all the program displays and find
+any computer terms that need indexing.
+For example,
+<PRE>
+    .P1
+    struct ip_mreq {
+      struct in_addr   imr_multiaddr; /* IPv4 class D multicast addr */
+      struct in_addr   imr_interface; /* IPv4 addr of local interface */
+    };
+    .P2
+</PRE>
+becomes
+<PRE>
+    .P1
+    struct ip_mreq {
+      struct in_addr   imr_multiaddr; /* IPv4 class D multicast addr */
+      struct in_addr   imr_interface; /* IPv4 addr of local interface */
+    };
+    .       Dt ip_mreq
+    .       Db imr_multiaddr
+    .       Db imr_interface
+    .P2
+</PRE>
+The macro whose name begins with <TT>D</TT> produces an index entry
+that includes <TT>~definition~of</TT> at the end.
+
+<P><LI>  I write italicized strings using a <TT>.IT</TT> macro,
+and I go through all of these as often an italicized term should
+be indexed, some with a <TT>~definition~of</TT> appended.
+
+<P><LI>  All tables should be examined for terms to index.
+
+<P><LI>  Next are the indented paragraphs, which often introduce a term.
+
+<P><LI>  All figures are examined for any terms to index.
+
+<P><LI>  All 2-character or longer, all uppercase acronyms are found
+using <TT>grep</TT>, and the list is printed.
+You then have to go through the list by hand to find what needs
+to be indexed.
+
+<P><LI>  In the process of doing all of the above steps,
+you find lots of words that also need to be indexed.
+I write them down on a sheet of paper as I find them
+(I normally fill about 3 sheets)
+and then go through all the chapters finding references to the term,
+and adding an index entry if appropriate.
+
+</UL>
+
+<P>
+Once all of the above steps are done (it took me 30 hours to do all
+of the above for UNPv1), then you generate an index, go through it
+by hand, fix things, generate another index, go through it again,
+again and again, until it starts to look reasonable.
+With UNPv1 this took me 5 complete passes and about 20 hours.
+
+<P>
+The final steps are just fine tuning this in a pass or two.
+
+<P>
+<A HREF="index.html">
+<IMG SRC="gifs/left-arrow.gif" ALT="left arrow" WIDTH=36 HEIGHT=23></A>
+Back to W. Richard Stevens' Home Page
+
+</BODY>
+</HTML>

@@ -1,0 +1,150 @@
+<HTML>
+<HEAD>
+<TITLE>
+T/TCP Home Page (TCP for Transactions)
+</TITLE>
+</HEAD>
+
+<BODY>
+
+<H2>T/TCP Home Page (TCP for Transactions)</H2>
+
+<HR>
+<MENU>
+<LI><A HREF="ttcp.html#rfcs">RFCs</A>
+<LI><A HREF="ttcp.html#implementations">Implementations</A>
+<LI><A HREF="ttcp.html#fixes">Source Code Bug Fixes</A>
+<LI><A HREF="ttcp.html#hosts">Internet Hosts Running T/TCP</A>
+<LI><A HREF="ttcp.html#badhosts">Implementations that Interact Poorly with T/TCP</A>
+<LI><A HREF="ttcp.html#misctools">Miscellaneous Tools</A>
+<!-- <LI>T/TCP Working Group
+    <A HREF="ftp://gemini.tuc.noao.edu/pub/ttcp/ttcp.mail">
+     Mailing List Archive</A>:
+  -->
+</MENU>
+<HR>
+
+<!-- ******************************************************************* -->
+<H2><A NAME="rfcs">RFCs</A></H2>
+<UL>
+
+<LI><A HREF="ftp://ds.internic.net/rfc/rfc1379.txt">RFC 1379</A>:
+    Braden, R. T., <EM>Extending TCP for Transactions-Concepts</EM>,
+    38 pages, Nov. 1992.
+    <BR>
+
+<P>
+<LI><A HREF="ftp://ds.internic.net/rfc/rfc1644.txt">RFC 1644</A>:
+    Braden, R. T., <EM>T/TCP-TCP Extensions for Transactions,
+    Functional Specification</EM>,
+    38 pages, July 1994.
+    <BR>
+</UL>
+
+<!-- ******************************************************************* -->
+<H2><A NAME="implementations">Implementations</A></H2>
+<UL>
+
+<P>
+<LI><A HREF="http://www.freebsd.org">FreeBSD</A>
+    releases 2.0.5 and later support T/TCP.
+    <BR>
+
+<P>
+<LI><A HREF="http://www.csn.ul.ie/~heathclf/fyp">Linux</A>:
+    patches are available for kernel 2.0.32.
+    <BR>
+
+<P>
+<LI><A HREF="ftp://ftp.isi.edu/pub/braden/TTCP.tar.Z">SunOS 4.1.3</A>:
+    A compressed tar file with the source code diffs for SunOS.
+    Although this is the reference implementation from the designer
+    of T/TCP, this code is only useful if you have the source code for
+    SunOS 4.1.3.
+    Here is the <A HREF="ttcp.sunos.readme.txt"><TT>README</TT></A>
+    file from this districution.
+    <BR>
+
+<P>
+<LI>BSD/OS.  Diffs are available to implement T/TCP in BSD/OS 2.1.
+    Contact <I>info@kohala.com</I> to obtain these diffs.
+    <BR>
+
+</UL>
+
+<!-- ******************************************************************* -->
+<H2><A NAME="fixes">Source Code Bug Fixes</A></H2>
+<UL>
+
+<LI><A HREF="ttcp.fix.96jan11.txt">11 Jan 96.</A>
+    Don't send FIN and/or data when CC option will not be used.
+<LI><A HREF="ttcp.fix.96jan12.txt">12 Jan 96.</A>
+    Must set <TT>TF_ACKNOW</TT> flag when retransmission timer expires.
+<LI><A HREF="ttcp.fix.96jan30.txt">30 Jan 96.</A>
+    Window scaling bug.
+
+</UL>
+
+<!-- ******************************************************************* -->
+<H2><A NAME="hosts">Internet Hosts Running T/TCP</A></H2>
+<UL>
+
+<LI><TT>www.ansp.br</TT>
+<LI><TT>www.elite.net</TT>
+<LI><TT>www.iqm.unicamp.br</TT>
+<LI><TT>www.neosoft.com</TT>
+<LI><TT>www.sbq.org.br</TT>
+<LI><TT>www.uidaho.edu</TT>
+<LI><TT>www.yahoo.com</TT>
+<P>Please notify <I>info@kohala.com</I> of any additions to this list.
+
+</UL>
+
+<!-- ******************************************************************* -->
+<H2><A NAME="badhosts">Implementations that Interact Poorly with T/TCP</A></H2>
+<UL>
+
+<LI>Solaris, through and including 2.5.  See Section 3.7 of
+    <I>TCP/IP Illustrated, Volume 3</I> for details.
+<P>
+<LI>AIX 4.1.2.  Earlier versions, specifically 3.2.2, handled SYN/data/FIN
+    segments correctly.
+<P>
+<LI>Annex terminal servers.  These don't like SYN segments with FIN or data.
+    This botch extends to their SLIP/PPP implementation (perhaps only when
+    doing VJ compression), so that T/TCP across an Annex acting as a
+    dialup SLIP server fails even if both ends are capable.
+<P>
+<LI>Linux.  Apparently kernels 2.0.30 and 2.1.x correct this problem.
+<P>
+<LI>KA9Q.
+
+</UL>
+
+<!-- ******************************************************************* -->
+<H2><A NAME="misctools">Miscellaneous Tools</A></H2>
+<UL>
+
+<LI><A HREF="ttcpcliserv.tar">client-server example programs</A>
+    from <I>TCP/IP Illustrated, Volume 3</I>, in a tar archive.
+    These are the UDP, TCP, and T/TCP examples from Chapter 1 and
+    the timing versions of these used for Figure 1.14.
+    <BR>
+
+<P>
+<LI><A HREF="ttcp.tcpdump.diffs"><TT>tcpdump</TT> diffs</A>.
+    These diffs are for Version 3.0.2
+    to print the T/TCP options (CC, CCnew, and CCecho).
+    Here is the latest version of
+    <A HREF="ftp://ftp.ee.lbl.gov/tcpdump.tar.Z"><TT>tcpdump</TT>.</A>
+    <BR>
+
+<P>
+<LI>The <A HREF="http://www.netperf.org/netperf/NetperfPage.html">
+    <TT>netperf</TT></A> program supports T/TCP.
+    <BR>
+
+</UL>
+
+</BODY>
+</HTML>

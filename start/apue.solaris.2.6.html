@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<TITLE>
+APUE, Solaris 2.6 Problems
+</TITLE>
+</HEAD>
+
+<BODY>
+
+<P>  There are two ways to create a stream pipe under SVR4
+(that is, a pipe that is full-duplex and allows descriptors to
+be passed across it):
+
+<OL>
+<LI>   <TT>pipe()</TT>, and
+<LI>   <TT>socketpair()</TT>.
+
+</OL>
+
+<P>  There are two ways to pass a descriptor under SVR4:
+
+<OL>
+<LI>   The <TT>I_SENDFD</TT> and <TT>I_RECVFD</TT> <TT>ioctl</TT>s, and
+<LI>   The <TT>sendmsg()</TT> and <TT>recvmsg()</TT> system calls.
+
+</OL>
+
+<P>  Under previous releases of SVR4 these were all interchangeable.
+The implementation of sockets within the Solaris 2.6 kernel has
+changed from all previous Solaris 2.x releases
+and sockets no longer possess all the properties of a stream.
+Portable code must not assume the streams properties of sockets in SVR4.
+
+<P>
+The file <TT>lib.svr4/spipe.c</TT> in the
+source code for the book calls <TT>pipe</TT>
+and the two files <TT>lib.svr4/{send,recv}fd.c</TT> call <TT>ioctl</TT>.
+This is the recommended way under SVR4.
+
+<P>
+Alternately, under Solaris 2.x you can call <TT>socketpair</TT>
+and then <TT>sendmsg</TT> and <TT>recvmsg</TT>,
+but you need to change what files are built into the
+<TT>libmisc.a</TT> library to do this.
+
+<P>
+On a Berkeley-derived kernel (e.g., 4.xBSD and SunOS 4.1.x),
+you must call <TT>socketpair</TT> and then
+<TT>sendmsg</TT> and <TT>recvmsg</TT>.
+
+<P>
+There are reports of people using the file <TT>lib.svr4/spipe.socket.c</TT>
+(which calls <TT>socketpair()</TT> under Solaris 2.6,
+and then trying to use the <TT>I_SENDFD</TT> <TT>ioctl</TT>
+to pass a descriptor.
+This no longer works.

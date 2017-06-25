@@ -1,0 +1,54 @@
+Date: Thu, 30 Jan 1997 10:11:41 -0700 (MST)
+From: David Borman <dab@BSDI.COM>
+Message-Id: <199701301711.KAA16320@forge.BSDI.COM>
+To: end2end-interest@ISI.EDU
+Subject: Re: Frequency of RST terminated connections
+
+(I've stripped down the To:/Cc: lines to just end2end-interest,
+it was getting a bit long...)
+
+> >It would be nice if port numbers were assigned in the stack,
+> >rather than at the application, but they aren't. And without
+> 
+> Aren't they? I thought most BSD-derived and BSD-inspired stacks (i.e.,
+> just about all of them) will automatically assign a local port number
+> for you.  Yeah, you can override it, but few if any applications do so
+> on a connect() as there is little if any reason to do so.
+
+Just a minor nit... connect() is used to specify the remote address
+and port, bind() is used to specify the local address and/or port.
+If you don't do a bind(), or do a bind() with a zero port number,
+then the kernel does the selection of the local port number.
+ 
+Of greater concern to me is how 4.3 BSD and later based systems
+divide up the port space, as defined in <netinet/in.h>
+	1-1023		Reserved for privileged processes
+	1024-5000	Dynamically assigned local port numbers
+	5001-65535	User servers, not necessarily privilaged.
+Having only 3977 ports available for the kernel to do dynamic
+port number assignment means it is using just over 6% of the
+total port number space.  It also isn't what was intended.  When
+Mike Karels recently noticed that the range was only up to 5000,
+not 50000, he thought "When did that get broken?", and a check of
+the SCCS file showed that it had been broken since it went in,
+a couple of months prior to the release of 4.3 BSD.  (Prior to
+4.3, ports 1024-65535 were available to the kernel for dynamic
+assignment.)
+
+In looking at the current Port number assignments
+	ftp://ftp.isi.edu/in-notes/iana/assignments/port-numbers
+it looks like the ranges should be:
+	1-1023		Well Known Ports
+	1024-49151	Registered Ports
+	49152-65535	Dynamic and/or Private Ports
+which reserves the top 1/4 of the port number space for dynamic
+allocation, just a bit over 4 times the space currently used by
+BSD based systems.  BSDI is in the final stages of getting
+BSD/OS 3.0 ready for release, so we won't be making any changes
+at this point in time, however I plan on changing the dynamic
+port assignment code in the kernel to use 49152-65535 for 3.1.
+
+Is anyone aware of any systems out there that might break if we
+start regularly using local ports that have the high bit set?
+
+		-David Borman, dab@bsdi.com

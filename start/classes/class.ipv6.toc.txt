@@ -1,0 +1,100 @@
+
+INTRODUCTION   4 
+
+     Why a New Version?   4 
+     CIDR: Classless Interdomain Routing   6 
+     Major Changes From IPv4   8 
+     Resources   9 
+     Header Formats   10 
+     DNS Support   11 
+     IPv6 Addresses   12 
+        Unspecified Address   14 
+        Loopback Address   14 
+        IPv4-Mapped IPv6 Address   14 
+        IPv4-Compatible IPv6 Address   15 
+        Interface IDs   15 
+        Link-Local Address   16 
+        Site-Local Address   16 
+        Aggregatable Global Unicast Addresses   17 
+     6bone   19 
+
+APPLICATION PROGRAMMING INTERFACE CHANGES   20 
+
+     Big Picture   20 
+     sockaddr_in6 Structure   22 
+     Address Conversion Functions   25 
+        inet_pton Function   27 
+        inet_ntop Function   28 
+        gethostbyname Function   29 
+        gethostbyname2 Function   29 
+        getaddrinfo Function   34 
+        getnameinfo Function   36 
+     New Socket Options   39 
+     Converting IPv4 Applications to IPv6   42 
+
+TRANSITION MECHANISMS   43 
+
+     The IPv4 Internet   43 
+     Adding IPv6/IPv4 hosts   45 
+        IN6_IS_ADDR_V4MAPPED Macro   50 
+        IPV6_ADDRFORM Socket Option   51 
+     Automatic Tunneling   53 
+     Configured Tunnels   57 
+     IPv6 Routing Table Example   57 
+     Longest Prefix Match   59 
+
+IPv6 PROTOCOL   60 
+
+     IPv6 Header   60 
+     Class   61 
+     Flow Label   62 
+     Payload Length   63 
+     Next Header   63 
+     Hop Limit   63 
+     Extension Headers   65 
+     Hop-by-Hop and Destination Options   66 
+     Routing Header   70 
+     Fragment Header   74 
+     Path MTU Discovery   76 
+     Authentication Header   79 
+     Encapsulating Security Payload Header   80 
+
+UPPER-LAYER ISSUES   81 
+
+     Checksums   81 
+     Other Issues   85 
+
+ICMPv6: INTERNET MESSAGE CONTROL PROTOCOL   86 
+
+     Introduction   86 
+     Destination Unreachable   89 
+     Packet Too Big   90 
+     Time Exceeded   90 
+     Parameter Problem   91 
+     Echo Request/Reply   92 
+
+MULTICASTING   93 
+
+     Introduction   93 
+     ICMP Group Membership Messages   102 
+     Multicast Routing   104 
+     Multicast API   106 
+
+NEIGHBOR DISCOVERY   109 
+
+     Introduction   109 
+     Neighbor Solicitation   114 
+     Neighbor Advertisement   116 
+     Redirect   118 
+     Router Solicitation   120 
+     Router Advertisement   121 
+     Neighbor Unreachability Detection   126 
+     Duplicate Address Detection   128 
+
+OTHER TOPICS   130 
+
+     Anycasting   130 
+     Mobility   136 
+
+Further Reading   141 
+

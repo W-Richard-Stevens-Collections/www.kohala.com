@@ -1,0 +1,458 @@
+<HTML>
+<HEAD>
+<TITLE>
+UNIX Network Programming, Volume 1-Preface
+</TITLE>
+</HEAD>
+
+<BODY>
+<H1>Preface</H1>
+<P>
+<!-- ***************************************************************** -->
+<HR>
+<H2>Introduction</H2>
+<P>
+Network programming involves writing programs
+that communicate with other programs across a computer network.
+One program is normally called the
+<I>client</I>
+and the other the
+<I>server</I>.
+Most operating systems provide precompiled programs that communicate across
+a network--common examples in the TCP/IP world are
+Web clients (browsers) and Web servers,
+and the FTP and Telnet clients and servers--but
+this book describes how to write our own network programs.
+<P>
+We write network programs using an
+<I>application program interface</I>
+or
+<I>API</I>.
+We describe two APIs for network programming:
+<OL>
+<LI>
+sockets, sometimes called "Berkeley sockets"
+acknowledging their heritage from Berkeley Unix, and
+<P>
+<LI>
+XTI (X/Open Transport Interface),
+a slight modification of the Transport Layer Interface (TLI)
+developed by AT&T.
+</OL>
+<P>
+All the examples in the text are from the Unix operating system,
+although the foundation and concepts required for network programming are,
+to a large degree, operating system independent.
+The examples are also based on the TCP/IP protocol suite,
+both IP versions 4 and 6.
+<P>
+To write network programs one must understand
+the underlying operating system
+and the underlying networking protocols.
+This book builds on the foundation of my other four books
+in these two areas,
+and these books are abbreviated throughout this text as follows:
+<UL>
+<LI>   APUE: <I>Advanced Programming in the UNIX Environment</I> [Stevens 1992],
+<LI>   TCPv1: <I>TCP/IP Illustrated, Volume 1</I> [Stevens 1994],
+<LI>   TCPv2: <I>TCP/IP Illustrated, Volume 2</I> [Wright and Stevens 1995], and
+<LI>   TCPv3: <I>TCP/IP Illustrated, Volume 3</I> [Stevens 1996].
+</UL>
+This second edition of
+<I>UNIX Network Programming</I>
+still contains information on both Unix and the TCP/IP protocols,
+but many references are made to these other four texts
+to allow interested readers to obtain more detailed information
+on various topics.
+This is especially the case for TCPv2,
+which describes and presents the actual 4.4BSD implementation of
+the network programming functions for the sockets API
+(<TT>socket</TT>,
+<TT>bind</TT>,
+<TT>connect</TT>,
+and so on).
+If one understands the implementation of a feature,
+the use of that feature in an application makes more sense.
+<!-- ***************************************************************** -->
+<HR>
+<H2>Changes from the First Edition</H2>
+<P>
+This second edition is a complete rewrite of the first edition.
+These changes have been driven by the feedback I have received
+teaching this material about once a month during 1990-1996,
+and by following certain Usenet newsgroups during this same time,
+which lets one see the topics that are continually misunderstood.
+The following are the major changes with this new edition:
+<UL>
+<LI>
+This new edition uses ANSI C for all examples.
+<P>
+<LI>
+The old Chapters 6 ("Berkeley Sockets")
+and 8 ("Library Routines") have been expanded into 25 chapters.
+Indeed this sevenfold expansion (based on a word count)
+of this material is probably the most significant change
+from the first to the second edition.
+Most of the individual sections in the old Chapter 6 have been expanded into
+an entire chapter with more examples added.
+<P>
+<LI>
+The TCP and UDP portions from the old Chapter 6 have been separated
+and we now cover the TCP functions and a complete TCP client-server,
+followed by the UDP functions and a complete UDP client-server.
+This is easier for newcomers to understand
+than describing all the details of the
+<TT>connect</TT>
+function, for example, with its different semantics for TCP versus UDP.
+<P>
+<LI>
+The old Chapter 7 ("System V Transport Layer Interface")
+has been expanded into seven chapters.
+We also cover the newer XTI instead of the TLI that it replaces.
+<P>
+<LI>
+The old Chapter 2 ("The Unix Model") is gone.
+This chapter provided an overview of the Unix system in about 75 pages.
+In 1990 this chapter was needed because few books existed
+that adequately described the basic Unix programming interface,
+especially the differences between the Berkeley and System V implementations
+that existed in 1990.
+Today, however, more readers have a fundamental understanding of Unix,
+so concepts such as a process ID, password files, directories, and group IDs,
+need not be repeated.
+(My APUE book is a 700-page expansion of this material
+for readers desiring additional Unix programming details.)
+<P>
+Some of the advanced topics from the old Chapter 2
+are covered in this new edition,
+but their coverage is moved to where the feature is used.
+For example, when showing our first concurrent server
+(Section 4.8) we cover the
+<TT>fork</TT>
+function.
+When we describe how to handle the
+<TT>SIGCHLD</TT>
+signal with our concurrent server (Section 5.9),
+we describe many additional features of Posix signal handling
+(zombies, interrupted system calls, etc.).
+<P>
+<LI>
+Whenever possible this text describes the Posix interface.
+(We say more about the Posix family of standards in Section 1.10.)
+This includes not only the Posix.1 standard for the basic Unix functions
+(process control, signals, etc.),
+but also the forthcoming Posix.1g standard
+for the sockets and XTI networking APIs,
+and the 1996 Posix.1 standard for threads.
+<P>
+The term "system call" has been changed to "function"
+when describing functions such as
+<TT>socket</TT>
+and
+<TT>connect</TT>.
+This follows the Posix convention that the distinction between
+a system call and a library function is an implementation detail
+that is often irrelevant for a programmer.
+<P>
+<LI>
+The old Chapters 4 ("A Network Primer")
+and 5 ("Communication Protocols") have been replaced
+with Appendix A covering IP versions 4 (IPv4) and 6 (IPv6),
+and Chapter 2 covering TCP and UDP.
+This new material focuses on the protocol issues that network programmers
+are certain to encounter.
+The coverage of IPv6 was included,
+even though IPv6 implementations are just starting to appear,
+since during the lifetime of this text IPv6 will probably
+become the predominant networking protocol.
+<P>
+I have found when teaching network programming that about 80% of all
+network programming problems have nothing to do with network programming,
+per se.
+That is, the problems are not with the API functions such as
+<TT>accept</TT>
+and
+<TT>select</TT>,
+but the problems arise from a lack of understanding
+of the underlying network protocols.
+For example, I have found that once a student understands TCP's
+three-way handshake and four-packet connection termination,
+many network programming problems are immediately understood.
+<P>
+The old sections on XNS, SNA, NetBIOS, the OSI protocols,
+and UUCP have been removed,
+since it has become obvious during the early 1990s that these
+proprietary protocols have been eclipsed by the TCP/IP protocols.
+(UUCP is still popular and is not proprietary,
+but there is little we can show from a network programming perspective
+using UUCP.)
+<P>
+<LI>
+The following new topics are covered in this second edition:
+<P>
+<UL>
+<LI>   IPv4/IPv6 interoperability (Chapter 10),
+<LI>   protocol-independent name translation (Chapter 11),
+<LI>   routing sockets (Chapter 17),
+<LI>   multicasting (Chapter 19),
+<LI>   threads (Chapter 23),
+<LI>   IP options (Chapter 24),
+<LI>   datalink access (Chapter 26),
+<LI>   client-server design alternatives (Chapter 27),
+<LI>   virtual networks and tunneling (Appendix B), and
+<LI>   network program debugging techniques (Appendix C).
+</UL>
+</UL>
+<P>
+Unfortunately, the coverage of the material from the first edition
+has been expanded so much that it no longer fits into a single book.
+Therefore at least two additional volumes are planned in the
+<I>UNIX Network Programming</I>
+series.
+<UL>
+<LI>
+Volume 2 will probably be subtitled
+<I>IPC: Interprocess Communication</I>
+and will be an expansion of the old Chapter 3,
+along with coverage of the 1996 Posix.1 realtime IPC mechanisms.
+<P>
+<LI>
+Volume 3 will probably be subtitled
+<I>Applications</I>
+and will be an expansion of Chapters 9-18 of the first edition.
+</UL>
+<P>
+Even though most of the networking applications will be covered
+in Volume 3, a few special applications are covered in this volume:
+Ping, Traceroute, and
+<TT>inetd</TT>.
+<!-- ***************************************************************** -->
+<HR>
+<H2>Readers</H2>
+<P>
+This text can be used as either a tutorial on network programming,
+or as a reference for experienced programmers.
+When used as a tutorial or for an introductory class
+on network programming, the emphasis should be on Part 2
+("Elementary Sockets," Chapters 3 through 9)
+followed by whatever additional topics are of interest.
+Part 2 covers the basic socket functions, for both TCP and UDP,
+along with I/O multiplexing, socket options,
+and basic name and address conversions.
+Chapter 1 should be read by all readers, especially Section 1.4,
+which describes some wrapper functions used throughout the text.
+Chapter 2 and perhaps Appendix A should be referred to as necessary,
+depending on the reader's background.
+Most of the chapters in Part 3 ("Advanced Sockets")
+can be read independently of the others in that part.
+<P>
+To aid in the use as a reference, a thorough index is provided,
+along with summaries on the end papers of where to find detailed
+descriptions of all the functions and structures.
+To help those reading topics in a random order,
+numerous references to related topics are provided throughout the text.
+<P>
+Although the sockets API has become the de facto standard for
+network programming, XTI is still used,
+sometimes with protocol suites other than TCP/IP.
+While the coverage of XTI in Part 4 is smaller than the
+coverage of sockets in Parts 2 and 3,
+much of the sockets coverage describes
+<I>concepts</I>
+that apply to XTI as well as sockets.
+For example, all of the concepts regarding the use of
+nonblocking I/O, broadcasting, multicasting,
+signal-driven I/O, out-of-band data, and threads,
+are the same, regardless of which API (sockets or XTI) is used.
+Indeed, many network programming problems are fundamentally similar,
+independent of whether the program is written using sockets or XTI,
+and there is hardly anything that can be done with one API
+that cannot be done with the other.
+The concepts are the same--just the function names and arguments change.
+<!-- ***************************************************************** -->
+<HR>
+<H2>Source Code and Errata Availability</H2>
+<P>
+The source code for all the examples that appear in the book
+is available from
+<TT>ftp://ftp.kohala.com/pub/rstevens/unpv12e.tar.gz</TT>.
+The best way to learn network programming is to take these programs,
+modify them, and enhance them.
+Actually writing code of this form is the
+<I>only</I>
+way to reinforce the concepts and techniques.
+Numerous exercises are also provided at the end of each chapter,
+and most answers are provided in Appendix E.
+<P>
+A current
+<A HREF="typos.unpv12e.txt">errata</A>
+for the book is also available from my home page,
+listed at the end of the Preface.
+<!-- ***************************************************************** -->
+<HR>
+<H2>Acknowledgments</H2>
+<P>
+Supporting every author is an understanding family,
+or nothing would ever get written!
+I am grateful to my family, Sally, Bill, Ellen, and David,
+first for their support and understanding when I wrote my first book
+(the first edition of this book),
+and for enduring this "small" revision.
+Their love, support, and encouragement helped make this book possible.
+<P>
+Numerous reviewers provided invaluable feedback
+(totaling 190 printed pages or 70,000 words),
+catching lots of errors,
+pointing out areas that needed more explanation,
+and suggesting alternative presentations, wording, and coding:
+Ragnvald Blindheim,
+Jim Bound,
+Gavin Bowe,
+Allen Briggs,
+Joe Doupnik,
+Wu-chang Feng,
+Bill Fenner,
+Bob Friesenhahn,
+Andrew Gierth,
+Wayne Hathaway,
+Kent Hofer,
+Sugih Jamin,
+Scott Johnson,
+Rick Jones,
+Mukesh Kacker,
+Marc Lampo,
+Marty Leisner,
+Jack McCann,
+Craig Metz,
+Bob Nelson,
+Evi Nemeth,
+John C. Noble,
+Steve Rago,
+Jim Reid,
+Chung-Shang Shao,
+Ian Lance Taylor,
+Ron Taylor,
+Andreas Terzis,
+and Dave Thaler.
+A special thanks to Sugih Jamin and his students in EECS 489
+("Computer Networks") at the University of Michigan
+who beta tested an early draft of the manuscript
+during the spring of 1997.
+<P>
+The following people answered email questions of mine,
+sometimes lots of questions,
+which improved the accuracy and presentation of the text:
+Dave Butenhof,
+Dave Hanson,
+Jim Hogue,
+Mukesh Kacker,
+Brian Kernighan,
+Vern Paxson,
+Steve Rago,
+Dennis Ritchie,
+Steve Summit,
+Paul Vixie,
+John Wait,
+Steve Wise,
+and Gary Wright.
+<P>
+A special thanks to Larry Rafsky and the wonderful team at Gari Software
+for handling lots of details
+and for many interesting technical discussions.
+Thank you, Larry, for everything.
+<P>
+Numerous individuals and their organizations
+went beyond the normal call of duty
+to provide either a loaner system, software, or access to a system,
+all of which were used to test some of the examples in the text.
+<UL>
+<LI>
+Meg McRoberts
+of SCO provided the latest releases of UnixWare, and
+Dion Johnson,
+Yasmin Kureshi,
+Michael Townsend,
+and Brian Ziel,
+provided support and answered questions.
+<P>
+<LI>
+Mukesh Kacker
+of SunSoft provided access to a beta version of Solaris 2.6
+and answered many questions about the Solaris TCP/IP implementation.
+<P>
+<LI>
+Jim Bound,
+Matt Thomas,
+Mary Clouter,
+and Barb Glover
+of Digital Equipment Corp. provided an Alpha system
+and access to the latest IPv6 kits for Digital Unix.
+<P>
+<LI>
+Michael Johnson of Red Hat Software
+provided the latest releases of Red Hat Linux.
+<P>
+<LI>
+Steve Wise
+and Jessie Haug
+of IBM Austin provided an RS/6000 system
+and access to the latest IPv6 for AIX.
+<P>
+<LI>
+Rick Jones
+of Hewlett-Packard provided access to a beta version of HP-UX 10.30
+and he and
+William Gilliam
+answered many questions about it.
+</UL>
+<P>
+Many people helped with the Internet connectivity
+used throughout the text.
+My thanks once again to the National Optical Astronomy Observatories (NOAO),
+Sidney Wolff, Richard Wolff, and Steve Grandi,
+for providing access to their networks and hosts.
+Dave Siegel, Justis Addis, and Paul Lucchina answered many questions,
+Phil Kaslo and Jim Davis provided an MBone connection,
+Ran Atkinson and Pedro Marques provided a 6bone connection,
+and Craig Metz provided lots of DNS help.
+<P>
+The staff at Prentice Hall,
+especially my editor Mary Franz,
+along with Noreen Regina,
+Sophie Papanikolaou,
+and Eileen Clark,
+have been a wonderful asset to a writer.
+Many thanks for letting me do so many things "my way."
+<P>
+As usual, but contrary to popular fads,
+I produced camera-ready copy of the book
+using the wonderful Groff package written by James Clark.
+I typed in all 291,972 words using the
+<TT>vi</TT>
+editor, created the 201 illustrations using the
+<TT>gpic</TT>
+program (using many of Gary Wright's macros),
+produced the 81 tables using the
+<TT>gtbl</TT>
+program, performed all the indexing,
+and did the final page layout.
+Dave Hanson's
+<TT>loom</TT>
+program and some scripts by Gary Wright
+were used to include the source code in the book.
+A set of
+<TT>awk</TT>
+scripts written by Jon Bentley and Brian Kernighan
+helped in producing the final index.
+<P>
+I welcome electronic mail from any readers with comments,
+suggestions, or bug fixes.
+<P>
+W. Richard Stevens
+<BR> <TT>http://www.kohala.com/</TT>
+<BR> <I>Tucson, Arizona</I>
+<BR> <I>September 1997</I>
+<BR>
+
+</BODY>
+</HTML>

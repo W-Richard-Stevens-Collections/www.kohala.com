@@ -1,0 +1,108 @@
+<HTML>
+<HEAD>
+<TITLE>
+Reported problems building the source code
+</TITLE>
+</HEAD>
+
+<BODY>
+
+<P>
+The following problems have been reported by readers building the
+source code.
+I am just collecting these and making them available:
+I do not have access to all the systems to try and duplicate
+the problems and/or fix them.
+Please let me know of any additional problems.
+
+<UL>
+
+<P>
+<LI>Digital Unix 4.0:
+	The <TT>configure</TT> script does not find the <TT>sigwait</TT>
+	function.  The easiest solution is to uncomment the <TT>#undef</TT>
+	of <TT>HAVE_SIGWAIT</TT> in <TT>config.h</TT> and change the
+	<TT>#undef</TT> to <TT>#define</TT>.
+
+<P>
+<LI>HP-UX 10.x/GCC:
+	Run <TT>./configure</TT> as instructed in the <TT>README</TT> file.
+
+	<P>
+	Edit the file <TT>unpv22e/lib/unpipc.h</TT> and insert
+	<TT>#ifdef HAVE_PTHREAD_H</TT>
+	just before the Pthread_xxxx prototypes,
+	(which start on line 427), and put a <TT>#endif</TT> just after
+	the prototype for <TT>pr_thread_id</TT>.  (New line 459.)
+
+	<P>
+	Edit the file <TT>unpv22e/lib/my_shm.c</TT> and change both 
+	occurrences of <TT>MAP_ANON</TT> to <TT>MAP_ANONYMOUS</TT>.
+
+	<P>
+	Optional: If you have superuser privileges, 
+	clean up the include header <TT>/usr/include/rpc/xdr.h</TT>:
+	Remove the extra <TT>/*</TT> inside the commented-out 
+	<TT>#endif</TT> on line 26--this will stop a plethora of 
+	(harmless) compiler warnings about the embedded 
+	comment start token.
+
+	<P>
+	cd to <TT>unpv22e/lib</TT> and do a <TT>make</TT>.
+
+	<P>
+	Continue on as described in the <TT>README</TT> file.
+
+<P>
+<LI>AIX 4.3.1:
+	There are three compiler warnings when compiling the file
+	<tt>/lib/wrapsunrpc.c</tt>.  These are because the AIX headers
+	do not use the <tt>const</tt> qualifier for the first and last
+	arguments to <tt>clnt_create</tt>.
+
+	<P>Beware of the following comment in the system headers
+	<tt>&lt;mqueue.h&gt;</tt> and <tt>&lt;semaphore.h&gt;</tt>:
+	<PRE>
+	/* THIS FILE is for conformance to IEEE POSIX 1003.1c.
+	 * It describes required symbols for the Realtime option
+	 * which is NOT SUPPORTED.
+	 */
+	</PRE>
+	AIX 4.3.1 does conform to Unix 98, but the Posix realtime options
+	are (unfortunately) an option to Unix 98.
+
+<P>
+<LI>Linux:
+	The standard Linux releases do not support the Posix.1b APIs
+	(Posix message queues, Posix semaphores, and Posix shared memory).
+	I just just been made aware of a
+	<A HREF="http://www.ispras.ru/~knizhnik/">Posix.1b library</A>
+	for Linux.
+
+<P>
+<LI>Linux, RedHat 5.1:
+	The function prototype for <tt>semctl</tt> in
+	<tt>&lt;sys/sem.h&gt;</tt> is wrong: the fourth argument is optional
+	(depending on the command) and should be specified as <tt>...</tt>
+	(an ellipsis).
+	This causes an error when compiling the library.  The easiest fix
+	is to add a dummy argument of 0 to the call to <tt>semctl</tt>
+	that contains just three arguments in <tt>lib/wrapunix.c</tt>.
+
+	<P>This system also has a <tt>&lt;semaphore.h&gt;</tt> header,
+	but it doesn't appear to fully support Posix semaphores (it appears
+	to support only Posix memory-based semaphores).  To prevent trying
+	to use Posix semaphores, comment out the definition of
+	<tt>HAVE_SEMAPHORE_H</tt> in the <tt>config.h</tt> header.
+
+<P>
+<LI>Solaris 2.6:
+	All my Solaris work was done with GCC, not the Sun C compiler.
+	(Anyone at Sun is welcome to send me the Sun compiler.)
+	The <tt>CFLAGS</tt> variable set by the <tt>configure</tt> script
+	almost certainly needs to be changed for the Sun compiler.
+
+</UL>
+
+</BODY>
+</HTML>

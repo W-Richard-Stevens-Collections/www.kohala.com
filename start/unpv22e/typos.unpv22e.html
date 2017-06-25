@@ -1,0 +1,682 @@
+<HTML>
+<HEAD>
+<TITLE>
+Errata for UNIX Network Programming, Volume 2
+</TITLE>
+</HEAD>
+
+<BODY>
+
+<CENTER>
+<H2>Errata for UNIX Network Programming, Volume 2</H2>
+</CENTER>
+
+<P>
+This file contains all typos found in the book
+<I>UNIX Network Programming, Volume 2, Second Edition: Interprocess
+	Communications</I> by W. Richard Stevens, Prentice Hall, 1999,
+	ISBN 0-13-081081-9.
+
+<UL>
+<LI>Last updated August 27, 1999.
+
+<LI>The smallest number in the list of numbers above the ISBN towards
+	the bottom of the copyright page specifies the printing.
+	For example "10 9 8 7 6 5 4 3 2 1" specifies the first printing.
+
+<LI>See also the <A HREF="typos.unpv22e.html#source">Source code fixes</A>
+	 later in this file.
+
+<LI>See also the <A HREF="typos.unpv22e.html#comments">Comments to Readers</A>
+	 at the end of this file.
+</UL>
+
+<HR>
+<UL>
+<LI>The following errors have not been corrected in any printing.
+</UL>
+
+<TABLE BORDER>
+<TR>
+	<TH>Page
+	<TH>Description
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">111
+	<TD>4th line from bottom of page:
+	"message queue has been initialized" should be
+	"message queue has not been initialized"  (990107).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">202
+	<TD>In the definitions of the two macros
+	<TT>is_read_lockable</TT> and <TT>is_write_lockable</TT>
+	the return value from <TT>lock_test</TT> should be negated, as in
+<PRE>
+#define is_read_lockable(fd, offset, whence, len) \
+                        !lock_test(fd, F_RDLCK, offset, whence, len)
+</PRE>
+	because the region is lockable if <TT>lock_test</TT> returns 0
+	(990105).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">209
+	<TD>2nd line from bottom of page:
+	"starvation of write locks" should be
+	"starvation of writers"  (990105).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">233
+	<TD>1st line of item "1." near top of page:
+	"In our first solution (Section 7.2)" should be
+	"In our first solution (Section 7.3)"  (990107).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">249
+	<TD>1st line on page:
+	"as each consumer thread terminates" should be
+	"as each producer thread terminates"  (990107).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">263
+	<TD>The last line of the description for lines 19-23
+	("A file is created ... is turned on.") should be
+	the first line of the description for lines 24-32 (990107).
+
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">339
+	<TD>In the first two lines of the description for lines 19-31
+	the two occurrences of "consumer" should be "producer" (990208).
+
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">376
+	<TD>Line 22 of Figure 15.16:
+	<TT>server1</TT> should be <TT>serverunref1</TT> (990215).
+
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">378
+	<TD>Line 23 of Figure 15.17:
+	<TT>server1</TT> should be <TT>serverunref2</TT> (990215).
+
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">378
+	<TD>8th line from bottom of page (continuation line of command):
+	"<TT>clientunref2 /tmp/door2 55 &amp;</TT>" should be
+	"<TT>clientunref2 /tmp/door2 66 &amp;</TT>" (990215).
+
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">386
+	<TD>Fifth line from top of page: replace
+	<TT>my_thread</TT> with <TT>my_create</TT> (990215).
+
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">386
+	<TD>Second line above <B>Server creation procedure</B>: replace
+	"calls <TT>my_thread</TT>" with "specifies <TT>my_thread</TT>" (990215).
+
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">387
+	<TD>Line 27 of Figure 15.23:
+	<TT>arg</TT> should be
+	"<TT>(Door_server_proc *) iptr->di_proc</TT>" (990215).
+
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">387
+	<TD>Line 40 of Figure 15.23:
+	<TT>my_thread</TT> should be <TT>my_create</TT> (990215).
+
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">388
+	<TD>Last line of page: replace
+	<TT>my_thread</TT> with <TT>my_create</TT> (990215).
+
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">389
+	<TD>First line of server output (15 lines from bottom of page): replace
+	<TT>my_thread</TT> with <TT>my_create</TT> (990215).
+
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">390
+	<TD>Second and fourth lines from top of page: replace
+	<TT>my_thread</TT> with <TT>my_create</TT> (990215).
+
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">391
+	<TD>First line on page: replace
+	<TT>thread_exit</TT> with <TT>pthread_exit</TT> (990215).
+
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">399
+	<TD>8th line from bottom of page: replace
+	"or within threads in different processes" with
+	"or between threads in different processes" (990226).
+
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">400
+	<TD>First line beneath Figure 16.1: replace
+	"whose name end" with "whose names end" (990226).
+
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">417
+	<TD>In the 3rd paragaph ("An RPC packet ..."): replace
+	the three occurrences of "picture" with "photo" (990226).
+	In the 5th line of that paragraph, replace
+	"different forms of credentials" with
+	"different forms of verifiers".
+
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">424
+	<TD>Third line below <B>Premature Termination of Server</B>: replace
+	<TT>clnt_call</TT> with <TT>clnt_create</TT> (990409).
+
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">441
+	<TD>First line of description for lines 20-22: replace
+	"host-to-network" with "network-to-host" (990226).
+
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">531
+	<TD>Last line on page: replace
+	<TT>my_thread</TT> with <TT>my_create</TT> (990215).
+
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">532
+	<TD>Second line for 16.1: replace
+	"After we terminate out client" with
+	"After we terminate out server" (990226).
+
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">532
+	<TD>Second line for 16.2: replace
+	"The next reply for" with
+	"The next reply from" (990226).
+
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">550
+	<TD>Add page 391 to the index entry for <TT>pthread_exit</TT> (990215).
+
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">557
+	<TD>Delete the index entry for <TT>thread_exit</TT> (990215).
+
+</TABLE>
+
+<UL>
+<LI>The following errors are corrected in the 3rd printing and later.
+</UL>
+
+<TABLE BORDER>
+<TR>
+	<TH>Page
+	<TH>Description
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">15
+	<TD>Indented paragraph one-third of the way down the page:
+	change "from this URL" to "from this site" (981120).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">16
+	<TD>9th line of Section 1.9:
+	in "each type of IPC as either can be"
+	delete "as either" (981120).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">28
+	<TD>Item 3 near the bottom of the page:
+	"the low-order 8 bits of the <I>id</I>." should be
+	"the low-order 8 bits of the <I>id</I> (which must not be 0)."
+	(981020).
+	See the <A HREF="typos.unpv22e.html#comments">Comments to Readers</A>
+	at the end of this file for more details on this correction.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">37
+	<TD>First line of first example (from <TT>/etc/system</TT> file):
+	change "<TT>4et</TT>" to "<TT>set</TT>" (981216).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">48
+	<TD>Line 12 of Figure 4.9: in the comment,
+	change "delete" to "ignore" (981125).
+	(Compare this ignoring of the newline to the actual
+	deletion of the newline in the subsequent errata for Figure 4.15
+	on p. 53.)
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">53
+	<TD>Line 12 of Figure 4.15: replace <TT>n--;</TT> with
+	<TT>buff[n-1] = '\0';</TT> (981125).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">62
+	<TD>Line 7 of Figure 4.23: change the declaration of <TT>buff</TT>
+	to <TT>buff[MAXLINE+1]</TT> (981125).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">62
+	<TD>Figure 4.23: add <TT>exit(0);</TT> between lines 45 and 46 (981102).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">65
+	<TD>13th line from top of page:
+	"if we invoke the client" should be
+	"if we invoke the server" (981125).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">75
+	<TD>Last line of 1st paragraph:
+	"for which it having" should be
+	"for which having" (981215).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">82
+	<TD>6th line from top of page:
+	"(indicated by an option letter followed by a colon)" is better as
+	"(indicated by a colon following the option letter in the third
+	argument)" (981215).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">95
+	<TD>1st line of 2nd indented paragraph:
+	"Two more variants" should be
+	"Two variants" (981215).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">100
+	<TD>Parenthetical note, about Digital Unix 4.0B: "33 through 38"
+	should be "33 through 48" (980906).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">102
+	<TD>Description for lines 18-21: add the following sentence
+	to the end of this paragraph:
+	"This function also sets the mask of signals to block
+	while the signal handler is executing." (981020).
+	<P>
+	See the <A HREF="typos.unpv22e.html#comments">Comments to Readers</A>
+	at the end of this file for more details on this correction
+	and the following corrections to pages 103-105.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">103
+	<TD>Figure 5.17: add a third argument,
+	<TT>&amp;newset</TT>, in the three calls to the function
+	<TT>Signal_rt</TT> on lines 19-21 (981020):
+<PRE>
+    Signal_rt(SIGRTMAX, sig_rt, &newset);
+    Signal_rt(SIGRTMAX - 1, sig_rt, &newset);
+    Signal_rt(SIGRTMAX - 2, sig_rt, &newset);
+</PRE>
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">104
+	<TD>Bottom portion of page
+	showing the Digital Unix 4.0B results (981020):
+	given the corrections to Figures 5.17 and 5.18,
+	these results are now correct.
+	Change this line to
+	"We now run the program under Digital Unix 4.0B and see the
+	expected results."
+	The last nine lines on the page are now:
+<PRE>
+    received signal #46, code = -1, ival = 0
+    received signal #46, code = -1, ival = 1
+    received signal #46, code = -1, ival = 2
+    received signal #47, code = -1, ival = 0
+    received signal #47, code = -1, ival = 1
+    received signal #47, code = -1, ival = 2
+    received signal #48, code = -1, ival = 0
+    received signal #48, code = -1, ival = 1
+    received signal #48, code = -1, ival = 2
+</PRE>
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">105
+	<TD>Top four lines of page, change to (981020):
+	<P>
+	The nine signals are queued and then delivered
+	in the order that we expect:	
+	the lowest-numbered-signal first, and for a given signal,
+	the three occurrences are delivered in FIFO order.
+	<P><SMALL>&nbsp;&nbsp;&nbsp;&nbsp;
+	The Solaris 2.6 implementation appears to have a bug</SMALL>.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">105
+	<TD>2nd line of <B><TT>signal_rt</TT> Function</B> paragraph:
+	"that provides realtime Posix semantics" should be
+	"that provides reliable Posix semantics" (981215).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">105
+	<TD>Figure 5.18: a third argument is being added to this function,
+	a signal set that specifies the set of signals to be blocked
+	while the signal handler is executing (981020).
+	Change line 3 to
+<PRE>
+    signal_rt(int signo, Sigfunc_rt *func, sigset_t *mask)
+</PRE>
+	and change line 7 to
+<PRE>
+    act.sa_mask = *mask;    /* signals to block */
+</PRE>
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">109
+	<TD>Last word of 1st line of 2nd paragraph describing lines 26-32:
+	"initial-ized" should be
+	"initial-ized," (981215).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">136
+	<TD>Figure 6.4, line 16:
+	change second argument to <TT>Ftok</TT> from 0 to 1 (981020).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">136
+	<TD>Figure 6.5, line 13:
+	change second argument to <TT>Ftok</TT> from 0 to 1 (981020).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">137
+	<TD>Figure 6.6, line 23:
+	change second argument to <TT>Ftok</TT> from 0 to 1 (981020).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">138
+	<TD>Figure 6.7, line 8:
+	change second argument to <TT>Ftok</TT> from 0 to 1 (981020).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">164
+	<TD>Caption for Figure 7.3:
+	"<TT>consumer</TT>" should be
+	"<TT>consume</TT>" and
+	"<TT>producer</TT>" should be
+	"<TT>produce</TT>" (981215).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">171
+	<TD>2nd line from top: "by the thread calling
+	<TT>pthread_cond_wait</TT>" should be "by the thread calling
+	<TT>pthread_cond_signal</TT>" (980910).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">177
+	<TD>2nd line in paragraph following indented items 1 and 2:
+	in "as long as no thread is reading or modifying"
+	delete "reading or" (981203).
+	In the next sentence change
+	"modified only if no other thread is reading the data" to
+	"modified only if no other thread is reading or modifying the data".
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">186
+	<TD>Comment on line 14 of Figure 8.8:
+	"releasing a reader" should be
+	"releasing a writer" (981216).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">272
+	<TD>Figure 10.52, line 29:
+	change second argument to <TT>ftok</TT> from 0 to 1 (981020).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">274
+	<TD>Figure 10.53, line 60:
+	change second argument to <TT>ftok</TT> from 0 to 1 (981020).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">276
+	<TD>Figure 10.55, line 8:
+	change second argument to <TT>ftok</TT> from 0 to 1 (981020).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">289
+	<TD>Figure 11.2, line 17:
+	change second argument to <TT>Ftok</TT> from 0 to 1 (981020).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">291
+	<TD>Figure 11.3, line 8:
+	change second argument to <TT>Ftok</TT> from 0 to 1 (981020).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">291
+	<TD>Figure 11.4, line 12:
+	change second argument to <TT>Ftok</TT> from 0 to 1 (981020).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">292
+	<TD>Figure 11.5, line 12:
+	change second argument to <TT>Ftok</TT> from 0 to 1 (981020).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">293
+	<TD>Figure 11.6, line 20:
+	change second argument to <TT>Ftok</TT> from 0 to 1 (981020).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">295
+	<TD>Figure 11.7, lines 14 and 20:
+	change second argument to <TT>Ftok</TT> from 0 to 1 (981020).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">346
+	<TD>Figure 14.1, line 19:
+	change second argument to <TT>Ftok</TT> from 0 to 1 (981020).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">347
+	<TD>Figure 14.2, line 8:
+	change second argument to <TT>Ftok</TT> from 0 to 1 (981020).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">347
+	<TD>Figure 14.3, line 10:
+	change second argument to <TT>Ftok</TT> from 0 to 1 (981020).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">348
+	<TD>Figure 14.4, line 10:
+	change second argument to <TT>Ftok</TT> from 0 to 1 (981020).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">355
+	<TD>7th line of item 2: remove the extraneous comma (980928).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">507
+	<TD>Line 71: change "three headers" to "two headers"
+	and remove ", and <TT>&lt;sys/sockio.h&gt;</TT>" from line 72
+	(981120).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP"> 512 <BR> 513
+	<TD>The <TT>strcat</TT> on line 78 (p. 513) can write one byte
+	beyond the end of the buffer (980714).
+	One solution is to change line 68 to
+	<TT>char buf[MAXLINE + 1];</TT> and then change the two
+	<TT>sizeof(buf)</TT> (lines 71 and 77) to <TT>MAXLINE</TT>.
+	This guarantees that the buffer is always terminated by a newline
+	followed by a null byte.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">518
+	<TD>Solution for Exercise 4.6:
+	in the first line change "(write-only)" to "(read-only)"
+	and in the second line change "(read-only)" to "(write-only)" (981125).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">524
+	<TD>2nd line of solution for Exercise 10.2:
+	"exists it, is" should be
+	"exists, it is" (980924).
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">527
+	<TD>Figure D.9, line 20:
+	change second argument to <TT>Ftok</TT> from 0 to 1 (981020).
+<TR>
+	<TD>&nbsp;
+	<TD>inside back cover:
+	Add a third argument to the prototype for <TT>signal_rt</TT>,
+	as per the correction shown earlier for page 105 (971020).
+</TABLE>
+
+<P>
+<UL>
+<LI><A NAME="source"></A>The following are fixes to the source code
+	that is provided for the text.
+	These fixes are for source code that is <I>not</I> shown in the book.
+	Fixes for source code that appears in the book is listed
+	in this errata by the corresponding page number.
+<UL>
+<P>
+<LI TYPE=disc><TT>pipemesg/mesg_send.c</TT>:
+Line 16 of this file,
+in the wrapper function <TT>Mesg_send</TT>,
+should be
+<PRE>
+    if ( (n = mesg_send(fd, mptr)) != MESGHDRSIZE + mptr->mesg_len)
+</PRE>
+that is, the expected value from the <TT>write</TT> on line 7.
+<P>
+<LI TYPE=disc><TT>pxsem/deadlock.c</TT>:
+Line 22: the 1 should be a 2.
+<P>
+<LI TYPE=disc><TT>shm/Makefile</TT>:
+<TT>PORGS</TT> should be <TT>PROGS</TT>.
+<P>
+<LI TYPE=disc><TT>shm/incr2private.c</TT>:
+Line 13: <TT>incr2</TT> should be <TT>incr2private</TT>.
+</UL>
+</UL>
+
+<HR>
+<UL>
+<LI><A NAME="comments">The following are Comments to the Reader,
+	they are not typos to be fixed.</A>
+</UL>
+
+
+<TABLE BORDER>
+<TR>
+	<TH>Page
+	<TH>Comment
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">28
+	<TD>Unix 98 now states that the behavior of <TT>ftok</TT>
+	is unspecified if the low-order 8 bits of the <I>id</I> are 0.
+	Looking around I see the Solaris and Digital Unix man pages
+	now make this same statement.
+	I have no idea when this disclaimer was added, and my 1991
+	"System V Interface Definition" does not have this statement.
+	AIX even goes so far as to return an error if the <I>id</I> is 0,
+	which IMHO is going just a little too far.
+	Indeed, looking at three different implementations of
+	<TT>ftok</TT>--System V Release 2, GNU libc, and BSD/OS--not
+	one of these three requires that the <I>id</I> be nonzero:
+	all just logically-OR in the low-order 8 bits of the <I>id</I>
+	regardless of its value.
+	Nevertheless all 19 uses of an <I>id</I> of 0 in the 1st printing
+	will be changed to 1 in the 2nd printing,
+	to avoid problems on systems such as AIX.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">101
+	<TD>My reason for the second parenthetical remark concerning
+	<TT>siginfo_t</TT> is that of all the structures defined by Posix.1
+	(<TT>aiocb</TT>, <TT>group</TT>, <TT>itimerspec</TT>,
+	 <TT>lock</TT>, <TT>mq_attr</TT>, <TT>passwd</TT>,
+	 <TT>sched_param</TT>, <TT>sigaction</TT>, <TT>sigevent</TT>,
+	 <TT>siginfo_t</TT>, <TT>sival</TT>, <TT>stat</TT>,
+	 <TT>termio</TT>, <TT>timespec</TT>, and <TT>utimbuf</TT>)
+	only <TT>siginfo_t</TT> is defined using a <TT>typedef</TT>.
+	Yes, Posix.1 appends <TT>_t</TT> to the names of all its
+	primitive system data types (<TT>pid_t</TT>, <TT>pthread_t</TT>,
+	etc.) but none of these need be structures and there are no
+	structure member names defined for any of these data types.
+	Therefore, naming <TT>siginfo_t</TT>, which must be a structure,
+	with the <TT>_t</TT> suffix struck me as a mistake.
+	The reason for this oddity is probably that <TT>siginfo_t</TT>
+	was defined by SVR4 (the earliest definition that I can find
+	for it is in the "System V Interface Definition," Third Edition,
+	Aug. 1989) and then ignored by Posix until the P1003.4 realtime
+	extensions.  Indeed, p. 354 (the Rationale) of 1003.1b-1993
+	talks about this name breaking the convention, and the reason
+	listed is to follow existing practice and thus promote portability.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">102
+	<TD>There was a bug in the test program in Figure 5.17 of the
+	1st printing.  The correction in the 2nd printing is listed
+	earlier in this errata, for pages 102-105.
+	The bug illustrates a "feature" of realtime signals
+	that we must account for.
+	<P>
+	The correction is to specify a third argument to our
+	<TT>signal_rt</TT> function (Figure 5.18) that specifies
+	the set of signals to be blocked while the signal handler
+	is executing.
+	In Figure 5.17 this argument is now specified as
+	<TT>&amp;newset</TT>, which contains all three of the
+	realtime signals that the test program is generating.
+	The underlying problem is that while the signal numbers
+	of the realtime signals (33 through 48 for Digital Unix)
+	specify their priority with regard to delivery when
+	more than one of the realtime signals is pending
+	(in our example, nine signals with numbers 46, 47, and 48
+	are all pending when all three signal numbers are unblocked,
+	so the lowest numbered signal is delivered first),
+	what determines whether another signal can then be delivered
+	while that signal handling function is executing
+	is the <TT>sa_mask</TT> of that signal handling function.
+	Therefore, whenever we are dealing with more than one realtime
+	signal, we must specify an <TT>sa_mask</TT> value for each
+	of the realtime signal's signal handling function,
+	and that mask should block all remaining realtime signals
+	with a higher number (that is, with a lower priority).
+	The rules of Posix (p. 75 of [IEEE 1996])
+	guarantee that when multiple realtime signals
+	are pending the lowest numbered is delivered first,
+	but it is our responsibility to then guarantee that a
+	lower priority realtime signal does not interrupt our
+	signal handling function; we do that by specifying an
+	<TT>sa_mask</TT> value for the signal handling function.
+	<P>
+	Since we are now blocking all three of the realtime signals
+	in this example from the signal handling function, calling
+	<TT>printf</TT> as a simple diagnostic tool is probably OK.
+	But a better technique of printing the order in which the
+	signals are delivered is to change Figure 5.17 as follows:
+	First, allocate two globals:
+<PRE>
+    static volatile siginfo_t  arrival[10];
+    static volatile int        nsig;
+</PRE>
+	Then have the signal handler save its <TT>info</TT> argument
+	in this array:
+<PRE>
+    static void
+    sig_rt(int signo, siginfo_t *info, void *context)
+    {
+	arrival[nsig++] = *info; /* save info for child to print */
+    }
+</PRE>
+	Lastly, have the child print the information in this array
+	before terminating:
+<PRE>
+    sleep(3);     /* let all queued signals be delivered */
+    for (i = 0; i < nsig; i++) {
+        printf("received signal #%d, code = %d, ival = %d\n",
+               arrival[i].si_signo, arrival[i].si_code,
+               arrival[i].si_value.sival_int);
+    }
+    exit(0);
+</PRE>
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">102
+	<TD>One reader has suggested an alternate solution to the
+	just-listed problem: retain the 2-argument version of the
+	<TT>signal_rt</TT> function on p. 105 but have the function
+	block all lower priority signals.
+	To do this, add the following two declarations to the function
+<PRE>
+    sigset_t  mask;
+    int       s;
+</PRE>
+	and then replace line 7 with the following
+<PRE>
+        /* compute mask of all lower-priority signals */
+    Sigemptyset(&mask);
+    for (s = signo + 1; s <= SIGRTMAX; s++)
+        Sigaddset(&mask, s);
+    act.sa_mask = mask;    /* block all lower-priority signals */
+</PRE>
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">205
+	<TD>Note that it is easier to initialize the sequence number
+	file to 1 using "<TT>echo 1 &gt; seqno</TT>".
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">205
+	<TD>Be aware that the <TT>loopfcntl</TT> program can take
+	much longer to execute if the <TT>seqno</TT> file is on
+	an NFS mounted filesystem.
+	You should try this if you have access to NFS--it is somewhat
+	an extension to Exercise 9.7.
+	Another interesting measurement is to time the program when
+	the file is on the <TT>/tmp</TT> filesystem,
+	as many implementations allow this filesystem to be stored in memory.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">209
+	<TD>You can add the line "<TT>wait(NULL); wait(NULL);</TT>"
+	between lines 34 and 35 of Figure 9.8 to wait for both children
+	to terminate, if you want to avoid the shell prompt during the
+	children's output.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">211
+	<TD>Same comment as earlier for page 209.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">312
+	<TD>You can add the line "<TT>wait(NULL);</TT>"
+	between lines 34 and 35 of Figure 12.10 to wait for the child
+	to terminate, if you want to avoid the shell prompt during the
+	child's output.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">314
+	<TD>Same comment as earlier for page 312, between lines 36-37.
+<TR>
+	<TD ALIGN="RIGHT" VALIGN="TOP">356
+	<TD>The URL for the Linux implementation of doors has moved to
+	<TT>http://www.rampant.org/doors/</TT>.
+</TABLE>
+
+</BODY>
+</HTML>

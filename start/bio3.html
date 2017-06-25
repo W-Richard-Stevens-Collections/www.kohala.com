@@ -1,0 +1,160 @@
+<HTML>
+<HEAD>
+<TITLE>
+Computers and Programming Languages that I have used
+</TITLE>
+</HEAD>
+
+<BODY>
+
+<CENTER>
+<H2>Computers and Programming Languages that I have used</H2>
+</CENTER>
+
+<UL>
+<LI>1968: IBM 360/67 running MTS, the Michigan Terminal System,
+in Fortran IV.
+
+<P>
+<LI>1970: PDP-8.  In this class (IE 373) we wrote programs in
+PDP-8 machine language (i.e., not in assembler but in octal machine code),
+running the programs on a PDP-8 emulator that ran under MTS on the 360/67.
+I still have my PDP-8 Handbook ("Introduction to Programming").
+
+<P>
+<LI>1970: IBM 360/67.  In this class
+(CCS 473, taught by Bernard Galler) we programmed in
+IBM 360 assembler, SNOBOL (using the classic Griswold, Poage, and
+Polonsky book), and BASIC (using an interpreter written by some
+graduate students for MTS the year before).
+Our "textbooks" for the IBM assembler were the classic
+"IBM Principle of Operations" and an IBM green card.
+Even though MTS was an interactive system,
+and terminals were starting to appear around campus,
+all our programs were done on punched cards
+(lots of IBM 029 card punches at the Computer Center),
+with line printer output.
+
+<P>
+<LI>1971: IBM 360/67.  In this class (CCS 573, taught by Larry Flanigan)
+we wrote an operating system for the 360,
+running it as a virtual machine under MTS.
+
+<P>
+<LI>1970 & 1971: Burroughs B3500.
+I had a summer job these two years for Southwire Corp. in
+Carrollton, Georgia, working with the B3500.
+The first summer I was an operator, handling punched cards,
+magnetic tapes, printer output, and IBM card sorters and collators.
+The second summer I programmed the B3500 in both COBOL and Fortran.
+The Burroughs machine and its operating system were very nice
+to use and program.
+
+<P>
+<LI>1972-1973: PDP-8/L minicomputer at Michigan's McMath Hulbert Observatory.
+We had a 4 Kbyte PDP-8 for instrument control and data acquisition.
+We also wrote our own operating system for the PDP-8.
+MTS supported a nice PDP-8 assembler
+(since they used PDP-8s for data concentrators into the 360/67)
+so we wrote our programs in Ann Arbor, generated paper tape output,
+drove to the observatory (about 70 minutes away),
+and loaded in the program on a paper tape reader attached to a teletype.
+(High speed paper tape readers were expensive.)
+To avoid going back to Ann Arbor for simple fixes,
+you became very good at binary patching
+(putting in a jump to unused memory,
+and putting the new code there).
+This patching was done with the 12 front panel switches in octal.
+
+<P>
+<LI>1973-1975: Data General Nova minicomputer in assembler.
+The Nova was a 16-bit minicomputer, a competitor to the PDP-11.
+I was working for Singer's M & M Computer Division in Orange, California,
+and we developed RJE terminals (Remote Job Entry) using the DG minis.
+Our programs (basically stand-alone operating systems)
+had to fit in 4096 16-bit words of memory,
+and controlled all the devices (card reader, printer,
+card punch, and synchronous communications line).
+Each program was about 6,000-8,000 lines of assembler
+(3-4 boxes of punched cards).
+
+<P>
+<LI>1975-1982: At Kitt Peak Observatory most of my programming
+was in Forth on Varian 620/f minicomputers (another 16-bit minicomputer
+that was a competitor to the PDP-11).
+I also programmed a CDC 6400 in Fortran and Pascal
+and a Datacraft 24-bit minicomputer
+(later became a Harris/3) in Fortran.
+Around 1980 we got some PDP-11s and some VAXes
+and I developed the Forth system for both,
+and also brought up Unix on both.
+I also worked with RSX-11M on a PDP-11/70 at the University of Arizona
+Digital Image Analysis Laboratory,
+and did some work with VMS on the VAXes at Kitt Peak.
+Seeing how hard it was to use both RSX-11M and VMS,
+I became a Unix fan very quickly.
+
+<P>
+<LI>1982-1990: At Health Systems International I started on a 4-user
+PDP-11/23 running Venix (a Version 7 flavor of Unix from Venturcom).
+We then got an IBM PC XT (8086, 10 Mb hard disk) in February 1993
+running MS-DOS with the Lattice C compiler.
+We later delivered a product on the PC XT running Venix
+and on the PC AT running Xenix.
+<P>
+We were trying to work with IBM in delivering a product on the
+16-bit Series/1 (yet another competitor to the PDP-11)
+running a little-known version of Unix that IBM provided
+for the Series/1: CP/IX ("Carrier Products Interactive Executive").
+It was developed at Case Western Reserve University for IBM's
+Telecommunication Carrier Products Division
+(based in Princeton, NJ, to sell to the phone companies)
+and was based on Unix System III.
+I recall going to Princeton to evaluate their implementation,
+taking a Berkeley source tape with me.
+I spent a day getting <TT>vi</TT> and <TT>csh</TT> to run.
+Even though the Series/1 had separate instruction and data space
+(like the PDP-11; 64 Kbytes for each),
+the Series/1 instruction set was slightly less efficient than the PDP-11s,
+and <TT>vi</TT> used all 64 Kbytes of instruction space on the PDP-11.
+It took some creative hacking to get <TT>vi</TT> running on the Series/1.
+We did end up getting a Series/1 for development,
+but gave up on it shortly thereafter,
+when we discovered that a PC XT (later a PC AT)
+running Unix was just as fast, and much cheaper.
+Berkeley Unix on a VAX was also a much nicer program development
+environment than the Series/1.
+<P>
+We replaced the PDP-11/23 with a VAX-11/750 running 4.2BSD,
+later upgrading this to a VAX-11/785.
+As I recall we were able to run around 16 users on a 4 Mbyte 750.
+Later we got a VAX-11/785 and then a VAX 8600
+(upgrading the latter to an 8650).
+All our VAXes ran Berkeley Unix
+(I had seen how programmer unfriendly VMS was during my Kitt Peak days.
+Been there, done that.)
+
+<P>
+<LI>AT&T 3b1 (aka, 7300 or Unix PC).
+This was a wonderful Unix system that unfortunately
+the marketing types at AT&T had no clue how to sell.
+It originally sold for $10,000;
+a few of us at HSI bought them when AT&T had a "fire sale" in 1987
+for $2,495 (Motorola 68010 at 10 MHz, 2 Mbyte memory, 67 Mbyte disk,
+Unix System V Release 3, C compiler, Smart Software package).
+
+<P>
+<LI>1990-present: Sun workstations: SLC, ELC, SparcStation 4, and Ultra 5.
+When I wanted a workstation in 1990 Sun was the only one for
+less than $5,000.
+Most vendors have ignored the low end of the market.
+
+</UL>
+
+<P>
+<A HREF="index.html">
+<IMG SRC="gifs/left-arrow.gif" ALT="left arrow" WIDTH=36 HEIGHT=23></A>
+Back to W. Richard Stevens' Home Page
+
+</BODY>
+</HTML>

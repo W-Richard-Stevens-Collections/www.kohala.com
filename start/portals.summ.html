@@ -1,0 +1,28 @@
+<H2>Abstract</H2>
+<P>Portals have been added to 4.4BSD as an experimental feature
+and are in the publicly-available 4.4BSD-Lite distribution.  Portals
+provide access to alternate file types or devices using names in
+the normal filesystem that a process just opens.  For example, an
+open of the file "/p/tcp/ftp.uu.net/smtp" returns a socket descriptor
+to the calling process that is connected to the SMTP server on the
+specified host.  By providing access through the normal filesystem,
+the calling process need not be aware of the special system calls
+necessary to create a TCP socket and establish a TCP connection.
+This makes TCP connections, for example, available to normal programs
+such as cat and awk.
+
+<P>This paper describes the implementation of portals in 4.4BSD as
+another type of filesystem and provides some examples.  It also compares
+portals to the System V Release 4 "connld" streams module, which provides
+similar capabilities.
+<H2>Summary</H2>
+1. Introduction<BR>
+2. Descriptor Passing<BR>
+3. Connection Server<BR>
+4. Portals<BR>
+5. Related Work<BR>
+6. Implementation of Portals<BR>
+7. Examples<BR>
+8. Problem Areas<BR>
+9. Performance<BR>
+10. Summary<BR>

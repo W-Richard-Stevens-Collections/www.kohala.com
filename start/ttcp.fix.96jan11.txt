@@ -1,0 +1,40 @@
+To: Richard Stevens <rstevens@noao.edu>
+Subject: T/TCP mod
+Date: Thu, 11 Jan 1996 13:32:39 +0100
+From: Andras Olah <olah@cs.utwente.nl>
+
+Rich,
+
+Here's a mod which prevents sending data and FIN on SYN segments in
+those situations when we're sure that we won't use T/TCP, i.e. the
+net.inet.tcp.rfc1644 sysctl variable is 0.  This is needed to
+prevent some interoperability problems with stacks that are confused
+with data/FIN on SYN segments.
+
+Andras
+
+*** tcp_output.c.orig	Tue Dec 19 13:37:43 1995
+--- tcp_output.c	Thu Jan 11 11:38:00 1996
+***************
+*** 167,172 ****
+--- 167,185 ----
+  			return 0;
+  	}
+  
++ 	/*
++ 	 * Be careful not to send data and/or FIN on SYN segments
++ 	 * in cases when no CC option will be sent.
++ 	 * This measure is needed to prevent interoperability problems
++ 	 * with not fully conformant TCP implementations.
++ 	 */
++ 	if ((flags & TH_SYN) &&
++ 	    ((tp->t_flags & TF_NOOPT) || !(tp->t_flags & TF_REQ_CC) ||
++ 	     ((flags & TH_ACK) && !(tp->t_flags & TF_RCVD_CC)))) {
++ 		len = 0;
++ 		flags &= ~TH_FIN;
++ 	}
++ 
+  	if (len < 0) {
+  		/*
+  		 * If FIN has been sent but not acked,
+

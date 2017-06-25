@@ -1,0 +1,95 @@
+<HTML>
+<HEAD>
+<TITLE>
+Turning PIC into HTML
+</TITLE>
+</HEAD>
+
+<BODY>
+
+<CENTER>
+<H2>Turning PIC into HTML</H2>
+</CENTER>
+
+<P>
+Say you have a <TT>pic</TT> figure in a file
+and you want to include the figure into an HTML document.
+For example, here is the file <TT>pic.ms</TT>:
+<LISTING>
+    .EQ
+    delim $$
+    .EN
+    .PS
+        arrow
+        box "$space 0 {H( omega )} over {1 - H( omega )}$"
+        arrow
+    .PE
+</LISTING>
+We can generate PostScript using <TT>groff</TT>,
+and then use <TT>ghostscript</TT> to generate a GIF image,
+but we get a full-sized 8.5 by 11-inch page for the GIF image
+(or whatever size page you use with <TT>groff</TT>).
+We want just the figure.
+<P>
+I run the following steps on a BSD/OS 3.0 system,
+as it provides all the programs with a full system installation.
+First generate PostScript using <TT>groff</TT>, as in
+<LISTING>
+    groff -e -p -ms pic.ms > file1.ps
+</LISTING>
+Then use <TT>ghostscript</TT> to generate the full 8.5 by 11-inch
+GIF image.
+<LISTING>
+    gs -q -sDEVICE=gifmono -sOutputFile=file1.gif -r150x150 file1.ps < /dev/null
+</LISTING>
+You can change the resolution as desired,
+depending on the amount of text in the figure, its size,
+and how big you want the result.
+For this example, with a resolution of 150 by 150,
+the resulting GIF image was 1280 by 1650.
+<P>
+We now need the PostScript bounding box of just the figure.
+<LISTING>
+    giftopnm file1.gif | pbmtoepsi -bbonly
+</LISTING>
+The first program converts a GIF file into a portable anymap,
+and the second converts a portable bitmap into Encapsulated PostScript.
+This generates the following two lines of output:
+<LISTING>
+    %!PS-Adobe-2.0 EPSF-1.2
+    %%BoundingBox: 150 1401 412 1475
+</LISTING>
+The four numbers on the second line
+are based on the PostScript coordinate system,
+which has (0,0) at the lower left,
+but in the next pipeline the <TT>pnmcut</TT> program
+assumes that (0,0) is the upper left.
+If the four numbers printed as the bounding box are
+<I>a</I>, <I>b</I>, <I>c</I>, and <I>d</I>,
+then the four arguments to <TT>pnmcut</TT> are
+<I>a</I>, <I>-d</I>, <I>(c-a+1)</I>, and <I>(d-b+1)</I>.
+<LISTING>
+    giftopnm file1.gif | pnmcut 150 -1475 263 75 | ppmtogif > file2.gif
+</LISTING>
+The size of the final file <TT>file2.gif</TT> is now 263 by 75.
+<P>
+Here is the final figure:
+<IMG SRC="file2.gif" ALIGN="MIDDLE">
+
+<HR>
+Naturally, there is another (easier) way to do this.
+My thanks to Scott Schwartz (&lt;schwartz@bio.cse.psu.edu&gt;)
+for telling me about the following.
+This technique uses the <TT>pnmcrop</TT> program,
+which accomplishes the same effect as using the PostScript bounding box:
+<LISTING>
+gs -q -sDEVICE='ppmraw' -sOutputFile='-' -dBATCH -dNOPAUSE file1.ps | pnmcrop | ppmtogif > file2.gif
+</LISTING>
+Beware that <TT>pnmcrop</TT> can use a lot of memory,
+so you may need to increase the amount of data space for your programs
+(the KornShell <TT>ulimit</TT> command; <TT>limit</TT> for the C Shell).
+I execute <TT>ulimit -d 65535</TT> in the KornShell to increase
+the datasize to 64 Mbytes.
+
+</BODY>
+</HTML>

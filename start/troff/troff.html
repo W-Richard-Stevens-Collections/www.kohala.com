@@ -1,0 +1,215 @@
+<HTML>
+<HEAD>
+<TITLE>
+Troff resources
+</TITLE>
+</HEAD>
+
+<BODY>
+
+<CENTER>
+<H2>Troff Resources</H2>
+</CENTER>
+
+<P>
+This page contains numerous resources for people using troff.
+My thanks to the Computing Sciences Research Group at Bell Labs
+for making PostScript copies of so many of their reports available.
+<P>
+Note that the raw troff input for the
+<A HREF="http://plan9.bell-labs.com/7thEdMan/index.html">document set</A>
+that came with the Seventh Edition release Unix
+(aka Unix Version 7, dated 1979) is now available.
+Thanks again to Bell Labs for making this available.
+
+<!-- ------------------------------------------------------------------- -->
+<HR>
+<H3>troff</H3>
+
+<UL>
+<P>
+<LI><A HREF="ftp://prep.ai.mit.edu/pub/gnu/groff-1.11a.tar.gz">Groff</A>.
+    This is the GNU troff package (groff), written by
+    <A HREF="http://www.jclark.com/">James J. Clark</A>.
+    It includes implementations of troff, eqn, pic, refer, and tbl.
+    The current version is 1.11a.
+
+    <P>Can you imagine anyone rewriting troff from scratch,
+    in what ended up as about 60,000 lines of C++?
+    Wow, I <I>am</I> impressed.
+    If it were not for James' freely available reimplementation,
+    troff would be dead by now.
+
+<P>
+<LI><A HREF="cstr54.ps">
+    <I>Troff User's Manual</I></A>
+    by Jospeh F. Ossanna and Brian W. Kernighan,
+    revised November 1992.
+    This is the definitive guide to all troff commands.
+    GNU's gtroff adds numerous capabilities to troff
+    and these enhancements are described in the gtroff man page.
+
+<P>
+<LI><A HREF="v7man/trofftut/trofftut.ps">
+    <I>A TROFF Tutorial</I></A>
+    by Brian W. Kernighan,
+    August 4, 1978.
+    This is a wonderful tutorial on how to use raw troff.
+
+<P>
+<LI><A HREF="cstr97.ps">
+    <I>A Typesetter-independent TROFF</I></A>
+    by Brian W. Kernighan,
+    revised March 1992.
+    This describes the changes made to troff to make it
+    typesetter independent.
+    The details are only of interest to people writing troff postprocessors
+    for new devices, but the historical details are interesting.
+</UL>
+
+<!-- ------------------------------------------------------------------- -->
+<HR>
+<H3>tbl</H3>
+
+<UL>
+
+<P>
+<LI><A HREF="v7man/tbl/tbl.ps">
+    <I>Tbl--A Program to Format Tables</I></A>
+    by M. E. Lesk,
+    June 11, 1976, revised August 5, 1977.
+    This is the original tbl user's manual.
+</UL>
+
+<!-- ------------------------------------------------------------------- -->
+<HR>
+<H3>eqn</H3>
+
+<UL>
+
+<P>
+<LI><A HREF="v7man/eqn/eqn2e.ps">
+    <I>Typesetting Mathematics -- User's Guide (Second Edition)</I></A>
+    by Brian W. Kernighan and Lorinda L. Cherry,
+    August 15, 1978.
+    This is the eqn user's manual.
+
+<P>
+<LI><A HREF="v7man/eqn/cacm.ps">
+    <I>A System for Typesetting Mathematics</I></A>
+    by Brian W. Kernighan and Lorinda L. Cherry,
+    1975.
+    This paper is a revision of a paper originally published
+	in CACM, March 1975.
+</UL>
+
+<!-- ------------------------------------------------------------------- -->
+<HR>
+<H3>pic</H3>
+
+<UL>
+
+<P>
+<LI><A HREF="cstr116.ps">
+    <I>PIC-A Graphics Language for Typesetting, User Manual</I></A>
+    by Brian W. Kernighan,
+    revised May 1991.
+    This is the pic user's manual.  I use this all the time.
+    GNU's gpic adds numerous capabilities to pic (alignment of text
+    with arrows, and the like) and these enhancements are described
+    in the gpic man page.
+
+<P>
+<LI><A HREF="gpic.raymond.ps">
+    <I>Making Pictures with GNU PIC</I></A>
+    by Eric S. Raymond,
+    August 1995.
+    This is an update of the generic pic user's manual, for GNU pic.
+    This manual was distributed with version 1.11 of groff.
+
+<P>
+<LI><A HREF="pic.examples.ps">
+    <I>Examples of </I><TT>pic</TT><I>Macros</I></A>.
+    This 7-page PostScript document contains examples of the pic macros
+    that I use when writing my books.  This
+    <A HREF="Setup.pic.txt">file</A>
+    contains all the pic macros that I use for my books.
+
+<P>
+<LI><A HREF="pic2html.html">Turning PIC Into HTML</A>.
+    I wanted to include some pic figures into an HTML document and spent
+    quite a few hours figuring out how to do this.
+    Here is my summary.
+</UL>
+
+<!-- ------------------------------------------------------------------- -->
+<HR>
+<H3>Macros</H3>
+
+<UL>
+<P>
+<LI><A HREF="v7man/msmacros/msmacros.ps">
+    <I>Typing Documents on the UNIX System:
+       Using the -ms Macros with Troff and Nroff</I></A>
+    by M. E. Lesk,
+    November 13, 1978.
+</UL>
+
+<!-- ------------------------------------------------------------------- -->
+<HR>
+<H3>grap</H3>
+
+<UL>
+<P>
+<LI><A HREF="cstr114.ps">
+    <I>Grap-A Language for Typesetting Graphs, Tutorial and User Manual</I></A>
+    by Jon L. Bentley and Brian W. Kernighan,
+    revised May 1991.
+    This is the grap program, which unfortunately,
+    has not been implemented with groff.
+
+<P>
+<LI><A HREF="prag-1.0pl2.shar">Prag</A>
+    is a simple grap replacement, written in awk, by Holger Meyer.
+</UL>
+
+<!-- ------------------------------------------------------------------- -->
+<HR>
+<H3>Indexing</H3>
+
+<UL>
+<P>
+<LI><A HREF="cstr128.ps">
+    <I>Tools for Printing Indexes</I></A>
+    by Jon L. Bentley and Brian W. Kernighan,
+    October 1986.
+    These tools work with troff's output to handle lots of the details
+    involved in producing an index.
+    I use these tools for all my books, as described
+    <A HREF="../indexing.html">here</A>.
+    <P>
+    <A HREF="indexing.tools.txt">Here</A> are the shell scripts
+    and awk scripts described in this paper.
+</UL>
+
+<!-- ------------------------------------------------------------------- -->
+<HR>
+<H3>refer</H3>
+
+<UL>
+
+<P>
+<LI><A HREF="v7man/refer/refer.ps">
+    <I>Some Applications of Inverted Indexes on the UNIX System</I></A>
+    by M. E. Lesk,
+    June 21, 1978.
+    This describes both the files used by <tt>refer</tt>
+    and the format of the input files used to maintain publication lists.
+</UL>
+
+<A HREF="../index.html">
+<IMG SRC="gifs/left-arrow.gif" ALT="left arrow" WIDTH=36 HEIGHT=23></A>
+Back to W. Richard Stevens' Home Page
+
+</BODY>
+</HTML>

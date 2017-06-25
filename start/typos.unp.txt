@@ -1,0 +1,440 @@
+----------------------------------------------------
+Typos and errors found in "UNIX Network Programming"
+(Last updated April 1, 1997)
+
+Note: If you fetched this file using anonymous ftp from ftp.uu.net,
+      be aware that a more current copy can probably be found at
+      the home page http://www.kohala.com/~rstevens.
+
+- p.  2: Two 1200 baud modems and a phone line are required to hook together 
+	 two personal computers, not one.  Also, the term "bps" is really
+	 better than "baud".
+
+- p. 44: In Figure 2.4 the description for SIGCONT should be "Continue
+	 after SIGTSTP or SIGSTOP".
+
+- p. 53: 4th sentence in next to last paragraph: "If we called sigblock first,
+	 to unblock the signal" should be "If we called sigsetmask first,".
+
+- p. 59: Item 2 at top of page: "If the pathname argument to execlp or
+	 execvp" should be "if the filename argument to execlp or execvp".
+
+- p. 62: Second line on the page should refer to Figure 2.4, not Figure 2.3.
+
+- p. 73: 6th line from top of page: "have by the following characteristics"
+	 should be "have the following characteristics".
+
+- p. 99: First line: the #define of LOCKFILE isn't needed, since it's
+	 never used.
+
+- p. 103: Caption for Figure 3.5 should start "Pipe between two processes".
+
+- p. 113: 4th line of 2nd paragraph: "FIFO2 for writing" should be "FIFO2
+	  for reading".
+
+- p. 212: 3rd paragraph: "We show how a user process can set the TCP push flag".
+	  There is no way for a user application to explicitly set this flag.
+	  It's set automatically by TCP.
+
+- p. 212: Last paragraph: the maximum size of an IP datagram is 65535 bytes,
+	  not 65536.
+
+- p. 217: Next to last sentence of 2nd paragraph: "six hexadecimal digits"
+	  should be "six hexadecimal numbers".
+
+- p. 229: 3rd line: "Figure 5.21" should be "in Figure 5.21".
+
+- p. 251: Under "Electronic Mail", 2nd line of 2nd paragraph: delete "the
+	  interactive user".
+
+- p. 274: In the pseudo code at the top of the page, the calls to bind() and
+          listen() are missing "if (".
+
+- p. 275: First line: "one of the following" should be "one or more of
+	  the following".
+
+- p. 277: End of 2nd line on page: "otherwise its nonzero." should be
+	  "otherwise it's nonzero."
+
+- p. 280: The end of the writen() function is simpler as "return(nbytes)"
+	  since nleft is 0.
+
+- p. 283: In the call to recvfrom() in the function dg_cli(), some systems
+	  (SunOS 4.x for example) don't allow the 6th argument to be a null
+	  pointer.  On these systems you should declare an integer (int len;),
+	  set it to 0 before the call to recvfrom (len = 0;) and then pass a
+	  pointer to this integer as the 6th argument (&len).
+
+- p. 302: In the prototype for getsockname(), the name "peer" for the second
+	  argument is really a misnomer.  A better name would be "local".
+
+- p. 325: For SIOCGARP the final word of the first sentence should be
+	  "table", not "entry".
+
+- p. 337: Item 2, 1st line: "is executed for every socket" should be "is
+	  executed for the socket".
+
+- p. 344: Below Figure 7.2: "which is shown in Figure 6.2." should be "which
+	  is shown in Figure 6.3."
+
+- p. 365: The assignment of &serv_addr to callptr->addr.buf is incorrect.
+	  Since t_alloc() allocated the structure, it allocated memory for
+	  the server address and stored the pointer in addr.buf.  In the
+	  example in the book, this assignment causes no harm, but if the
+	  example were to call t_free() two things would happen: t_free()
+	  would try and release the memory occupied by the automatic variable
+	  serv_addr, and the original memory allocated by t_alloc() would
+	  never be freed (i.e., a memory leak).
+
+- p. 413: Same potential error in the call to recvfrom() as noted on p. 283
+	  above.
+
+- p. 449: In the ping program, the function inet_ntoa() is called with the
+	  wrong type of argument (a "u_long" instead of a "struct in_addr").
+	  The call in main() on this page should be
+		inet_ntoa(dest.sin_addr);
+
+- p. 456: The third line of C code from the bottom of the page:
+		from->sin_addr.s_addr = ntohl( ...);
+	  should be removed.
+
+- p. 457: There are three calls to inet_ntoa() on this page with the wrong
+	  type of argument.  Replace all three with
+		inet_ntoa(from->sin_addr)
+
+- p. 564: Last line of page: "rhsd server" should be "rshd server".
+
+- p. 701: One-third of the way down the page: "We'll use a simple example
+	  to shows", "shows" should be "show".
+
+- p. 706: Last sentence of item 3: "When the response if received" should
+	  be "When the response is received".
+
+- p. 749: The entry for BBN should not have a comma after "Bolt".  Similar
+	  fix for the entry "Bolt, Beranek and Newman".
+
+- p. 763: Delete index entry for "rhsd server".
+
+The following errors are corrected in the 8th printing (check the copyright
+page to see if the last number above the ISBN is 8 or greater.)
+-------------------------------------------------------------------------
+
+- p. xi: Last paragraph of Preface: Update e-mail address to "rstevens@noao.edu"
+	 and state that examples are available at ftp.uu.net in the file
+	 published/books/stevens.netprog.tar.Z.
+
+- p. 15: Last sentence before "Argument List": "status of the program in
+	 "unpredictable" should be "status of the program is unpredictable".
+
+- p. 19: Halfway down the page: "using a disk file or some form or
+	 interprocess" should be "using a disk file or some form of".
+
+- p. 46: Item 2, halfway down the page: "All signals, other than SIGKILL"
+	 should be "All signals, other than SIGKILL and SIGSTOP".
+
+- p. 51: Second bullet item (half way down the page), second sentence:
+	 "But we don't want to signal discarded" should be "But we don't
+	 want the signal discarded".
+
+- p. 68: Half way down the page, the line of output after "Executing the
+	 program again yields", "prgrp" should be "pgrp".
+
+- p. 87: Second to last sentence in first paragraph of chapter 3: "to assure
+	 certain" should be "to assure".
+
+- p. 110: 12th line from the top: "file mode access mode" should be "file
+	  mode access word".
+
+- p. 129: 17th line from the top: "len specifies" should be "length specifies".
+
+- p. 132: 1st line: "Both of these program" should be "Both of these programs".
+
+- p. 141: In item 3 towards the top of the page the sentence "Then the absolute
+	  value of sem_op is subtracted from the semaphore's current value."
+	  should be added between the two existing sentences.
+
+- p. 141: In the comment for the "array" member of the "union semun" the
+	  two constants IPC_GETALL and IPC_SETALL should be GETALL and SETALL.
+
+- p. 146: In the comment halfway down the page: "any process that exit's"
+	  should be "any process that exits" (remove single quote).
+
+- p. 148: Halfway down the page in the code, the line
+		if ( (semval = semctl(id, 1, GETVAL, 0)) < 0)
+	  should be
+		semctl_arg.val = 0;
+		if ( (semval = semctl(id, 1, GETVAL, semctl_arg)) < 0)
+
+	  This same type of fix (replacing the argument of 0 with the
+	  actual union whose "arg" member is zero) needs to be applied
+	  to the semctl() call at the bottom of p. 149 (sem_rm() function)
+	  and halfway down p. 150 (sem_close() function).
+
+- p. 148: In the line of code "err_sys("can SETVAL[0]");" 3/4 of the way down
+	  the page, replace "can" with "can't".  Do the same thing 3 lines
+	  down (for SETVAL[1]).
+
+- p. 282: In the function str_cli at the top of the page, the line
+	  "recvline[n] = 0; /* null terminate */" right before the call to
+	  fputs can be removed, since readline stores the terminating null.
+
+- p. 285: Near bottom of page: "if the system is a multihomed" should be
+	  "if the system is multihomed".
+
+- p. 305: The word "fileystem" 1/3 down the page should be "filesystem".
+
+- p. 339: Halfway down page (RFC 868): Harrenstein should be Harrenstien.
+	  (The bibliography entry is correct.)
+
+- p. 350: Fig. 7.6: the two occurences of ".buff" should be ".buf".
+
+- p. 371: First sentence: replace "Section 6.5" with "Section 7.4".
+
+- p. 371: In the last line of Figure 7.11 replace T_UNBIND with T_UNBND.
+
+- p. 401: In the error message after "if (port < 0)" the word "implemeneted"
+	  should be "implemented".
+
+- p. 415: In the call to fgets halfway down the page replace the second
+	  argument ("MAXLINE") with "MAXLINE - sizeof(long)".
+
+- p. 428: The comment one-third of the way down the page that starts with
+	  (a) is wrong.  The last sentence of that item should say "then
+	  that user name has to equal the user name on the client (cliuname)".
+
+- p. 437: First sentence of Section 10.2: Harrenstein should be Harrenstien.
+	  (The bibliography entry is correct.)
+
+- p. 518: Fourth line of program text, describing -i option: "inted"
+	  should be "inetd".
+
+- p. 546: The comment "set to same value for now" for the variable "seqnum"
+	  should be removed.
+
+- p. 612: In the last sentence of next to last paragraph: "(Stopped) tty input"
+	  should be "Stopped (tty input)".
+
+- p. 627: The word TIOCKPT_xxx in the comment halfway down the page should be
+	  TIOCPKT_xxx.
+
+- p. 630: The comment in the middle of the page: "Get the name of the server we
+	  connect to" should be "Get the port number for the rlogin service".
+
+- p. 635: The word "haldner" in the comment preceding the sigcld_parent()
+	  function should be "handler".
+
+- p. 648: Same as on p. 627: TIOCKPT_xxx should be TIOCPKT_xxx.
+
+- p. 697: Last sentence "16-bit UDP port number" should be "16-bit TCP
+	  and UDP port numbers."
+
+- p. 702: The following footnote should be added to the command line at the
+	  top of the page: "Be aware that some systems have an rdate(8) command
+	  for the superuser to set the time and date from a remote host.  If
+	  you compile and run this example you may want to change the name."
+
+- p. 716: Last paragraph of Section 18.4: "This protocol ..." should be
+	  "An overview of this protocol is given in Xerox [1985]."  (There
+	  is no 1986 reference by Xerox.)
+
+- p. 723: Near center of page at right margin: "provided my" should be
+	  "provided by".
+
+- p. 751: The index entry for page 473 under "connect system call" is
+	  wrong and should be removed.
+
+- p. 753: The page numbers for the index entry for "/etc/inetd.conf file"
+	  should be: 335-337, 471, 713.
+
+- p. 753: Delete the index entry for "/etc/rmt server".  (The entry is
+	  under "rmt server" on p. 763.)
+
+- p. 755: Delete the index entry for "inetd.conf file".  (The entry is
+	  under "/etc/inetd.conf file" on p. 753.)
+
+- p. 756: Delete the index entry for "inittab file".  (The entry is under
+	  "/etc/inittab file" on p. 753.)
+
+- p. 763: The index entry "Reynolds, J." should have an entry for p. 526.
+
+- p. 763: The index entry "rmt server" should have an entry for p. 320.
+
+- p. 771: Remove the index entry for T_UNBIND.
+
+The following errors are corrected in the 5th printing (check the copyright
+page to see if the last number above the ISBN is 5 or greater.)
+-------------------------------------------------------------------------
+- p. xi (Preface), 3rd paragraph from bottom:  "Much of the what I have
+	learned" should be "Much of what I have learned".
+
+- p. 12 (Section 2.2), second bullet: "RFS (Remote File System)"
+	should be "RFS (Remote File Sharing)".  
+
+- p. 14 (Section 2.2), last paragraph, first sentence: "if an errors occurs"
+	should be "if an error occurs".
+
+- p. 39 (Section 2.3), in the prototype for the open function, the comma
+	in "oflag," should be removed.
+
+- p. 57 (exit System Call).  The 2nd paragraph of this section should
+	refer to Figure 2.1, not Figure 2.3.
+
+- p. 58 (Section 2.5), last sentence of item 1. at bottom of page: the
+	word "argv" should be italicized, not in a constant-width font.
+
+- p. 93 (Section 3.2), 2nd paragraph from top, 2nd sentence: "When the
+	function is F_TLOCK and the region is already locked", the F_TLOCK
+	should be F_LOCK.
+
+- p. 111 (Section 3.5), first sentence: "If a process writes less than the
+	 capacity of a pipe" should be "If a process writes less than the
+	 capacity of a pipe or FIFO".
+
+- p. 114 (Section 3.5).  The header file "fifo.h" referred to in the
+	 code on pages 113 and 114 simply contains the first 8 lines
+	 from the code listing on page 112.  Add a note to the bottom
+	 of p. 114 stating this.
+
+- p. 125 (Section 3.8), last sentence: "An an example" should be
+	 "As an example".
+
+- p. 128 (Section 3.9), first sentence of last paragraph: "The name mtext",
+	 the word "mtext" should be in a constant-width font, not italics.
+
+- p. 128 (Section 3.9), third from last sentence: "By template we mean that
+	 the ptr", the word "ptr" should be italicized, not in a constant-width
+	 font.
+
+- p. 130 (Section 3.9), about halfway down the page: "This does not include
+	 the long integer message size" should be "This does not include
+	 the long integer message type".
+
+- p. 133 (Section 3.9), last paragraph, first sentence: "if the ability"
+	should be "is the ability".
+
+- p. 140 (Section 3.10), in the prototype for semop(), "struct sembuf **opsptr"
+	 should be "struct sembuf *opsptr" (remove one asterisk).
+
+- p. 141 (Section 3.10), item 1. near top of page: "the value of sem_val is
+	 added to" should be "the value of sem_op is added to".
+
+- p. 146 (Section 3.10), first line of C comment: "Provide an" should be
+	"Provide a".
+
+- p. 276 (Section 6.5), halfway down the page: "These four functions are
+	 operate" should be "These four functions all operate".
+
+- p. 277 (Section 6.5), halfway down the page: "converts a charter string"
+	 should be "converts a character string".
+
+- p. 284 (Section 6.6), the port numbers chosen for the TCP and UDP examples,
+	 6000, should be different (say 6543), since 6000 is used on
+	 many systems by the X11 window system.
+
+- p. 300 (Section 6.7), halfway down the page in the code example,
+	 the second argument to writev() should be "&iov[0]", not
+	 "&iovec[0]".
+
+- p. 310 (Section 6.10), "The program that is execed by the parent" should be
+	 "The program that is execed by the child".
+
+- p. 320 (Section 6.11), SO_TYPE paragraph: "that inherits a process when
+	 it is started" should be "that inherits a socket when it is started".
+
+- p. 323 (Section 6.11), first two entries in Figure 6.16 have incorrect
+	 descriptions.  The first description (for FIOCLEX) should be
+	 "set close-on-exec for fd".  The second description (for FIONCLEX)
+	 should be "clear close-on-exec for fd".
+
+- p. 333 (Section 6.15), second sentence under SIGIO: "The signal is
+	 sent to the process group of the signal" should be "The signal is
+	 sent to the process group of the socket".
+
+- p. 334 (Section 6.15), second to last sentence under SIGURG: "The signal is
+	 sent to the process group of the signal" should be "The signal is
+	 sent to the process group of the socket".
+
+- p. 343 (Section 7.1), first paragraph: "RFS (Remote File System)"
+	 should be "RFS (Remote File Sharing)".  
+
+- p. 350 (Section 7.4), the "char *ptr" should really be a
+	 "struct t_uderr *ptr" and the call to t_alloc() should be
+	 coerced as "ptr = (struct t_uderr *) t_alloc(...)"
+
+- p. 351 (Section 7.4), final paragraph: the words "request" and "return"
+	 that are in a constant-width font should both be italicized.
+
+- p. 352 (Section 7.4), the two paragraphs following the prototype for the
+	 t_connect function: the words "addr", "opt", "udata", "sequence",
+	 and "len" which are all in italics should all be in a constant-width
+	 font.
+
+- p. 362 (Section 7.5), the name of the header file is not given -- it is
+	 "inet.h".
+
+- p. 362 (Section 7.5), same as p. 284 regarding the port numbers.
+
+- p. 370 (Section 7.6), last paragraph under "nonblocking I/O": "can accept
+	 some data, t_snd returns the actual number of bytes accepted and the
+	 TMORE flags value is returned to the caller" should be replaced with
+	 "can accept some (but not all) of the data, t_snd returns the actual
+	 number of bytes accepted as if the T_MORE flags was specified by the
+	 caller".
+
+- p. 373 (Section 7.6), first sentence of "t_rcvconnect Function".
+	 "allows a server to accept" should be "allows a client to initiate".
+
+- p. 381 (Section 7.9), second to last paragraph: "Remote File System"
+	 should be "Remote File Sharing".  
+
+- p. 381 (Section 7.9), last paragraph: "/dev/sxt" should be "/dev/spx".
+
+- p. 382 (Figure 7.19), caption: "/dev/sxt" should be "/dev/spx".
+
+- p. 395 (Section 8.2), about half way down the page: "The addr is a
+	 pointer to a sockaddr_in structure" should be "The addr is a
+	 pointer to a in_addr structure".
+
+- p. 405, 5th line from bottom, add comma after "network speed".
+
+- p. 457, (Section 11.2), in the comment near the top of the page,
+	  "convert # 16-bit words to #bytes" should be "convert #32-bit
+	  words to #bytes".
+
+- p. 458, (Section 11.2), half-way down the page the string "Source Quence"
+          should be "Source Quench".
+
+- p. 466, final sentence of first paragraph: remove "a" in "a Section 12.4.)".
+
+- p. 480 (Section 12.7), last line of large comment: "its" should
+	 be "it's".
+
+- p. 497 (Section 12.7), the last line of the first code listing has the
+	 word "statistics" misspelled.
+
+- p. 543 (Section 13.3), the name of the header file is not given -- it is
+	 "defs.h".
+
+- p. 554 (Section 13.4): first paragraph of the section: "lp -plaser1"
+	 should be "lp -dlaser1" (change -p to -d).
+
+- p. 699 Figure 18.2: the row labelled "floating-point format": the entry
+	 "IEEE" should be under "Sun RPC", not "Xerox Courier".  The entry
+	 under "Xerox Courier" should be blank.
+
+- p. 699 Figure 18.2: Under Apollo: IEEE, VAX, IBM, or Cray. (add commas)
+
+- p. 751 (Index): the entry for "/dev/sxt" should be "/dev/spx".
+
+- p. 755 (Index): the entry for in_addr needs page 395 added to it.
+
+- p. 763 (Index): the entry for "Remote File System" should be
+	 "Remote File Sharing".
+
+- p. 763 (Index): the entry for "RFS (Remote File System" should be
+	 "RFS (Remote File Sharing".
+
+- p. 767 (Index): the entry for sockaddr_in needs page 395 removed from it.
+
+- p. 770 (Index): the entry "TMORE constant, 370" should be deleted.  The
+	 entry for T_MORE should have page 370 added to it.

@@ -1,0 +1,73 @@
+From: Chris Torek <torek@elf.bsdi.com>
+Subject: Re: Delay in re-using TCP/IP port
+Newsgroups: comp.unix.wizards
+Message-Id: <199501010028.QAA16863@elf.bsdi.com>
+Date: Sat, 31 Dec 1994 16:28:30 -0800
+Organization: Berkeley Software Design, Inc.
+
+In article <3dqes6$e49@bosnia.pop.psu.edu> W. Richard Stevens
+<rstevens@noao.edu> wrote:
+> ... The *real* restriction is a TCP requirement that the end doing
+> the active close must not reuse the *socket pair* (i.e., the 4-tuple
+> of IP addresses and port numbers) until twice the MSL has expired.
+> Berkeley took this one step further and won't let you bind a local port
+> if that port is part of a socket pair in the TIME_WAIT state.  Hence the
+> SO_REUSEADDR socket option, to bypass this (overly restrictive) BSD
+> implementation feature.
+
+Indeed, the underlying problem is that in BSD, the 4-tuple is
+specified by two separate system calls, bind() followed by connect(),
+with each of the two calls being optional (of course at least *one*
+call is required!).  At the time of the bind(), then, it is not
+possible to tell whether the connect() will specify a unique 4-tuple.
+
+What is really needed is to replace the two system calls with a
+single call (`setaddrs()'? it needs a good name) in which the local
+and peer <address,port> pairs are each optional.  Servers would
+specify a local pair only (equivalent to `bind' plus `listen'---perhaps
+the listen call itself could also be deleted, but see below),
+clients would specify a remote pair only (equivalent to `connect'),
+and programs that, like FTP, need to specify both would simply do
+so.  In such a system, it is immediately possible to reject an
+attempt to act as a server when there is another server already
+listening for incoming connections, but not when there are lingering
+sockets but no server.
+
+There is still one problem:  You must still identify whether you are
+calling because `I want to be a server' or because `I want to initiate
+a connection'.  For instance, a UDP (or even TCP) server might only
+want to server connections from w.x.y.z, so it should be able to
+specify the remote address as well as the local port, yet not initiate
+a connection.  Thus, the call should probably take three arguments:
+
+    #define XXX bind_connnect_listen /* pick a better name */
+
+    /* laddr = local <address,port>; raddr = peer/remote <address,port> */
+    int XXX(int s, struct sockaddr *laddr, int laddrlen,
+		   struct sockaddr *raddr, int raddrlen,
+		   int listen);
+
+If `listen' is zero, this would initiate a connection, otherwise
+it would provide the `backlog' argument to listen() (which is
+invariably a constant, and might as well just be a flag, but one
+thing at a time...).
+
+Compatibility library bind() and connect() routines would look like
+this:
+
+	int bind(int s, struct sockaddr *name, int namelen) {
+		/* traditional listen() arg is 5 */
+		return XXX(s, name, namelen, NULL, 0, 5);
+	}
+
+	int connect(int s, struct sockaddr *name, int namelen) {
+		return XXX(s, NULL, 0, name, namelen, 0);
+	}
+
+These would suffice for everything except FTP (and maybe one or two
+similar programs), and any `special' servers that want to specify
+both local and remote addresses.
+-- 
+In-Real-Life: Chris Torek, Berkeley Software Design Inc
+Berkeley, CA	Domain:	torek@bsdi.com	+1 510 549 1145
+

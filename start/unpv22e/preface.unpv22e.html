@@ -1,0 +1,340 @@
+<HTML>
+<HEAD>
+<TITLE>Preface</TITLE>
+</HEAD>
+<BODY>
+<A NAME="Preface"></A>
+<H1>Preface</H1>
+<H3>Introduction</H3>
+<P>
+Most nontrivial programs involve some form of
+<I>IPC</I>
+or
+<I>Interprocess Communication</I>.
+This is a natural effect of the design principle
+that the better approach is to design an application
+as a group of small pieces that communicate with each other,
+instead of designing one huge monolithic program.
+Historically, applications have been built in the following ways:
+<OL>
+<LI>
+One huge monolithic program that does everything.
+The various pieces of the program can be implemented as functions
+that exchange information as function parameters,
+function return values, and global variables.
+<P><LI>
+Multiple programs that communicate with each other using some form of IPC.
+Many of the standard Unix tools were designed in this fashion,
+using shell pipelines (a form of IPC)
+to pass information from one program to the next.
+<P><LI>
+One program comprised of multiple threads
+that communicate with each other using some type of IPC.
+The term IPC describes this communication
+even though it is between threads and not between processes.
+</OL>
+<P>
+Combinations of the second two forms of design are also possible:
+multiple processes, each consisting of one or more threads,
+involving communication between the threads within a given process
+and between the different processes.
+<P>
+&nbsp;&nbsp;&nbsp;&nbsp;
+What I have described is distributing the work involved in
+performing a given application between multiple processes
+and perhaps among the threads within a process.
+On a system containing multiple processors (CPUs),
+multiple processes might be able to run at the same time
+(on different CPUs), or the multiple threads of a given process
+might be able to run at the same time.
+Therefore, distributing an application among multiple processes or threads
+might reduce the amount of time required for an application to perform
+a given task.
+<P>
+&nbsp;&nbsp;&nbsp;&nbsp;
+This book describes four different forms of IPC in detail:
+<OL>
+<LI>
+message passing (pipes, FIFOs, and message queues),
+<P><LI>
+synchronization (mutexes, condition variables, read-write locks,
+file and record locks, and semaphores),
+<P><LI>
+shared memory (anonymous and named), and
+<P><LI>
+remote procedure calls (Solaris doors and Sun RPC).
+</OL>
+<P>
+This book does not cover the writing of programs that communicate
+across a computer network.
+This form of communication normally involves what is called the
+<I>sockets API</I>
+(application program interface) using the TCP/IP protocol suite;
+these topics are covered in detail in Volume 1 of this series
+[Stevens 1998].
+<P>
+&nbsp;&nbsp;&nbsp;&nbsp;
+One could argue that single-host or nonnetworked IPC
+(the subject of this volume)
+should not be used and instead all applications should be written
+as distributed applications that run on various hosts across a network.
+Practically, however, single-host IPC is often much faster
+and sometimes simpler than communicating across a network.
+Techniques such as shared memory and synchronization
+are normally available only on a single host,
+and may not be used across a network.
+Experience and history have shown a need for both
+nonnetworked IPC (this volume)
+and IPC across a network (Volume 1 of this series).
+<P>
+&nbsp;&nbsp;&nbsp;&nbsp;
+This current volume builds on the foundation of Volume 1
+and my other four books,
+which are abbreviated throughout this text as follows:
+<UL>
+<LI>UNPv1: <I><A HREF="../unpv12e.html">
+              UNIX Network Programming, Volume 1</A></I>
+              [Stevens 1998],
+<LI>APUE: <I><A HREF="../apue.html">
+              Advanced Programming in the UNIX Environment</A></I>
+              [Stevens 1992],
+<LI>TCPv1: <I><A HREF="../tcpipiv1.html">
+              TCP/IP Illustrated, Volume 1</A></I>
+              [Stevens 1994],
+<LI>TCPv2: <I><A HREF="../tcpipiv2.html">
+              TCP/IP Illustrated, Volume 2</A></I>
+              [Wright and Stevens 1995], and
+<LI>TCPv3: <I><A HREF="../tcpipiv3.html">
+              TCP/IP Illustrated, Volume 3</A></I>
+              [Stevens 1996].
+</UL>
+<P>
+&nbsp;&nbsp;&nbsp;&nbsp;
+Although covering IPC in a text with "network programming"
+in the title might seem odd,
+IPC is often used in networked applications.
+As stated in the Preface of the 1990 edition of
+<I><A HREF="../unp.html">
+UNIX Network Programming</A></I>,
+"A requisite for understanding how to develop software for a network
+is an understanding of interprocess communication (IPC)."
+<H3>Changes from the First Edition</H3>
+<P>
+This volume is a complete rewrite and expansion
+of Chapters 3 and 18 from the 1990 edition of
+<I><A HREF="../unp.html">
+UNIX Network Programming</A></I>.
+Based on a word count, the material has expanded by a factor of five.
+The following are the major changes with this new edition:
+<UL>
+<LI>
+In addition to the three forms of "System V IPC"
+(message queues, semaphores, and shared memory),
+the newer Posix functions that implement these three types of IPC
+are also covered.
+(I say more about the Posix family of standards in Section 1.7.)
+In the coming years, I expect a movement to the Posix IPC functions,
+which have several advantages over their System V counterparts.
+<P><LI>
+The Posix functions for synchronization are covered:
+mutex locks, condition variables, and read-write locks.
+These can be used to synchronize either threads or processes
+and are often used when accessing shared memory.
+<P><LI>
+This volume assumes a Posix threads environment (called "Pthreads"),
+and many of the examples are built using multiple threads
+instead of multiple processes.
+<P><LI>
+The coverage of pipes, FIFOs, and record locking
+focuses on their Posix definitions.
+<P><LI>
+In addition to describing the IPC facilities and showing how to use them,
+I also develop implementations of Posix message queues,
+read-write locks, and Posix semaphores
+(all of which can be implemented as user libraries).
+These implementations can tie together many different features
+(e.g., one implementation of Posix semaphores uses
+mutexes, condition variables, and memory-mapped I/O)
+and highlight conditions that must often be handled in our applications
+(such as race conditions, error handling, memory leaks,
+and variable-length argument lists).
+Understanding an implementation of a certain feature
+often leads to a greater knowledge of how to use that feature.
+<P><LI>
+The RPC coverage focuses on the Sun RPC package.
+I precede this with a description of the new Solaris doors API,
+which is similar to RPC but on a single host.
+This provides an introduction to many of the features
+that we need to worry about when calling procedures in another process,
+without having to worry about any networking details.
+</UL>
+<P>
+<H3>Readers</H3>
+<P>
+This text can be used either as a tutorial on IPC,
+or as a reference for experienced programmers.
+The book is divided into four main parts:
+<UL>
+<LI>message passing,
+<LI>synchronization,
+<LI>shared memory, and
+<LI>remote procedure calls
+</UL>
+but many readers will probably be interested in specific subsets.
+Most chapters can be read independently of others, although
+Chapter 2 summarizes many features common to all the Posix IPC functions,
+Chapter 3 summarizes many features common to all the System V IPC functions,
+and Chapter 12 is an introduction to both Posix and System V shared memory.
+All readers should read Chapter 1, especially Section 1.6,
+which describes some wrapper functions used throughout the text.
+The Posix IPC chapters are independent of the System V IPC chapters,
+and the chapters on pipes, FIFOs, and record locking
+belong to neither camp.
+The two chapters on RPC are also independent of the other IPC techniques.
+<P>
+&nbsp;&nbsp;&nbsp;&nbsp;
+To aid in the use as a reference, a thorough index is provided,
+along with summaries on the end papers of where to find detailed
+descriptions of all the functions and structures.
+To help those reading topics in a random order,
+numerous references to related topics are provided throughout the text.
+<H3>Source Code and Errata Availability</H3>
+<P>
+The source code for all the examples that appear in this book
+is available from the author's home page
+(listed at the end of this Preface).
+The best way to learn the IPC techniques described in this book
+is to take these programs, modify them, and enhance them.
+Actually writing code of this form is the
+<I>only</I>
+way to reinforce the concepts and techniques.
+Numerous exercises are also provided at the end of each chapter,
+and most answers are provided in Appendix D.
+<P>
+&nbsp;&nbsp;&nbsp;&nbsp;
+A current errata for this book is also available from the author's home page.
+<H3>Acknowledgments</H3>
+<P>
+Although the author's name is the only one to appear on the cover,
+the combined effort of many people is required to produce a quality text book.
+First and foremost is the author's family,
+who put up with the long and weird hours that go into writing a book.
+Thank you once again, Sally, Bill, Ellen, and David.
+<P>
+&nbsp;&nbsp;&nbsp;&nbsp;
+My thanks to the technical reviewers who provided invaluable feedback
+(135 printed pages) catching lots of errors,
+pointing out areas that needed more explanation,
+and suggesting alternative presentations, wording, and coding:
+Gavin Bowe,
+Allen Briggs,
+Dave Butenhof,
+Wan-Teh Chang,
+Chris Cleeland,
+Bob Friesenhahn,
+Andrew Gierth,
+Scott Johnson,
+Marty Leisner,
+Larry McVoy,
+Craig Metz,
+Bob Nelson,
+Steve Rago,
+Jim Reid,
+Swamy K. Sitarama,
+Jon C. Snader,
+Ian Lance Taylor,
+Rich Teer,
+and
+Andy Tucker.
+<P>
+&nbsp;&nbsp;&nbsp;&nbsp;
+The following people answered email questions of mine, in some cases
+<I>many</I>
+questions,
+all of which improved the accuracy and presentation of the text:
+David Bausum,
+Dave Butenhof,
+Bill Gallmeister,
+Mukesh Kacker,
+Brian Kernighan,
+Larry McVoy,
+Steve Rago,
+Keith Skowran,
+Bart Smaalders,
+Andy Tucker,
+and
+John Wait.
+<P>
+&nbsp;&nbsp;&nbsp;&nbsp;
+A special thanks to Larry Rafsky at GSquared, for lots of things.
+My thanks as usual to the National Optical Astronomy Observatories (NOAO),
+Sidney Wolff, Richard Wolff, and Steve Grandi,
+for providing access to their networks and hosts.
+Jim Bound,
+Matt Thomas,
+Mary Clouter,
+and Barb Glover
+of Digital Equipment Corp. provided the Alpha system
+used for most of the examples in this text.
+A subset of the code in this book was tested on other Unix systems:
+my thanks to Michael Johnson of Red Hat Software
+for providing the latest releases of Red Hat Linux,
+and to Dave Marquardt
+and Jessie Haug
+of IBM Austin for an RS/6000 system and access to the latest releases of AIX.
+<P>
+&nbsp;&nbsp;&nbsp;&nbsp;
+My thanks to the wonderful staff at Prentice Hall-my editor Mary Franz,
+along with Noreen Regina,
+Sophie Papanikolaou,
+and Patti Guerrieri-for all their help,
+especially in bringing everything together on a tight schedule.
+<H3>Colophon</H3>
+<P>
+I produced camera-ready copy of the book (PostScript),
+which was then typeset for the final book.
+The formatting system used was James Clark's wonderful
+<TT>groff</TT>
+package, on a SparcStation running Solaris 2.6.
+(Reports of troff's death are greatly exaggerated.)
+I typed in all 138,897 words using the
+<TT>vi</TT>
+editor, created the 72 illustrations using the
+<TT>gpic</TT>
+program (using many of Gary Wright's macros),
+produced the 35 tables using the
+<TT>gtbl</TT>
+program, performed all the indexing (using a set of
+<TT>awk</TT>
+scripts written by Jon Bentley and Brian Kernighan),
+and did the final page layout.
+Dave Hanson's
+<TT>loom</TT>
+program, the GNU
+<TT>indent</TT>
+program, and some scripts by Gary Wright
+were used to include the 8,046 lines of C source code in the book.
+<P>
+&nbsp;&nbsp;&nbsp;&nbsp;
+I welcome email from any readers with comments,
+suggestions, or bug fixes.
+<P>
+<TABLE WIDTH="100%">
+<TR>
+	<TD ALIGN="left"><I>Tucson, Arizona</I></TD>
+	<TD ALIGN="center"></TD>
+	<TD ALIGN="right">W. Richard Stevens</TD>
+</TR>
+<TR>
+	<TD ALIGN="left"><I>July 1998</I></TD>
+	<TD ALIGN="center"></TD>
+</TR>
+<TR>
+	<TD ALIGN="left"></TD>
+	<TD ALIGN="center"></TD>
+	<TD ALIGN="right"><TT>http://www.kohala.com/</TT></TD>
+</TR>
+</TABLE>
+
+</BODY>
+</HTML>

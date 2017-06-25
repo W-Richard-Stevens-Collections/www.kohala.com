@@ -1,0 +1,33 @@
+Article: 45354 of comp.protocols.tcp-ip
+From: vern@daffy.ee.lbl.gov (Vern Paxson)
+Newsgroups: comp.protocols.tcp-ip
+Subject: Re: Traceroute and TTL
+Date: 29 Sep 1995 19:38:54 GMT
+Organization: Lawrence Berkeley Laboratory, Berkeley CA
+Message-ID: <48407@dog.ee.lbl.gov>
+
+In article <44c1a6$jtj@news.cuny.edu>,
+Erik Van Riper <geek@imageek.york.cuny.edu> wrote:
+> Even more bothersome is no matter where I go, as soon as I hit 
+> SprintLink, I get the same "problem".  Anyone else have an idea what 
+> traceroute is telling me here?
+
+I'm just finishing up a draft of a study of end-to-end Internet routing
+behavior.  One of the findings that surprised me is the prevalance of
+routing asymmetry.  Of the ~600 different Internet paths I looked at
+(i.e., source/destination pairs), about 30% exhibited a major asymmetry,
+meaning that the routes in the two directions visited different cities.
+I also found that such differences generally lead to different TTL's
+(different number of hops in each direction), which explains the behavior
+you're seeing.  Finally, due to the phenomenon of "hot potato" routing
+between ISP's (explained in the paper), we can expect asymmetries to
+increase in the future.
+
+I'll be submitting a more polished version of the study to SIGCOMM '96.  If
+you're interested in reading the draft, drop me a line.  (Those folks who
+I've already communicated with about this study needn't send me additional
+email, I'm already planning to let you know when the draft is ready.)
+
+		Vern
+
+
